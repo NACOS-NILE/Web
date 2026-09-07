@@ -13,8 +13,73 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NACOS Nile — Nigeria Association of Computing Students",
-  description: "Official web portal of NACOS Nile University of Nigeria Chapter.",
+  title: {
+    default: "NACOS Nile | Where Technology Meets Ambition",
+    template: "%s | NACOS Nile",
+  },
+
+  description:
+    "NACOS Nile University connects computing students through technology, innovation, learning, mentorship, and community.",
+
+  keywords: [
+    "NACOS Nile",
+    "NACOS",
+    "Nile University",
+    "NACOS Nile University",
+    "computing students",
+    "Computer Science",
+    "Software Engineering",
+    "Cyber Security",
+    "Information Technology",
+    "Information Systems",
+    "Data Science",
+    "Abuja",
+  ],
+
+  authors: [
+    {
+      name: "NACOS Nile University",
+    },
+  ],
+
+  creator: "NACOS Nile University",
+  publisher: "NACOS Nile University",
+
+  applicationName: "NACOS Nile",
+
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    title: "NACOS Nile | Where Technology Meets Ambition",
+    description:
+      "Connecting computing students at Nile University through technology, innovation, learning, mentorship, and community.",
+    siteName: "NACOS Nile",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "NACOS Nile | Where Technology Meets Ambition",
+    description:
+      "Connecting computing students at Nile University through technology, innovation, learning, mentorship, and community.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
