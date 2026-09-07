@@ -44,7 +44,6 @@ export default function Home() {
       <Navbar />
       <main>
         <section id="home" className="hero section-grid">
-          <div className="hero-signal" aria-hidden="true"><span className="signal-dot" />NILE / ABUJA / 09°04′N</div>
           <div className="hero-copy">
             <p className="eyebrow">NIGERIA ASSOCIATION OF COMPUTING STUDENTS</p>
             <h1>We learn.<br />We build.<br /><span>We grow.</span></h1>

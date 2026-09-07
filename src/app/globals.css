@@ -20,7 +20,7 @@ button { font: inherit; }
 .section-shell { padding-inline: max(5vw, 28px); }
 
 /* Loading — the real brand artwork rises through a moving liquid line. */
-.loading-screen { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: transparent; pointer-events: none; animation: loader-exit .45s 2.45s ease forwards; }
+.loading-screen { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: rgba(9,19,44,.32); -webkit-backdrop-filter: blur(18px) saturate(.8); backdrop-filter: blur(18px) saturate(.8); pointer-events: none; animation: loader-exit .45s 2.45s ease forwards; }
 .loader-mark { position: relative; width: min(280px, 72vw); height: 133px; }
 .loader-logo { width: 100%; height: 100%; object-fit: contain; }
 .loader-logo-base { opacity: .12; filter: grayscale(1) brightness(2); }
@@ -53,9 +53,6 @@ button { font: inherit; }
 /* Hero */
 .hero { position: relative; min-height: max(790px, 100svh); padding: 120px max(5vw,28px) 0; overflow: hidden; color: white; background-color: var(--ink); background-image: linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px),radial-gradient(circle at 74% 42%,rgba(39,65,147,.5),transparent 38%); background-size: 64px 64px,64px 64px,auto; }
 .hero::before { content: ""; position: absolute; width: 160px; height: 7px; left: 0; top: 52%; background: var(--green); }
-.hero-signal { position: absolute; top: 112px; right: 5vw; display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.48); font: 500 .63rem/1 var(--font-geist-mono); letter-spacing: .12em; }
-.signal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 5px rgba(117,185,71,.12); animation: pulse 1.8s infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 10px transparent; } }
 .hero-copy { position: relative; z-index: 4; width: 55%; padding-top: clamp(58px,9vh,104px); }
 .eyebrow, .section-label { font: 700 .68rem/1 var(--font-geist-mono); letter-spacing: .17em; }
 .eyebrow { margin: 0 0 30px; color: #9eabca; }
@@ -153,7 +150,7 @@ button { font: inherit; }
 
 @media (max-width: 640px) {
   .section-shell { padding-inline: 22px; }.site-header { height: 72px; padding-inline: 20px; }.brand img { width: 78px; }.brand > span { display: none; }
-  .hero { min-height: 790px; padding: 110px 22px 0; }.hero::before { width: 70px; top: 40%; }.hero-signal { top: 88px; right: 22px; }.hero-copy { width: 100%; padding-top: 70px; }.hero h1 { font-size: clamp(4rem,19vw,5.8rem); }.eyebrow { max-width: 260px; line-height: 1.5; }.hero-lede { margin-top: 34px; }.hero-actions { align-items: flex-start; flex-direction: column; gap: 12px; }.hero-visual { width: 370px; right: -190px; top: 22%; opacity: .35; }.hero-ticker { min-height: 84px; }.hero-ticker strong { font-size: 1.4rem; }.hero-ticker span { display: none; }
+  .hero { min-height: 100svh; padding: 92px 22px 88px; }.hero::before { width: 70px; top: 40%; }.hero-copy { width: 100%; padding-top: 38px; }.hero h1 { font-size: clamp(3.6rem,17vw,5.2rem); }.eyebrow { max-width: 260px; margin-bottom: 20px; line-height: 1.5; }.hero-lede { max-width: 34rem; margin: 24px 0 20px; font-size: .95rem; line-height: 1.55; }.hero-actions { align-items: flex-start; flex-direction: column; gap: 6px; }.hero-actions .button { min-height: 46px; }.hero-visual { width: 350px; right: -190px; top: 20%; opacity: .32; }.hero-ticker { min-height: 76px; }.hero-ticker strong { font-size: 1.35rem; }.hero-ticker span { display: none; }
   .about { grid-template-columns: 1fr; gap: 42px; padding-top: 95px; padding-bottom: 100px; }.about-detail { grid-column: auto; padding-top: 0; }.about-statement h2 { font-size: 2.7rem; }
   .disciplines { padding-top: 90px; padding-bottom: 90px; }.section-heading h2 { margin-top: 55px; }.discipline-row { grid-template-columns: 28px 1fr 20px; gap: 14px; min-height: 92px; }.discipline-row p { display: none; }
   .initiatives { padding-top: 95px; padding-bottom: 100px; }.initiatives-heading { align-items: flex-start; flex-direction: column; margin: 55px 0 45px; gap: 24px; }.initiative-grid { grid-template-columns: 1fr; }.initiative-card { min-height: 330px; }.initiative-icon { margin: 46px 0 34px; }
