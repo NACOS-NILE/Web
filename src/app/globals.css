@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Theme Colors */
+  --nacos-blue: #274193;
+  --nacos-dark: #0d1733;
+  --nacos-dark-alt: #111d3d;
+  --nacos-accent: #3b82f6;
+  --nacos-accent-light: #60a5fa;
+
+  /* Site Theme (Dark mode default) */
+  --background: var(--nacos-dark);
+  --foreground: #f8fafc;
 }
 
-@theme inline {
+@theme {
+  --color-nacos-blue: var(--nacos-blue);
+  --color-nacos-dark: var(--nacos-dark);
+  --color-nacos-dark-alt: var(--nacos-dark-alt);
+  --color-nacos-accent: var(--nacos-accent);
+  --color-nacos-accent-light: var(--nacos-accent-light);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Subtle Organic Noise Texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Structured Low-Opacity Geometric Dot Pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(39, 65, 147, 0.25) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
