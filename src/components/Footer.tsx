@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { NAV_LINKS } from "@/lib/data";
+import { BrandMark } from "./BrandMark";
 import { SocialLinks } from "./SocialLinks";
 
 export function Footer() {
@@ -11,17 +11,8 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div className="flex flex-col gap-4">
-            <Link href="#top" className="flex items-center gap-2.5">
-              <Image
-                src="/logo.svg"
-                alt="NACOS Nile logo"
-                width={80}
-                height={38}
-                className="h-7 w-auto"
-              />
-              <span className="text-base font-bold tracking-tight text-white">
-                NACOS <span className="text-nacos-accent-light">Nile</span>
-              </span>
+            <Link href="#top" aria-label="NACOS Nile — home" className="flex items-center">
+              <BrandMark size="md" tone="dark" />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-white/55">
               Nigeria Association of Computing Students — Nile University of Nigeria Chapter.

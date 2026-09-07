@@ -2,10 +2,10 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/lib/data";
+import { BrandMark } from "./BrandMark";
 import { Button } from "./Button";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -62,21 +62,11 @@ export function Navbar() {
       >
         <Link
           href="#top"
-          className="flex items-center gap-2.5 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nacos-accent"
+          aria-label="NACOS Nile — home"
+          className="flex items-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nacos-accent"
           onClick={() => setOpen(false)}
         >
-          <Image
-            src="/logo.svg"
-            alt="NACOS Nile logo"
-            width={80}
-            height={38}
-            priority
-            className="h-8 w-auto"
-          />
-          <span className="text-sm font-bold tracking-tight text-nacos-dark sm:text-base dark:text-white">
-            NACOS{" "}
-            <span className="ml-0.5 text-nacos-blue dark:text-nacos-accent-light">Nile</span>
-          </span>
+          <BrandMark size="md" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">

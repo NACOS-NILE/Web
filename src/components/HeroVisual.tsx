@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Code2, Terminal, Users } from "lucide-react";
-import Image from "next/image";
+import { Code2, Terminal, Trophy, Users } from "lucide-react";
+import { BrandMark } from "./BrandMark";
 
 function useFloat(distance: number, duration: number, delay = 0) {
   const shouldReduceMotion = useReducedMotion();
@@ -40,16 +40,9 @@ export function HeroVisual() {
       {/* central floating logo badge */}
       <motion.div
         {...float1}
-        className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-3xl border border-white/15 bg-white/10 px-9 py-7 shadow-2xl shadow-nacos-dark/40 backdrop-blur-md sm:px-11 sm:py-8"
+        className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-3xl border border-white/15 bg-white/10 px-7 py-6 shadow-2xl shadow-nacos-dark/40 backdrop-blur-md sm:px-8 sm:py-7"
       >
-        <Image
-          src="/logo.svg"
-          alt="NACOS Nile logo"
-          width={80}
-          height={38}
-          priority
-          className="h-10 w-auto sm:h-12"
-        />
+        <BrandMark size="lg" tone="dark" nileVariant="icon" />
       </motion.div>
 
       {/* discipline chip */}
@@ -66,22 +59,18 @@ export function HeroVisual() {
         </div>
       </motion.div>
 
-      {/* code snippet card */}
+      {/* hackathon chip */}
       <motion.div
         {...float3}
-        className="absolute right-0 bottom-6 w-52 rounded-2xl border border-white/15 bg-nacos-dark/80 p-3.5 shadow-lg shadow-nacos-dark/30 backdrop-blur-md sm:-right-4 sm:bottom-10"
+        className="absolute right-0 bottom-6 flex items-center gap-2 rounded-2xl border border-white/15 bg-nacos-dark/80 px-4 py-3 shadow-lg shadow-nacos-dark/30 backdrop-blur-md sm:-right-4 sm:bottom-10"
       >
-        <div className="mb-2 flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-red-400/70" />
-          <span className="h-2 w-2 rounded-full bg-yellow-400/70" />
-          <span className="h-2 w-2 rounded-full bg-green-400/70" />
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-nacos-accent/20 text-nacos-accent-light">
+          <Trophy className="h-4 w-4" aria-hidden="true" />
+        </span>
+        <div className="leading-tight">
+          <p className="text-xs font-semibold text-white">Hackathons</p>
+          <p className="text-[11px] text-white/50">Build & compete</p>
         </div>
-        <p className="font-mono text-[11px] leading-relaxed text-white/70">
-          <span className="text-nacos-accent-light">const</span> community ={" "}
-          <span className="text-green-300">&quot;NACOS Nile&quot;</span>;
-          <br />
-          community.<span className="text-nacos-accent-light">build</span>();
-        </p>
       </motion.div>
 
       {/* mentorship chip */}

@@ -1,4 +1,10 @@
-import { BookOpen, Terminal, Trophy, Users, type LucideIcon } from "lucide-react";
+import {
+  BookOpen,
+  Terminal,
+  Trophy,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { PROGRAMS, type Program } from "@/lib/data";
 import { Reveal } from "./Reveal";
 import { SectionHeader } from "./SectionHeader";
@@ -12,7 +18,10 @@ const ICONS: Record<Program["icon"], LucideIcon> = {
 
 export function ProgramsSection() {
   return (
-    <section id="programs" className="bg-grid relative overflow-hidden bg-nacos-dark py-20 sm:py-28">
+    <section
+      id="programs"
+      className="bg-grid relative overflow-hidden bg-nacos-dark py-20 sm:py-28"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-linear-to-b from-nacos-dark via-nacos-dark to-nacos-blue/15"
@@ -32,14 +41,11 @@ export function ProgramsSection() {
         <div className="flex flex-col divide-y divide-white/10 border-y border-white/10">
           {PROGRAMS.map((program, i) => {
             const Icon = ICONS[program.icon];
-            const reversed = i % 2 === 1;
 
             return (
               <Reveal key={program.title} delay={i * 0.06}>
                 <div
-                  className={`flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:gap-10 sm:py-10 ${
-                    reversed ? "sm:flex-row-reverse" : ""
-                  }`}
+                  className={`flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:gap-10 sm:py-10 `}
                 >
                   <span className="font-mono text-4xl font-semibold text-white/15 sm:text-5xl">
                     {program.index}
