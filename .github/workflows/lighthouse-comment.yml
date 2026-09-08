@@ -16,7 +16,8 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     if: >
-      github.event.workflow_run.event == 'pull_request'
+      github.event.workflow_run.event == 'pull_request' ||
+      github.event.workflow_run.event == 'workflow_dispatch'
     steps:
       - name: Download Lighthouse Metadata Artifact
         uses: actions/download-artifact@v4
@@ -116,7 +117,6 @@ jobs:
 
             commentBody += `*(Scores are based on the median of 3 Lighthouse runs against the Next.js production build)*\n`;
 
-            // Always creates a new comment so participants can track improvements across commits
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,

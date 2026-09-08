@@ -3,6 +3,12 @@ name: Lighthouse Audit
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to audit (e.g. 4)'
+        required: true
+        type: string
 
 jobs:
   audit:
@@ -11,6 +17,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.pr_number != '' && format('refs/pull/{0}/head', github.event.inputs.pr_number) || '' }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,8 +43,9 @@ jobs:
         if: always()
         run: |
           mkdir -p ./report-metadata
-          echo "${{ github.event.pull_request.number }}" > ./report-metadata/pr_number
-          echo "${{ github.event.pull_request.head.sha }}" > ./report-metadata/pr_sha
+          PR_NUM="${{ github.event.pull_request.number || github.event.inputs.pr_number }}"
+          echo "$PR_NUM" > ./report-metadata/pr_number
+          git rev-parse HEAD > ./report-metadata/pr_sha
           if [ -d .lighthouseci ]; then
             cp -r .lighthouseci ./report-metadata/lighthouseci
           fi
