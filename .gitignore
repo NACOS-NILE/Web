@@ -42,3 +42,5 @@ next-env.d.ts
 
 # generated (see scripts/resolve-logo-assets.js)
 /src/lib/logo-assets.generated.ts
+# lighthouse
+.lighthouseci/
