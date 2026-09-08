@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-full flex flex-col justify-between py-12 md:py-20">
+    <main className="min-h-screen w-full flex flex-col justify-between pt-28 md:pt-36 pb-12 md:pb-20">
       {/* Top Meta Bar */}
       <Container size="default">
         <header className="flex items-center justify-between border-b border-neutral-900/10 pb-6">
