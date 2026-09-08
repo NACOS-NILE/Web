@@ -1,6 +1,7 @@
 import { Badge } from "./Badge";
 import { BrandMark } from "./BrandMark";
 import { Button } from "./Button";
+import { DisciplinesMarquee } from "./DisciplinesMarquee";
 import { Reveal } from "./Reveal";
 import { DISCIPLINES, EXCOS, PROGRAMS } from "@/lib/data";
 
@@ -56,20 +57,8 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.3}>
-          <ul
-            className="flex w-full max-w-full flex-nowrap gap-2 overflow-x-auto pt-4 pb-1 sm:justify-center not-sm:overflow-scroll not-sm:scrollbar-none"
-            aria-label="Disciplines"
-          >
-            {DISCIPLINES.map((discipline) => (
-              <li
-                key={discipline.name}
-                className="shrink-0 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium whitespace-nowrap text-white/75 sm:text-sm"
-              >
-                {discipline.name}
-              </li>
-            ))}
-          </ul>
+        <Reveal delay={0.3} className="w-full">
+          <DisciplinesMarquee items={DISCIPLINES.map((discipline) => discipline.name)} />
         </Reveal>
 
         <Reveal delay={0.36} className="w-full">
