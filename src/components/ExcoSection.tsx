@@ -1,0 +1,2 @@
+import ExcoCard from "./ExcoCard"; import { excos } from "@/data/site";
+export default function ExcoSection(){return <section className="section exco-section" id="excos"><div className="page-shell"><p className="section-label">04 / PEOPLE BEHIND THE NETWORK</p><div className="exco-heading"><h2>Meet the <em>Excos.</em></h2><p>Nine students. One shared mission: make the computing experience at Nile better for everyone.</p></div><div className="exco-grid">{excos.map(exco=><ExcoCard key={exco.number} exco={exco}/>)}</div></div></section>}
