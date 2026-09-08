@@ -1,0 +1,50 @@
+name: Lighthouse Audit
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Next.js Static Export
+        run: npm run build
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: './lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Save PR Details and Audit Artifacts
+        if: always()
+        run: |
+          mkdir -p ./report-metadata
+          echo "${{ github.event.pull_request.number }}" > ./report-metadata/pr_number
+          echo "${{ github.event.pull_request.head.sha }}" > ./report-metadata/pr_sha
+          if [ -d .lighthouseci ]; then
+            cp -r .lighthouseci ./report-metadata/lighthouseci
+          fi
+
+      - name: Upload Report Metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-metadata
+          path: ./report-metadata/
+          retention-days: 1
