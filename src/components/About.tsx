@@ -250,7 +250,7 @@ export default function About() {
         </div>
 
         {/* Carousel Slider Track */}
-        <div className="overflow-hidden rounded-2xl p-1 -m-1">
+        <div id="disciplines" className="overflow-hidden rounded-2xl p-1 -m-1 scroll-mt-24">
           <div
             className="flex transition-transform duration-500 ease-out gap-6"
             style={{

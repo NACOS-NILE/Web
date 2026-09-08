@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import ExcoCard, { ExcoCardProps } from "./ExcoCard";
 import ScrollReveal from "./ScrollReveal";
 
-export interface ExcoMember extends ExcoCardProps {}
+export type ExcoMember = ExcoCardProps;
 
 const EXCO_MEMBERS: ExcoMember[] = [
   {

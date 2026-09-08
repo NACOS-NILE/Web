@@ -28,7 +28,7 @@ const DISCIPLINES: string[] = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-nacos-dark-alt text-gray-400 border-t border-white/10 pt-16 pb-12 overflow-hidden">
+    <footer id="contact" className="relative bg-nacos-dark-alt text-gray-400 border-t border-white/10 pt-16 pb-12 overflow-hidden scroll-mt-20">
       {/* Structured Dot Pattern & Organic Noise Texture (No Soft Blobs) */}
       <div className="absolute inset-0 pointer-events-none aria-hidden:true">
         <div className="absolute inset-0 bg-dot-pattern opacity-30" />
