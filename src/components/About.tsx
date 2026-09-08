@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import ScrollReveal from "./ScrollReveal";
 
 interface Discipline {
   id: string;
@@ -132,68 +135,169 @@ const DISCIPLINES: Discipline[] = [
 ];
 
 export default function About() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [isUnderlineDrawn, setIsUnderlineDrawn] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsUnderlineDrawn(true);
+          if (headingRef.current) {
+            observer.unobserve(headingRef.current);
+          }
+        }
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    const currentRef = headingRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const totalPages = Math.ceil(DISCIPLINES.length / itemsPerPage);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  }, [totalPages]);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev >= totalPages - 1 ? 0 : prev + 1));
+  }, [totalPages]);
+
   return (
     <section id="about" className="relative py-20 sm:py-28 bg-nacos-dark-alt px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Structured Geometric Dot Pattern & Organic Noise Texture (No Soft Blobs) */}
+      {/* Background Texture */}
       <div className="absolute inset-0 pointer-events-none aria-hidden:true">
         <div className="absolute inset-0 bg-dot-pattern opacity-40" />
         <div className="absolute inset-0 bg-noise pointer-events-none" />
       </div>
 
       <div className="relative max-w-7xl mx-auto">
-        {/* Asymmetric Left-Aligned Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16 sm:mb-20 pb-10 border-b border-white/10">
-          <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-nacos-blue/15 border border-nacos-accent/25 text-nacos-accent-light text-xs font-mono font-medium">
-              // 01. department_programs
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-semibold tracking-normal text-white">
-              Computing Degrees at Nile University of Nigeria
+        {/* Header & Navigation Controls */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <ScrollReveal className="max-w-2xl">
+            <h2
+              ref={headingRef}
+              className="text-2xl sm:text-4xl font-semibold tracking-normal text-white mb-4"
+            >
+              Computing Degrees at{" "}
+              <span className="relative inline-block pb-1">
+                <span>Nile University of Nigeria</span>
+                <span
+                  className="absolute bottom-0 left-0 h-[3px] rounded-full bg-gradient-to-r from-nacos-accent to-nacos-accent-light transition-all duration-700 ease-out pointer-events-none"
+                  style={{
+                    width: isUnderlineDrawn ? "100%" : "0%",
+                    transitionDelay: isUnderlineDrawn ? "400ms" : "0ms",
+                  }}
+                />
+              </span>
             </h2>
-            <p className="text-base text-gray-300 leading-relaxed max-w-2xl font-normal">
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
               Organized under the Department of Computer Science (Faculty of Natural &amp; Applied Sciences) at Nile University of Nigeria, NACOS Nile supports students across all six computing degree specializations.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-4 hidden lg:flex justify-end">
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 font-mono text-xs text-gray-400 space-y-2 max-w-xs">
-              <div className="text-nacos-accent-light font-medium">// department_info</div>
-              <div>Faculty: Natural &amp; Applied Sciences</div>
-              <div>Dept: Computer Science</div>
-              <div>Location: Abuja, FCT, Nigeria</div>
-            </div>
+          {/* Carousel Arrow Controls */}
+          <div className="flex items-center gap-3 self-end md:self-auto">
+            <button
+              onClick={prevSlide}
+              aria-label="Previous Disciplines"
+              className="w-11 h-11 rounded-full bg-white/[0.04] hover:bg-nacos-accent border border-white/10 hover:border-nacos-accent text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={nextSlide}
+              aria-label="Next Disciplines"
+              className="w-11 h-11 rounded-full bg-white/[0.04] hover:bg-nacos-accent border border-white/10 hover:border-nacos-accent text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
 
-        {/* Disciplines Grid with Simple Background Color Shift Hover (No Border Glow) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {DISCIPLINES.map((item) => (
-            <div
-              key={item.id}
-              className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.02] hover:bg-nacos-blue/25 border border-white/10 transition-colors duration-200 flex flex-col justify-between"
-            >
-              <div>
-                {/* Icon Container */}
-                <div className="w-12 h-12 rounded-xl bg-nacos-accent/15 border border-nacos-accent/30 flex items-center justify-center mb-6">
-                  {item.icon}
+        {/* Carousel Slider Track */}
+        <div className="overflow-hidden rounded-2xl p-1 -m-1">
+          <div
+            className="flex transition-transform duration-500 ease-out gap-6"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+            }}
+          >
+            {DISCIPLINES.map((item) => (
+              <div
+                key={item.id}
+                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] flex-shrink-0"
+              >
+                <div className="group relative h-full p-6 sm:p-8 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/10 transition-colors duration-200 flex flex-col justify-between">
+                  <div>
+                    {/* Icon Container */}
+                    <div className="w-12 h-12 rounded-xl bg-nacos-blue/15 border border-nacos-accent/25 flex items-center justify-center mb-6">
+                      {item.icon}
+                    </div>
+
+                    {/* Card Title */}
+                    <h3 className="text-lg font-medium text-white mb-2 group-hover:text-nacos-accent-light transition-colors">
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm text-gray-300 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Card Title - font-medium */}
-                <h3 className="text-lg font-medium text-white mb-2 group-hover:text-nacos-accent-light transition-colors">
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  {item.description}
-                </p>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Bottom Simple Link */}
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center text-xs font-mono text-nacos-accent-light">
-                <span>degree_program // {item.id}</span>
-              </div>
-            </div>
+        {/* Carousel Indicator Dots */}
+        <div className="flex items-center justify-center gap-2 mt-10">
+          {Array.from({ length: totalPages }).map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              aria-label={`Go to slide page ${idx + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                currentIndex === idx
+                  ? "w-8 bg-nacos-accent"
+                  : "w-2.5 bg-white/20 hover:bg-white/40"
+              }`}
+            />
           ))}
         </div>
       </div>

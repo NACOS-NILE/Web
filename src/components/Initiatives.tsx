@@ -1,9 +1,9 @@
 import React from "react";
+import ScrollReveal from "./ScrollReveal";
 
 interface Initiative {
   id: string;
   step: string;
-  codeFn: string;
   title: string;
   description: string;
   tag: string;
@@ -14,7 +14,6 @@ const INITIATIVES: Initiative[] = [
   {
     id: "bootcamps",
     step: "01",
-    codeFn: "fn run_bootcamps()",
     title: "Tech Bootcamps & Coding Workshops",
     tag: "Hands-on Skills",
     description:
@@ -38,9 +37,8 @@ const INITIATIVES: Initiative[] = [
   {
     id: "hackathon",
     step: "02",
-    codeFn: "fn launch_hackathon()",
     title: "Annual Hackathon & Tech Week",
-    tag: "Innovation",
+    tag: "Flagship Innovation",
     description:
       "The annual computing competition bringing Nile University student teams together to prototype software solutions for real challenges facing Nigerian tech.",
     icon: (
@@ -65,7 +63,6 @@ const INITIATIVES: Initiative[] = [
   {
     id: "mentorship",
     step: "03",
-    codeFn: "fn career_mentorship()",
     title: "Industry Mentorship & Career Talks",
     tag: "Career Guidance",
     description:
@@ -89,7 +86,6 @@ const INITIATIVES: Initiative[] = [
   {
     id: "academics",
     step: "04",
-    codeFn: "fn academic_support()",
     title: "Academic Tutorials & Study Groups",
     tag: "Course Revision",
     description:
@@ -117,28 +113,27 @@ export default function Initiatives() {
       id="events"
       className="relative py-20 sm:py-28 bg-nacos-dark px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden"
     >
-      {/* Structured Dot Pattern & Noise Texture (No Soft Blobs) */}
+      {/* Background Texture */}
       <div className="absolute inset-0 pointer-events-none aria-hidden:true">
         <div className="absolute inset-0 bg-dot-pattern opacity-40" />
         <div className="absolute inset-0 bg-noise pointer-events-none" />
       </div>
 
       <div className="relative max-w-5xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-nacos-blue/15 border border-nacos-accent/25 text-nacos-accent-light text-xs font-mono font-medium mb-4">
-            // 02. student_initiatives
-          </div>
-          <h2 className="text-2xl sm:text-4xl font-semibold tracking-normal text-white mb-6">
-            Student-Led Programs &amp; Initiatives
+        {/* Section Header with Distinctive Typography */}
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-nacos-accent-light">
+              Student Programs Roadmap
+            </span>
           </h2>
-          <p className="text-base text-gray-300 leading-relaxed font-normal">
-            Practical activities organized by NACOS Nile student committees to complement classroom lectures at Nile University of Nigeria.
+          <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
+            A structured annual timeline of technical activities organized by NACOS Nile student committees to complement classroom lectures.
           </p>
-        </div>
+        </ScrollReveal>
 
-        {/* Timeline / Sequential List Layout (Distinct from Grid Layout) */}
-        <div className="relative space-y-8 before:absolute before:inset-0 before:left-6 sm:before:left-1/2 before:-ml-px before:w-0.5 before:bg-white/10 before:hidden sm:before:block">
+        {/* Roadmap / Timeline Layout with Connecting Path Line */}
+        <div className="relative space-y-10 sm:space-y-12 before:absolute before:inset-0 before:left-5 sm:before:left-1/2 before:-ml-px before:w-0.5 before:bg-gradient-to-b before:from-nacos-accent/80 before:via-nacos-blue/60 before:to-nacos-accent/30">
           {INITIATIVES.map((item, idx) => {
             const isEven = idx % 2 === 0;
             return (
@@ -146,33 +141,30 @@ export default function Initiatives() {
                 key={item.id}
                 className={`relative flex flex-col sm:flex-row items-start ${
                   isEven ? "sm:flex-row-reverse" : ""
-                } justify-between gap-8 group`}
+                } justify-between gap-6 sm:gap-12 group`}
               >
-                {/* Content Box with Icon Color-Fill Hover Effect (No Border Glow) */}
-                <div className="w-full sm:w-[calc(50%-2.5rem)] p-6 sm:p-8 rounded-2xl bg-white/[0.02] border-l-4 border-l-nacos-accent border-y border-r border-white/10 transition-colors duration-200">
+                {/* Roadmap Node Card */}
+                <div className="w-full sm:w-[calc(50%-2.5rem)] ml-12 sm:ml-0 p-6 sm:p-8 rounded-2xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-nacos-accent/40 transition-all duration-300 shadow-lg group-hover:-translate-y-1">
                   <div className="flex items-center justify-between gap-4 mb-4">
-                    {/* Icon with Color Fill Animation on Hover */}
-                    <div className="w-10 h-10 rounded-xl bg-nacos-accent/15 border border-nacos-accent/20 flex items-center justify-center group-hover:bg-nacos-accent group-hover:text-white transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-nacos-blue/20 border border-nacos-accent/30 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
                       {item.icon}
                     </div>
-
-                    <span className="font-mono text-xs text-nacos-accent-light bg-nacos-blue/20 px-2.5 py-1 rounded">
-                      {item.codeFn}
+                    <span className="text-xs font-semibold text-nacos-accent-light bg-nacos-blue/15 border border-nacos-accent/25 px-3 py-1 rounded-full">
+                      {item.tag}
                     </span>
                   </div>
 
-                  {/* Card Title - font-medium */}
-                  <h3 className="text-lg font-medium text-white mb-2 group-hover:text-nacos-accent-light transition-colors">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-nacos-accent-light transition-colors">
                     {item.title}
                   </h3>
 
-                  <p className="text-sm text-gray-300 leading-relaxed">
+                  <p className="text-sm text-gray-300 leading-relaxed font-normal">
                     {item.description}
                   </p>
                 </div>
 
-                {/* Center Badge Marker */}
-                <div className="hidden sm:flex absolute left-1/2 -translate-x-1/2 top-6 w-10 h-10 rounded-full bg-nacos-dark border border-nacos-accent items-center justify-center font-mono text-xs font-bold text-nacos-accent-light">
+                {/* Timeline Center Node Marker */}
+                <div className="absolute left-0 sm:left-1/2 -translate-x-1/2 top-6 w-10 h-10 rounded-full bg-nacos-dark border-2 border-nacos-accent flex items-center justify-center text-xs font-bold text-nacos-accent-light shadow-lg shadow-nacos-accent/20 z-10">
                   {item.step}
                 </div>
               </div>

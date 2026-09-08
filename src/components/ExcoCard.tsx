@@ -6,37 +6,62 @@ export interface ExcoCardProps {
   role: string;
   quote: string;
   imageSrc: string;
+  imageStyle?: React.CSSProperties;
+  isActive?: boolean;
+  offset?: number;
+  onClick?: () => void;
 }
 
-export default function ExcoCard({ name, role, quote, imageSrc }: ExcoCardProps) {
+export default function ExcoCard({
+  name,
+  role,
+  imageSrc,
+  imageStyle,
+  isActive = false,
+  offset = 0,
+  onClick,
+}: ExcoCardProps) {
+  const absOffset = Math.abs(offset);
+  const rotateY = offset * -8;
+  const translateZ = -absOffset * 20;
+  const scale = isActive ? 1.04 : Math.max(0.78, 1 - absOffset * 0.18);
+  const opacity = isActive ? 1 : Math.max(0.55, 1 - absOffset * 0.4);
+  const zIndex = 30 - absOffset * 10;
+
   return (
-    <div className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 transition-colors duration-200 flex flex-col items-center text-center">
-      {/* Circular Profile Photo with Natural Color, Scale-105 and Border Shift on Hover */}
-      <div className="relative w-28 h-28 sm:w-32 sm:h-32 mb-6 rounded-full overflow-hidden border border-white/20 group-hover:border-nacos-accent group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+    <div
+      onClick={onClick}
+      style={{
+        transform: `perspective(1000px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
+        opacity,
+        zIndex,
+      }}
+      className="flex flex-col items-center select-none cursor-pointer group transition-all duration-300 ease-out shrink-0"
+    >
+      {/* Officer Portrait Card Container */}
+      <div
+        className={`relative overflow-hidden transition-all duration-300 ease-out shadow-xl ${
+          isActive
+            ? "w-44 sm:w-56 md:w-60 h-56 sm:h-72 md:h-76 rounded-2xl border-2 border-nacos-accent ring-2 ring-nacos-accent/30 shadow-[0_12px_28px_rgba(20,90,220,0.35)]"
+            : "w-32 sm:w-38 md:w-40 h-40 sm:h-48 md:h-52 rounded-xl border border-white/20 hover:border-white/40 opacity-75 group-hover:opacity-100"
+        }`}
+      >
         <Image
           src={imageSrc}
           alt={`${name} - ${role}`}
           fill
-          sizes="(max-width: 640px) 112px, 128px"
-          className="object-cover object-center"
+          sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 240px"
+          className="object-cover object-[center_top] pointer-events-none transition-transform duration-500 group-hover:scale-105"
+          style={imageStyle}
         />
-        {/* Subtle Vignette Ring */}
-        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_12px_rgba(13,23,51,0.6)] pointer-events-none" />
       </div>
 
-      {/* Exco Info */}
-      <h3 className="text-base sm:text-lg font-medium text-white mb-1 group-hover:text-nacos-accent-light transition-colors">
-        {name}
-      </h3>
-
-      <div className="text-xs font-mono font-medium text-nacos-accent-light uppercase tracking-wider mb-4 px-3 py-1 rounded-full bg-nacos-blue/15 border border-nacos-accent/25">
-        {role}
-      </div>
-
-      {/* Quote */}
-      <blockquote className="text-sm italic text-gray-300 leading-relaxed font-normal mt-auto relative pt-2 border-t border-white/5 w-full">
-        &ldquo;{quote}&rdquo;
-      </blockquote>
+      {/* Side Card Officer Name */}
+      {!isActive && (
+        <span className="text-[11px] font-medium text-gray-400 mt-2 tracking-wide group-hover:text-white transition-colors truncate max-w-[110px] text-center">
+          {name}
+        </span>
+      )}
     </div>
   );
 }
