@@ -1,109 +1,68 @@
+"use client";
+
 import React from "react";
 import ScrollReveal from "./ScrollReveal";
 
-interface Initiative {
+interface EventItem {
   id: string;
-  step: string;
+  day: string;
+  month: string;
+  type: string;
+  time: string;
+  location: string;
   title: string;
   description: string;
-  tag: string;
-  icon: React.ReactNode;
+  registerUrl: string;
 }
 
-const INITIATIVES: Initiative[] = [
+const EVENTS: EventItem[] = [
   {
-    id: "bootcamps",
-    step: "01",
-    title: "Tech Bootcamps & Coding Workshops",
-    tag: "Hands-on Skills",
+    id: "systems-design",
+    day: "10",
+    month: "Oct",
+    type: "Workshop",
+    time: "4:00 PM WAT",
+    location: "LT 3, Nile University",
+    title: "Intro to Systems Design",
     description:
-      "Student-led technical sessions covering web development, cloud computing, mobile application development, and software engineering tools used in industry.",
-    icon: (
-      <svg
-        className="w-6 h-6 text-nacos-accent-light"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        viewBox="0 0 24 24"
-      >
-        <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" />
-        <path d="m8 10 2 2-2 2" />
-        <path d="M12 14h4" />
-      </svg>
-    ),
+      "A hands-on session on designing scalable software systems — from requirements gathering to architectural diagrams.",
+    registerUrl: "#join",
   },
   {
-    id: "hackathon",
-    step: "02",
-    title: "Annual Hackathon & Tech Week",
-    tag: "Flagship Innovation",
+    id: "big-tech",
+    day: "24",
+    month: "Oct",
+    type: "Talk",
+    time: "5:00 PM WAT",
+    location: "Auditorium, Nile University",
+    title: "From Classroom to Big Tech",
     description:
-      "The annual computing competition bringing Nile University student teams together to prototype software solutions for real challenges facing Nigerian tech.",
-    icon: (
-      <svg
-        className="w-6 h-6 text-nacos-accent-light"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        viewBox="0 0 24 24"
-      >
-        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-        <path d="M4 22h16" />
-        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-      </svg>
-    ),
+      "An alumni fireside chat on landing international internships, building portfolios, and thriving in global tech companies.",
+    registerUrl: "#join",
   },
   {
-    id: "mentorship",
-    step: "03",
-    title: "Industry Mentorship & Career Talks",
-    tag: "Career Guidance",
+    id: "hackathon-week",
+    day: "07",
+    month: "Nov",
+    type: "Hackathon",
+    time: "9:00 AM WAT",
+    location: "Innovation Hub, Nile University",
+    title: "NACOS Annual Hackathon Sprints",
     description:
-      "Direct interactive sessions with Nile alumni, software engineers, and industry professionals offering career guidance, resume reviews, and internship advice.",
-    icon: (
-      <svg
-        className="w-6 h-6 text-nacos-accent-light"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        viewBox="0 0 24 24"
-      >
-        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-        <rect width="20" height="14" x="2" y="6" rx="2" />
-        <path d="M12 12h.01" />
-      </svg>
-    ),
+      "48-hour team hackathon prototype challenge building impactful AI and cloud software solutions for local problems.",
+    registerUrl: "#join",
   },
   {
-    id: "academics",
-    step: "04",
-    title: "Academic Tutorials & Study Groups",
-    tag: "Course Revision",
+    id: "algo-prep",
+    day: "18",
+    month: "Dec",
+    type: "Revision",
+    time: "3:00 PM WAT",
+    location: "CS Lab 2, Nile University",
+    title: "Data Structures & Midterm Review",
     description:
-      "Peer tutorial circles organized before midterms and final exams to review difficult topics across Computer Science and Software Engineering courses.",
-    icon: (
-      <svg
-        className="w-6 h-6 text-nacos-accent-light"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        viewBox="0 0 24 24"
-      >
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-      </svg>
-    ),
+      "Peer-led review circle solving complex algorithmic problems and preparing students for departmental examinations.",
+    registerUrl: "#join",
   },
 ];
 
@@ -111,7 +70,7 @@ export default function Initiatives() {
   return (
     <section
       id="events"
-      className="relative py-20 sm:py-28 bg-nacos-dark px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden"
+      className="relative py-20 sm:py-28 bg-nacos-dark-alt px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden scroll-mt-20"
     >
       {/* Background Texture */}
       <div className="absolute inset-0 pointer-events-none aria-hidden:true">
@@ -120,56 +79,66 @@ export default function Initiatives() {
       </div>
 
       <div className="relative max-w-5xl mx-auto">
-        {/* Section Header with Distinctive Typography */}
+        {/* Section Header */}
         <ScrollReveal className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-nacos-accent-light">
-              Student Programs Roadmap
-            </span>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+            Events &amp; Workshops
           </h2>
           <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
-            A structured annual timeline of technical activities organized by NACOS Nile student committees to complement classroom lectures.
+            Join hands-on coding sessions, alumni career talks, and flagship hackathons hosted at Nile University campus.
           </p>
         </ScrollReveal>
 
-        {/* Roadmap / Timeline Layout with Connecting Path Line */}
-        <div className="relative space-y-10 sm:space-y-12 before:absolute before:inset-0 before:left-5 sm:before:left-1/2 before:-ml-px before:w-0.5 before:bg-gradient-to-b before:from-nacos-accent/80 before:via-nacos-blue/60 before:to-nacos-accent/30">
-          {INITIATIVES.map((item, idx) => {
-            const isEven = idx % 2 === 0;
-            return (
-              <div
-                key={item.id}
-                className={`relative flex flex-col sm:flex-row items-start ${
-                  isEven ? "sm:flex-row-reverse" : ""
-                } justify-between gap-6 sm:gap-12 group`}
-              >
-                {/* Roadmap Node Card */}
-                <div className="w-full sm:w-[calc(50%-2.5rem)] ml-12 sm:ml-0 p-6 sm:p-8 rounded-2xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-nacos-accent/40 transition-all duration-300 shadow-lg group-hover:-translate-y-1">
-                  <div className="flex items-center justify-between gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-nacos-blue/20 border border-nacos-accent/30 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                      {item.icon}
-                    </div>
-                    <span className="text-xs font-semibold text-nacos-accent-light bg-nacos-blue/15 border border-nacos-accent/25 px-3 py-1 rounded-full">
-                      {item.tag}
-                    </span>
+        {/* Events Cards List */}
+        <div className="space-y-6">
+          {EVENTS.map((event, idx) => (
+            <ScrollReveal key={event.id} delay={idx * 100}>
+              <div className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-nacos-accent/40 transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl">
+                {/* Left: Date Badge + Meta Info */}
+                <div className="flex items-center gap-5 shrink-0">
+                  {/* Date Block */}
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-nacos-accent to-nacos-accent-light text-nacos-dark flex flex-col items-center justify-center font-bold shadow-lg shrink-0">
+                    <span className="text-xl sm:text-2xl leading-none">{event.day}</span>
+                    <span className="text-xs sm:text-sm uppercase tracking-wider mt-0.5">{event.month}</span>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-nacos-accent-light transition-colors">
-                    {item.title}
-                  </h3>
+                  {/* Meta Pills (Type, Time, Location) */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-nacos-accent-light bg-nacos-blue/20 border border-nacos-accent/30 px-2.5 py-0.5 rounded-full">
+                        {event.type}
+                      </span>
+                      <span className="text-xs text-gray-400 font-medium">{event.time}</span>
+                    </div>
+                    <p className="text-xs text-gray-400 font-medium flex items-center gap-1">
+                      <span>📍</span> {event.location}
+                    </p>
+                  </div>
+                </div>
 
+                {/* Center: Title & Description */}
+                <div className="flex-1 md:px-4">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-nacos-accent-light transition-colors">
+                    {event.title}
+                  </h3>
                   <p className="text-sm text-gray-300 leading-relaxed font-normal">
-                    {item.description}
+                    {event.description}
                   </p>
                 </div>
 
-                {/* Timeline Center Node Marker */}
-                <div className="absolute left-0 sm:left-1/2 -translate-x-1/2 top-6 w-10 h-10 rounded-full bg-nacos-dark border-2 border-nacos-accent flex items-center justify-center text-xs font-bold text-nacos-accent-light shadow-lg shadow-nacos-accent/20 z-10">
-                  {item.step}
+                {/* Right: Register CTA Button linking to #join */}
+                <div className="w-full md:w-auto shrink-0 pt-2 md:pt-0">
+                  <a
+                    href={event.registerUrl}
+                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/5 hover:bg-nacos-accent text-white hover:text-nacos-dark font-semibold text-sm border border-white/10 hover:border-nacos-accent transition-all duration-200 shadow-md group-hover:scale-105 active:scale-95"
+                  >
+                    <span>Register</span>
+                    <span className="text-base font-bold">↗</span>
+                  </a>
                 </div>
               </div>
-            );
-          })}
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>

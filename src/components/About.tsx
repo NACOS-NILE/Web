@@ -140,6 +140,11 @@ export default function About() {
   const [isUnderlineDrawn, setIsUnderlineDrawn] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
+  const [isPointerDown, setIsPointerDown] = useState(false);
+  const startXRef = useRef<number>(0);
+  const currentXRef = useRef<number>(0);
+  const hasMovedRef = useRef<boolean>(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -193,6 +198,42 @@ export default function About() {
     setCurrentIndex((prev) => (prev >= totalPages - 1 ? 0 : prev + 1));
   }, [totalPages]);
 
+  // Keep currentIndex valid when itemsPerPage changes
+  useEffect(() => {
+    if (currentIndex >= totalPages) {
+      setCurrentIndex(Math.max(0, totalPages - 1));
+    }
+  }, [itemsPerPage, totalPages, currentIndex]);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setIsPointerDown(true);
+    startXRef.current = e.clientX;
+    currentXRef.current = e.clientX;
+    hasMovedRef.current = false;
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isPointerDown) return;
+    currentXRef.current = e.clientX;
+    if (Math.abs(e.clientX - startXRef.current) > 10) {
+      hasMovedRef.current = true;
+    }
+  };
+
+  const handlePointerUp = () => {
+    if (!isPointerDown) return;
+    setIsPointerDown(false);
+    const deltaX = currentXRef.current - startXRef.current;
+
+    if (hasMovedRef.current && Math.abs(deltaX) > 25) {
+      if (deltaX > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    }
+  };
+
   return (
     <section id="about" className="relative py-20 sm:py-28 bg-nacos-dark-alt px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Texture */}
@@ -207,7 +248,7 @@ export default function About() {
           <ScrollReveal className="max-w-2xl">
             <h2
               ref={headingRef}
-              className="text-2xl sm:text-4xl font-semibold tracking-normal text-white mb-4"
+              className="text-2xl sm:text-4xl font-semibold tracking-normal text-white mb-4 font-display"
             >
               Computing Degrees at{" "}
               <span className="relative inline-block pb-1">
@@ -250,11 +291,18 @@ export default function About() {
         </div>
 
         {/* Carousel Slider Track */}
-        <div id="disciplines" className="overflow-hidden rounded-2xl p-1 -m-1 scroll-mt-24">
+        <div
+          id="disciplines"
+          className="overflow-hidden rounded-2xl p-1 -m-1 scroll-mt-24 cursor-grab active:cursor-grabbing select-none touch-pan-y"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+        >
           <div
             className="flex transition-transform duration-500 ease-out gap-6"
             style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
+              transform: `translateX(calc(-${currentIndex} * (100% + 1.5rem)))`,
             }}
           >
             {DISCIPLINES.map((item) => (

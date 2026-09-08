@@ -60,7 +60,7 @@ const EXCO_MEMBERS: ExcoMember[] = [
     imageSrc: "/excos-pics/provost.jpg",
     imageStyle: {
       objectFit: "cover",
-      transform: "rotate(90deg) scale(1.4)",
+      transform: "rotate(90deg) scale(1.35)",
     },
   },
   {
@@ -70,7 +70,7 @@ const EXCO_MEMBERS: ExcoMember[] = [
     imageSrc: "/excos-pics/socials.jpg",
     imageStyle: {
       objectFit: "cover",
-      transform: "rotate(-90deg) scale(1.4)",
+      transform: "rotate(-90deg) scale(1.35)",
     },
   },
   {
@@ -145,7 +145,7 @@ export default function ExcoGrid() {
   return (
     <section
       id="excos"
-      className="relative py-12 sm:py-16 bg-nacos-dark-alt px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden"
+      className="relative py-12 sm:py-16 bg-nacos-dark px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden scroll-mt-20"
     >
       {/* Background Texture */}
       <div className="absolute inset-0 pointer-events-none aria-hidden:true">
