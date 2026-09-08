@@ -13,11 +13,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_NAME = "NACOS Nile";
+const TITLE = "NACOS Nile University Chapter";
+const DESCRIPTION =
+  "Official web portal of NACOS Nile University of Nigeria Chapter.";
+const SOCIAL_PREVIEW_IMAGE = "/logos/nacos.png";
+
 export const metadata: Metadata = {
-  title: "NACOS Nile University Chapter",
-  description:
-    "Official web portal of NACOS Nile University of Nigeria Chapter.",
+  title: TITLE,
+  description: DESCRIPTION,
   manifest: "/site.webmanifest",
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: SITE_NAME,
+    type: "website",
+    images: [{ url: SOCIAL_PREVIEW_IMAGE, width: 512, height: 512 }],
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [SOCIAL_PREVIEW_IMAGE],
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
