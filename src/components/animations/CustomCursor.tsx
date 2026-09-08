@@ -1,11 +1,42 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+const emptySubscribe = () => () => {};
+
+function useIsClient() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+function getIsTouch() {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(pointer: coarse)").matches ||
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0
+  );
+}
+
+function subscribeTouch(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const media = window.matchMedia("(pointer: coarse)");
+  media.addEventListener("change", callback);
+  return () => media.removeEventListener("change", callback);
+}
+
+function useIsTouchDevice() {
+  return useSyncExternalStore(subscribeTouch, getIsTouch, () => false);
+}
+
 export function CustomCursor() {
-  const [mounted, setMounted] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+  const isClient = useIsClient();
+  const isTouch = useIsTouchDevice();
+
   const [isVisible, setIsVisible] = useState(false);
   const [cursorText, setCursorText] = useState("");
   const [cursorVariant, setCursorVariant] = useState<"default" | "hover" | "text">("default");
@@ -18,25 +49,13 @@ export function CustomCursor() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    setMounted(true);
-
-    // Detect touch / coarse pointer devices
-    const isTouchDevice =
-      window.matchMedia("(pointer: coarse)").matches ||
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0;
-
-    if (isTouchDevice) {
-      setIsTouch(true);
-      return;
-    }
+    if (!isClient || isTouch) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
 
-      // Check target element for custom cursor attributes
       const target = e.target as HTMLElement | null;
       const interactiveEl = target?.closest(
         "[data-cursor], [data-cursor-text], a, button, input, textarea"
@@ -77,9 +96,9 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [isClient, isTouch, mouseX, mouseY]);
 
-  if (!mounted || isTouch) {
+  if (!isClient || isTouch) {
     return null;
   }
 
