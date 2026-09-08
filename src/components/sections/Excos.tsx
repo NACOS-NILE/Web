@@ -133,13 +133,13 @@ export function Excos() {
     <section
       id="excos"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 border-t border-neutral-900/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#F7F7F5] text-neutral-900 border-t border-neutral-900/10 overflow-hidden"
     >
       {/* Top Section Meta Row */}
       <Container size="default">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel label="Executive Leadership" showLine />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-medium">
+        <div className="flex items-center justify-between border-b border-neutral-900/10 pb-6">
+          <SectionLabel label="Executive Leadership" showLine className="text-neutral-500" />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-semibold">
             Chapter Officers
           </span>
         </div>

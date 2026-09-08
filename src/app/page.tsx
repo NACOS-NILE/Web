@@ -7,14 +7,18 @@ import { Excos } from "@/components/sections/Excos";
 import { Community } from "@/components/sections/Community";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/layout/Footer";
+import { SectionTransition } from "@/components/animations/SectionTransition";
 
 export default function Home() {
   return (
     <main className="w-full">
       <Hero />
+      <SectionTransition type="dark-to-light" />
       <About />
+      <SectionTransition type="light-to-dark" />
       <Disciplines />
       <Programs />
+      <SectionTransition type="light-to-dark" />
       <Events />
       <Excos />
       <Community />
@@ -23,3 +27,4 @@ export default function Home() {
     </main>
   );
 }
+

@@ -3,81 +3,66 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
 import { SectionLabel } from "../ui/SectionLabel";
+import { EDITORIAL_IMAGES } from "@/lib/images";
 
 interface DisciplineData {
   id: string;
-  number: string;
   name: string;
   description: string;
   focus: string;
   image: string;
-  caption: string;
 }
 
 const DISCIPLINES: DisciplineData[] = [
   {
     id: "cs",
-    number: "01",
     name: "Computer Science",
     description:
       "Algorithmic foundations, computation theory, and the core mathematical mechanics underpinning modern software systems.",
     focus: "Algorithms • Complexity Theory • System Architectures",
-    image: "/excos-pics/dtd.jpg",
-    caption: "COMPUTATIONAL THEORY // DTD",
+    image: EDITORIAL_IMAGES.disciplines.computerScience,
   },
   {
     id: "se",
-    number: "02",
     name: "Software Engineering",
     description:
       "Large-scale distributed systems, architectural design patterns, testing rigor, and the end-to-end craft of production software.",
     focus: "Distributed Systems • Design Patterns • Full-Stack Craft",
-    image: "/excos-pics/sg.jpg",
-    caption: "SYSTEM ARCHITECTURE // SG",
+    image: EDITORIAL_IMAGES.disciplines.softwareEngineering,
   },
   {
     id: "cs-sec",
-    number: "03",
     name: "Cyber Security",
     description:
       "Network defense, applied cryptography, defensive operations, vulnerability analysis, and digital infrastructure resilience.",
-    focus: "Cryptography • Threat Modeling • Defensive Ops",
-    image: "/excos-pics/provost.jpg",
-    caption: "DEFENSIVE OPERATIONS // PROVOST",
+    focus: "Cryptography • Threat Modeling • Defensive Operations",
+    image: EDITORIAL_IMAGES.disciplines.cyberSecurity,
   },
   {
     id: "it",
-    number: "04",
     name: "Information Technology",
     description:
       "Cloud infrastructure, automated DevOps pipelines, systems administration, and enterprise communication networks.",
     focus: "Cloud Architecture • DevOps • Network Operations",
-    image: "/excos-pics/fc.jpg",
-    caption: "INFRASTRUCTURE & OPS // FC",
+    image: EDITORIAL_IMAGES.disciplines.informationTechnology,
   },
   {
     id: "is",
-    number: "05",
     name: "Information Systems",
     description:
       "Enterprise software integration, organizational data architectures, digital governance, and strategic technology leadership.",
-    focus: "Enterprise Strategy • Data Governance • Workflows",
-    image: "/excos-pics/pro.jpg",
-    caption: "STRATEGY & GOVERNANCE // PRO",
+    focus: "Enterprise Systems • Data Governance • Digital Strategy",
+    image: EDITORIAL_IMAGES.disciplines.informationSystems,
   },
   {
     id: "ds",
-    number: "06",
     name: "Data Science",
     description:
       "Statistical inference, machine learning algorithms, high-volume data pipelines, and computational intelligence.",
-    focus: "Machine Learning • Statistical Inference • Analytics",
-    image: "/excos-pics/socials.jpg",
-    caption: "COMPUTATIONAL INTELLIGENCE // SOCIALS",
+    focus: "Machine Learning • Statistical Inference • Big Data",
+    image: EDITORIAL_IMAGES.disciplines.dataScience,
   },
 ];
 
@@ -85,34 +70,31 @@ export function Disciplines() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mobileExpandedIndex, setMobileExpandedIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const shouldReduceMotion = useReducedMotion();
 
   const activeDiscipline = DISCIPLINES[activeIndex];
 
-  // GSAP ScrollTrigger for section choreography and pinned/parallax preview
+  // Scroll listener to update active discipline as user scrolls through the list on desktop
   useEffect(() => {
-    if (shouldReduceMotion || !sectionRef.current) return;
+    if (shouldReduceMotion) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    const handleScroll = () => {
+      if (window.innerWidth < 1024) return; // Desktop only
 
-    const ctx = gsap.context(() => {
-      // Gentle parallax drift on the right preview column
-      if (previewRef.current) {
-        gsap.to(previewRef.current, {
-          y: 40,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 1.2,
-          },
-        });
-      }
-    }, sectionRef);
+      const viewportCenter = window.innerHeight * 0.45;
 
-    return () => ctx.revert();
+      itemRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+          setActiveIndex(index);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [shouldReduceMotion]);
 
   const toggleMobile = (index: number) => {
@@ -124,14 +106,14 @@ export function Disciplines() {
     <section
       id="disciplines"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 border-t border-neutral-900/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#111111] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
     >
       {/* Top Section Meta Row */}
       <Container size="default">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel label="Academic Disciplines" showLine />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-medium">
-            06 Fields of Study
+        <div className="flex items-center justify-between border-b border-white/10 pb-6">
+          <SectionLabel label="Academic Disciplines" showLine className="text-neutral-400" />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa] font-medium">
+            Concentrations
           </span>
         </div>
       </Container>
@@ -145,7 +127,7 @@ export function Disciplines() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.84] tracking-tight uppercase text-neutral-950 select-none"
+              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.84] tracking-tight uppercase text-white select-none"
             >
               SIX WAYS
               <br />
@@ -161,7 +143,7 @@ export function Disciplines() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm leading-relaxed text-neutral-600 max-w-sm"
+              className="text-sm leading-relaxed text-neutral-400 max-w-sm"
             >
               The Nile computing community spans six core concentrations — from theoretical computation and systems architecture to cyber defense and computational intelligence.
             </motion.p>
@@ -169,128 +151,119 @@ export function Disciplines() {
         </div>
       </Container>
 
-      {/* Main Interactive Index Canvas */}
+      {/* Main Interactive Index Canvas with True Sticky Image Panel */}
       <Container size="default">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
-          {/* Left Column: The Large Editorial List */}
-          <div className="lg:col-span-7 xl:col-span-8">
-            <div className="border-t border-neutral-900/10">
-              {DISCIPLINES.map((item, index) => {
-                const isActive = activeIndex === index;
-                const isMobileOpen = mobileExpandedIndex === index;
+          {/* Left Column: The Large Discipline List */}
+          <div className="lg:col-span-7 xl:col-span-8 border-t border-white/10">
+            {DISCIPLINES.map((item, index) => {
+              const isActive = activeIndex === index;
+              const isMobileOpen = mobileExpandedIndex === index;
 
-                return (
-                  <div
-                    key={item.id}
-                    className="border-b border-neutral-900/10 transition-colors duration-400"
+              return (
+                <div
+                  key={item.id}
+                  ref={(el) => {
+                    itemRefs.current[index] = el;
+                  }}
+                  className={`border-b border-white/10 transition-colors duration-400 ${
+                    isActive ? "bg-white/[0.02]" : ""
+                  }`}
+                >
+                  {/* Desktop Trigger / Row Item */}
+                  <button
+                    type="button"
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onFocus={() => setActiveIndex(index)}
+                    onClick={() => toggleMobile(index)}
+                    data-cursor="VIEW"
+                    aria-expanded={isMobileOpen}
+                    className="group w-full py-8 sm:py-10 text-left flex items-baseline justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
                   >
-                    {/* Desktop Trigger / Row Item */}
-                    <button
-                      type="button"
-                      onMouseEnter={() => setActiveIndex(index)}
-                      onFocus={() => setActiveIndex(index)}
-                      onClick={() => toggleMobile(index)}
-                      data-cursor="VIEW"
-                      aria-expanded={isMobileOpen}
-                      className="group w-full py-7 sm:py-9 text-left flex items-baseline justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
-                    >
-                      <div className="flex items-baseline gap-4 sm:gap-6 md:gap-8 min-w-0">
-                        <span
-                          className={`font-mono text-xs sm:text-sm tracking-widest transition-colors duration-300 ${
-                            isActive
-                              ? "text-[#274193] font-bold"
-                              : "text-neutral-400 group-hover:text-neutral-700"
-                          }`}
-                        >
-                          {item.number}
-                        </span>
-
-                        <span
-                          className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl uppercase tracking-tight leading-[0.88] transition-all duration-400 will-change-transform ${
-                            isActive
-                              ? "text-[#274193] translate-x-2"
-                              : "text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1"
-                          }`}
-                        >
-                          {item.name}
-                        </span>
-                      </div>
-
-                      {/* Micro Interaction Arrow / Indicator */}
+                    <div className="flex items-baseline gap-4 sm:gap-6 md:gap-8 min-w-0">
                       <span
-                        aria-hidden="true"
-                        className={`font-mono text-xs transition-transform duration-300 ${
+                        className={`h-2 w-2 rounded-full transition-all duration-300 ${
                           isActive
-                            ? "text-[#274193] translate-x-1 font-bold"
-                            : "text-neutral-300 opacity-0 group-hover:opacity-100"
-                        } ${isMobileOpen ? "rotate-90" : ""}`}
+                            ? "bg-[#3b82f6] scale-125"
+                            : "bg-transparent group-hover:bg-neutral-600"
+                        }`}
+                      />
+
+                      <span
+                        className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl uppercase tracking-tight leading-[0.88] transition-all duration-400 will-change-transform ${
+                          isActive
+                            ? "text-[#60a5fa] translate-x-2"
+                            : "text-neutral-500 group-hover:text-white group-hover:translate-x-1"
+                        }`}
                       >
-                        →
+                        {item.name}
                       </span>
-                    </button>
+                    </div>
 
-                    {/* Mobile Expanded Drawer (Tap-to-expand) */}
-                    <AnimatePresence>
-                      {isMobileOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="lg:hidden overflow-hidden pb-8 space-y-4"
-                        >
-                          <p className="text-sm leading-relaxed text-neutral-600 font-sans">
-                            {item.description}
-                          </p>
+                    <span
+                      aria-hidden="true"
+                      className={`font-mono text-sm transition-transform duration-300 ${
+                        isActive
+                          ? "text-[#60a5fa] translate-x-1 font-bold"
+                          : "text-neutral-600 opacity-0 group-hover:opacity-100"
+                      } ${isMobileOpen ? "rotate-90" : ""}`}
+                    >
+                      →
+                    </span>
+                  </button>
 
-                          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
-                            {item.focus}
-                          </div>
+                  {/* Mobile Expanded Drawer (Tap-to-expand) */}
+                  <AnimatePresence>
+                    {isMobileOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="lg:hidden overflow-hidden pb-8 space-y-4"
+                      >
+                        <p className="text-sm leading-relaxed text-neutral-300 font-sans">
+                          {item.description}
+                        </p>
 
-                          {/* Mobile Inline Artwork */}
-                          <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden bg-neutral-200/40 mt-3">
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              fill
-                              sizes="(max-width: 768px) 80vw, 300px"
-                              className="object-cover grayscale contrast-110"
-                            />
-                            <div className="absolute bottom-2 left-2 right-2 text-[9px] font-mono uppercase tracking-widest text-white bg-black/60 px-2 py-1">
-                              {item.caption}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
+                        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#60a5fa]">
+                          {item.focus}
+                        </div>
 
-            {/* Micro Instruction Note */}
-            <div className="pt-6 hidden lg:flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-neutral-400 font-mono">
-              <span>[HOVER OR FOCUS A DISCIPLINE TO REVEAL FOLIO]</span>
-              <span>INDEX 01—06</span>
-            </div>
+                        {/* Mobile Inline Artwork */}
+                        <div className="relative aspect-[4/3] w-full max-w-sm overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 mt-3">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            sizes="(max-width: 768px) 90vw, 350px"
+                            className="object-cover grayscale contrast-110"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Right Column: Desktop Sticky/Floating Editorial Artwork & Description */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-4 lg:sticky lg:top-32">
-            <div ref={previewRef} className="space-y-6">
-              {/* Dynamic Image Container */}
+          {/* Right Column: TRUE STICKY Visual Experience (Fixed while scrolling) */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-4 sticky top-28 self-start">
+            <div className="space-y-6">
+              {/* Sticky Image Container with Smooth AnimatePresence */}
               <div
                 data-cursor="VIEW"
-                className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-200/40 will-change-transform"
+                className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeDiscipline.id}
-                    initial={{ opacity: 0, scale: 1.06 }}
+                    initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
                     transition={{
-                      duration: 0.65,
+                      duration: 0.5,
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     className="relative h-full w-full"
@@ -301,11 +274,11 @@ export function Disciplines() {
                       fill
                       sizes="(max-width: 1200px) 40vw, 30vw"
                       priority
-                      className="object-cover object-top grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
+                      className="object-cover object-center grayscale contrast-110 brightness-95 transition-all duration-700 hover:scale-105 hover:grayscale-0 hover:brightness-100"
                     />
 
-                    {/* Subtle bottom vignette */}
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    {/* Gradient overlay for readability */}
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -314,22 +287,19 @@ export function Disciplines() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeDiscipline.id}
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-3 pt-2 border-t border-neutral-900/10"
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-3 pt-4 border-t border-white/10"
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#274193] font-semibold">
-                    <span>{activeDiscipline.focus}</span>
-                  </div>
-
-                  <p className="text-sm leading-relaxed text-neutral-600 font-sans">
-                    {activeDiscipline.description}
-                  </p>
-                  <div className="text-[11px] font-mono text-neutral-900 tracking-wider">
+                  <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] font-semibold">
                     {activeDiscipline.focus}
                   </div>
+
+                  <p className="text-sm leading-relaxed text-neutral-300 font-sans">
+                    {activeDiscipline.description}
+                  </p>
                 </motion.div>
               </AnimatePresence>
             </div>

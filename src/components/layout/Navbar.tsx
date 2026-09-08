@@ -72,7 +72,7 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isScrolled
-            ? "bg-[#F7F7F5]/90 py-3.5 backdrop-blur-md border-b border-neutral-900/[0.08]"
+            ? "bg-[#0d1733]/90 py-3.5 backdrop-blur-md border-b border-white/10 shadow-lg"
             : "bg-transparent py-6 md:py-8 border-b border-transparent"
         }`}
       >
@@ -99,22 +99,21 @@ export function Navbar() {
               />
             </Link>
 
-            {/* CENTER: Desktop Editorial Nav Links */}
+            {/* CENTER: Desktop Nav Links */}
             <ul className="hidden lg:flex items-center gap-7 xl:gap-9">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     data-cursor="pointer"
-                    className="group relative inline-block py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-600 transition-colors duration-300 hover:text-[#274193]"
+                    className="group relative inline-block py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-300 transition-colors duration-300 hover:text-white"
                   >
                     <span className="relative z-10 inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5">
                       {link.label}
                     </span>
-                    {/* Brand Hairline Hover Underline */}
                     <span
                       aria-hidden="true"
-                      className="absolute bottom-0 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-[#274193] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+                      className="absolute bottom-0 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-[#3b82f6] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
                     />
                   </Link>
                 </li>
@@ -123,13 +122,13 @@ export function Navbar() {
 
             {/* RIGHT: Desktop CTA & Mobile Toggle */}
             <div className="flex items-center gap-4">
-              {/* Desktop Refined CTA */}
+              {/* Desktop CTA */}
               <div className="hidden sm:block">
                 <MagneticElement strength={0.22}>
                   <Link
                     href="#community"
                     data-cursor="OPEN"
-                    className="group inline-flex items-center gap-2 rounded-[2px] border border-[#274193] bg-[#274193] px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#1f3475]"
+                    className="group inline-flex items-center gap-2 rounded-[2px] bg-[#274193] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#3453b3] shadow-md shadow-[#274193]/20"
                   >
                     <span>Join NACOS</span>
                     <span
@@ -148,24 +147,18 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
-                aria-controls="mobile-navigation-overlay"
-                data-cursor="OPEN"
-                className="flex lg:hidden items-center gap-2 py-1 px-2 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-900 focus-visible:outline-neutral-900"
+                className="lg:hidden flex items-center justify-center p-2 text-white hover:text-[#60a5fa] transition-colors focus-visible:outline-white"
               >
-                <span>{mobileMenuOpen ? "Close" : "Menu"}</span>
-                <div
-                  aria-hidden="true"
-                  className="flex flex-col justify-center gap-1 w-4 h-3.5"
-                >
+                <div className="w-5 flex flex-col items-center justify-center gap-1.5">
                   <span
-                    className={`block h-[1.5px] bg-neutral-900 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    className={`block h-[1.5px] bg-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       mobileMenuOpen
                         ? "w-4 translate-y-[2.75px] rotate-45"
                         : "w-4"
                     }`}
                   />
                   <span
-                    className={`block h-[1.5px] bg-neutral-900 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    className={`block h-[1.5px] bg-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       mobileMenuOpen
                         ? "w-4 -translate-y-[2.75px] -rotate-45"
                         : "w-2.5 self-end"
@@ -178,7 +171,7 @@ export function Navbar() {
         </Container>
       </header>
 
-      {/* Mobile Editorial Full-Screen Overlay */}
+      {/* Mobile Full-Screen Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -190,7 +183,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-[#F7F7F5] px-6 sm:px-10 pt-28 pb-10 lg:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-[#0d1733] text-[#F7F7F5] px-6 sm:px-10 pt-28 pb-10 lg:hidden overflow-y-auto"
           >
             {/* Menu Links with Stagger */}
             <motion.div
@@ -208,18 +201,16 @@ export function Navbar() {
               }}
               className="flex flex-col gap-5 sm:gap-6 my-auto"
             >
-              <div className="text-meta mb-2">Index</div>
-
               {NAV_LINKS.map((link) => (
                 <motion.div
                   key={link.href}
                   variants={{
-                    hidden: { opacity: 0, y: 24 },
+                    hidden: { opacity: 0, y: 20 },
                     visible: {
                       opacity: 1,
                       y: 0,
                       transition: {
-                        duration: 0.65,
+                        duration: 0.5,
                         ease: [0.16, 1, 0.3, 1],
                       },
                     },
@@ -228,7 +219,7 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={closeMenu}
-                    className="group flex items-center text-4xl sm:text-5xl font-heading uppercase tracking-tight text-neutral-900 transition-colors duration-300 hover:text-[#274193]"
+                    className="group flex items-center text-4xl sm:text-5xl font-heading uppercase tracking-tight text-white transition-colors duration-300 hover:text-[#60a5fa]"
                   >
                     <span>{link.label}</span>
                   </Link>
@@ -241,20 +232,20 @@ export function Navbar() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="pt-8 border-t border-neutral-900/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+              className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
             >
               <Link
                 href="#community"
                 onClick={closeMenu}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 border border-neutral-900 bg-neutral-900 px-6 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-[#F7F7F5] transition-all hover:bg-neutral-800"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-[2px] bg-[#274193] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#3453b3]"
               >
                 <span>Join Community</span>
                 <span>↗</span>
               </Link>
 
-              <div className="flex flex-col sm:text-right text-[11px] uppercase tracking-[0.2em] text-neutral-400">
-                <span>NACOS Nile University Chapter</span>
-                <span className="font-mono text-neutral-500">2026 Academic Session</span>
+              <div className="flex flex-col sm:text-right text-[11px] uppercase tracking-[0.2em] text-neutral-400 font-mono">
+                <span>NACOS Nile Chapter</span>
+                <span className="text-neutral-500">Nile University of Nigeria</span>
               </div>
             </motion.div>
           </motion.div>

@@ -1,91 +1,71 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
 import { SectionLabel } from "../ui/SectionLabel";
-import { MagneticElement } from "../animations/MagneticElement";
+import { EDITORIAL_IMAGES } from "@/lib/images";
 
 interface CommunityChannel {
   id: string;
-  number: string;
   platform: string;
   handle: string;
   href: string;
   description: string;
-  category: string;
-  badge: string;
 }
 
 const CHANNELS: CommunityChannel[] = [
   {
     id: "discord",
-    number: "01",
     platform: "Discord Community",
     handle: "discord.gg/nacosnile",
     href: "https://discord.gg",
     description:
-      "Our 24/7 digital campus. Real-time engineering discussions, study sprints, voice lounges, and live code reviews.",
-    category: "Primary Virtual Arena",
-    badge: "Active Sprints",
+      "Our 24/7 digital campus for engineering discussions, study sprints, voice lounges, and collaborative peer code reviews.",
   },
   {
     id: "whatsapp",
-    number: "02",
     platform: "WhatsApp Cohorts",
     handle: "chat.whatsapp.com/nacosnile",
     href: "https://whatsapp.com",
     description:
-      "Departmental cohort channels, immediate academic broadcasts, executive announcements, and quick peer problem-solving.",
-    category: "Announcements & Groups",
-    badge: "Official Broadcast",
+      "Departmental cohort channels, immediate academic broadcasts, executive announcements, and peer support.",
   },
   {
     id: "github",
-    number: "03",
     platform: "GitHub Organization",
     handle: "github.com/nacos-nile",
     href: "https://github.com/nacos-nile",
     description:
-      "Official open-source repositories, collaborative tools, hackathon projects, and community contributions.",
-    category: "Code & Open Source",
-    badge: "Repositories",
+      "Official open-source repositories, collaborative tools, hackathon projects, and student contributions.",
   },
   {
     id: "telegram",
-    number: "04",
     platform: "Telegram Archive",
     handle: "t.me/nacosnile",
     href: "https://telegram.org",
     description:
-      "Curated engineering books, academic slides, past question archives, and technical research libraries.",
-    category: "Resource Library",
-    badge: "Academic Archive",
+      "Curated engineering books, lecture slides, past examinations, and technical research libraries.",
   },
   {
     id: "linkedin",
-    number: "05",
     platform: "LinkedIn Network",
     handle: "linkedin.com/company/nacos-nile",
     href: "https://linkedin.com",
     description:
       "Professional alumni network, career placements, student spotlights, and industry advisory partnerships.",
-    category: "Alumni & Industry",
-    badge: "Career Hub",
   },
   {
     id: "twitter",
-    number: "06",
     platform: "X / Twitter",
     handle: "@nacos_nile",
     href: "https://x.com",
     description:
       "Public dispatches, live event coverage, hackathon demos, and Nile computing student achievements.",
-    category: "Public Broadcast",
-    badge: "Dispatches",
   },
 ];
 
@@ -102,12 +82,12 @@ export function Community() {
       const rows = gsap.utils.toArray<HTMLElement>(".community-row");
       gsap.fromTo(
         rows,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 24 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.1,
+          duration: 0.7,
+          stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -124,88 +104,83 @@ export function Community() {
     <section
       id="community"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-40 bg-[#0d1733] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#0d1733] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
     >
       {/* Top Meta Bar */}
       <Container size="default">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
-          <SectionLabel label="Community Channels" showLine className="text-neutral-400" />
-          <div className="flex items-center gap-4 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.2em] text-[#60a5fa]">
-            <span>6 Departments Connected</span>
-          </div>
+        <div className="flex items-center justify-between border-b border-white/10 pb-6">
+          <SectionLabel label="Community Network" showLine className="text-neutral-400" />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa] font-medium">
+            Connect
+          </span>
         </div>
       </Container>
 
-      {/* Editorial Headline & Overview */}
-      <Container size="default" className="pt-16 sm:pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          <div className="lg:col-span-7">
-            <h2 className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] text-white">
-              WHERE BUILDERS
+      {/* Editorial Headline & Overview with Hero Image Visual */}
+      <Container size="default" className="pt-16 sm:pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-7 space-y-6">
+            <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.85] text-white">
+              JOIN THE
               <br />
-              <span className="text-[#3b82f6]">CONVERGE &amp; GROW.</span>
+              <span className="text-[#3b82f6]">COMMUNITY.</span>
             </h2>
+
+            <p className="text-sm sm:text-base leading-relaxed text-neutral-300 font-sans max-w-lg">
+              NACOS Nile connects students across all six computing concentrations. Find hackathon teammates, share code, access shared resources, and grow alongside fellow builders.
+            </p>
           </div>
 
-          <div className="lg:col-span-5 space-y-6 pt-2 lg:pt-4">
-            <p className="text-sm sm:text-base leading-relaxed text-neutral-300 font-sans">
-              NACOS Nile bridges classroom theory with real-world engineering. Join our active communication circles to find hackathon teammates, ask technical questions, access study archives, and stay informed on all department activities.
-            </p>
-
-            <div className="flex items-center gap-4 text-[#93c5fd] font-mono text-[11px] uppercase tracking-[0.16em]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#3b82f6] animate-pulse" />
-              <span>Direct access across all platforms</span>
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl">
+              <Image
+                src={EDITORIAL_IMAGES.community}
+                alt="NACOS Nile student computing community meetup"
+                fill
+                sizes="(max-width: 1024px) 90vw, 500px"
+                className="object-cover object-center grayscale contrast-110 brightness-95 hover:grayscale-0 hover:scale-105 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0d1733]/80 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
         </div>
       </Container>
 
       {/* Channels Directory */}
-      <Container size="default" className="pt-16 sm:pt-24">
+      <Container size="default" className="pt-16 sm:pt-20">
         <div className="border-t border-white/10">
           {CHANNELS.map((channel) => (
             <div
               key={channel.id}
-              className="community-row group relative border-b border-white/10 transition-colors duration-400 hover:bg-[#14234b]"
+              className="community-row group relative border-b border-white/10 transition-colors duration-300 hover:bg-white/[0.02]"
             >
               <Link
                 href={channel.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="OPEN"
-                className="flex flex-col lg:flex-row items-start lg:items-center justify-between py-8 sm:py-10 px-2 sm:px-4 gap-6 transition-all duration-300"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-7 sm:py-8 px-2 sm:px-4 gap-4 sm:gap-6 transition-all duration-300"
               >
                 {/* Channel Identity */}
-                <div className="flex items-baseline gap-6 sm:gap-10 min-w-[280px]">
-                  <span className="font-mono text-xs text-neutral-500 group-hover:text-[#60a5fa] transition-colors duration-300">
-                    {channel.number}
+                <div className="min-w-[260px]">
+                  <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight leading-none text-white group-hover:text-[#60a5fa] transition-colors duration-300">
+                    {channel.platform}
+                  </h3>
+                  <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.16em] uppercase text-neutral-400 group-hover:text-[#93c5fd] block pt-1.5 transition-colors">
+                    {channel.handle}
                   </span>
-                  <div>
-                    <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight leading-none text-white group-hover:text-[#60a5fa] transition-colors duration-300">
-                      {channel.platform}
-                    </h3>
-                    <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-[#93c5fd] block pt-1.5">
-                      {channel.handle}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-neutral-300 group-hover:text-neutral-100 transition-colors duration-300 max-w-lg leading-relaxed">
+                <p className="text-xs sm:text-sm text-neutral-400 group-hover:text-neutral-200 transition-colors duration-300 max-w-lg leading-relaxed font-sans">
                   {channel.description}
                 </p>
 
-                {/* Metadata Badge & Action Arrow */}
-                <div className="flex items-center gap-6 w-full lg:w-auto justify-between lg:justify-end pt-2 lg:pt-0">
-                  <span className="font-mono text-[10px] tracking-[0.16em] uppercase px-2.5 py-1 border border-[#3b82f6]/30 bg-[#274193]/20 text-[#93c5fd] rounded-[2px] transition-colors duration-300">
-                    {channel.badge}
+                {/* Action Arrow */}
+                <div className="shrink-0 pt-2 sm:pt-0">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-neutral-300 group-hover:border-[#3b82f6] group-hover:bg-[#3b82f6] group-hover:text-white transition-all duration-300 text-sm">
+                    ↗
                   </span>
-
-                  <MagneticElement strength={0.3}>
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#3b82f6]/40 text-[#93c5fd] group-hover:border-[#3b82f6] group-hover:bg-[#3b82f6] group-hover:text-white transition-all duration-300 text-sm">
-                      ↗
-                    </span>
-                  </MagneticElement>
                 </div>
               </Link>
             </div>

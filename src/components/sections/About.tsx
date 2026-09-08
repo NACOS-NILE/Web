@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
 import { SectionLabel } from "../ui/SectionLabel";
 import { AnimatedLink } from "../ui/AnimatedLink";
+import { EDITORIAL_IMAGES } from "@/lib/images";
 
 export function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -24,7 +25,6 @@ export function About() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Subtle horizontal and vertical drift on typography lines during scroll
       if (line1Ref.current && line2Ref.current && line3Ref.current) {
         gsap.to(line1Ref.current, {
           x: -24,
@@ -60,7 +60,6 @@ export function About() {
         });
       }
 
-      // Parallax drift on the artwork block
       if (imageRef.current) {
         gsap.to(imageRef.current, {
           y: -40,
@@ -82,13 +81,13 @@ export function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#0d1733] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#F7F7F5] text-neutral-900 border-t border-neutral-900/10 overflow-hidden"
     >
       {/* Top Section Meta Row */}
       <Container size="default">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
-          <SectionLabel label="About NACOS" showLine className="text-neutral-400" />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa]">
+        <div className="flex items-center justify-between border-b border-neutral-900/10 pb-6">
+          <SectionLabel label="About NACOS" showLine className="text-neutral-500" />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-semibold">
             Nile Chapter
           </span>
         </div>
@@ -102,7 +101,7 @@ export function About() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.84] tracking-tight uppercase text-white"
+            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.84] tracking-tight uppercase text-neutral-950"
           >
             {/* Line 1 */}
             <div className="overflow-hidden">
@@ -126,7 +125,7 @@ export function About() {
                 whileInView={{ y: "0%" }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-[#60a5fa] will-change-transform"
+                className="block text-[#274193] will-change-transform"
               >
                 A STUDENT
               </motion.div>
@@ -161,11 +160,11 @@ export function About() {
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-6 max-w-xl"
             >
-              <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-white font-normal">
+              <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-neutral-900 font-normal">
                 NACOS Nile is the unifying digital nerve-center for Nile University&apos;s computing minds. We operate at the intersection of student ambition and industry rigor.
               </p>
 
-              <p className="text-sm sm:text-base leading-relaxed text-neutral-300 font-sans">
+              <p className="text-sm sm:text-base leading-relaxed text-neutral-600 font-sans">
                 Fostering software craft, collaborative engineering, cybersecurity defense, and technological research. Not just an association, but an active collective of builders shaping the future of African computing. From first-year algorithmic foundations to competitive hackathons, our community exists to turn academic curiosity into production-ready capability.
               </p>
 
@@ -174,57 +173,53 @@ export function About() {
                   href="#disciplines"
                   arrow
                   cursorLabel="EXPLORE"
-                  className="text-xs font-semibold uppercase tracking-[0.2em] text-[#60a5fa] hover:text-white"
+                  className="text-xs font-semibold uppercase tracking-[0.2em] text-[#274193] hover:text-black"
                 >
                   Explore Academic Disciplines
                 </AnimatedLink>
               </div>
             </motion.div>
 
-            {/* Typography-Driven Statistics with Brand Navy Clean Styling */}
+            {/* Typography-Driven Statistics */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-16 sm:mt-24 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-8"
+              className="mt-16 sm:mt-20 pt-8 border-t border-neutral-900/10 grid grid-cols-2 sm:grid-cols-4 gap-8"
             >
-              {/* Stat 1 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-white leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
                   06
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
                   Disciplines
                 </div>
               </div>
 
-              {/* Stat 2 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-white leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
                   09
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
                   Executive Excos
                 </div>
               </div>
 
-              {/* Stat 3 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-[#60a5fa] leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-[#274193] leading-none mb-1">
                   NUN
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
                   Nile University
                 </div>
               </div>
 
-              {/* Stat 4 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-white leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
                   ABJ
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
                   Abuja, Nigeria
                 </div>
               </div>
@@ -237,7 +232,6 @@ export function About() {
               ref={imageRef}
               className="relative w-full max-w-md lg:max-w-sm xl:max-w-md will-change-transform"
             >
-              {/* Masked Portrait Container */}
               <motion.div
                 data-cursor="VIEW"
                 initial={
@@ -255,17 +249,15 @@ export function About() {
                   duration: 1.2,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden bg-white/5 border border-white/10"
+                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-neutral-200 border border-neutral-900/10 shadow-lg"
               >
                 <Image
-                  src="/excos-pics/vp.jpg"
-                  alt="Abdullah Ali Ahmad, NACOS Nile Vice President"
+                  src={EDITORIAL_IMAGES.about}
+                  alt="Nile University students collaborating on computing and software projects"
                   fill
                   sizes="(max-width: 768px) 90vw, (max-width: 1200px) 40vw, 30vw"
-                  className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                  className="object-cover object-center grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
-
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0d1733]/70 via-transparent to-transparent opacity-70" />
               </motion.div>
             </div>
           </div>

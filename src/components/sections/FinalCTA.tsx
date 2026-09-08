@@ -7,12 +7,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
 import { MagneticElement } from "../animations/MagneticElement";
+import { EDITORIAL_IMAGES } from "@/lib/images";
 
 export function FinalCTA() {
   const sectionRef = useRef<HTMLElement>(null);
-  const line1Ref = useRef<HTMLHeadingElement>(null);
-  const line2Ref = useRef<HTMLHeadingElement>(null);
-  const line3Ref = useRef<HTMLHeadingElement>(null);
+  const headlineRef = useRef<HTMLDivElement>(null);
   const ctaContainerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -22,63 +21,32 @@ export function FinalCTA() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Subtle horizontal parallax drift on the three gigantic typography lines
-      if (line1Ref.current && line2Ref.current && line3Ref.current) {
+      if (headlineRef.current) {
         gsap.fromTo(
-          line1Ref.current,
-          { x: -30 },
+          headlineRef.current,
+          { scale: 0.96, opacity: 0.9 },
           {
-            x: 25,
+            scale: 1,
+            opacity: 1,
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.2,
-            },
-          }
-        );
-
-        gsap.fromTo(
-          line2Ref.current,
-          { x: 30 },
-          {
-            x: -25,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.2,
-            },
-          }
-        );
-
-        gsap.fromTo(
-          line3Ref.current,
-          { x: -20 },
-          {
-            x: 20,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.2,
+              start: "top 80%",
+              end: "bottom bottom",
+              scrub: 1,
             },
           }
         );
       }
 
-      // Entrance animation for the CTA block
       if (ctaContainerRef.current) {
         gsap.fromTo(
           ctaContainerRef.current,
-          { opacity: 0, y: 40 },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            duration: 1,
+            duration: 0.9,
             ease: "power3.out",
             scrollTrigger: {
               trigger: ctaContainerRef.current,
@@ -97,9 +65,9 @@ export function FinalCTA() {
       id="cta"
       ref={sectionRef}
       aria-label="Final Call to Action — Join NACOS Nile"
-      className="relative w-full bg-[#0A0A0A] text-[#F7F7F5] py-28 sm:py-36 md:py-48 overflow-hidden"
+      className="relative w-full bg-[#111111] text-[#F7F7F5] py-28 sm:py-36 md:py-48 overflow-hidden border-t border-white/10"
     >
-      {/* Editorial Watermark / Chapter Stamp in Background */}
+      {/* Background Watermark */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.03] select-none"
@@ -109,111 +77,49 @@ export function FinalCTA() {
         </span>
       </div>
 
-      {/* TOP EDITORIAL METADATA BAR */}
-      <Container size="default">
-        <div className="flex flex-wrap items-center justify-between gap-6 border-b border-white/10 pb-8 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.24em] text-neutral-400">
-          <div className="flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6] animate-pulse" />
-            <span className="text-white font-medium">NACOS NILE</span>
-            <span className="text-neutral-600">/</span>
-            <span>NILE UNIVERSITY OF NIGERIA</span>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <span>ABUJA, NIGERIA</span>
-          </div>
+      {/* Main Closing Statement with Typographic Image Texture Mask */}
+      <Container size="full" className="px-4 sm:px-8 md:px-12 lg:px-16 py-12">
+        <div ref={headlineRef} className="flex flex-col items-center justify-center text-center select-none">
+          <h2
+            style={{
+              backgroundImage: `url(${EDITORIAL_IMAGES.hero})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+            className="font-heading text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[16.5vw] font-bold uppercase tracking-[-0.04em] leading-[0.82] bg-clip-text text-transparent brightness-150 contrast-125"
+          >
+            <div>COME</div>
+            <div>BUILD</div>
+            <div className="text-white">WITH US.</div>
+          </h2>
         </div>
       </Container>
 
-      {/* MAIN STATEMENT: GIGANTIC EDITORIAL POSTER TYPOGRAPHY */}
-      <Container size="full" className="px-4 sm:px-8 md:px-12 lg:px-16 pt-16 sm:pt-24 pb-16 sm:pb-24">
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="w-full max-w-[1600px] overflow-hidden">
-            {/* Line 1: COME */}
-            <div className="overflow-hidden py-1">
-              <h2
-                ref={line1Ref}
-                className="font-heading text-[20vw] sm:text-[18vw] md:text-[17vw] lg:text-[16vw] xl:text-[15.5vw] font-bold uppercase tracking-[-0.04em] leading-[0.8] text-[#F7F7F5] will-change-transform"
-              >
-                COME
-              </h2>
-            </div>
-
-            {/* Line 2: BUILD */}
-            <div className="overflow-hidden py-1">
-              <h2
-                ref={line2Ref}
-                className="font-heading text-[20vw] sm:text-[18vw] md:text-[17vw] lg:text-[16vw] xl:text-[15.5vw] font-bold uppercase tracking-[-0.04em] leading-[0.8] text-[#F7F7F5] will-change-transform"
-              >
-                BUILD
-              </h2>
-            </div>
-
-            {/* Line 3: WITH US. */}
-            <div className="overflow-hidden py-1">
-              <h2
-                ref={line3Ref}
-                className="font-heading text-[20vw] sm:text-[18vw] md:text-[17vw] lg:text-[16vw] xl:text-[15.5vw] font-bold uppercase tracking-[-0.04em] leading-[0.8] text-neutral-400 will-change-transform"
-              >
-                WITH US<span className="text-[#F7F7F5]">.</span>
-              </h2>
-            </div>
-          </div>
-        </div>
-      </Container>
-
-      {/* PRIMARY ACTION & LUXURY REFINED INTERACTION */}
+      {/* Primary Action Button & Supporting Thesis */}
       <Container size="default">
         <div
           ref={ctaContainerRef}
-          className="flex flex-col items-center justify-center text-center gap-10 sm:gap-14 pt-4 pb-16 border-b border-white/10"
+          className="flex flex-col items-center justify-center text-center gap-8 sm:gap-12 pt-6 pb-12"
         >
-          {/* Subtitle / Closing Thesis Statement */}
-          <p className="max-w-xl text-sm sm:text-base md:text-lg leading-relaxed text-neutral-400 font-sans font-light">
-            Every software system, every security protocol, and every breakthrough begins with a community that dares to build. Your seat is waiting.
+          <p className="max-w-lg text-sm sm:text-base leading-relaxed text-neutral-400 font-sans">
+            Every software system, every security protocol, and every technical breakthrough begins with a community that dares to build. Your seat is waiting.
           </p>
 
-          {/* Primary Action Button */}
-          <div className="pt-2">
-            <MagneticElement strength={0.32}>
-              <Link
-                href="#community"
-                data-cursor="OPEN"
-                className="group relative inline-flex items-center gap-4 sm:gap-6 rounded-[2px] bg-[#274193] px-8 sm:px-12 py-5 sm:py-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-white transition-all duration-300 hover:bg-[#1d3273] shadow-2xl focus-visible:outline-white"
+          <MagneticElement strength={0.32}>
+            <Link
+              href="#community"
+              data-cursor="OPEN"
+              className="group inline-flex items-center gap-4 rounded-[2px] bg-[#274193] px-8 sm:px-12 py-5 sm:py-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-white transition-all duration-300 hover:bg-[#3453b3] shadow-2xl shadow-[#274193]/30"
+            >
+              <span>JOIN THE COMMUNITY</span>
+              <span
+                aria-hidden="true"
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[#274193] text-xs font-bold transition-transform duration-300 group-hover:translate-x-1"
               >
-                <span className="relative z-10 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1">
-                  JOIN THE COMMUNITY
-                </span>
-
-                <span
-                  aria-hidden="true"
-                  className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full bg-white text-[#274193] text-xs font-bold transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5"
-                >
-                  →
-                </span>
-              </Link>
-            </MagneticElement>
-          </div>
-        </div>
-      </Container>
-
-      {/* SECONDARY EDITORIAL METADATA & CHAPTER SIGN-OFF */}
-      <Container size="default" className="pt-12 sm:pt-16">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400">
-          <div className="space-y-1">
-            <div className="text-white font-medium">NACOS NILE CHAPTER</div>
-            <div>Nile University of Nigeria</div>
-          </div>
-
-          <div className="space-y-1">
-            <div className="text-white font-medium">COMPUTING COLLECTIVE</div>
-            <div>CS • SE • CYBER • IT • IS • DS</div>
-          </div>
-
-          <div className="space-y-1 sm:text-right">
-            <div className="text-white font-medium">SESSION 2025 / 2026</div>
-            <div className="text-[#60a5fa]">SEE YOU INSIDE ↗</div>
-          </div>
+                →
+              </span>
+            </Link>
+          </MagneticElement>
         </div>
       </Container>
     </section>

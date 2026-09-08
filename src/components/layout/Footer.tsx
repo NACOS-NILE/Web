@@ -159,18 +159,13 @@ export function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM: Restrained Micro Metadata & Creator Credit */}
-        <div className="pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-neutral-400">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span>© 2026 NACOS NILE</span>
-            <span className="hidden sm:inline text-neutral-700">•</span>
-            <span>NILE UNIVERSITY OF NIGERIA</span>
-            <span className="hidden sm:inline text-neutral-700">•</span>
-            <span>COMPUTING COMMUNITY</span>
+        {/* BOTTOM: Quiet Copyright */}
+        <div className="pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-neutral-500">
+          <div>
+            <span>© 2026 NACOS NILE CHAPTER • NILE UNIVERSITY OF NIGERIA</span>
           </div>
-
-          <div className="flex items-center gap-4 text-neutral-400">
-            <span>WEBSITE BY NACOS NILE BUILDERS</span>
+          <div>
+            <span>ALL RIGHTS RESERVED</span>
           </div>
         </div>
       </Container>
