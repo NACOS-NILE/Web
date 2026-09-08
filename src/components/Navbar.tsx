@@ -63,7 +63,7 @@ export function Navbar() {
         <Link
           href="#top"
           aria-label="NACOS Nile — home"
-          className="flex items-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nacos-accent"
+          className="flex items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nacos-accent"
           onClick={() => setOpen(false)}
         >
           <BrandMark size="md" />
