@@ -20,7 +20,9 @@ export function DisciplinesMarquee({
     const track = trackRef.current;
     if (!track) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const isMobile = window.matchMedia("(max-width: 639px)").matches;
     if (reduceMotion || !isMobile) return;
 
@@ -89,7 +91,11 @@ export function DisciplinesMarquee({
       ))}
       {/* Decorative duplicate: gives the mobile auto-scroll loop a seamless second lap. */}
       {items.map((name) => (
-        <li key={`dup-${name}`} aria-hidden="true" className={`${pillClass} sm:hidden`}>
+        <li
+          key={`dup-${name}`}
+          aria-hidden="true"
+          className={`${pillClass} sm:hidden`}
+        >
           {name}
         </li>
       ))}

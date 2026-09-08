@@ -50,13 +50,15 @@ html {
   text-wrap: balance;
 }
 
-.scrollbar-hide {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
+@media (max-width: 639px) {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 ::selection {

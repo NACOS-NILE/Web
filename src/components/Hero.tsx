@@ -57,8 +57,10 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.3} className="w-full">
-          <DisciplinesMarquee items={DISCIPLINES.map((discipline) => discipline.name)} />
+        <Reveal delay={0.3} className="w-screen px-4 sm:px-6">
+          <DisciplinesMarquee
+            items={DISCIPLINES.map((discipline) => discipline.name)}
+          />
         </Reveal>
 
         <Reveal delay={0.36} className="w-full">
