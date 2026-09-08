@@ -87,7 +87,7 @@ export function About() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="02" label="About / NACOS Identity" showLine />
+          <SectionLabel number="01" label="About / NACOS Identity" showLine />
           <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
             Folio // Culture & Vision • 2026
           </span>
@@ -262,7 +262,7 @@ export function About() {
                   alt="Abdullah Ali Ahmad, NACOS Nile Vice President"
                   fill
                   sizes="(max-width: 768px) 90vw, (max-width: 1200px) 40vw, 30vw"
-                  className="object-cover grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                  className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />

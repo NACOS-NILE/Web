@@ -139,7 +139,7 @@ export function Events() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="05" label="Events / Calendar" showLine />
+          <SectionLabel number="04" label="Events / Calendar" showLine />
           <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
             <span>Calendar Folio // 2026</span>
             <span>All Dates Subject to Academic Session</span>
@@ -228,7 +228,7 @@ export function Events() {
                   fill
                   sizes="(max-width: 1200px) 90vw, 450px"
                   priority
-                  className="object-cover grayscale contrast-110 transition-transform duration-700 hover:scale-105 hover:grayscale-0"
+                  className="object-cover object-top grayscale contrast-110 transition-transform duration-700 hover:scale-105 hover:grayscale-0"
                 />
 
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -385,7 +385,7 @@ export function Events() {
                       fill
                       sizes="(max-width: 1200px) 40vw, 30vw"
                       priority
-                      className="object-cover grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
+                      className="object-cover object-top grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
                     />
 
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />

@@ -129,7 +129,7 @@ export function Disciplines() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="03" label="Disciplines / Index" showLine />
+          <SectionLabel number="02" label="Disciplines / Index" showLine />
           <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
             <span className="hidden sm:inline">NUN Department of Computing</span>
             <span>06 Disciplines</span>
@@ -302,7 +302,7 @@ export function Disciplines() {
                       fill
                       sizes="(max-width: 1200px) 40vw, 30vw"
                       priority
-                      className="object-cover grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
+                      className="object-cover object-top grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
                     />
 
                     {/* Subtle bottom vignette */}

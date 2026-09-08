@@ -138,7 +138,7 @@ export function Excos() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="06" label="Executive Council" showLine />
+          <SectionLabel number="05" label="Executive Council" showLine />
           <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
             <span>Executive Leadership • 2026</span>
             <span>09 Officers</span>
@@ -197,7 +197,7 @@ export function Excos() {
                   fill
                   sizes="(max-width: 1200px) 90vw, 700px"
                   priority
-                  className="object-cover grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                  className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -234,7 +234,7 @@ export function Excos() {
                   alt={vp.name}
                   fill
                   sizes="(max-width: 1200px) 90vw, 450px"
-                  className="object-cover grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                  className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -281,7 +281,7 @@ export function Excos() {
                       alt={member.name}
                       fill
                       sizes="(max-width: 768px) 90vw, 380px"
-                      className="object-cover grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                      className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                     />
 
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -329,7 +329,7 @@ export function Excos() {
                       alt={member.name}
                       fill
                       sizes="(max-width: 768px) 90vw, 300px"
-                      className="object-cover grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                      className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                     />
 
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />

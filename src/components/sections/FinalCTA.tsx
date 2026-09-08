@@ -97,7 +97,7 @@ export function FinalCTA() {
       id="cta"
       ref={sectionRef}
       aria-label="Final Call to Action — Join NACOS Nile"
-      className="relative w-full bg-[#0A0A0A] text-[#F7F7F5] py-28 sm:py-36 md:py-48 overflow-hidden select-none"
+      className="relative w-full bg-[#0A0A0A] text-[#F7F7F5] py-28 sm:py-36 md:py-48 overflow-hidden"
     >
       {/* Editorial Watermark / Chapter Stamp in Background */}
       <div

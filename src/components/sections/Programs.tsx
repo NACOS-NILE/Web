@@ -141,7 +141,7 @@ export function Programs() {
       <div className="py-24 sm:py-32 border-b border-neutral-900/10">
         <Container size="default">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-            <SectionLabel number="04" label="Programs / Initiatives" showLine />
+            <SectionLabel number="03" label="Programs / Initiatives" showLine />
             <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
               Folio // Initiatives • 2026
             </div>
@@ -302,7 +302,7 @@ export function Programs() {
                         fill
                         sizes="(max-width: 1400px) 35vw, 400px"
                         priority
-                        className="object-cover grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
+                        className="object-cover object-top grayscale contrast-110 transition-all duration-700 hover:grayscale-0 hover:scale-105"
                       />
 
                       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -367,7 +367,7 @@ export function Programs() {
                     alt={item.titleLine1}
                     fill
                     sizes="(max-width: 768px) 90vw, 400px"
-                    className="object-cover grayscale contrast-110"
+                    className="object-cover object-top grayscale contrast-110"
                   />
                   <div className="absolute bottom-2 left-2 right-2 text-[9px] font-mono uppercase tracking-widest text-white bg-black/60 px-2 py-1">
                     {item.caption}

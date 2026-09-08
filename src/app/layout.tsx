@@ -33,7 +33,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased selection:bg-[#111111] selection:text-[#F7F7F5]`}
     >
-      <body className="min-h-full flex flex-col bg-[#F7F7F5] text-[#111111]">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#F7F7F5] text-[#111111]"
+      >
         <CustomCursor />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>

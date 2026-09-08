@@ -6,6 +6,7 @@ import { Events } from "@/components/sections/Events";
 import { Excos } from "@/components/sections/Excos";
 import { Community } from "@/components/sections/Community";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Excos />
       <Community />
       <FinalCTA />
+      <Footer />
     </main>
   );
 }

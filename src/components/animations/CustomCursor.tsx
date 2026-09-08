@@ -61,22 +61,24 @@ export function CustomCursor() {
         "[data-cursor], [data-cursor-text], a, button, input, textarea"
       ) as HTMLElement | null;
 
+      let nextVariant: "default" | "hover" | "text" = "default";
+      let nextText = "";
+
       if (interactiveEl) {
         const customText =
           interactiveEl.getAttribute("data-cursor-text") ||
           interactiveEl.getAttribute("data-cursor");
 
         if (customText && !["pointer", "true"].includes(customText)) {
-          setCursorText(customText.toUpperCase());
-          setCursorVariant("text");
+          nextText = customText.toUpperCase();
+          nextVariant = "text";
         } else {
-          setCursorText("");
-          setCursorVariant("hover");
+          nextVariant = "hover";
         }
-      } else {
-        setCursorText("");
-        setCursorVariant("default");
       }
+
+      setCursorVariant((prev) => (prev !== nextVariant ? nextVariant : prev));
+      setCursorText((prev) => (prev !== nextText ? nextText : prev));
     };
 
     const handleMouseLeave = () => {

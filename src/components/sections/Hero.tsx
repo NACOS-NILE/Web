@@ -109,8 +109,8 @@ export function Hero() {
           className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-5 text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-500"
         >
           <div className="flex items-center gap-3">
-            <span className="font-mono text-neutral-900">[01]</span>
-            <span>NACOS Nile Chapter</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-neutral-900" />
+            <span className="font-semibold text-neutral-900">NACOS Nile Chapter</span>
             <span className="hidden sm:inline text-neutral-300">/</span>
             <span className="hidden sm:inline">Nile University of Nigeria</span>
           </div>
@@ -237,7 +237,7 @@ export function Hero() {
                   fill
                   priority
                   sizes="(max-width: 768px) 90vw, (max-width: 1200px) 35vw, 30vw"
-                  className="object-cover grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
+                  className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
                 {/* Subtle vignette / gradient overlay to preserve monochrome purity */}
