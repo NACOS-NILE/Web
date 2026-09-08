@@ -80,9 +80,9 @@ export function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[92vh] lg:min-h-screen w-full flex flex-col justify-between pt-28 sm:pt-32 md:pt-36 pb-10 md:pb-14 bg-[#0d1733] text-[#F7F7F5] overflow-hidden transition-colors duration-500"
+      className="relative min-h-[92vh] lg:min-h-screen w-full flex flex-col justify-between pt-28 sm:pt-32 md:pt-36 pb-10 md:pb-14 bg-[#111111] text-[#F7F7F5] overflow-hidden transition-colors duration-500"
     >
-      {/* Top Meta Bar */}
+      {/* Top Meta Bar - Minimal & Clean */}
       <Container size="default">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -93,12 +93,10 @@ export function Hero() {
           <div className="flex items-center gap-3">
             <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6]" />
             <span className="font-semibold text-white tracking-widest">NACOS Nile Chapter</span>
-            <span className="hidden sm:inline text-neutral-600">/</span>
-            <span className="hidden sm:inline text-neutral-400">Nile University of Nigeria</span>
           </div>
 
           <div className="font-mono text-[10px] sm:text-[11px] text-neutral-400">
-            <span>Abuja, Nigeria</span>
+            <span>Nile University of Nigeria</span>
           </div>
         </motion.div>
       </Container>
@@ -108,34 +106,22 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           {/* Left Column: Headline & Actions */}
           <div className="lg:col-span-8 flex flex-col justify-between z-10">
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-4 sm:mb-6 flex items-center gap-2.5"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6]" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#60a5fa]">
-                Computing & Engineering Community
-              </span>
-            </motion.div>
-
             {/* Giant Manuka Headline */}
             <div ref={headlineRef}>
               <motion.h1
                 variants={titleContainerVariants}
                 initial="hidden"
                 animate="visible"
-                className="font-heading text-[clamp(4.2rem,11.5vw,12.5rem)] leading-[0.82] tracking-tight uppercase text-white select-none"
+                className="font-heading text-[clamp(4rem,11vw,12rem)] leading-[0.88] tracking-tight uppercase text-white select-none py-1"
               >
-                <div className="overflow-hidden">
+                <div className="overflow-hidden py-1">
                   <motion.div variants={titleLineVariants} className="block">
                     WE BUILD
                   </motion.div>
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden py-1">
                   <motion.div variants={titleLineVariants} className="block text-[#F7F7F5]">
-                    TOGETHER.
+                    TOGETHER<span className="text-[#3b82f6]">.</span>
                   </motion.div>
                 </div>
               </motion.h1>
@@ -220,7 +206,7 @@ export function Hero() {
                 />
 
                 {/* Subtle dark vignette */}
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0d1733]/70 via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent opacity-80" />
               </motion.div>
             </div>
           </div>

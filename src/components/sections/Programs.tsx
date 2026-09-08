@@ -6,53 +6,42 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
-import { SectionLabel } from "../ui/SectionLabel";
 import { EDITORIAL_IMAGES } from "@/lib/images";
 
 interface ProgramItem {
   id: string;
   title: string;
-  subtitle: string;
   description: string;
-  focus: string[];
   image: string;
 }
 
 const PROGRAMS: ProgramItem[] = [
   {
     id: "hackathons",
-    title: "Hackathons & Build Sprints",
-    subtitle: "Collaborative Engineering",
+    title: "Hackathons & Sprints",
     description:
-      "48-hour development sprints where Nile computing students design, architect, and demo working software prototypes to solve real-world industry challenges.",
-    focus: ["Rapid Prototyping", "Full-Stack Systems", "Product Strategy"],
+      "48-hour development sprints where Nile computing students design, architect, and demo working software prototypes to solve real-world problems.",
     image: EDITORIAL_IMAGES.programs.codeGenesis,
   },
   {
     id: "bootcamps",
     title: "Technical Bootcamps",
-    subtitle: "Hands-On Skill Acquisition",
     description:
-      "Intensive multi-week masterclasses covering distributed systems, web architectures, cybersecurity operations, and cloud pipelines led by senior peers.",
-    focus: ["Software Architecture", "Cloud Platforms", "Cyber Defense"],
+      "Intensive multi-week engineering masterclasses covering systems design, cloud architectures, cybersecurity operations, and full-stack software development.",
     image: EDITORIAL_IMAGES.programs.accelerator,
   },
   {
     id: "mentorship",
     title: "Industry Mentorship",
-    subtitle: "Practitioner Guidance",
     description:
-      "Direct technical advisory pairings connecting aspiring students with established Nile computing alumni and engineering leaders at top technology companies.",
-    focus: ["Career Advisory", "System Architecture", "Code Review"],
+      "Direct technical pairings connecting students with established Nile computing alumni and engineering practitioners across the global tech sector.",
     image: EDITORIAL_IMAGES.programs.mentorship,
   },
   {
     id: "techweek",
     title: "Nile Tech Week",
-    subtitle: "Annual Flagship Gathering",
     description:
-      "Our premier annual symposium bringing together student innovators, researchers, and tech leaders for keynotes, project exhibitions, and technical discussions.",
-    focus: ["Keynote Presentations", "Exhibitions", "Networking"],
+      "Our premier annual gathering uniting student innovators, researchers, and industry leaders for keynotes, project exhibitions, and technical panels.",
     image: EDITORIAL_IMAGES.programs.techWeek,
   },
 ];
@@ -98,24 +87,17 @@ export function Programs() {
 
   return (
     <section id="programs" className="relative w-full bg-[#F7F7F5] text-neutral-900 border-t border-neutral-900/10">
-      {/* Intro Header Section */}
-      <div className="py-24 sm:py-32 border-b border-neutral-900/10">
+      {/* Intro Header Section - No Section Labels */}
+      <div className="py-20 sm:py-28 border-b border-neutral-900/10">
         <Container size="default">
-          <div className="flex items-center justify-between border-b border-neutral-900/10 pb-6">
-            <SectionLabel label="Programs & Initiatives" showLine className="text-neutral-500" />
-            <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-semibold">
-              Flagship Programs
-            </div>
-          </div>
-
-          <div className="pt-16 sm:pt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <motion.h2
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.84] tracking-tight uppercase text-neutral-950 select-none"
+                className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.88] tracking-tight uppercase text-neutral-950 select-none py-1"
               >
                 WE DON&apos;T
                 <br />
@@ -143,13 +125,13 @@ export function Programs() {
       {/* DESKTOP: Sticky Storytelling Canvas (Visible on lg+) */}
       <div
         ref={scrollTrackRef}
-        className="hidden lg:block relative h-[320vh] w-full bg-[#F7F7F5]"
+        className="hidden lg:block relative h-[280vh] w-full bg-[#F7F7F5]"
       >
         <div className="sticky top-0 h-screen w-full flex flex-col justify-between py-12 md:py-16 overflow-hidden">
           {/* Main Storytelling Stage */}
           <Container size="default" className="my-auto py-8">
             <div className="grid grid-cols-12 gap-8 xl:gap-14 items-center">
-              {/* Column 1: Index List */}
+              {/* Column 1: Program Selector List */}
               <div className="col-span-4 space-y-4">
                 <div className="flex flex-col space-y-3 border-l-2 border-neutral-300 pl-4">
                   {PROGRAMS.map((item, idx) => {
@@ -160,7 +142,7 @@ export function Programs() {
                         type="button"
                         onClick={() => handleIndexClick(idx)}
                         data-cursor="EXPLORE"
-                        className={`text-left text-sm font-mono uppercase tracking-[0.14em] py-2 transition-all duration-300 flex items-center justify-between focus-visible:outline-none ${
+                        className={`text-left text-sm font-mono uppercase tracking-[0.14em] py-2.5 transition-all duration-300 flex items-center justify-between focus-visible:outline-none ${
                           isSelected
                             ? "text-[#274193] font-bold translate-x-1"
                             : "text-neutral-400 hover:text-neutral-900"
@@ -187,7 +169,7 @@ export function Programs() {
                 </div>
               </div>
 
-              {/* Column 2: Narrative Presentation */}
+              {/* Column 2: Narrative Presentation (Simplified) */}
               <div className="col-span-4 pr-4">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -198,10 +180,6 @@ export function Programs() {
                     transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     className="space-y-5"
                   >
-                    <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#274193] font-semibold">
-                      {activeProgram.subtitle}
-                    </div>
-
                     <h3 className="font-heading text-5xl xl:text-6xl uppercase tracking-tight leading-[0.9] text-neutral-950 select-none">
                       {activeProgram.title}
                     </h3>
@@ -209,17 +187,6 @@ export function Programs() {
                     <p className="text-sm leading-relaxed text-neutral-600 font-sans">
                       {activeProgram.description}
                     </p>
-
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {activeProgram.focus.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 border border-neutral-300 bg-white text-neutral-700 rounded-[2px]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -257,19 +224,15 @@ export function Programs() {
       </div>
 
       {/* MOBILE: Vertical Progressive Journey (Visible on < lg) */}
-      <div className="lg:hidden py-16">
+      <div className="lg:hidden py-14">
         <Container size="default">
-          <div className="space-y-16">
+          <div className="space-y-12">
             {PROGRAMS.map((item) => (
               <div
                 key={item.id}
-                className="border-b border-neutral-900/10 pb-12 space-y-5"
+                className="border-b border-neutral-900/10 pb-10 space-y-4"
               >
-                <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#274193] font-semibold">
-                  {item.subtitle}
-                </div>
-
-                <h3 className="font-heading text-4xl sm:text-5xl uppercase tracking-tight leading-[0.88] text-neutral-950">
+                <h3 className="font-heading text-4xl sm:text-5xl uppercase tracking-tight leading-[0.9] text-neutral-950">
                   {item.title}
                 </h3>
 
@@ -277,18 +240,7 @@ export function Programs() {
                   {item.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
-                  {item.focus.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 border border-neutral-300 bg-white text-neutral-700"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="relative aspect-[4/3] w-full max-w-sm overflow-hidden rounded-[2px] bg-neutral-200 border border-neutral-900/10 mt-4">
+                <div className="relative aspect-[4/3] w-full max-w-sm overflow-hidden rounded-[2px] bg-neutral-200 border border-neutral-900/10 mt-3">
                   <Image
                     src={item.image}
                     alt={item.title}

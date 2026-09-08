@@ -7,7 +7,6 @@ import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
-import { SectionLabel } from "../ui/SectionLabel";
 import { EDITORIAL_IMAGES } from "@/lib/images";
 
 interface CommunityChannel {
@@ -104,23 +103,13 @@ export function Community() {
     <section
       id="community"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#0d1733] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-40 bg-[#111111] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
     >
-      {/* Top Meta Bar */}
-      <Container size="default">
-        <div className="flex items-center justify-between border-b border-white/10 pb-6">
-          <SectionLabel label="Community Network" showLine className="text-neutral-400" />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa] font-medium">
-            Connect
-          </span>
-        </div>
-      </Container>
-
-      {/* Editorial Headline & Overview with Hero Image Visual */}
-      <Container size="default" className="pt-16 sm:pt-24">
+      {/* Editorial Headline & Overview with Hero Image Visual - No Section Labels */}
+      <Container size="default" className="pt-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6">
-            <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.85] text-white">
+            <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] text-white py-1">
               JOIN THE
               <br />
               <span className="text-[#3b82f6]">COMMUNITY.</span>
@@ -140,7 +129,7 @@ export function Community() {
                 sizes="(max-width: 1024px) 90vw, 500px"
                 className="object-cover object-center grayscale contrast-110 brightness-95 hover:grayscale-0 hover:scale-105 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d1733]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
         </div>
@@ -163,10 +152,10 @@ export function Community() {
               >
                 {/* Channel Identity */}
                 <div className="min-w-[260px]">
-                  <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight leading-none text-white group-hover:text-[#60a5fa] transition-colors duration-300">
+                  <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight leading-none text-white group-hover:text-white transition-colors duration-300">
                     {channel.platform}
                   </h3>
-                  <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.16em] uppercase text-neutral-400 group-hover:text-[#93c5fd] block pt-1.5 transition-colors">
+                  <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.16em] uppercase text-neutral-400 group-hover:text-[#60a5fa] block pt-1.5 transition-colors">
                     {channel.handle}
                   </span>
                 </div>

@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Container } from "../layout/Container";
-import { SectionLabel } from "../ui/SectionLabel";
 import { EDITORIAL_IMAGES } from "@/lib/images";
 
 interface DisciplineData {
@@ -82,7 +81,7 @@ export function Disciplines() {
     const handleScroll = () => {
       if (window.innerWidth < 1024) return; // Desktop only
 
-      const viewportCenter = window.innerHeight * 0.45;
+      const viewportCenter = window.innerHeight * 0.48;
 
       itemRefs.current.forEach((el, index) => {
         if (!el) return;
@@ -106,20 +105,10 @@ export function Disciplines() {
     <section
       id="disciplines"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#111111] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-40 bg-[#111111] text-[#F7F7F5] border-t border-white/10"
     >
-      {/* Top Section Meta Row */}
-      <Container size="default">
-        <div className="flex items-center justify-between border-b border-white/10 pb-6">
-          <SectionLabel label="Academic Disciplines" showLine className="text-neutral-400" />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa] font-medium">
-            Concentrations
-          </span>
-        </div>
-      </Container>
-
-      {/* Section Header Statement */}
-      <Container size="default" className="pt-16 sm:pt-24 md:pt-28 pb-12 sm:pb-20">
+      {/* Section Header Statement - No Section Labels */}
+      <Container size="default" className="pt-4 pb-12 sm:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
             <motion.h2
@@ -127,13 +116,13 @@ export function Disciplines() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.84] tracking-tight uppercase text-white select-none"
+              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.88] tracking-tight uppercase text-white select-none py-1"
             >
               SIX WAYS
               <br />
               TO THINK
               <br />
-              IN COMPUTING.
+              IN COMPUTING<span className="text-[#3b82f6]">.</span>
             </motion.h2>
           </div>
 
@@ -143,7 +132,7 @@ export function Disciplines() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm leading-relaxed text-neutral-400 max-w-sm"
+              className="text-sm leading-relaxed text-neutral-400 max-w-sm font-sans"
             >
               The Nile computing community spans six core concentrations — from theoretical computation and systems architecture to cyber defense and computational intelligence.
             </motion.p>
@@ -151,11 +140,11 @@ export function Disciplines() {
         </div>
       </Container>
 
-      {/* Main Interactive Index Canvas with True Sticky Image Panel */}
+      {/* Main Interactive Index Canvas with True Stationary Sticky Image Panel */}
       <Container size="default">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
-          {/* Left Column: The Large Discipline List */}
-          <div className="lg:col-span-7 xl:col-span-8 border-t border-white/10">
+          {/* Left Column: The Large Scrolling Discipline List */}
+          <div className="lg:col-span-7 xl:col-span-7 border-t border-white/10">
             {DISCIPLINES.map((item, index) => {
               const isActive = activeIndex === index;
               const isMobileOpen = mobileExpandedIndex === index;
@@ -166,8 +155,8 @@ export function Disciplines() {
                   ref={(el) => {
                     itemRefs.current[index] = el;
                   }}
-                  className={`border-b border-white/10 transition-colors duration-400 ${
-                    isActive ? "bg-white/[0.02]" : ""
+                  className={`border-b border-white/10 transition-colors duration-300 ${
+                    isActive ? "bg-white/[0.03]" : ""
                   }`}
                 >
                   {/* Desktop Trigger / Row Item */}
@@ -178,22 +167,22 @@ export function Disciplines() {
                     onClick={() => toggleMobile(index)}
                     data-cursor="VIEW"
                     aria-expanded={isMobileOpen}
-                    className="group w-full py-8 sm:py-10 text-left flex items-baseline justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
+                    className="group w-full py-10 sm:py-12 lg:py-14 text-left flex items-baseline justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
                   >
-                    <div className="flex items-baseline gap-4 sm:gap-6 md:gap-8 min-w-0">
+                    <div className="flex items-center gap-4 sm:gap-6 min-w-0">
                       <span
-                        className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                        className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                           isActive
                             ? "bg-[#3b82f6] scale-125"
-                            : "bg-transparent group-hover:bg-neutral-600"
+                            : "bg-neutral-700 group-hover:bg-neutral-500"
                         }`}
                       />
 
                       <span
-                        className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl uppercase tracking-tight leading-[0.88] transition-all duration-400 will-change-transform ${
+                        className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl uppercase tracking-tight leading-[0.9] transition-all duration-300 will-change-transform ${
                           isActive
-                            ? "text-[#60a5fa] translate-x-2"
-                            : "text-neutral-500 group-hover:text-white group-hover:translate-x-1"
+                            ? "text-white translate-x-2"
+                            : "text-neutral-500 group-hover:text-neutral-300 group-hover:translate-x-1"
                         }`}
                       >
                         {item.name}
@@ -202,9 +191,9 @@ export function Disciplines() {
 
                     <span
                       aria-hidden="true"
-                      className={`font-mono text-sm transition-transform duration-300 ${
+                      className={`font-mono text-sm transition-all duration-300 ${
                         isActive
-                          ? "text-[#60a5fa] translate-x-1 font-bold"
+                          ? "text-[#60a5fa] translate-x-1 font-bold opacity-100"
                           : "text-neutral-600 opacity-0 group-hover:opacity-100"
                       } ${isMobileOpen ? "rotate-90" : ""}`}
                     >
@@ -248,10 +237,10 @@ export function Disciplines() {
             })}
           </div>
 
-          {/* Right Column: TRUE STICKY Visual Experience (Fixed while scrolling) */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-4 sticky top-28 self-start">
-            <div className="space-y-6">
-              {/* Sticky Image Container with Smooth AnimatePresence */}
+          {/* Right Column: TRUE STATIONARY STICKY Image Panel */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-28 self-start">
+            <div className="space-y-5">
+              {/* Sticky Image Container with Smooth Crossfade and Scale */}
               <div
                 data-cursor="VIEW"
                 className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl"
@@ -261,23 +250,23 @@ export function Disciplines() {
                     key={activeDiscipline.id}
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
                     transition={{
-                      duration: 0.5,
+                      duration: 0.45,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="relative h-full w-full"
+                    className="absolute inset-0 h-full w-full"
                   >
                     <Image
                       src={activeDiscipline.image}
                       alt={activeDiscipline.name}
                       fill
-                      sizes="(max-width: 1200px) 40vw, 30vw"
+                      sizes="(max-width: 1200px) 45vw, 500px"
                       priority
                       className="object-cover object-center grayscale contrast-110 brightness-95 transition-all duration-700 hover:scale-105 hover:grayscale-0 hover:brightness-100"
                     />
 
-                    {/* Gradient overlay for readability */}
+                    {/* Subtle gradient overlay for depth */}
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   </motion.div>
                 </AnimatePresence>
@@ -287,11 +276,11 @@ export function Disciplines() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeDiscipline.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-3 pt-4 border-t border-white/10"
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-3 pt-3 border-t border-white/10"
                 >
                   <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] font-semibold">
                     {activeDiscipline.focus}

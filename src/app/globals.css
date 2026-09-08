@@ -25,9 +25,8 @@
   --white: #FFFFFF;
   --black: #111111;
 
-  /* Official NACOS Nile Brand Palette */
+  /* Official NACOS Nile Brand Palette - Blue used ONLY as accent */
   --nacos-blue: #274193;
-  --nacos-navy: #0d1733;
   --nacos-accent: #3b82f6;
   --nacos-light-blue: #60a5fa;
 
@@ -47,7 +46,6 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-nacos-blue: var(--nacos-blue);
-  --color-nacos-navy: var(--nacos-navy);
   --color-nacos-accent: var(--nacos-accent);
   --color-nacos-light: var(--nacos-light-blue);
 

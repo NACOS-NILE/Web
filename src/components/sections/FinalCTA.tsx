@@ -67,49 +67,49 @@ export function FinalCTA() {
       aria-label="Final Call to Action — Join NACOS Nile"
       className="relative w-full bg-[#111111] text-[#F7F7F5] py-28 sm:py-36 md:py-48 overflow-hidden border-t border-white/10"
     >
-      {/* Background Watermark */}
+      {/* Subtle Background Watermark */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.03] select-none"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.02] select-none"
       >
-        <span className="font-heading text-[45vw] tracking-tighter leading-none text-white uppercase">
+        <span className="font-heading text-[40vw] tracking-tighter leading-none text-white uppercase">
           NILE
         </span>
       </div>
 
       {/* Main Closing Statement with Typographic Image Texture Mask */}
-      <Container size="full" className="px-4 sm:px-8 md:px-12 lg:px-16 py-12">
-        <div ref={headlineRef} className="flex flex-col items-center justify-center text-center select-none">
+      <Container size="full" className="px-4 sm:px-8 md:px-12 lg:px-16 py-8">
+        <div ref={headlineRef} className="flex flex-col items-center justify-center text-center select-none py-2">
           <h2
             style={{
               backgroundImage: `url(${EDITORIAL_IMAGES.hero})`,
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
-            className="font-heading text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[16.5vw] font-bold uppercase tracking-[-0.04em] leading-[0.82] bg-clip-text text-transparent brightness-150 contrast-125"
+            className="font-heading text-[clamp(4.5rem,15vw,14rem)] uppercase tracking-tight leading-[0.88] bg-clip-text text-transparent brightness-150 contrast-125 py-2"
           >
             <div>COME</div>
             <div>BUILD</div>
-            <div className="text-white">WITH US.</div>
+            <div className="text-white">WITH US<span className="text-[#3b82f6]">.</span></div>
           </h2>
         </div>
       </Container>
 
-      {/* Primary Action Button & Supporting Thesis */}
+      {/* Primary Action Button & Supporting Statement */}
       <Container size="default">
         <div
           ref={ctaContainerRef}
-          className="flex flex-col items-center justify-center text-center gap-8 sm:gap-12 pt-6 pb-12"
+          className="flex flex-col items-center justify-center text-center gap-8 sm:gap-10 pt-4 pb-8"
         >
           <p className="max-w-lg text-sm sm:text-base leading-relaxed text-neutral-400 font-sans">
-            Every software system, every security protocol, and every technical breakthrough begins with a community that dares to build. Your seat is waiting.
+            Every software system, every security protocol, and every technical breakthrough begins with a community that dares to build.
           </p>
 
           <MagneticElement strength={0.32}>
             <Link
               href="#community"
               data-cursor="OPEN"
-              className="group inline-flex items-center gap-4 rounded-[2px] bg-[#274193] px-8 sm:px-12 py-5 sm:py-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-white transition-all duration-300 hover:bg-[#3453b3] shadow-2xl shadow-[#274193]/30"
+              className="group inline-flex items-center gap-4 rounded-[2px] bg-[#274193] px-8 sm:px-12 py-4 sm:py-5 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-white transition-all duration-300 hover:bg-[#3453b3] shadow-2xl shadow-[#274193]/30"
             >
               <span>JOIN THE COMMUNITY</span>
               <span

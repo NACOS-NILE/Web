@@ -70,9 +70,9 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isScrolled
-            ? "bg-[#0d1733]/90 py-3.5 backdrop-blur-md border-b border-white/10 shadow-lg"
+            ? "bg-[#111111]/95 py-3.5 border-b border-white/10 shadow-lg"
             : "bg-transparent py-6 md:py-8 border-b border-transparent"
         }`}
       >
@@ -183,7 +183,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-[#0d1733] text-[#F7F7F5] px-6 sm:px-10 pt-28 pb-10 lg:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-[#111111] text-[#F7F7F5] px-6 sm:px-10 pt-28 pb-10 lg:hidden overflow-y-auto"
           >
             {/* Menu Links with Stagger */}
             <motion.div
@@ -239,7 +239,7 @@ export function Navbar() {
                 onClick={closeMenu}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-[2px] bg-[#274193] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#3453b3]"
               >
-                <span>Join Community</span>
+                <span>Join NACOS</span>
                 <span>↗</span>
               </Link>
 

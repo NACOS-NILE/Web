@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "../layout/Container";
-import { SectionLabel } from "../ui/SectionLabel";
 import { MagneticElement } from "../animations/MagneticElement";
 import { EDITORIAL_IMAGES } from "@/lib/images";
 
@@ -25,7 +24,7 @@ const FEATURED_EVENT = {
   category: "Annual Competition",
   status: "UPCOMING",
   description:
-    "An intensive 48-hour collaborative engineering arena where Nile computing students design, architect, and demo working software prototypes to solve real-world community and industrial problems.",
+    "An intensive 48-hour collaborative engineering arena where Nile computing students design, architect, and demo working software prototypes to solve real-world industrial problems.",
   image: EDITORIAL_IMAGES.events.hackathon,
 };
 
@@ -93,20 +92,10 @@ export function Events() {
     <section
       id="events"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#111111] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-40 bg-[#111111] text-[#F7F7F5] border-t border-white/10"
     >
-      {/* Top Section Meta Row */}
-      <Container size="default">
-        <div className="flex items-center justify-between border-b border-white/10 pb-6">
-          <SectionLabel label="Events & Gatherings" showLine className="text-neutral-400" />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa] font-medium">
-            Calendar
-          </span>
-        </div>
-      </Container>
-
-      {/* Main Section Headline */}
-      <Container size="default" className="pt-16 sm:pt-24 pb-16 sm:pb-24">
+      {/* Main Section Headline - No Section Labels */}
+      <Container size="default" className="pt-4 pb-14 sm:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
             <motion.h2
@@ -114,13 +103,13 @@ export function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.5rem,8.6vw,10.2rem)] leading-[0.84] tracking-tight uppercase text-white select-none"
+              className="font-heading text-[clamp(3.5rem,8.6vw,10.2rem)] leading-[0.88] tracking-tight uppercase text-white select-none py-1"
             >
               SOMETHING
               <br />
               IS ALWAYS
               <br />
-              HAPPENING.
+              HAPPENING<span className="text-[#3b82f6]">.</span>
             </motion.h2>
           </div>
 
@@ -130,7 +119,7 @@ export function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm leading-relaxed text-neutral-400 max-w-sm"
+              className="text-sm leading-relaxed text-neutral-400 max-w-sm font-sans"
             >
               From 48-hour hackathon sprints to peer study pods, the NACOS Nile calendar delivers experiences that challenge and connect our computing community.
             </motion.p>
@@ -151,7 +140,7 @@ export function Events() {
                 <span className="text-[#60a5fa] font-medium">{FEATURED_EVENT.status}</span>
               </div>
 
-              <h3 className="font-heading text-4xl sm:text-6xl md:text-7xl xl:text-8xl uppercase tracking-tight leading-[0.84] text-white">
+              <h3 className="font-heading text-4xl sm:text-6xl md:text-7xl xl:text-8xl uppercase tracking-tight leading-[0.88] text-white">
                 <div>{FEATURED_EVENT.titleLine1}</div>
                 <div>{FEATURED_EVENT.titleLine2}</div>
               </h3>
@@ -206,8 +195,8 @@ export function Events() {
               return (
                 <div
                   key={event.id}
-                  className={`border-b border-white/10 transition-colors duration-400 ${
-                    isActive ? "bg-white/[0.02]" : ""
+                  className={`border-b border-white/10 transition-colors duration-300 ${
+                    isActive ? "bg-white/[0.03]" : ""
                   }`}
                 >
                   {/* Event Row Button */}
@@ -220,18 +209,18 @@ export function Events() {
                     aria-expanded={isMobileOpen}
                     className="group w-full py-7 sm:py-9 text-left flex items-center justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
                   >
-                    <div className="flex items-baseline gap-4 sm:gap-6 min-w-0">
+                    <div className="flex items-center gap-4 sm:gap-6 min-w-0">
                       <span
-                        className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
-                          isActive ? "bg-[#3b82f6] scale-125" : "bg-transparent group-hover:bg-neutral-600"
+                        className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                          isActive ? "bg-[#3b82f6] scale-125" : "bg-neutral-700 group-hover:bg-neutral-500"
                         }`}
                       />
 
                       <span
-                        className={`font-heading text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl uppercase tracking-tight leading-[0.88] transition-all duration-300 will-change-transform ${
+                        className={`font-heading text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl uppercase tracking-tight leading-[0.9] transition-all duration-300 will-change-transform ${
                           isActive
-                            ? "text-[#60a5fa] translate-x-1 sm:translate-x-2"
-                            : "text-neutral-500 group-hover:text-white"
+                            ? "text-white translate-x-1 sm:translate-x-2"
+                            : "text-neutral-500 group-hover:text-neutral-300"
                         }`}
                       >
                         {event.title}
@@ -288,7 +277,7 @@ export function Events() {
 
           {/* Right Column: Desktop Interactive Preview Panel */}
           <div className="hidden lg:block lg:col-span-5 xl:col-span-4 sticky top-28 self-start">
-            <div className="space-y-6">
+            <div className="space-y-5">
               {/* Dynamic Image Canvas */}
               <div
                 data-cursor="VIEW"
@@ -299,9 +288,9 @@ export function Events() {
                     key={activeEvent.id}
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative h-full w-full"
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0 h-full w-full"
                   >
                     <Image
                       src={activeEvent.image}
@@ -321,11 +310,11 @@ export function Events() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeEvent.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-3 pt-4 border-t border-white/10"
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-3 pt-3 border-t border-white/10"
                 >
                   <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] font-semibold">
                     <span>{activeEvent.category}</span>

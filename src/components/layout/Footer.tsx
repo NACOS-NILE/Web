@@ -23,11 +23,10 @@ const NAV_LINKS: FooterNavLink[] = [
 const COMMUNITY_LINKS = [
   { label: "Discord", href: "https://discord.gg" },
   { label: "WhatsApp", href: "https://whatsapp.com" },
-  { label: "Telegram", href: "https://telegram.org" },
   { label: "GitHub", href: "https://github.com/nacos-nile" },
+  { label: "Telegram", href: "https://telegram.org" },
   { label: "LinkedIn", href: "https://linkedin.com" },
   { label: "X / Twitter", href: "https://x.com" },
-  { label: "Instagram", href: "https://instagram.com" },
 ];
 
 export function Footer() {
@@ -38,15 +37,15 @@ export function Footer() {
   return (
     <footer
       aria-label="Site Footer"
-      className="relative w-full bg-[#060a17] text-[#F7F7F5] border-t border-white/10 pt-20 sm:pt-28 pb-12 sm:pb-16 overflow-hidden"
+      className="relative w-full bg-[#111111] text-[#F7F7F5] border-t border-white/10 pt-20 sm:pt-28 pb-12 sm:pb-16 overflow-hidden"
     >
       <Container size="default">
-        {/* Primary Asymmetric Editorial Grid */}
+        {/* Primary Editorial Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 lg:gap-8 pb-16 sm:pb-24 border-b border-white/10">
-          {/* LEFT / LARGE AREA: NACOS NILE Wordmark & Charter */}
+          {/* LEFT: NACOS NILE Wordmark */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.82] text-white">
+              <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.88] text-white">
                 NACOS
                 <br />
                 NILE<span className="text-[#3b82f6]">.</span>
@@ -58,11 +57,11 @@ export function Footer() {
                 Nigeria Association of Computing Students
               </p>
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
-                Nile University of Nigeria • Chapter 2026
+                Nile University of Nigeria Chapter
               </p>
             </div>
 
-            {/* Compact Secondary CTA with Brand Blue */}
+            {/* CTA with Brand Blue Accent */}
             <div className="pt-4">
               <MagneticElement strength={0.22}>
                 <Link
@@ -159,10 +158,10 @@ export function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM: Quiet Copyright */}
+        {/* BOTTOM: Clean Copyright */}
         <div className="pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-neutral-500">
           <div>
-            <span>© 2026 NACOS NILE CHAPTER • NILE UNIVERSITY OF NIGERIA</span>
+            <span>© NACOS NILE CHAPTER • NILE UNIVERSITY OF NIGERIA</span>
           </div>
           <div>
             <span>ALL RIGHTS RESERVED</span>

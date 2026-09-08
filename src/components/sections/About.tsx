@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
-import { SectionLabel } from "../ui/SectionLabel";
 import { AnimatedLink } from "../ui/AnimatedLink";
 import { EDITORIAL_IMAGES } from "@/lib/images";
 
@@ -83,28 +82,18 @@ export function About() {
       ref={sectionRef}
       className="relative w-full py-24 sm:py-32 md:py-44 bg-[#F7F7F5] text-neutral-900 border-t border-neutral-900/10 overflow-hidden"
     >
-      {/* Top Section Meta Row */}
-      <Container size="default">
-        <div className="flex items-center justify-between border-b border-neutral-900/10 pb-6">
-          <SectionLabel label="About NACOS" showLine className="text-neutral-500" />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-semibold">
-            Nile Chapter
-          </span>
-        </div>
-      </Container>
-
       {/* Massive Editorial Statement with Brand Accent */}
-      <Container size="default" className="pt-16 sm:pt-24 md:pt-28 pb-16 sm:pb-24">
+      <Container size="default" className="pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24">
         <div ref={headlineRef} className="select-none">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.84] tracking-tight uppercase text-neutral-950"
+            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.88] tracking-tight uppercase text-neutral-950 py-1"
           >
             {/* Line 1 */}
-            <div className="overflow-hidden">
+            <div className="overflow-hidden py-1">
               <motion.div
                 ref={line1Ref}
                 initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
@@ -118,7 +107,7 @@ export function About() {
             </div>
 
             {/* Line 2 (Asymmetrically Offset in Brand Accent Blue) */}
-            <div className="overflow-hidden pl-4 sm:pl-16 md:pl-28 lg:pl-36">
+            <div className="overflow-hidden pl-4 sm:pl-16 md:pl-28 lg:pl-36 py-1">
               <motion.div
                 ref={line2Ref}
                 initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
@@ -132,7 +121,7 @@ export function About() {
             </div>
 
             {/* Line 3 */}
-            <div className="overflow-hidden">
+            <div className="overflow-hidden py-1">
               <motion.div
                 ref={line3Ref}
                 initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
@@ -141,7 +130,7 @@ export function About() {
                 transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="block will-change-transform"
               >
-                ASSOCIATION.
+                ASSOCIATION<span className="text-[#274193]">.</span>
               </motion.div>
             </div>
           </motion.h2>
