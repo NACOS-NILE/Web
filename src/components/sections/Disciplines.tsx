@@ -129,11 +129,10 @@ export function Disciplines() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="02" label="Disciplines / Index" showLine />
-          <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
-            <span className="hidden sm:inline">NUN Department of Computing</span>
-            <span>06 Disciplines</span>
-          </div>
+          <SectionLabel label="Academic Disciplines" showLine />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-medium">
+            06 Fields of Study
+          </span>
         </div>
       </Container>
 
@@ -199,7 +198,7 @@ export function Disciplines() {
                         <span
                           className={`font-mono text-xs sm:text-sm tracking-widest transition-colors duration-300 ${
                             isActive
-                              ? "text-neutral-950 font-semibold"
+                              ? "text-[#274193] font-bold"
                               : "text-neutral-400 group-hover:text-neutral-700"
                           }`}
                         >
@@ -209,8 +208,8 @@ export function Disciplines() {
                         <span
                           className={`font-heading text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl uppercase tracking-tight leading-[0.88] transition-all duration-400 will-change-transform ${
                             isActive
-                              ? "text-neutral-950 translate-x-1 sm:translate-x-2"
-                              : "text-neutral-400 group-hover:text-neutral-700"
+                              ? "text-[#274193] translate-x-2"
+                              : "text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1"
                           }`}
                         >
                           {item.name}
@@ -222,7 +221,7 @@ export function Disciplines() {
                         aria-hidden="true"
                         className={`font-mono text-xs transition-transform duration-300 ${
                           isActive
-                            ? "text-neutral-950 translate-x-1"
+                            ? "text-[#274193] translate-x-1 font-bold"
                             : "text-neutral-300 opacity-0 group-hover:opacity-100"
                         } ${isMobileOpen ? "rotate-90" : ""}`}
                       >
@@ -307,12 +306,6 @@ export function Disciplines() {
 
                     {/* Subtle bottom vignette */}
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                    {/* On-image Micro Badge */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/90 font-mono">
-                      <span>FOLIO // {activeDiscipline.number}</span>
-                      <span>NACOS NILE</span>
-                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -327,15 +320,13 @@ export function Disciplines() {
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-3 pt-2 border-t border-neutral-900/10"
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
-                    <span>{activeDiscipline.caption}</span>
-                    <span>NUN &apos;26</span>
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#274193] font-semibold">
+                    <span>{activeDiscipline.focus}</span>
                   </div>
 
                   <p className="text-sm leading-relaxed text-neutral-600 font-sans">
                     {activeDiscipline.description}
                   </p>
-
                   <div className="text-[11px] font-mono text-neutral-900 tracking-wider">
                     {activeDiscipline.focus}
                   </div>

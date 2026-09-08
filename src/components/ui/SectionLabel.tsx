@@ -5,6 +5,7 @@ interface SectionLabelProps {
   label: string;
   showLine?: boolean;
   className?: string;
+  accentDot?: boolean;
 }
 
 export function SectionLabel({
@@ -12,11 +13,15 @@ export function SectionLabel({
   label,
   showLine = false,
   className = "",
+  accentDot = true,
 }: SectionLabelProps) {
   return (
     <div
-      className={`inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400 ${className}`}
+      className={`inline-flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400 ${className}`}
     >
+      {accentDot && (
+        <span className="h-1.5 w-1.5 rounded-full bg-[#274193]" />
+      )}
       {number && (
         <span className="font-mono text-neutral-900 dark:text-neutral-200">
           [{number}]

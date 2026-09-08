@@ -116,9 +116,7 @@ export function Hero() {
           </div>
 
           <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] text-neutral-400">
-            <span>ABUJA, NG</span>
-            <span>•</span>
-            <span>VOL. 2026</span>
+            <span>Abuja, Nigeria</span>
           </div>
         </motion.div>
       </Container>
@@ -133,9 +131,10 @@ export function Hero() {
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-4 sm:mb-6"
+              className="mb-4 sm:mb-6 flex items-center gap-2.5"
             >
-              <span className="text-[11px] font-medium uppercase tracking-[0.24em] text-neutral-500">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#274193]" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#274193]">
                 Community & Computing Innovation
               </span>
             </motion.div>
@@ -178,12 +177,12 @@ export function Hero() {
                   <Link
                     href="#community"
                     data-cursor="OPEN"
-                    className="group inline-flex items-center gap-3 rounded-[2px] border border-neutral-950 bg-neutral-950 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-[#F7F7F5] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-800"
+                    className="group inline-flex items-center gap-3 rounded-[2px] border border-[#274193] bg-[#274193] px-6 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#1d3273] shadow-sm"
                   >
                     <span>Join Community</span>
                     <span
                       aria-hidden="true"
-                      className="inline-block transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+                      className="inline-block text-[#93c5fd] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
                     >
                       →
                     </span>
@@ -194,7 +193,7 @@ export function Hero() {
                 <Link
                   href="#about"
                   data-cursor="pointer"
-                  className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 transition-colors duration-300 hover:text-neutral-950 py-1"
+                  className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-500 transition-colors duration-300 hover:text-[#274193] py-1"
                 >
                   <span>Explore NACOS</span>
                   <span
@@ -240,14 +239,8 @@ export function Hero() {
                   className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
-                {/* Subtle vignette / gradient overlay to preserve monochrome purity */}
+                {/* Subtle vignette overlay */}
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
-
-                {/* On-image Micro Badge */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/90 font-mono">
-                  <span>FIG. 01</span>
-                  <span>LEADERSHIP</span>
-                </div>
               </motion.div>
 
               {/* Editorial Caption Under Image */}

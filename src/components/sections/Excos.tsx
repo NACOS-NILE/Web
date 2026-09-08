@@ -138,11 +138,10 @@ export function Excos() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="05" label="Executive Council" showLine />
-          <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
-            <span>Executive Leadership • 2026</span>
-            <span>09 Officers</span>
-          </div>
+          <SectionLabel label="Executive Leadership" showLine />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-medium">
+            Chapter Officers
+          </span>
         </div>
       </Container>
 
@@ -200,18 +199,13 @@ export function Excos() {
                   className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-white/90">
-                  <span>{"FIG. 01 • LEADERSHIP"}</span>
-                  <span>{"CHAPTER '26"}</span>
-                </div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
               </div>
 
               {/* President Information */}
               <div className="space-y-2 pt-2">
-                <div className="font-mono text-xs uppercase tracking-widest text-neutral-400">
-                  {`${president.number} • ${president.role}`}
+                <div className="font-mono text-xs uppercase tracking-widest text-[#274193] font-semibold">
+                  {president.role}
                 </div>
                 <h3 className="font-heading text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[0.88] text-neutral-950">
                   {president.name}
@@ -237,18 +231,13 @@ export function Excos() {
                   className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-white/90">
-                  <span>{"FIG. 02 • STEWARDSHIP"}</span>
-                  <span>{"NACOS NILE"}</span>
-                </div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
               </div>
 
               {/* VP Information */}
               <div className="space-y-2 pt-2 max-w-md ml-auto">
-                <div className="font-mono text-xs uppercase tracking-widest text-neutral-400">
-                  {`${vp.number} • ${vp.role}`}
+                <div className="font-mono text-xs uppercase tracking-widest text-[#274193] font-semibold">
+                  {vp.role}
                 </div>
                 <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[0.88] text-neutral-950">
                   {vp.name}
@@ -284,17 +273,12 @@ export function Excos() {
                       className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                     />
 
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/90">
-                      <span>{`FOLIO • ${member.number}`}</span>
-                      <span>{"NACOS"}</span>
-                    </div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
                   </div>
 
                   <div className="space-y-1.5 pt-1">
-                    <div className="font-mono text-[11px] uppercase tracking-widest text-neutral-400">
-                      {`${member.number} • ${member.role}`}
+                    <div className="font-mono text-[11px] uppercase tracking-widest text-[#274193] font-semibold">
+                      {member.role}
                     </div>
                     <h4 className="font-heading text-2xl sm:text-3xl lg:text-3xl uppercase tracking-tight leading-[0.88] text-neutral-950">
                       {member.name}
@@ -332,17 +316,12 @@ export function Excos() {
                       className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                     />
 
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-white/90">
-                      <span>{`FOLIO • ${member.number}`}</span>
-                      <span>{"NACOS"}</span>
-                    </div>
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
                   </div>
 
                   <div className="space-y-1 pt-1">
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
-                      {`${member.number} • ${member.role}`}
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-[#274193] font-semibold">
+                      {member.role}
                     </div>
                     <h4 className="font-heading text-xl sm:text-2xl uppercase tracking-tight leading-[0.88] text-neutral-950">
                       {member.name}

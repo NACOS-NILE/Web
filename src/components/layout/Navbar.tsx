@@ -8,18 +8,17 @@ import { Container } from "./Container";
 import { MagneticElement } from "../animations/MagneticElement";
 
 interface NavLinkItem {
-  number: string;
   label: string;
   href: string;
 }
 
 const NAV_LINKS: NavLinkItem[] = [
-  { number: "01", label: "About", href: "#about" },
-  { number: "02", label: "Disciplines", href: "#disciplines" },
-  { number: "03", label: "Programs", href: "#programs" },
-  { number: "04", label: "Events", href: "#events" },
-  { number: "05", label: "Excos", href: "#excos" },
-  { number: "06", label: "Community", href: "#community" },
+  { label: "About", href: "#about" },
+  { label: "Disciplines", href: "#disciplines" },
+  { label: "Programs", href: "#programs" },
+  { label: "Events", href: "#events" },
+  { label: "Excos", href: "#excos" },
+  { label: "Community", href: "#community" },
 ];
 
 export function Navbar() {
@@ -107,15 +106,15 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     data-cursor="pointer"
-                    className="group relative inline-block py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-600 transition-colors duration-300 hover:text-neutral-950"
+                    className="group relative inline-block py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-600 transition-colors duration-300 hover:text-[#274193]"
                   >
                     <span className="relative z-10 inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5">
                       {link.label}
                     </span>
-                    {/* Editorial Hairline Hover Underline */}
+                    {/* Brand Hairline Hover Underline */}
                     <span
                       aria-hidden="true"
-                      className="absolute bottom-0 left-0 h-[1px] w-full origin-left scale-x-0 bg-neutral-950 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+                      className="absolute bottom-0 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-[#274193] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
                     />
                   </Link>
                 </li>
@@ -130,12 +129,12 @@ export function Navbar() {
                   <Link
                     href="#community"
                     data-cursor="OPEN"
-                    className="group inline-flex items-center gap-2 rounded-[2px] border border-neutral-900/20 bg-transparent px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-900 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-neutral-900 hover:bg-neutral-900 hover:text-[#F7F7F5]"
+                    className="group inline-flex items-center gap-2 rounded-[2px] border border-[#274193] bg-[#274193] px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#1f3475]"
                   >
                     <span>Join NACOS</span>
                     <span
                       aria-hidden="true"
-                      className="inline-block text-[0.85em] transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="inline-block text-[0.85em] text-[#93c5fd] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     >
                       ↗
                     </span>
@@ -229,11 +228,8 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={closeMenu}
-                    className="group flex items-baseline gap-4 text-3xl sm:text-4xl md:text-5xl font-heading uppercase tracking-tight text-neutral-900 transition-colors duration-300 hover:text-neutral-500"
+                    className="group flex items-center text-4xl sm:text-5xl font-heading uppercase tracking-tight text-neutral-900 transition-colors duration-300 hover:text-[#274193]"
                   >
-                    <span className="font-mono text-xs sm:text-sm tracking-widest text-neutral-400 group-hover:text-neutral-900 transition-colors">
-                      {link.number}
-                    </span>
                     <span>{link.label}</span>
                   </Link>
                 </motion.div>

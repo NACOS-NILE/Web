@@ -60,10 +60,10 @@ export function About() {
         });
       }
 
-      // Parallax effect on the portrait artwork (subtle 35px shift)
+      // Parallax drift on the artwork block
       if (imageRef.current) {
         gsap.to(imageRef.current, {
-          y: -45,
+          y: -40,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -82,27 +82,27 @@ export function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 border-t border-neutral-900/10 overflow-hidden"
+      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#0d1733] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
     >
       {/* Top Section Meta Row */}
       <Container size="default">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="01" label="About / NACOS Identity" showLine />
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
-            Folio // Culture & Vision • 2026
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+          <SectionLabel label="About NACOS" showLine className="text-neutral-400" />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#60a5fa]">
+            Nile Chapter
           </span>
         </div>
       </Container>
 
-      {/* Massive Editorial Statement */}
-      <Container size="default" className="pt-16 sm:pt-24 md:pt-32 pb-16 sm:pb-24">
+      {/* Massive Editorial Statement with Brand Accent */}
+      <Container size="default" className="pt-16 sm:pt-24 md:pt-28 pb-16 sm:pb-24">
         <div ref={headlineRef} className="select-none">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-[clamp(3.5rem,8.6vw,10.8rem)] leading-[0.84] tracking-tight uppercase text-neutral-950"
+            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.84] tracking-tight uppercase text-white"
           >
             {/* Line 1 */}
             <div className="overflow-hidden">
@@ -118,7 +118,7 @@ export function About() {
               </motion.div>
             </div>
 
-            {/* Line 2 (Asymmetrically Offset) */}
+            {/* Line 2 (Asymmetrically Offset in Brand Accent Blue) */}
             <div className="overflow-hidden pl-4 sm:pl-16 md:pl-28 lg:pl-36">
               <motion.div
                 ref={line2Ref}
@@ -126,7 +126,7 @@ export function About() {
                 whileInView={{ y: "0%" }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-neutral-400 will-change-transform"
+                className="block text-[#60a5fa] will-change-transform"
               >
                 A STUDENT
               </motion.div>
@@ -161,11 +161,11 @@ export function About() {
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-6 max-w-xl"
             >
-              <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-neutral-900 font-normal">
+              <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-white font-normal">
                 NACOS Nile is the unifying digital nerve-center for Nile University&apos;s computing minds. We operate at the intersection of student ambition and industry rigor.
               </p>
 
-              <p className="text-sm sm:text-base leading-relaxed text-neutral-600 font-sans">
+              <p className="text-sm sm:text-base leading-relaxed text-neutral-300 font-sans">
                 Fostering software craft, collaborative engineering, cybersecurity defense, and technological research. Not just an association, but an active collective of builders shaping the future of African computing. From first-year algorithmic foundations to competitive hackathons, our community exists to turn academic curiosity into production-ready capability.
               </p>
 
@@ -174,57 +174,57 @@ export function About() {
                   href="#disciplines"
                   arrow
                   cursorLabel="EXPLORE"
-                  className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-900"
+                  className="text-xs font-semibold uppercase tracking-[0.2em] text-[#60a5fa] hover:text-white"
                 >
                   Explore Academic Disciplines
                 </AnimatedLink>
               </div>
             </motion.div>
 
-            {/* Typography-Driven Minimal Statistics */}
+            {/* Typography-Driven Statistics with Brand Navy Clean Styling */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-16 sm:mt-24 pt-8 border-t border-neutral-900/10 grid grid-cols-2 sm:grid-cols-4 gap-8"
+              className="mt-16 sm:mt-24 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-8"
             >
               {/* Stat 1 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-white leading-none mb-1">
                   06
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
                   Disciplines
                 </div>
               </div>
 
               {/* Stat 2 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-white leading-none mb-1">
                   09
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
                   Executive Excos
                 </div>
               </div>
 
               {/* Stat 3 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-[#60a5fa] leading-none mb-1">
                   NUN
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
                   Nile University
                 </div>
               </div>
 
               {/* Stat 4 */}
               <div>
-                <div className="font-heading text-4xl sm:text-5xl text-neutral-950 leading-none mb-1">
+                <div className="font-heading text-4xl sm:text-5xl text-white leading-none mb-1">
                   ABJ
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
                   Abuja, Nigeria
                 </div>
               </div>
@@ -255,7 +255,7 @@ export function About() {
                   duration: 1.2,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden bg-neutral-200/40"
+                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden bg-white/5 border border-white/10"
               >
                 <Image
                   src="/excos-pics/vp.jpg"
@@ -265,19 +265,8 @@ export function About() {
                   className="object-cover object-top grayscale contrast-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:grayscale-0"
                 />
 
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
-
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/90 font-mono">
-                  <span>FIG. 02</span>
-                  <span>COMMUNITY</span>
-                </div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0d1733]/70 via-transparent to-transparent opacity-70" />
               </motion.div>
-
-              {/* Editorial Caption Tag */}
-              <div className="mt-3 flex items-baseline justify-between text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-mono">
-                <span>EXECUTIVE STEWARDSHIP</span>
-                <span>CHAPTER &apos;26</span>
-              </div>
             </div>
           </div>
         </div>

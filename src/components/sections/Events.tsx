@@ -139,11 +139,10 @@ export function Events() {
       {/* Top Section Meta Row */}
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900/10 pb-6">
-          <SectionLabel number="04" label="Events / Calendar" showLine />
-          <div className="flex items-center gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-neutral-400">
-            <span>Calendar Folio // 2026</span>
-            <span>All Dates Subject to Academic Session</span>
-          </div>
+          <SectionLabel label="Events & Calendar" showLine />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#274193] font-medium">
+            Session 2025/2026
+          </span>
         </div>
       </Container>
 
@@ -187,10 +186,10 @@ export function Events() {
             {/* Left: Featured Info */}
             <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
               <div className="flex items-center gap-3 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.24em] text-neutral-500">
-                <span className="px-2 py-0.5 bg-neutral-900 text-[#F7F7F5] rounded-[2px] font-bold">
+                <span className="px-2.5 py-1 bg-[#274193] text-white rounded-[2px] font-semibold">
                   {FEATURED_EVENT.tag}
                 </span>
-                <span>{FEATURED_EVENT.status}</span>
+                <span className="text-[#274193] font-medium">{FEATURED_EVENT.status}</span>
               </div>
 
               <h3 className="font-heading text-4xl sm:text-6xl md:text-7xl xl:text-8xl uppercase tracking-tight leading-[0.84] text-neutral-950">
@@ -207,10 +206,10 @@ export function Events() {
                   <Link
                     href="#events"
                     data-cursor="OPEN"
-                    className="inline-flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] border border-neutral-900 bg-neutral-900 px-6 py-3.5 text-[#F7F7F5] transition-all hover:bg-neutral-800"
+                    className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] border border-[#274193] bg-[#274193] px-6 py-3.5 text-white transition-all hover:bg-[#1f3475] shadow-sm"
                   >
                     <span>Event Details</span>
-                    <span>→</span>
+                    <span className="text-[#93c5fd]">→</span>
                   </Link>
                 </MagneticElement>
               </div>
@@ -232,11 +231,6 @@ export function Events() {
                 />
 
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/90 font-mono">
-                  <span>{FEATURED_EVENT.caption}</span>
-                  <span>NACOS NILE</span>
-                </div>
               </div>
             </div>
           </div>
@@ -389,11 +383,6 @@ export function Events() {
                     />
 
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/90 font-mono">
-                      <span>FOLIO // {activeEvent.number}</span>
-                      <span>{activeEvent.status}</span>
-                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>

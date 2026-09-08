@@ -113,16 +113,14 @@ export function FinalCTA() {
       <Container size="default">
         <div className="flex flex-wrap items-center justify-between gap-6 border-b border-white/10 pb-8 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.24em] text-neutral-400">
           <div className="flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#F7F7F5] animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6] animate-pulse" />
             <span className="text-white font-medium">NACOS NILE</span>
             <span className="text-neutral-600">/</span>
-            <span>CHAPTER PORTAL</span>
+            <span>NILE UNIVERSITY OF NIGERIA</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="hidden md:inline">NILE UNIVERSITY OF NIGERIA</span>
-            <span className="hidden md:inline text-neutral-600">•</span>
-            <span>ABUJA, FCT</span>
+            <span>ABUJA, NIGERIA</span>
           </div>
         </div>
       </Container>
@@ -181,15 +179,15 @@ export function FinalCTA() {
               <Link
                 href="#community"
                 data-cursor="OPEN"
-                className="group relative inline-flex items-center gap-4 sm:gap-6 rounded-[2px] bg-[#F7F7F5] px-8 sm:px-12 py-5 sm:py-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-[#0A0A0A] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-white hover:scale-[1.02] active:scale-[0.98] shadow-2xl focus-visible:outline-white"
+                className="group relative inline-flex items-center gap-4 sm:gap-6 rounded-[2px] bg-[#274193] px-8 sm:px-12 py-5 sm:py-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] text-white transition-all duration-300 hover:bg-[#1d3273] shadow-2xl focus-visible:outline-white"
               >
-                <span className="relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1">
+                <span className="relative z-10 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1">
                   JOIN THE COMMUNITY
                 </span>
 
                 <span
                   aria-hidden="true"
-                  className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full bg-[#0A0A0A] text-[#F7F7F5] text-xs font-bold transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5 group-hover:bg-[#111111]"
+                  className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full bg-white text-[#274193] text-xs font-bold transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5"
                 >
                   →
                 </span>
@@ -201,29 +199,20 @@ export function FinalCTA() {
 
       {/* SECONDARY EDITORIAL METADATA & CHAPTER SIGN-OFF */}
       <Container size="default" className="pt-12 sm:pt-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-500">
-          <div className="space-y-1.5">
-            <div className="text-neutral-400 font-semibold">CHAPTER</div>
-            <div>NACOS NILE UNIVERSITY</div>
-            <div>ABUJA, FCT, NIGERIA</div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400">
+          <div className="space-y-1">
+            <div className="text-white font-medium">NACOS NILE CHAPTER</div>
+            <div>Nile University of Nigeria</div>
           </div>
 
-          <div className="space-y-1.5">
-            <div className="text-neutral-400 font-semibold">REPRESENTATION</div>
-            <div>COMPUTING STUDENTS</div>
-            <div>FACULTY OF NATURAL SCIENCES</div>
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="text-neutral-400 font-semibold">DISCIPLINES</div>
+          <div className="space-y-1">
+            <div className="text-white font-medium">COMPUTING COLLECTIVE</div>
             <div>CS • SE • CYBER • IT • IS • DS</div>
-            <div>UNDERGRADUATE &amp; POSTGRAD</div>
           </div>
 
-          <div className="space-y-1.5 sm:text-right">
-            <div className="text-neutral-400 font-semibold">SESSION</div>
-            <div>ACADEMIC YEAR 2025 / 2026</div>
-            <div className="text-neutral-300">SEE YOU INSIDE ↗</div>
+          <div className="space-y-1 sm:text-right">
+            <div className="text-white font-medium">SESSION 2025 / 2026</div>
+            <div className="text-[#60a5fa]">SEE YOU INSIDE ↗</div>
           </div>
         </div>
       </Container>
