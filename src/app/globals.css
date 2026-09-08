@@ -24,3 +24,28 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.navbar{
+
+}
+
+.navbar a {
+  color: var(--foreground);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.navbar a:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.footer{
+
+}
+
+.footer-col{
+
+}
+
+
