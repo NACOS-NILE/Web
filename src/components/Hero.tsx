@@ -58,7 +58,7 @@ export function Hero() {
 
         <Reveal delay={0.3}>
           <ul
-            className="flex w-full max-w-full flex-nowrap gap-2 overflow-x-auto pt-4 pb-1 sm:justify-center"
+            className="flex w-full max-w-full flex-nowrap gap-2 overflow-x-auto pt-4 pb-1 sm:justify-center not-sm:overflow-scroll not-sm:scrollbar-none"
             aria-label="Disciplines"
           >
             {DISCIPLINES.map((discipline) => (
