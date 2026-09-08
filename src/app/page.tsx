@@ -4,6 +4,8 @@ import { Disciplines } from "@/components/sections/Disciplines";
 import { Programs } from "@/components/sections/Programs";
 import { Events } from "@/components/sections/Events";
 import { Excos } from "@/components/sections/Excos";
+import { Community } from "@/components/sections/Community";
+import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <Programs />
       <Events />
       <Excos />
+      <Community />
+      <FinalCTA />
     </main>
   );
 }
