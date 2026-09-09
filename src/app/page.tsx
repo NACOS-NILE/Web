@@ -42,7 +42,10 @@ const excos = [
 export default function Home() {
   return (
     <div>
-      <header>
+
+      <main id="top">
+        <section className="navbar">
+                <header>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <a href="#top" className="flex items-center gap-3">
             <img src="./public/logo.svg" alt="NACOS Nile logo" className="h-11 w-11 rounded-full border border-slate-200 bg-white p-1" />
@@ -53,10 +56,10 @@ export default function Home() {
           </a>
 
           <nav>
-            <!-- Brand / Logo -->
-            <div class="logo"><img src="./public/logo.svg"></img></div>
+            {/* Brand / Logo */}
+            <div className="logo"><img src="./public/logo.svg" alt="NACOS Nile logo" /></div>
 
-            <!-- Navigation Links -->
+            {/* Navigation Links */}
             <ul>
               <li><a href="#">How it works</a></li>
               <li><a href="#">FAQ</a></li>
@@ -64,10 +67,10 @@ export default function Home() {
               <li><a href="#">Journal</a></li>
             </ul>
 
-            <!-- Right side: language & CTA -->
-            <div class="nav-actions">
-              <span class="language">EN</span>
-              <a href="#" class="preorder">Pre-order</a>
+            {/* Right side: language & CTA */}
+            <div className="nav-actions">
+              <span className="language">EN</span>
+              <a href="#" className="preorder">Log in</a>
             </div>
           </nav>
 
@@ -76,9 +79,6 @@ export default function Home() {
           </a>
         </div>
       </header>
-
-      <main id="top">
-        <section className="navbar">
 
         </section>
         <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.22),_transparent_35%),linear-gradient(135deg,_#edf4ff_0%,_#f8fafc_42%,_#eef6ff_100%)]">
