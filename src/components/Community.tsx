@@ -30,9 +30,12 @@ export default function Community() {
                 <li key={c.id} className="reveal border-t border-hairline last:border-b">
                   <a
                     href={c.href}
-                    className="group grid grid-cols-[1.5rem_1fr_auto] items-center gap-x-5 py-6 transition-colors duration-200 sm:gap-x-7"
+                    className="group grid grid-cols-[1.5rem_1fr_auto] sm:grid-cols-[1.75rem_1fr_auto] items-start gap-x-5 py-6 transition-colors duration-200 sm:gap-x-7"
                   >
-                    <Logo className="h-[1.15rem] w-[1.15rem] text-ink-faint transition-colors duration-200 group-hover:text-ink" />
+                    {/* Full brand colour and a larger optical size, so each
+                        mark is recognisable at a glance. X inherits the ink
+                        colour because its mark flips with the background. */}
+                    <Logo className="mt-0.5 h-6 w-6 text-ink" />
                     <span className="min-w-0">
                       <span className="block text-[1.15rem] leading-snug text-ink">
                         {c.name}
@@ -41,7 +44,7 @@ export default function Community() {
                         {c.blurb}
                       </span>
                     </span>
-                    <span className="ui hidden text-ink-faint transition-colors duration-200 group-hover:text-ink sm:block">
+                    <span className="ui mt-1 hidden text-ink-faint transition-colors duration-200 group-hover:text-ink sm:block">
                       {c.handle}
                     </span>
                   </a>
