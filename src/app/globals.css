@@ -1,26 +1,158 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------
+   NACOS Nile — design tokens
+
+   Palette is the one given in the brief:
+     Primary  #274193 (NACOS Nile Royal Blue) · Dark #0d1733
+     Accents  #3b82f6 / #60a5fa
+   Green #75b947 is the national NACOS colour and appears only where the
+   organisation itself uses it — the logo lockup and the seal.
+
+   Type is a two-family system, chosen against the identity rather than by
+   default: Newsreader (a text serif) carries every heading and every run of
+   prose, giving the page the register of a faculty publication; Geist Mono
+   carries labels, navigation, buttons and numerals, which is where the
+   computing side of the chapter belongs. No third family, no gradient text.
+------------------------------------------------------------------- */
+
+@theme {
+  --color-royal-50: #eef2fd;
+  --color-royal-100: #dbe3fb;
+  --color-royal-200: #bccbf7;
+  --color-royal-300: #93a9f0;
+  --color-royal-400: #6b84e6;
+  --color-royal-500: #4a61d4;
+  --color-royal-600: #274193;
+  --color-royal-700: #21387f;
+  --color-royal-800: #182a5f;
+  --color-royal-900: #101d42;
+  --color-royal-950: #0d1733;
+
+  --color-sky-accent: #3b82f6;
+  --color-sky-soft: #60a5fa;
+  --color-nacos-green: #75b947;
+
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --surface: #fbfaf8;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f2f1ed;
+  --ink: #14181f;
+  --ink-muted: #4b5262;
+  --ink-faint: #6c7484;
+  --hairline: #ddd9d1;
+  --hairline-strong: #c3beb3;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --surface: #0b1020;
+    --surface-raised: #111830;
+    --surface-sunken: #080d1a;
+    --ink: #f2f4f8;
+    --ink-muted: #adb6c8;
+    --ink-faint: #8b94a8;
+    --hairline: #1f2842;
+    --hairline-strong: #35406090;
+  }
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings sit tighter and slightly darker than body prose. */
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Long prose reads better with a ragged edge than a forced justify. */
+p {
+  text-wrap: pretty;
+}
+
+/* The mono voice: navigation, labels, buttons, numerals, metadata. */
+.ui {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sky-accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ------------------------------------------------------------------
+   Motion. One effect only: a short upward settle as a section arrives.
+   Transform-only, so text is never rendered at partial contrast, and
+   scoped to `.js` so the page is complete with scripting disabled.
+------------------------------------------------------------------- */
+.js .reveal {
+  transform: translate3d(0, 14px, 0);
+  transition: transform 0.55s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal[data-shown="true"] {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
