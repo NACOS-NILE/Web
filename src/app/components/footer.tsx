@@ -8,12 +8,12 @@ export default function Footer() {
         <div className="space-y-6">
           {/* Logo Placeholder */}
           <div className="flex items-center space-x-3">
-            <div className="w-16 h-12 bg-gray-200 text-black flex items-center justify-center font-bold rounded text-xs text-center p-1">
-              [MAP LOGO]
+            <div className="w-16 h-12flex items-center justify-center font-bold rounded text-xs text-center p-1">
+              <img src="logo.svg"></img>
             </div>
             <div>
-              <h2 className="text-xl font-extrabold tracking-wide">NACOS NATIONAL</h2>
-              <p className="text-xs text-gray-400 italic">Networking the world</p>
+              <h2 className="text-xl font-extrabold tracking-wide">Nile NACOS</h2>
+              <p className="text-xs text-gray-400 italic">About the Community</p>
             </div>
           </div>
 
@@ -21,21 +21,6 @@ export default function Footer() {
           <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
             Nigeria Association of Computing Students (NACOS) is the Umbrella body for students studying Computer Science, Computer Engineering, Information Systems, Cyber Security and all IT related courses in Nigeria.
           </p>
-
-          {/* Social Icons */}
-          <div className="flex items-center space-x-3 pt-2">
-            {['facebook', 'twitter', 'linkedin', 'mail'].map((icon, idx) => (
-              <a
-                key={idx}
-                href="#"
-                className="w-9 h-9 rounded-full bg-[#1db954] hover:bg-green-600 flex items-center justify-center text-white text-xs transition-colors"
-                aria-label={icon}
-              >
-                {/* SVG icon placeholder or FontAwesome icon */}
-                <span className="capitalize">{icon[0]}</span>
-              </a>
-            ))}
-          </div>
         </div>
 
         {/* Right Column: Quick Links */}

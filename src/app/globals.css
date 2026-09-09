@@ -41,3 +41,23 @@ body {
   background-color: var(--foreground);
   color: var(--background);
 }
+
+/* I thought to make an animated loading screen */
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 10% 50%; }
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-gradient-shift {
+  animation: gradientShift 3s ease infinite;
+}
+
+.animate-progress {
+  animation: progressFill 3s linear forwards;
+}
