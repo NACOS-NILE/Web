@@ -5,7 +5,7 @@
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -23,10 +23,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
-.navbar{
-
+.dark body {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 .navbar a {
@@ -39,13 +41,3 @@ body {
   background-color: var(--foreground);
   color: var(--background);
 }
-
-.footer{
-
-}
-
-.footer-col{
-
-}
-
-
