@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "preview": "node output/playwright/serve.cjs",
     "lint": "eslint"
   },
   "dependencies": {
