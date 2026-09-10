@@ -1,5 +1,7 @@
-import Navbar from "@/components/Navbar";
+import About from "@/components/About";
+import Disciplines from "@/components/Disciplines";
 import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
@@ -7,7 +9,8 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <section id="about" className="min-h-[40vh] bg-slate-50" aria-hidden="true" />
+        <About />
+        <Disciplines />
       </main>
     </>
   );
