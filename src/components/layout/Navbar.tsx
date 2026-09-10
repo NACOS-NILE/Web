@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "./Container";
 import { MagneticElement } from "../animations/MagneticElement";
+import { useLenisScroll } from "../animations/SmoothScroll";
 
 interface NavLinkItem {
   label: string;
@@ -24,6 +25,7 @@ const NAV_LINKS: NavLinkItem[] = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollTo } = useLenisScroll();
 
   // Handle scroll detection with passive listener
   useEffect(() => {
@@ -67,6 +69,37 @@ export function Navbar() {
 
   const closeMenu = () => setMobileMenuOpen(false);
 
+  // Smooth scroll to top when logo is clicked on homepage
+  const handleLogoClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      closeMenu();
+      if (typeof window !== "undefined" && window.location.pathname === "/") {
+        e.preventDefault();
+        scrollTo(0, { duration: 1.2 });
+        window.history.pushState(null, "", "/");
+      }
+    },
+    [scrollTo]
+  );
+
+  // Smooth scroll to a hash section — used for both desktop and mobile links
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      const sectionId = href.replace("#", "");
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+
+      // Close mobile menu first, then scroll after layout settles
+      closeMenu();
+      setTimeout(() => {
+        scrollTo(section, { offset: -80, duration: 1.2 });
+      }, mobileMenuOpen ? 350 : 0);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [mobileMenuOpen, scrollTo]
+  );
+
   return (
     <>
       <header
@@ -84,7 +117,7 @@ export function Navbar() {
             {/* LEFT: Official NACOS Nile Logo */}
             <Link
               href="/"
-              onClick={closeMenu}
+              onClick={handleLogoClick}
               data-cursor="pointer"
               aria-label="NACOS Nile Homepage"
               className="group relative flex items-center gap-3 select-none"
@@ -103,9 +136,10 @@ export function Navbar() {
             <ul className="hidden lg:flex items-center gap-7 xl:gap-9">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <a
                     href={link.href}
                     data-cursor="pointer"
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="group relative inline-block py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-300 transition-colors duration-300 hover:text-white"
                   >
                     <span className="relative z-10 inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5">
@@ -115,7 +149,7 @@ export function Navbar() {
                       aria-hidden="true"
                       className="absolute bottom-0 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-[#3b82f6] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
                     />
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -125,9 +159,10 @@ export function Navbar() {
               {/* Desktop CTA */}
               <div className="hidden sm:block">
                 <MagneticElement strength={0.22}>
-                  <Link
+                  <a
                     href="#community"
                     data-cursor="OPEN"
+                    onClick={(e) => handleNavClick(e, "#community")}
                     className="group inline-flex items-center gap-2 rounded-[2px] bg-[#274193] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#3453b3] shadow-md shadow-[#274193]/20"
                   >
                     <span>Join NACOS</span>
@@ -137,7 +172,7 @@ export function Navbar() {
                     >
                       ↗
                     </span>
-                  </Link>
+                  </a>
                 </MagneticElement>
               </div>
 
@@ -216,13 +251,13 @@ export function Navbar() {
                     },
                   }}
                 >
-                  <Link
+                  <a
                     href={link.href}
-                    onClick={closeMenu}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="group flex items-center text-4xl sm:text-5xl font-heading uppercase tracking-tight text-white transition-colors duration-300 hover:text-[#60a5fa]"
                   >
                     <span>{link.label}</span>
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </motion.div>
@@ -234,14 +269,14 @@ export function Navbar() {
               transition={{ delay: 0.35, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
             >
-              <Link
+              <a
                 href="#community"
-                onClick={closeMenu}
+                onClick={(e) => handleNavClick(e, "#community")}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-[2px] bg-[#274193] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#3453b3]"
               >
                 <span>Join NACOS</span>
                 <span>↗</span>
-              </Link>
+              </a>
 
               <div className="flex flex-col sm:text-right text-[11px] uppercase tracking-[0.2em] text-neutral-400 font-mono">
                 <span>NACOS Nile Chapter</span>

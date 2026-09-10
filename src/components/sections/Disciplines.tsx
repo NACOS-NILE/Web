@@ -143,7 +143,57 @@ export function Disciplines() {
       {/* Main Interactive Index Canvas with True Stationary Sticky Image Panel */}
       <Container size="default">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
-          {/* Left Column: The Large Scrolling Discipline List */}
+          {/* Left Column: TRUE STATIONARY STICKY Image Panel */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-24 self-start">
+            <div className="space-y-4">
+              {/* Sticky Image — aspect-[4/3] max-h-[360px] fits within viewport without being cut off */}
+              <div
+                data-cursor="VIEW"
+                className="relative aspect-[4/3] max-h-[360px] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeDiscipline.id}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{
+                      duration: 0.45,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="absolute inset-0 h-full w-full"
+                  >
+                    <Image
+                      src={activeDiscipline.image}
+                      alt={activeDiscipline.name}
+                      fill
+                      sizes="(max-width: 1200px) 45vw, 500px"
+                      priority
+                      className="object-cover object-center grayscale contrast-110 brightness-95 transition-all duration-700 hover:scale-105 hover:grayscale-0 hover:brightness-100"
+                    />
+
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Description only — clean and uncluttered */}
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={activeDiscipline.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-sm leading-relaxed text-neutral-300 font-sans border-t border-white/10 pt-3"
+                >
+                  {activeDiscipline.description}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Right Column: The Large Scrolling Discipline List */}
           <div className="lg:col-span-7 xl:col-span-7 border-t border-white/10">
             {DISCIPLINES.map((item, index) => {
               const isActive = activeIndex === index;
@@ -167,7 +217,7 @@ export function Disciplines() {
                     onClick={() => toggleMobile(index)}
                     data-cursor="VIEW"
                     aria-expanded={isMobileOpen}
-                    className="group w-full py-10 sm:py-12 lg:py-14 text-left flex items-baseline justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
+                    className="group w-full py-8 sm:py-10 lg:py-12 text-left flex items-center justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
                   >
                     <div className="flex items-center gap-4 sm:gap-6 min-w-0">
                       <span
@@ -188,17 +238,6 @@ export function Disciplines() {
                         {item.name}
                       </span>
                     </div>
-
-                    <span
-                      aria-hidden="true"
-                      className={`font-mono text-sm transition-all duration-300 ${
-                        isActive
-                          ? "text-[#60a5fa] translate-x-1 font-bold opacity-100"
-                          : "text-neutral-600 opacity-0 group-hover:opacity-100"
-                      } ${isMobileOpen ? "rotate-90" : ""}`}
-                    >
-                      →
-                    </span>
                   </button>
 
                   {/* Mobile Expanded Drawer (Tap-to-expand) */}
@@ -235,56 +274,6 @@ export function Disciplines() {
                 </div>
               );
             })}
-          </div>
-
-          {/* Right Column: TRUE STATIONARY STICKY Image Panel */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-28 self-start">
-            <div className="space-y-4">
-              {/* Sticky Image — 3:4 aspect fits in viewport */}
-              <div
-                data-cursor="VIEW"
-                className="relative aspect-[3/4] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeDiscipline.id}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{
-                      duration: 0.45,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="absolute inset-0 h-full w-full"
-                  >
-                    <Image
-                      src={activeDiscipline.image}
-                      alt={activeDiscipline.name}
-                      fill
-                      sizes="(max-width: 1200px) 45vw, 500px"
-                      priority
-                      className="object-cover object-center grayscale contrast-110 brightness-95 transition-all duration-700 hover:scale-105 hover:grayscale-0 hover:brightness-100"
-                    />
-
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Description only — no extra focus labels */}
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={activeDiscipline.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-sm leading-relaxed text-neutral-300 font-sans border-t border-white/10 pt-3"
-                >
-                  {activeDiscipline.description}
-                </motion.p>
-              </AnimatePresence>
-            </div>
           </div>
         </div>
       </Container>

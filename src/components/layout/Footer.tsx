@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Container } from "./Container";
 import { AnimatedLink } from "../ui/AnimatedLink";
 import { MagneticElement } from "../animations/MagneticElement";
+import { useLenisScroll } from "../animations/SmoothScroll";
 
 interface FooterNavLink {
   label: string;
@@ -29,9 +30,13 @@ const COMMUNITY_LINKS = [
   { label: "X / Twitter", href: "https://x.com" },
 ];
 
+
+
 export function Footer() {
+  const { scrollTo } = useLenisScroll();
+
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollTo(0, { duration: 1.4 });
   };
 
   return (
