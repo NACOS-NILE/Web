@@ -610,8 +610,9 @@
   }
   .community-routes .button {
     font-size: 12px;
-    gap: 18px;
+    gap: 10px;
     padding-inline: 16px;
+    justify-content: center;
   }
   .community-public {
     align-items: flex-start;
