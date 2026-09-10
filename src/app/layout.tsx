@@ -66,8 +66,6 @@ export const metadata: Metadata = {
   },
 };
 
-import CustomCursor from "@/components/CustomCursor";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -79,7 +77,6 @@ export default function RootLayout({
       className={`${publicSans.variable} ${rector.variable} font-sans h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
-        <CustomCursor />
         {children}
       </body>
     </html>
