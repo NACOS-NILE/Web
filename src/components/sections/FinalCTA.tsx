@@ -7,12 +7,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "../layout/Container";
 import { MagneticElement } from "../animations/MagneticElement";
-import { EDITORIAL_IMAGES } from "@/lib/images";
 
 export function FinalCTA() {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const ctaContainerRef = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<HTMLDivElement>(null);
+  const line2Ref = useRef<HTMLDivElement>(null);
+  const line3Ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function FinalCTA() {
       if (headlineRef.current) {
         gsap.fromTo(
           headlineRef.current,
-          { scale: 0.96, opacity: 0.9 },
+          { scale: 0.96, opacity: 0.8 },
           {
             scale: 1,
             opacity: 1,
@@ -32,7 +34,7 @@ export function FinalCTA() {
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top 80%",
-              end: "bottom bottom",
+              end: "center center",
               scrub: 1,
             },
           }
@@ -55,6 +57,27 @@ export function FinalCTA() {
           }
         );
       }
+
+      // Stagger the headline lines in
+      const lines = [line1Ref.current, line2Ref.current, line3Ref.current].filter(Boolean);
+      lines.forEach((line, i) => {
+        if (!line) return;
+        gsap.fromTo(
+          line,
+          { y: "80%", opacity: 0 },
+          {
+            y: "0%",
+            opacity: 1,
+            duration: 1.1,
+            delay: i * 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headlineRef.current,
+              start: "top 85%",
+            },
+          }
+        );
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -70,27 +93,37 @@ export function FinalCTA() {
       {/* Subtle Background Watermark */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.02] select-none"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.025] select-none"
       >
         <span className="font-heading text-[40vw] tracking-tighter leading-none text-white uppercase">
           NILE
         </span>
       </div>
 
-      {/* Main Closing Statement with Typographic Image Texture Mask */}
+      {/* Main Closing Statement — BLACK + WHITE + BLUE ACCENT (no green, no image mask) */}
       <Container size="full" className="px-4 sm:px-8 md:px-12 lg:px-16 py-8">
         <div ref={headlineRef} className="flex flex-col items-center justify-center text-center select-none py-2">
-          <h2
-            style={{
-              backgroundImage: `url(${EDITORIAL_IMAGES.hero})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-            className="font-heading text-[clamp(4.5rem,15vw,14rem)] uppercase tracking-tight leading-[0.88] bg-clip-text text-transparent brightness-150 contrast-125 py-2"
-          >
-            <div>COME</div>
-            <div>BUILD</div>
-            <div className="text-white">WITH US<span className="text-[#3b82f6]">.</span></div>
+          <h2 className="font-heading text-[clamp(4.5rem,14vw,13rem)] uppercase tracking-tight leading-[0.88]">
+            {/* Line 1: Grey */}
+            <div className="overflow-visible pb-2">
+              <div ref={line1Ref} className="block text-neutral-500 will-change-transform">
+                COME
+              </div>
+            </div>
+
+            {/* Line 2: Grey */}
+            <div className="overflow-visible pb-2">
+              <div ref={line2Ref} className="block text-neutral-500 will-change-transform">
+                BUILD
+              </div>
+            </div>
+
+            {/* Line 3: White — main emphasis */}
+            <div className="overflow-visible pb-2">
+              <div ref={line3Ref} className="block text-white will-change-transform">
+                WITH US<span className="text-[#3b82f6]">.</span>
+              </div>
+            </div>
           </h2>
         </div>
       </Container>
@@ -101,6 +134,9 @@ export function FinalCTA() {
           ref={ctaContainerRef}
           className="flex flex-col items-center justify-center text-center gap-8 sm:gap-10 pt-4 pb-8"
         >
+          {/* Subtle accent line */}
+          <div className="w-16 h-[2px] bg-[#274193]" aria-hidden="true" />
+
           <p className="max-w-lg text-sm sm:text-base leading-relaxed text-neutral-400 font-sans">
             Every software system, every security protocol, and every technical breakthrough begins with a community that dares to build.
           </p>

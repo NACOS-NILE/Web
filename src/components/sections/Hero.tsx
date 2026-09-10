@@ -112,14 +112,15 @@ export function Hero() {
                 variants={titleContainerVariants}
                 initial="hidden"
                 animate="visible"
-                className="font-heading text-[clamp(4rem,11vw,12rem)] leading-[0.88] tracking-tight uppercase text-white select-none py-1"
+                className="font-heading text-[clamp(3.5rem,10vw,11rem)] leading-[0.92] tracking-tight uppercase text-white select-none"
               >
-                <div className="overflow-hidden py-1">
+                {/* Each line uses pb-2 overflow-visible to prevent clip of descenders / animation */}
+                <div className="overflow-visible pb-2">
                   <motion.div variants={titleLineVariants} className="block">
                     WE BUILD
                   </motion.div>
                 </div>
-                <div className="overflow-hidden py-1">
+                <div className="overflow-visible pb-2">
                   <motion.div variants={titleLineVariants} className="block text-[#F7F7F5]">
                     TOGETHER<span className="text-[#3b82f6]">.</span>
                   </motion.div>
@@ -155,21 +156,6 @@ export function Hero() {
                     </span>
                   </Link>
                 </MagneticElement>
-
-                {/* Secondary CTA: Scroll Anchor */}
-                <Link
-                  href="#about"
-                  data-cursor="pointer"
-                  className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition-colors duration-300 hover:text-white py-1"
-                >
-                  <span>Explore NACOS</span>
-                  <span
-                    aria-hidden="true"
-                    className="inline-block transition-transform duration-300 group-hover:translate-y-0.5 text-[#60a5fa]"
-                  >
-                    ↓
-                  </span>
-                </Link>
               </div>
             </motion.div>
           </div>

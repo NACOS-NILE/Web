@@ -107,7 +107,7 @@ export function Disciplines() {
       ref={sectionRef}
       className="relative w-full py-24 sm:py-32 md:py-40 bg-[#111111] text-[#F7F7F5] border-t border-white/10"
     >
-      {/* Section Header Statement - No Section Labels */}
+      {/* Section Header Statement — No Section Labels */}
       <Container size="default" className="pt-4 pb-12 sm:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
@@ -116,7 +116,7 @@ export function Disciplines() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.88] tracking-tight uppercase text-white select-none py-1"
+              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.92] tracking-tight uppercase text-white select-none"
             >
               SIX WAYS
               <br />
@@ -134,7 +134,7 @@ export function Disciplines() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-sm leading-relaxed text-neutral-400 max-w-sm font-sans"
             >
-              The Nile computing community spans six core concentrations — from theoretical computation and systems architecture to cyber defense and computational intelligence.
+              Six core concentrations — from theoretical computation and systems architecture to cyber defense and computational intelligence.
             </motion.p>
           </div>
         </div>
@@ -239,11 +239,11 @@ export function Disciplines() {
 
           {/* Right Column: TRUE STATIONARY STICKY Image Panel */}
           <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-28 self-start">
-            <div className="space-y-5">
-              {/* Sticky Image Container with Smooth Crossfade and Scale */}
+            <div className="space-y-4">
+              {/* Sticky Image — 3:4 aspect fits in viewport */}
               <div
                 data-cursor="VIEW"
-                className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl"
+                className="relative aspect-[3/4] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 shadow-2xl"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -266,30 +266,23 @@ export function Disciplines() {
                       className="object-cover object-center grayscale contrast-110 brightness-95 transition-all duration-700 hover:scale-105 hover:grayscale-0 hover:brightness-100"
                     />
 
-                    {/* Subtle gradient overlay for depth */}
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Dynamic Metadata & Description */}
+              {/* Description only — no extra focus labels */}
               <AnimatePresence mode="wait">
-                <motion.div
+                <motion.p
                   key={activeDiscipline.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-3 pt-3 border-t border-white/10"
+                  className="text-sm leading-relaxed text-neutral-300 font-sans border-t border-white/10 pt-3"
                 >
-                  <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] font-semibold">
-                    {activeDiscipline.focus}
-                  </div>
-
-                  <p className="text-sm leading-relaxed text-neutral-300 font-sans">
-                    {activeDiscipline.description}
-                  </p>
-                </motion.div>
+                  {activeDiscipline.description}
+                </motion.p>
               </AnimatePresence>
             </div>
           </div>

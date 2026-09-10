@@ -80,20 +80,20 @@ export function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full py-24 sm:py-32 md:py-44 bg-[#F7F7F5] text-neutral-900 border-t border-neutral-900/10 overflow-hidden"
+      className="relative w-full py-12 sm:py-16 md:py-24 bg-[#F7F7F5] text-neutral-900 border-t border-neutral-900/10 overflow-hidden"
     >
-      {/* Massive Editorial Statement with Brand Accent */}
-      <Container size="default" className="pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24">
+      {/* Editorial Statement */}
+      <Container size="default" className="pt-4 pb-10 sm:pb-16">
         <div ref={headlineRef} className="select-none">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.88] tracking-tight uppercase text-neutral-950 py-1"
+            className="font-heading text-[clamp(3.2rem,7.5vw,9rem)] leading-[0.92] tracking-tight uppercase text-neutral-950 py-1"
           >
             {/* Line 1 */}
-            <div className="overflow-hidden py-1">
+            <div className="overflow-visible pb-2">
               <motion.div
                 ref={line1Ref}
                 initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
@@ -107,7 +107,7 @@ export function About() {
             </div>
 
             {/* Line 2 (Asymmetrically Offset in Brand Accent Blue) */}
-            <div className="overflow-hidden pl-4 sm:pl-16 md:pl-28 lg:pl-36 py-1">
+            <div className="overflow-visible pl-4 sm:pl-16 md:pl-28 lg:pl-36 pb-2">
               <motion.div
                 ref={line2Ref}
                 initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
@@ -121,7 +121,7 @@ export function About() {
             </div>
 
             {/* Line 3 */}
-            <div className="overflow-hidden py-1">
+            <div className="overflow-visible pb-2">
               <motion.div
                 ref={line3Ref}
                 initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}

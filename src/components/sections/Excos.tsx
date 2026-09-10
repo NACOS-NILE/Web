@@ -133,7 +133,7 @@ export function Excos() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.5rem,8.6vw,10.2rem)] leading-[0.88] tracking-tight uppercase text-neutral-950 select-none py-1"
+              className="font-heading text-[clamp(3.5rem,8.6vw,10.2rem)] leading-[0.92] tracking-tight uppercase text-neutral-950 select-none"
             >
               THE PEOPLE
               <br />

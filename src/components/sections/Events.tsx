@@ -103,7 +103,7 @@ export function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.5rem,8.6vw,10.2rem)] leading-[0.88] tracking-tight uppercase text-white select-none py-1"
+              className="font-heading text-[clamp(3.5rem,8.6vw,10.2rem)] leading-[0.92] tracking-tight uppercase text-white select-none"
             >
               SOMETHING
               <br />
@@ -277,7 +277,7 @@ export function Events() {
 
           {/* Right Column: Desktop Interactive Preview Panel */}
           <div className="hidden lg:block lg:col-span-5 xl:col-span-4 sticky top-28 self-start">
-            <div className="space-y-5">
+            <div className="space-y-4">
               {/* Dynamic Image Canvas */}
               <div
                 data-cursor="VIEW"
@@ -306,25 +306,18 @@ export function Events() {
                 </AnimatePresence>
               </div>
 
-              {/* Dynamic Info Box */}
+              {/* Dynamic Description — no extra labels */}
               <AnimatePresence mode="wait">
-                <motion.div
+                <motion.p
                   key={activeEvent.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-3 pt-3 border-t border-white/10"
+                  className="text-sm leading-relaxed text-neutral-300 font-sans border-t border-white/10 pt-3"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-[#60a5fa] font-semibold">
-                    <span>{activeEvent.category}</span>
-                    <span>{activeEvent.status}</span>
-                  </div>
-
-                  <p className="text-sm leading-relaxed text-neutral-300 font-sans">
-                    {activeEvent.description}
-                  </p>
-                </motion.div>
+                  {activeEvent.description}
+                </motion.p>
               </AnimatePresence>
             </div>
           </div>

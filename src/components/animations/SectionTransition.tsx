@@ -52,17 +52,18 @@ export function SectionTransition({ type = "light-to-dark" }: SectionTransitionP
           }
         );
       } else if (type === "kinetic-type" && textRef.current) {
+        // Kinetic ticker: start at right edge, end at left — fully visible at mid-scroll
         gsap.fromTo(
           textRef.current,
-          { x: "15%" },
+          { x: "5%" },
           {
-            x: "-25%",
+            x: "-30%",
             ease: "none",
             scrollTrigger: {
               trigger: containerRef.current,
               start: "top bottom",
               end: "bottom top",
-              scrub: 1,
+              scrub: 1.2,
             },
           }
         );
@@ -102,18 +103,19 @@ export function SectionTransition({ type = "light-to-dark" }: SectionTransitionP
     );
   }
 
-  // kinetic-type (e.g. between Community and Final CTA)
+  // kinetic-type strip between Community and Final CTA
+  // Text is always partially visible — phrase "COLLABORATE · BUILD · LEARN" scrolls through
   return (
     <div
       ref={containerRef}
       aria-hidden="true"
-      className="relative h-28 sm:h-36 w-full overflow-hidden pointer-events-none bg-[#111111] flex items-center border-t border-white/10"
+      className="relative h-28 sm:h-40 w-full overflow-hidden pointer-events-none bg-[#111111] flex items-center border-t border-white/10"
     >
       <div
         ref={textRef}
-        className="whitespace-nowrap font-heading text-6xl sm:text-8xl md:text-9xl uppercase tracking-widest text-neutral-800/40 select-none"
+        className="whitespace-nowrap font-heading text-6xl sm:text-8xl md:text-9xl uppercase tracking-widest text-neutral-700/60 select-none"
       >
-        BUILD • COLLABORATE • LEAD • ADVANCE • SOLVE •
+        COLLABORATE &nbsp;·&nbsp; BUILD &nbsp;·&nbsp; LEARN &nbsp;·&nbsp; COLLABORATE &nbsp;·&nbsp; BUILD &nbsp;·&nbsp; LEARN &nbsp;·
       </div>
     </div>
   );
