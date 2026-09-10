@@ -140,9 +140,9 @@ The project is built on modern industry standards:
    - Create a Pull Request against the `main` branch of `NACOS-NILE/Web`.
    - **PR Title Format** (using your Student ID):
      - Solo: `Submission: [StudentID] - NACOS Nile Landing Page`  
-       *Example: `Submission: [211206123] - NACOS Nile Landing Page`*
+         *Example: `Submission: [Your Student ID] - NACOS Nile Landing Page`*
      - Team of 2: `Submission: [StudentID_1, StudentID_2] - NACOS Nile Landing Page`  
-       *Example: `Submission: [211206123, 211206456] - NACOS Nile Landing Page`*
+         *Example: `Submission: [Student ID 1, Student ID 2] - NACOS Nile Landing Page`*
 
 ---
 
