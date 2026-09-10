@@ -2,6 +2,7 @@
   "name": "nacos-web",
   "version": "0.1.0",
   "private": true,
+  "author": "Wali Emmanuel Medugu (ID: 242120036, Department of Software Engineering)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +10,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@types/three": "^0.185.4",
+    "framer-motion": "^13.2.0",
+    "lucide-react": "^1.41.0",
     "next": "16.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
