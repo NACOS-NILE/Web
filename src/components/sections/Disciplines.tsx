@@ -108,15 +108,16 @@ export function Disciplines() {
       className="relative w-full py-24 sm:py-32 md:py-40 bg-[#111111] text-[#F7F7F5] border-t border-white/10"
     >
       {/* Section Header Statement — No Section Labels */}
+      {/* Section Header Statement — No Section Labels */}
       <Container size="default" className="pt-4 pb-12 sm:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 min-w-0">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[clamp(3.2rem,8.2vw,9.5rem)] leading-[0.92] tracking-tight uppercase text-white select-none"
+              className="font-heading text-[clamp(2.75rem,5.2vw,5.75rem)] 2xl:text-[6.25rem] leading-[0.95] tracking-tight uppercase text-white select-none"
             >
               SIX WAYS
               <br />
@@ -126,7 +127,7 @@ export function Disciplines() {
             </motion.h2>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col justify-end">
+          <div className="lg:col-span-4 min-w-0 flex flex-col justify-end">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}

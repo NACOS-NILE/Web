@@ -105,14 +105,14 @@ export function Hero() {
       <Container size="default" className="my-auto py-8 sm:py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           {/* Left Column: Headline & Actions */}
-          <div className="lg:col-span-8 flex flex-col justify-between z-10">
+          <div className="lg:col-span-8 min-w-0 flex flex-col justify-between z-10">
             {/* Giant Manuka Headline */}
             <div ref={headlineRef}>
               <motion.h1
                 variants={titleContainerVariants}
                 initial="hidden"
                 animate="visible"
-                className="font-heading text-[clamp(3.5rem,10vw,11rem)] leading-[0.92] tracking-tight uppercase text-white select-none"
+                className="font-heading text-[clamp(3.5rem,6.8vw,7.5rem)] 2xl:text-[8.5rem] leading-[0.92] tracking-tight uppercase text-white select-none"
               >
                 {/* Each line uses pb-2 overflow-visible to prevent clip of descenders / animation */}
                 <div className="overflow-visible pb-2">
@@ -161,7 +161,7 @@ export function Hero() {
           </div>
 
           {/* Right Column: Authentic Editorial Tech Workspace Image */}
-          <div className="lg:col-span-4 lg:pl-4 xl:pl-8 flex flex-col justify-end">
+          <div className="lg:col-span-4 min-w-0 lg:pl-4 xl:pl-8 flex flex-col justify-end">
             <div ref={imageContainerRef} className="relative w-full max-w-md mx-auto lg:max-w-none">
               <motion.div
                 data-cursor="VIEW"
@@ -180,7 +180,7 @@ export function Hero() {
                   delay: 0.35,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10"
+                className="group relative aspect-[3/4] sm:aspect-[4/5] max-h-[500px] 2xl:max-h-[560px] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10"
               >
                 <Image
                   src={EDITORIAL_IMAGES.hero}

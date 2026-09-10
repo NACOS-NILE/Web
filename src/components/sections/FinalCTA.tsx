@@ -103,7 +103,7 @@ export function FinalCTA() {
       {/* Main Closing Statement — BLACK + WHITE + BLUE ACCENT (no green, no image mask) */}
       <Container size="full" className="px-4 sm:px-8 md:px-12 lg:px-16 py-8">
         <div ref={headlineRef} className="flex flex-col items-center justify-center text-center select-none py-2">
-          <h2 className="font-heading text-[clamp(4.5rem,14vw,13rem)] uppercase tracking-tight leading-[0.88]">
+          <h2 className="font-heading text-[clamp(4rem,9.5vw,9.5rem)] 2xl:text-[10.5rem] uppercase tracking-tight leading-[0.88]">
             {/* Line 1: Grey */}
             <div className="overflow-visible pb-2">
               <div ref={line1Ref} className="block text-neutral-500 will-change-transform">
