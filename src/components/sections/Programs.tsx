@@ -173,7 +173,7 @@ export function Programs() {
                         type="button"
                         onClick={() => handleIndexClick(idx)}
                         data-cursor="pointer"
-                        className={`text-left py-3 transition-all duration-300 flex items-center gap-3 focus-visible:outline-none group ${
+                        className={`text-left py-3 cursor-pointer transition-all duration-300 flex items-center gap-3 focus-visible:outline-none group ${
                           isSelected
                             ? "text-neutral-950"
                             : "text-neutral-400 hover:text-neutral-700"

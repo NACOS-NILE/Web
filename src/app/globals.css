@@ -65,6 +65,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Ensure all buttons, links, and clickable controls trigger the pointer cursor */
+button,
+[role="button"],
+a,
+select,
+summary,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
 /* Luxury Editorial Selection */
 ::selection {
   background-color: #111111;

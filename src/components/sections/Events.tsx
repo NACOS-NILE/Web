@@ -207,7 +207,7 @@ export function Events() {
                     onClick={() => toggleMobileEvent(event.id, idx)}
                     data-cursor="VIEW"
                     aria-expanded={isMobileOpen}
-                    className="group w-full py-7 sm:py-9 text-left flex items-center justify-between gap-4 transition-all duration-300 focus-visible:outline-none"
+                    className="group w-full py-7 sm:py-9 text-left flex items-center justify-between gap-4 cursor-pointer transition-all duration-300 focus-visible:outline-none"
                   >
                     <div className="flex items-center gap-4 sm:gap-6 min-w-0">
                       <span

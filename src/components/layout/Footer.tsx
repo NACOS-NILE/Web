@@ -131,34 +131,61 @@ export function Footer() {
           </div>
 
           {/* RIGHT: Location & Secretariat */}
-          <div className="lg:col-span-2 space-y-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.24em] text-neutral-400 pb-2 border-b border-white/10">
-              Location
-            </h3>
-            <address className="not-italic space-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-400 leading-relaxed">
-              <div className="text-neutral-200 font-medium">NACOS Nile Chapter</div>
-              <div>Nile University of Nigeria</div>
-              <div>Plot 681, Cadastral Zone C-OO</div>
-              <div>Research &amp; Institution Area</div>
-              <div className="text-neutral-300">Abuja, Nigeria</div>
-            </address>
+          <div className="lg:col-span-2 space-y-6 flex flex-col justify-between">
+            <div className="space-y-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.24em] text-neutral-400 pb-2 border-b border-white/10">
+                Location
+              </h3>
+              <address className="not-italic space-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-400 leading-relaxed">
+                <div className="text-neutral-200 font-medium">NACOS Nile Chapter</div>
+                <div>Nile University of Nigeria</div>
+                <div>Plot 681, Cadastral Zone C-OO</div>
+                <div>Research &amp; Institution Area</div>
+                <div className="text-neutral-300">Abuja, Nigeria</div>
+              </address>
+            </div>
 
-            <div className="pt-4">
-              <button
-                type="button"
-                onClick={scrollToTop}
-                data-cursor="OPEN"
-                aria-label="Scroll back to top of page"
-                className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-neutral-400 hover:text-[#60a5fa] transition-colors"
-              >
-                <span>BACK TO TOP</span>
-                <span
-                  aria-hidden="true"
-                  className="inline-block transition-transform duration-300 group-hover:-translate-y-1"
+            {/* Big Circular Back To Top Button with Up-Through-Bottom Hover Animation */}
+            <div className="pt-2">
+              <MagneticElement strength={0.32}>
+                <button
+                  type="button"
+                  onClick={scrollToTop}
+                  data-cursor="TOP"
+                  aria-label="Scroll back to top of page"
+                  className="group relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-[#274193] text-white cursor-pointer shadow-2xl shadow-[#274193]/35 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#3b82f6] hover:scale-108 active:scale-95 focus-visible:outline-none"
                 >
-                  ↑
-                </span>
-              </button>
+                  <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden flex items-center justify-center">
+                    {/* Arrow 1: Center -> Slides UP out of view on hover */}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[170%]"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 19V5M5 12l7-7 7 7" />
+                    </svg>
+
+                    {/* Arrow 2: Hidden at bottom -> Slides UP into center from bottom on hover */}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="absolute w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 translate-y-[170%] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 19V5M5 12l7-7 7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </MagneticElement>
             </div>
           </div>
         </div>

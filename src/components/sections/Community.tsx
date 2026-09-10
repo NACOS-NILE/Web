@@ -404,7 +404,7 @@ export function Community() {
             data-cursor="CLICK"
             aria-label={isExpanded ? "Retract community channels" : "Expand community channels"}
             aria-expanded={isExpanded}
-            className="group relative z-20 flex items-center justify-center rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-white/[0.05] backdrop-blur-md border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] select-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-108 hover:border-white/50 hover:bg-white/[0.1] focus-visible:outline-none"
+            className="group relative z-20 flex items-center justify-center rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-white/[0.05] backdrop-blur-md border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] select-none cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-108 hover:border-white/50 hover:bg-white/[0.1] focus-visible:outline-none"
           >
             {/* Community People Icon — 100% Fully White (No blue head) */}
             <div className="relative flex items-center justify-center text-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110">

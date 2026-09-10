@@ -182,7 +182,7 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
-                className="lg:hidden flex items-center justify-center p-2 text-white hover:text-[#60a5fa] transition-colors focus-visible:outline-white"
+                className="lg:hidden flex items-center justify-center p-2 text-white hover:text-[#60a5fa] cursor-pointer transition-colors focus-visible:outline-white"
               >
                 <div className="w-5 flex flex-col items-center justify-center gap-1.5">
                   <span

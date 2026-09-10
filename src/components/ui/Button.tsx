@@ -49,7 +49,7 @@ export function Button({
   const baseClasses = `
     group relative inline-flex items-center justify-center gap-2.5 
     font-medium uppercase rounded-[2px] transition-all duration-500 
-    ease-[cubic-bezier(0.16,1,0.3,1)] select-none disabled:opacity-40 
+    ease-[cubic-bezier(0.16,1,0.3,1)] select-none cursor-pointer disabled:opacity-40 
     disabled:pointer-events-none
     ${sizeClasses[size]}
     ${variantClasses[variant]}

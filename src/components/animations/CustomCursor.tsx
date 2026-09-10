@@ -58,7 +58,7 @@ export function CustomCursor() {
 
       const target = e.target as HTMLElement | null;
       const interactiveEl = target?.closest(
-        "[data-cursor], [data-cursor-text], a, button, input, textarea"
+        "[data-cursor], [data-cursor-text], a, button, input, textarea, [role='button']"
       ) as HTMLElement | null;
 
       let nextVariant: "default" | "hover" | "text" = "default";
