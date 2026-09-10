@@ -22,8 +22,10 @@ export default function Excos() {
         </h2>
 
         {/* Three lead offices are set larger — a real hierarchy, and also the
-            three highest-resolution photographs in the set. */}
-        <ul className="mt-16 grid max-w-3xl gap-x-9 gap-y-12 sm:grid-cols-3">
+            three highest-resolution photographs in the set. Centred, so the
+            narrower block sits under the middle of the full-width roster
+            below rather than hanging off its left edge. */}
+        <ul className="mx-auto mt-16 grid max-w-3xl gap-x-9 gap-y-12 sm:grid-cols-3">
           {leads.map((p, i) => (
             <li
               key={p.slug}
@@ -60,7 +62,8 @@ export default function Excos() {
               <Portrait
                 slug={p.slug}
                 alt={`${p.name}, ${p.role}`}
-                className="h-[4.25rem] w-[4.25rem] shrink-0 object-cover sm:h-[5.25rem] sm:w-[5.25rem]"
+                wrapperClassName="shrink-0"
+                className="h-[4.25rem] w-[4.25rem] object-cover sm:h-[5.25rem] sm:w-[5.25rem]"
               />
               <div className="min-w-0">
                 <h3 className="text-[1.15rem] leading-snug text-ink">

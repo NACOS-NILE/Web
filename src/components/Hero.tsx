@@ -24,7 +24,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-8 max-w-lg text-[1.15rem] leading-[1.7] text-royal-100/85">
-              Six disciplines, one chapter. We run the bootcamps, the tutorials
+              Six departments, one chapter. We run the bootcamps, the tutorials
               before hard exams, the hackathon worth clearing your calendar for
               — and the executive council that answers its messages.
             </p>

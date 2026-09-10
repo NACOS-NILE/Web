@@ -78,13 +78,13 @@ export const EXCOS: Exco[] = [
   },
 ];
 
-export type Discipline = {
+export type Department = {
   code: string;
   name: string;
   blurb: string;
 };
 
-export const DISCIPLINES: Discipline[] = [
+export const DEPARTMENTS: Department[] = [
   {
     code: "CSC",
     name: "Computer Science",
@@ -228,7 +228,7 @@ export const CHANNELS: Channel[] = [
 
 export const NAV_LINKS = [
   { label: "About", href: "#about" },
-  { label: "Disciplines", href: "#disciplines" },
+  { label: "Departments", href: "#departments" },
   { label: "Events", href: "#events" },
   { label: "Excos", href: "#excos" },
   { label: "Community", href: "#community" },

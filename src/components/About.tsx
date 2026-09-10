@@ -16,7 +16,7 @@ export default function About() {
 
         <div className="mt-16 grid gap-x-16 gap-y-10 border-t border-hairline pt-12 md:grid-cols-12">
           <p className="reveal text-ink-muted md:col-span-5 md:col-start-1">
-            We exist for students across six computing programmes on this
+            We exist for students across six computing departments on this
             campus, from first years writing their first loop to finalists
             defending capstone projects. Membership is the whole of that
             spread, not the top of it.

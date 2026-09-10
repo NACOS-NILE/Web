@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NACOS Nile — Nigeria Association of Computing Students",
   description:
-    "The Nile University of Nigeria chapter of the Nigeria Association of Computing Students. Bootcamps, hackathons, mentorship and tutorials across six computing disciplines.",
+    "The Nile University of Nigeria chapter of the Nigeria Association of Computing Students. Bootcamps, hackathons, mentorship and tutorials across six computing departments.",
   applicationName: "NACOS Nile",
   keywords: [
     "NACOS",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NACOS Nile — Nigeria Association of Computing Students",
     description:
-      "The Nile University of Nigeria chapter of NACOS: bootcamps, hackathons, mentorship and tutorials across six computing disciplines.",
+      "The Nile University of Nigeria chapter of NACOS: bootcamps, hackathons, mentorship and tutorials across six computing departments.",
     siteName: "NACOS Nile",
     locale: "en_NG",
     type: "website",

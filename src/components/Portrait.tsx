@@ -10,11 +10,14 @@ export default function Portrait({
   alt,
   lead = false,
   className = "",
+  wrapperClassName = "",
 }: {
   slug: string;
   alt: string;
   lead?: boolean;
   className?: string;
+  /** Applied to <picture>, which is the flex/grid child — not the <img>. */
+  wrapperClassName?: string;
 }) {
   const [w, h] = lead ? [200, 250] : [112, 112];
   const base = `/excos/${slug}`;
@@ -22,7 +25,7 @@ export default function Portrait({
     `${base}-${w}.${ext} 1x, ${base}-${w * 2}.${ext} 2x`;
 
   return (
-    <picture>
+    <picture className={wrapperClassName}>
       <source srcSet={srcset("avif")} type="image/avif" />
       <source srcSet={srcset("webp")} type="image/webp" />
       <img
