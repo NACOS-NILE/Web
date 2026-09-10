@@ -7,7 +7,7 @@ export default function Hero() {
       className="relative overflow-hidden border-b border-white/10 bg-royal-950"
     >
       <div className="mx-auto max-w-6xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-36">
-        <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
+        <div className="grid gap-16 lg:grid-cols-12 lg:items-center lg:gap-10">
           <div className="lg:col-span-7">
             <p className="label text-royal-200">
               Nigeria Association of Computing Students
@@ -47,7 +47,7 @@ export default function Hero() {
 
           {/* The chapter's own seal, captioned as the artefact it is rather
               than used as abstract decoration. */}
-          <figure className="relative lg:col-span-5 lg:pl-10">
+          <figure className="relative lg:col-span-5 lg:flex lg:flex-col lg:items-center lg:pl-16">
             <div className="hidden lg:absolute lg:inset-y-1 lg:left-0 lg:block lg:w-px lg:bg-white/12" />
             <Image
               src="/nacos-seal.png"
@@ -57,7 +57,7 @@ export default function Hero() {
               priority
               className="w-40 max-w-full sm:w-48 lg:w-60"
             />
-            <figcaption className="label mt-6 max-w-[15rem] leading-[1.9] text-royal-300">
+            <figcaption className="label mt-6 max-w-[15rem] leading-[1.9] text-royal-300 lg:text-center">
               National seal of the Nigeria Association of Computing Students
             </figcaption>
           </figure>
