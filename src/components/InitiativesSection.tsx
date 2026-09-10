@@ -41,7 +41,7 @@ export default function InitiativesSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div>
-            <span className="text-xs font-mono text-[#c1b3ff] uppercase tracking-widest block mb-2">
+            <span className="text-xs font-mono text-[#60a5fa] uppercase tracking-widest block mb-2">
               03 / Signature Programs
             </span>
             <h2 className="font-rector text-3xl sm:text-5xl font-normal text-white uppercase tracking-tight">
@@ -63,15 +63,15 @@ export default function InitiativesSection() {
               <div
                 key={item.id}
                 onClick={() => setSelectedInitiative(item)}
-                className={`group relative cut-corner p-4 sm:p-8 lg:p-10 flex flex-col justify-between border hover:border-[#c1b3ff]/50 transition-all duration-300 shadow-xl cursor-pointer ${
+                className={`group relative cut-corner p-4 sm:p-8 lg:p-10 flex flex-col justify-between border hover:border-[#60a5fa]/50 transition-all duration-300 shadow-xl cursor-pointer ${
                   isFlagship
-                    ? "bg-gradient-to-b from-[#c1b3ff]/10 via-[#0d1021] to-[#070913] border-[#c1b3ff]/30"
+                    ? "bg-gradient-to-b from-[#60a5fa]/10 via-[#0d1021] to-[#070913] border-[#60a5fa]/30"
                     : "bg-white/[0.02] border-white/10"
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4 sm:mb-8">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 cut-corner-sm bg-[#c1b3ff]/10 text-[#c1b3ff] flex items-center justify-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 cut-corner-sm bg-[#60a5fa]/10 text-[#60a5fa] flex items-center justify-center">
                       <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/10 cut-corner-sm text-zinc-300">
@@ -79,13 +79,13 @@ export default function InitiativesSection() {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-[#c1b3ff] uppercase tracking-wider mb-1 sm:mb-2">
+                  <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-[#60a5fa] uppercase tracking-wider mb-1 sm:mb-2">
                     <span>{item.category}</span>
                     <span>•</span>
                     <span className="text-emerald-400">{item.status}</span>
                   </div>
 
-                  <h3 className="font-rector text-xl sm:text-3xl font-normal text-white uppercase tracking-tight mb-2 sm:mb-4 group-hover:text-[#c1b3ff] transition-colors">
+                  <h3 className="font-rector text-xl sm:text-3xl font-normal text-white uppercase tracking-tight mb-2 sm:mb-4 group-hover:text-[#60a5fa] transition-colors">
                     {item.title}
                   </h3>
 
@@ -98,7 +98,7 @@ export default function InitiativesSection() {
                   <div className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-8">
                     {item.highlights.map((h, i) => (
                       <div key={i} className="flex items-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs text-zinc-200">
-                        <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#c1b3ff] shrink-0" />
+                        <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#60a5fa] shrink-0" />
                         <span>{h}</span>
                       </div>
                     ))}
@@ -118,7 +118,7 @@ export default function InitiativesSection() {
                   </button>
 
                   {isFlagship && (
-                    <span className="hidden sm:flex text-xs font-mono text-[#c1b3ff] font-bold uppercase items-center gap-1.5 shrink-0">
+                    <span className="hidden sm:flex text-xs font-mono text-[#60a5fa] font-bold uppercase items-center gap-1.5 shrink-0">
                       <Award className="w-4 h-4" /> ₦1,000,000+ Pool
                     </span>
                   )}
@@ -149,13 +149,13 @@ export default function InitiativesSection() {
               <button
                 onClick={() => setSelectedInitiative(null)}
                 aria-label="Close Initiative Modal"
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 sm:p-2.5 cut-corner-sm bg-white/5 hover:bg-[#c1b3ff] text-white/70 hover:text-[#070913] transition-colors cursor-pointer z-10"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 sm:p-2.5 cut-corner-sm bg-white/5 hover:bg-[#60a5fa] text-white/70 hover:text-[#070913] transition-colors cursor-pointer z-10"
               >
                 <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4 pr-10">
-                <span className="text-[10px] sm:text-[12px] font-mono font-bold text-[#c1b3ff] px-2 py-0.5 sm:px-2.5 sm:py-1 cut-corner-sm bg-[#c1b3ff]/10 border border-[#c1b3ff]/20">
+                <span className="text-[10px] sm:text-[12px] font-mono font-bold text-[#60a5fa] px-2 py-0.5 sm:px-2.5 sm:py-1 cut-corner-sm bg-[#60a5fa]/10 border border-[#60a5fa]/20">
                   {selectedInitiative.category}
                 </span>
                 <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-emerald-400 uppercase">
@@ -173,14 +173,14 @@ export default function InitiativesSection() {
 
               {/* Highlights Breakdown */}
               <div className="p-3.5 sm:p-5 cut-corner-sm bg-white/[0.02] border border-white/5 mb-4 sm:mb-8">
-                <div className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-[#c1b3ff] mb-3 sm:mb-4 flex items-center gap-2 font-bold">
+                <div className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-[#60a5fa] mb-3 sm:mb-4 flex items-center gap-2 font-bold">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Program Key Features & Deliverables</span>
                 </div>
                 <ul className="space-y-2 sm:space-y-2.5">
                   {selectedInitiative.highlights.map((h, i) => (
                     <li key={i} className="text-[12px] sm:text-[13px] text-white/80 flex items-start gap-2 sm:gap-2.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#c1b3ff] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#60a5fa] shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </li>
                   ))}
@@ -193,7 +193,7 @@ export default function InitiativesSection() {
                   href="https://discord.gg/nacos-nile"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 cut-corner-sm bg-[#c1b3ff] text-[#070913] font-bold text-[11px] sm:text-[12px] font-mono uppercase hover:bg-white transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer text-center"
+                  className="px-5 sm:px-6 py-2.5 sm:py-3 cut-corner-sm bg-[#60a5fa] text-[#070913] font-bold text-[11px] sm:text-[12px] font-mono uppercase hover:bg-white transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer text-center"
                 >
                   <span>Join Official Channel</span>
                   <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />

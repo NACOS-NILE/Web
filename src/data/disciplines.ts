@@ -62,8 +62,8 @@ export const DISCIPLINES: Discipline[] = [
     coreTopics: ["Enterprise Networking (Cisco/CCNA)", "Cloud & Virtualization", "System Administration", "IT Service Management", "IoT Infrastructure"],
     careerPaths: ["Network Engineer", "Systems Administrator", "Cloud Operations Specialist", "IT Consultant", "Infrastructure Lead"],
     featuredTech: ["Cisco IOS", "AWS / Azure", "Terraform", "Ansible", "Linux Server"],
-    colorGradient: "from-violet-600/20 via-purple-600/10 to-transparent",
-    borderColor: "border-violet-500/30"
+    colorGradient: "from-blue-600/20 via-sky-600/10 to-transparent",
+    borderColor: "border-blue-500/30"
   },
   {
     id: "is",

@@ -347,7 +347,7 @@ export default function InteractiveTerminal() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8 mb-8">
           <div>
-            <span className="text-xs font-mono text-[#c1b3ff] uppercase tracking-widest block mb-2">
+            <span className="text-xs font-mono text-[#60a5fa] uppercase tracking-widest block mb-2">
               05 / Developer Shell
             </span>
             <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
@@ -375,7 +375,7 @@ export default function InteractiveTerminal() {
               key={cmd}
               type="button"
               onClick={() => handleChipClick(cmd)}
-              className="cut-corner-sm px-3 py-1 bg-white/5 hover:bg-[#c1b3ff] hover:text-[#070913] text-xs font-mono text-zinc-300 transition-colors"
+              className="cut-corner-sm px-3 py-1 bg-white/5 hover:bg-[#60a5fa] hover:text-[#070913] text-xs font-mono text-zinc-300 transition-colors"
             >
               ${cmd}
             </button>
@@ -430,13 +430,13 @@ export default function InteractiveTerminal() {
               }
               if (log.type === "system") {
                 return (
-                  <div key={log.id} className="text-[#c1b3ff] italic">
+                  <div key={log.id} className="text-[#60a5fa] italic">
                     {log.text}
                   </div>
                 );
               }
               return (
-                <div key={log.id} className="text-zinc-300 whitespace-pre-wrap pl-2 border-l-2 border-[#c1b3ff]/30 py-1 bg-white/[0.01]">
+                <div key={log.id} className="text-zinc-300 whitespace-pre-wrap pl-2 border-l-2 border-[#60a5fa]/30 py-1 bg-white/[0.01]">
                   {log.text}
                 </div>
               );
@@ -466,7 +466,7 @@ export default function InteractiveTerminal() {
             />
             <button
               type="submit"
-              className="cut-corner-sm px-4 py-1.5 bg-[#c1b3ff] hover:bg-white text-[#070913] font-mono text-xs font-bold transition-colors flex items-center gap-1.5"
+              className="cut-corner-sm px-4 py-1.5 bg-[#60a5fa] hover:bg-white text-[#070913] font-mono text-xs font-bold transition-colors flex items-center gap-1.5"
             >
               <span>Execute</span>
               <CornerDownLeft className="w-3.5 h-3.5" />

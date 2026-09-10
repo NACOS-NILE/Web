@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#070913] text-[#f4f2ee] selection:bg-[#c1b3ff] selection:text-[#070913]">
+    <div className="flex flex-col min-h-screen bg-[#070913] text-[#f4f2ee] selection:bg-[#60a5fa] selection:text-[#070913]">
       {/* Preloader */}
       <Preloader />
 

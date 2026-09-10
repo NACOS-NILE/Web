@@ -51,7 +51,7 @@ function FloatingCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#070913] via-transparent to-transparent opacity-80" />
         <div className="absolute bottom-2 left-2 right-2 text-center">
-          <span className="text-[9px] font-mono tracking-widest text-[#c1b3ff] uppercase px-2 py-0.5 rounded bg-black/70 backdrop-blur-md border border-white/10 group-hover:bg-[#c1b3ff] group-hover:text-[#070913] transition-colors">
+          <span className="text-[9px] font-mono tracking-widest text-[#60a5fa] uppercase px-2 py-0.5 rounded bg-black/70 backdrop-blur-md border border-white/10 group-hover:bg-[#60a5fa] group-hover:text-[#070913] transition-colors">
             {caption} ↗
           </span>
         </div>
@@ -178,11 +178,11 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 mb-8"
         >
-          <span className="h-px w-6 bg-[#c1b3ff]/50" />
-          <span className="text-[12px] md:text-[13px] font-mono uppercase tracking-[0.25em] text-[#c1b3ff] font-semibold">
+          <span className="h-px w-6 bg-[#60a5fa]/50" />
+          <span className="text-[12px] md:text-[13px] font-mono uppercase tracking-[0.25em] text-[#60a5fa] font-semibold">
             NACOS Nile University Chapter
           </span>
-          <span className="h-px w-6 bg-[#c1b3ff]/50" />
+          <span className="h-px w-6 bg-[#60a5fa]/50" />
         </motion.div>
 
         {/* Kinetic Display Headline */}
@@ -193,7 +193,7 @@ export default function Hero() {
           className="font-rector text-[46px] sm:text-[72px] md:text-[96px] lg:text-[112px] font-normal tracking-[-0.03em] uppercase leading-[0.92] text-[#f4f2ee] mb-8 max-w-3xl"
         >
           Orchestrating<br />
-          <span className="text-[#c1b3ff] italic">
+          <span className="text-[#60a5fa] italic">
             Excellence
           </span>
         </motion.h1>
@@ -218,7 +218,7 @@ export default function Hero() {
           {/* Primary Button */}
           <Link
             href="#community"
-            className="cut-corner inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#c1b3ff] hover:bg-white text-[#070913] font-bold text-[13px] font-mono uppercase tracking-wider transition-all duration-300 shadow-xl cursor-pointer w-full sm:w-auto whitespace-nowrap"
+            className="cut-corner inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#60a5fa] hover:bg-white text-[#070913] font-bold text-[13px] font-mono uppercase tracking-wider transition-all duration-300 shadow-xl cursor-pointer w-full sm:w-auto whitespace-nowrap"
           >
             <span>Join Student Hub</span>
             <ArrowUpRight className="w-4 h-4 text-[#070913] shrink-0" />
@@ -227,7 +227,7 @@ export default function Hero() {
           {/* Secondary Button */}
           <Link
             href="#disciplines"
-            className="cut-corner group inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white/[0.05] hover:bg-[#c1b3ff] text-[#f4f2ee] hover:text-[#070913] font-medium text-[13px] font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer w-full sm:w-auto whitespace-nowrap"
+            className="cut-corner group inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white/[0.05] hover:bg-[#60a5fa] text-[#f4f2ee] hover:text-[#070913] font-medium text-[13px] font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer w-full sm:w-auto whitespace-nowrap"
           >
             <span>Explore Disciplines</span>
             <ArrowUpRight className="w-4 h-4 text-white/60 group-hover:text-[#070913] shrink-0" />
@@ -242,19 +242,19 @@ export default function Hero() {
           className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-12 mt-16 pt-10 border-t border-white/10 w-full max-w-2xl"
         >
           <Link href="#community" className="group text-left transition-transform hover:-translate-y-1 block cursor-pointer">
-            <div className="text-[24px] sm:text-[30px] font-black text-[#f4f2ee] group-hover:text-[#c1b3ff] transition-colors">2,500+</div>
+            <div className="text-[24px] sm:text-[30px] font-black text-[#f4f2ee] group-hover:text-[#60a5fa] transition-colors">2,500+</div>
             <div className="text-[11px] font-mono uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">Students ↗</div>
           </Link>
           <Link href="#disciplines" className="group text-left transition-transform hover:-translate-y-1 block cursor-pointer">
-            <div className="text-[24px] sm:text-[30px] font-black text-[#c1b3ff] group-hover:text-white transition-colors">6</div>
+            <div className="text-[24px] sm:text-[30px] font-black text-[#60a5fa] group-hover:text-white transition-colors">6</div>
             <div className="text-[11px] font-mono uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">Disciplines ↗</div>
           </Link>
           <Link href="#initiatives" className="group text-left transition-transform hover:-translate-y-1 block cursor-pointer">
-            <div className="text-[24px] sm:text-[30px] font-black text-[#f4f2ee] group-hover:text-[#c1b3ff] transition-colors">Annual</div>
+            <div className="text-[24px] sm:text-[30px] font-black text-[#f4f2ee] group-hover:text-[#60a5fa] transition-colors">Annual</div>
             <div className="text-[11px] font-mono uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">Tech Week ↗</div>
           </Link>
           <Link href="#excos" className="group text-left transition-transform hover:-translate-y-1 block cursor-pointer">
-            <div className="text-[24px] sm:text-[30px] font-black text-[#f4f2ee] group-hover:text-[#c1b3ff] transition-colors">9</div>
+            <div className="text-[24px] sm:text-[30px] font-black text-[#f4f2ee] group-hover:text-[#60a5fa] transition-colors">9</div>
             <div className="text-[11px] font-mono uppercase tracking-widest text-white/50 group-hover:text-white/80 transition-colors">Officers ↗</div>
           </Link>
         </motion.div>

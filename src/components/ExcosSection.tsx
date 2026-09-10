@@ -138,15 +138,15 @@ export default function ExcosSection() {
         {/* Leadership Display Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="h-px w-8 bg-[#c1b3ff]/40" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#c1b3ff] font-semibold">
+            <span className="h-px w-8 bg-[#60a5fa]/40" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#60a5fa] font-semibold">
               03 / Chapter Leadership
             </span>
-            <span className="h-px w-8 bg-[#c1b3ff]/40" />
+            <span className="h-px w-8 bg-[#60a5fa]/40" />
           </div>
           <h2 className="font-rector text-[38px] sm:text-[52px] md:text-[64px] font-normal uppercase tracking-tight leading-[0.95] text-[#f4f2ee] mb-4">
             A Council of<br />
-            <span className="text-[#c1b3ff] italic">
+            <span className="text-[#60a5fa] italic">
               Student Allies
             </span>
           </h2>
@@ -163,7 +163,7 @@ export default function ExcosSection() {
             {/* Top Controls: Progress & Arrow Buttons */}
             <div className="flex items-center justify-between gap-4 pb-3.5 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <span className="cut-corner-sm text-[10px] font-mono text-[#c1b3ff] px-2 py-1 bg-white/5 border border-white/10">
+                <span className="cut-corner-sm text-[10px] font-mono text-[#60a5fa] px-2 py-1 bg-white/5 border border-white/10">
                   0{currentIndex + 1} / 0{EXCOS.length}
                 </span>
                 <span className="text-[11px] font-mono text-white/50 uppercase truncate max-w-[150px]">
@@ -176,14 +176,14 @@ export default function ExcosSection() {
                 <button
                   onClick={prevExco}
                   aria-label="Previous Executive"
-                  className="cut-corner-sm group w-9 h-9 bg-white/5 hover:bg-[#c1b3ff] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-colors cursor-pointer"
+                  className="cut-corner-sm group w-9 h-9 bg-white/5 hover:bg-[#60a5fa] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={nextExco}
                   aria-label="Next Executive"
-                  className="cut-corner-sm group w-9 h-9 bg-white/5 hover:bg-[#c1b3ff] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-colors cursor-pointer"
+                  className="cut-corner-sm group w-9 h-9 bg-white/5 hover:bg-[#60a5fa] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -212,13 +212,13 @@ export default function ExcosSection() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] font-mono tracking-wider text-[#c1b3ff] uppercase block mb-1">
+                    <span className="text-[10px] font-mono tracking-wider text-[#60a5fa] uppercase block mb-1">
                       {activeExco.dept}
                     </span>
                     <h3 className="font-rector text-lg sm:text-2xl font-normal uppercase text-[#f4f2ee] tracking-tight leading-tight">
                       {activeExco.name}
                     </h3>
-                    <p className="text-xs sm:text-sm font-mono text-[#c1b3ff] font-bold mt-1">
+                    <p className="text-xs sm:text-sm font-mono text-[#60a5fa] font-bold mt-1">
                       {activeExco.role}
                     </p>
                   </div>
@@ -236,7 +236,7 @@ export default function ExcosSection() {
             {/* Compact Progress Bar at Bottom */}
             <div className="h-[2px] bg-white/10 overflow-hidden w-full mt-1">
               <motion.div
-                className="h-full bg-[#c1b3ff]"
+                className="h-full bg-[#60a5fa]"
                 animate={{ width: `${progressPercent}%` }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               />
@@ -271,7 +271,7 @@ export default function ExcosSection() {
 
                 {/* Office Badge Overlay */}
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
-                  <span className="cut-corner-sm text-[11px] font-mono tracking-widest text-[#c1b3ff] uppercase px-3 py-1.5 bg-[#070913]/90 backdrop-blur-md border border-white/15">
+                  <span className="cut-corner-sm text-[11px] font-mono tracking-widest text-[#60a5fa] uppercase px-3 py-1.5 bg-[#070913]/90 backdrop-blur-md border border-white/15">
                     {activeExco.dept}
                   </span>
                   <span className="cut-corner-sm text-[11px] font-mono text-white/80 px-2.5 py-1.5 bg-[#070913]/90 backdrop-blur-md border border-white/15">
@@ -288,7 +288,7 @@ export default function ExcosSection() {
                 {/* Progress Bar */}
                 <div className="flex-1 h-[3px] bg-white/10 overflow-hidden">
                   <motion.div
-                    className="h-full bg-[#c1b3ff]"
+                    className="h-full bg-[#60a5fa]"
                     animate={{ width: `${progressPercent}%` }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
                   />
@@ -299,14 +299,14 @@ export default function ExcosSection() {
                   <button
                     onClick={prevExco}
                     aria-label="Previous Executive"
-                    className="cut-corner-sm group w-11 h-11 bg-white/5 hover:bg-[#c1b3ff] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-all duration-300 cursor-pointer"
+                    className="cut-corner-sm group w-11 h-11 bg-white/5 hover:bg-[#60a5fa] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-all duration-300 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
                   </button>
                   <button
                     onClick={nextExco}
                     aria-label="Next Executive"
-                    className="cut-corner-sm group w-11 h-11 bg-white/5 hover:bg-[#c1b3ff] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-all duration-300 cursor-pointer"
+                    className="cut-corner-sm group w-11 h-11 bg-white/5 hover:bg-[#60a5fa] text-white hover:text-[#070913] border border-white/15 flex items-center justify-center transition-all duration-300 cursor-pointer"
                   >
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </button>
@@ -325,7 +325,7 @@ export default function ExcosSection() {
                 >
                   {/* Quote */}
                   <div className="relative">
-                    <Quote className="w-8 h-8 text-[#c1b3ff]/40 mb-2" />
+                    <Quote className="w-8 h-8 text-[#60a5fa]/40 mb-2" />
                     <p className="font-rector text-[20px] sm:text-[24px] md:text-[26px] font-normal text-[#f4f2ee] leading-snug">
                       &ldquo;{activeExco.quote}&rdquo;
                     </p>
@@ -342,7 +342,7 @@ export default function ExcosSection() {
                       <h3 className="font-rector text-[22px] sm:text-[26px] font-normal uppercase text-[#f4f2ee]">
                         {activeExco.name}
                       </h3>
-                      <p className="text-[13px] font-mono text-[#c1b3ff] font-bold">
+                      <p className="text-[13px] font-mono text-[#60a5fa] font-bold">
                         {activeExco.role}
                       </p>
                     </div>
@@ -365,7 +365,7 @@ export default function ExcosSection() {
               onClick={() => setCurrentIndex(idx)}
               className={`group relative aspect-square rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer ${
                 currentIndex === idx
-                  ? "border-[#c1b3ff] ring-2 ring-[#c1b3ff]/40 scale-105"
+                  ? "border-[#60a5fa] ring-2 ring-[#60a5fa]/40 scale-105"
                   : "border-white/10 opacity-70 hover:opacity-100"
               }`}
             >

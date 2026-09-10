@@ -42,7 +42,7 @@ export default function Preloader() {
                   cx="100"
                   cy="100"
                   r="92"
-                  stroke="#c1b3ff"
+                  stroke="#60a5fa"
                   strokeWidth="3"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 1 }}
@@ -54,7 +54,7 @@ export default function Preloader() {
                   cx="100"
                   cy="100"
                   r="82"
-                  stroke="#c1b3ff"
+                  stroke="#60a5fa"
                   strokeWidth="1.5"
                   strokeDasharray="4 4"
                   initial={{ pathLength: 0, opacity: 0 }}
@@ -65,7 +65,7 @@ export default function Preloader() {
                 {/* Circuit Bus Radiating Traces */}
                 <motion.path
                   d="M100 40 V15 M100 160 V185 M40 100 H15 M160 100 H185 M55 55 L35 35 M145 55 L165 35 M55 145 L35 165 M145 145 L165 165"
-                  stroke="#c1b3ff"
+                  stroke="#60a5fa"
                   strokeWidth="2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
@@ -78,7 +78,7 @@ export default function Preloader() {
                   cx="100"
                   cy="15"
                   r="3.5"
-                  fill="#c1b3ff"
+                  fill="#60a5fa"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.9, duration: 0.3 }}
@@ -87,7 +87,7 @@ export default function Preloader() {
                   cx="100"
                   cy="185"
                   r="3.5"
-                  fill="#c1b3ff"
+                  fill="#60a5fa"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.9, duration: 0.3 }}
@@ -96,7 +96,7 @@ export default function Preloader() {
                   cx="15"
                   cy="100"
                   r="3.5"
-                  fill="#c1b3ff"
+                  fill="#60a5fa"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.9, duration: 0.3 }}
@@ -105,7 +105,7 @@ export default function Preloader() {
                   cx="185"
                   cy="100"
                   r="3.5"
-                  fill="#c1b3ff"
+                  fill="#60a5fa"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.9, duration: 0.3 }}
@@ -154,7 +154,7 @@ export default function Preloader() {
                   width="72"
                   height="72"
                   rx="6"
-                  stroke="#c1b3ff"
+                  stroke="#60a5fa"
                   strokeWidth="2"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 0.8 }}
@@ -167,7 +167,7 @@ export default function Preloader() {
                 initial={{ scale: 0.7, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-16 md:w-20 h-16 md:h-20 rounded-full overflow-hidden p-1 shadow-[0_0_30px_rgba(193,179,255,0.4)]"
+                className="relative w-16 md:w-20 h-16 md:h-20 rounded-full overflow-hidden p-1 shadow-[0_0_30px_rgba(96, 165, 250,0.4)]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -195,7 +195,7 @@ export default function Preloader() {
                 initial={{ y: "120%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[11px] md:text-[13px] font-mono tracking-[0.3em] uppercase text-[#c1b3ff]/80"
+                className="text-[11px] md:text-[13px] font-mono tracking-[0.3em] uppercase text-[#60a5fa]/80"
               >
                 Learn • Build • Grow • Excellence
               </motion.p>
@@ -208,7 +208,7 @@ export default function Preloader() {
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{ duration: 2.1, ease: "easeInOut" }}
-              className="h-full bg-[#c1b3ff]"
+              className="h-full bg-[#60a5fa]"
             />
           </div>
         </motion.div>

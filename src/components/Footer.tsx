@@ -56,7 +56,7 @@ export default function Footer() {
           <div className="col-span-2 lg:col-span-1 flex flex-col justify-between">
             <div>
               <Link href="/" className="flex items-center gap-3 group mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#0d1021] border border-white/20 flex items-center justify-center p-1 group-hover:border-[#c1b3ff] transition-colors overflow-hidden">
+                <div className="w-10 h-10 rounded-full bg-[#0d1021] border border-white/20 flex items-center justify-center p-1 group-hover:border-[#60a5fa] transition-colors overflow-hidden">
                   <Image
                     src="/logo.png"
                     alt="NACOS Logo"
@@ -69,7 +69,7 @@ export default function Footer() {
                   <span className="text-[16px] font-black uppercase tracking-tight text-[#f4f2ee]">
                     NACOS Nile
                   </span>
-                  <span className="text-[10px] font-mono tracking-widest text-[#c1b3ff] uppercase">
+                  <span className="text-[10px] font-mono tracking-widest text-[#60a5fa] uppercase">
                     Learn • Build • Grow
                   </span>
                 </div>
@@ -88,7 +88,7 @@ export default function Footer() {
           {/* Links Columns */}
           {footerSections.map((section) => (
             <div key={section.title} className="flex flex-col">
-              <div className="text-[12px] font-mono uppercase tracking-widest text-[#c1b3ff] font-bold mb-5">
+              <div className="text-[12px] font-mono uppercase tracking-widest text-[#60a5fa] font-bold mb-5">
                 {section.title}
               </div>
               <ul className="space-y-3">
@@ -120,7 +120,7 @@ export default function Footer() {
             href="/"
             className="group block w-full hover:opacity-90 transition-opacity"
           >
-            <div className="font-rector text-[12vw] sm:text-[13vw] md:text-[14vw] font-normal tracking-[-0.04em] uppercase leading-none text-[#f4f2ee] group-hover:text-[#c1b3ff] transition-all duration-500 select-none">
+            <div className="font-rector text-[12vw] sm:text-[13vw] md:text-[14vw] font-normal tracking-[-0.04em] uppercase leading-none text-[#f4f2ee] group-hover:text-[#60a5fa] transition-all duration-500 select-none">
               NACOS NILE
             </div>
           </Link>
@@ -138,7 +138,7 @@ export default function Footer() {
             <div className="text-white/60">
               © {new Date().getFullYear()} NACOS Nile Chapter. All rights reserved.
             </div>
-            <div className="text-[11px] text-[#c1b3ff]/80">
+            <div className="text-[11px] text-[#60a5fa]/80">
               Built for Creative Engineering &amp; Student Excellence.
             </div>
           </div>

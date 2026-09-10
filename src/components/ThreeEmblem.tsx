@@ -34,7 +34,7 @@ export default function ThreeEmblem() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xc1b3ff, 2.5);
+    const dirLight1 = new THREE.DirectionalLight(0x60a5fa, 2.5);
     dirLight1.position.set(350, 400, 600);
     scene.add(dirLight1);
 
@@ -48,7 +48,7 @@ export default function ThreeEmblem() {
     // 1. Faceted Icosahedron Gemstone
     const geometry = new THREE.IcosahedronGeometry(220, 0);
     const material = new THREE.MeshStandardMaterial({
-      color: 0xc1b3ff,
+      color: 0x60a5fa,
       roughness: 0.2,
       metalness: 0.4,
       emissive: 0x274193,
@@ -94,7 +94,7 @@ export default function ThreeEmblem() {
 
     particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0xc1b3ff,
+      color: 0x60a5fa,
       size: 3,
       transparent: true,
       opacity: 0.4,

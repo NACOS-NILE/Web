@@ -59,7 +59,7 @@ export default function CommunitySection() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-4">
-              <span className="text-xs font-mono text-[#c1b3ff] uppercase tracking-widest block">
+              <span className="text-xs font-mono text-[#60a5fa] uppercase tracking-widest block">
                 Official Student Network
               </span>
               <h2 className="font-rector text-3xl sm:text-5xl font-normal text-white uppercase tracking-tight leading-[1.05]">
@@ -87,12 +87,12 @@ export default function CommunitySection() {
               >
                 {copiedLink ? (
                   <>
-                    <Check className="w-4 h-4 text-[#c1b3ff]" />
+                    <Check className="w-4 h-4 text-[#60a5fa]" />
                     <span>Invite Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-4 h-4 text-[#c1b3ff]" />
+                    <Copy className="w-4 h-4 text-[#60a5fa]" />
                     <span>Copy Invite Link</span>
                   </>
                 )}
@@ -105,7 +105,7 @@ export default function CommunitySection() {
         {/* Channels Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div>
-            <span className="text-xs font-mono text-[#c1b3ff] uppercase tracking-widest block mb-2">
+            <span className="text-xs font-mono text-[#60a5fa] uppercase tracking-widest block mb-2">
               06 / Community Channels
             </span>
             <h2 className="font-rector text-3xl sm:text-5xl font-normal text-white uppercase tracking-tight">
@@ -127,11 +127,11 @@ export default function CommunitySection() {
                 href={ch.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cut-corner bg-white/[0.02] border border-white/10 p-8 flex flex-col justify-between group hover:border-[#c1b3ff]/50 transition-all duration-300"
+                className="cut-corner bg-white/[0.02] border border-white/10 p-8 flex flex-col justify-between group hover:border-[#60a5fa]/50 transition-all duration-300"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-10 h-10 cut-corner-sm bg-[#c1b3ff]/10 text-[#c1b3ff] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 cut-corner-sm bg-[#60a5fa]/10 text-[#60a5fa] flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 bg-white/10 text-zinc-300 cut-corner-sm">
@@ -139,10 +139,10 @@ export default function CommunitySection() {
                     </span>
                   </div>
 
-                  <h3 className="font-rector text-xl font-normal text-white uppercase tracking-tight group-hover:text-[#c1b3ff] transition-colors">
+                  <h3 className="font-rector text-xl font-normal text-white uppercase tracking-tight group-hover:text-[#60a5fa] transition-colors">
                     {ch.name}
                   </h3>
-                  <span className="text-xs font-mono text-[#c1b3ff] block mb-2">
+                  <span className="text-xs font-mono text-[#60a5fa] block mb-2">
                     {ch.memberCount}
                   </span>
                   <p className="text-xs text-zinc-400 leading-relaxed">
@@ -152,7 +152,7 @@ export default function CommunitySection() {
 
                 <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-zinc-400 group-hover:text-white">
                   <span>Open Channel</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#c1b3ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-4 h-4 text-[#60a5fa] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </a>
             );
@@ -172,14 +172,14 @@ export default function CommunitySection() {
                 className="cut-corner-sm bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 p-3.5 flex items-center justify-between gap-3 group transition-all"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 cut-corner-sm bg-[#c1b3ff]/10 text-[#c1b3ff] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <div className="w-9 h-9 cut-corner-sm bg-[#60a5fa]/10 text-[#60a5fa] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <Icon className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-rector text-sm text-white uppercase tracking-tight truncate group-hover:text-[#c1b3ff] transition-colors">
+                    <h3 className="font-rector text-sm text-white uppercase tracking-tight truncate group-hover:text-[#60a5fa] transition-colors">
                       {ch.name}
                     </h3>
-                    <span className="text-[11px] font-mono text-[#c1b3ff] block truncate">
+                    <span className="text-[11px] font-mono text-[#60a5fa] block truncate">
                       {ch.memberCount}
                     </span>
                   </div>
@@ -187,7 +187,7 @@ export default function CommunitySection() {
 
                 <div className="flex items-center gap-1.5 shrink-0 text-xs font-mono text-zinc-400 group-hover:text-white">
                   <span className="text-[10px] uppercase tracking-wider">Join</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#c1b3ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#60a5fa] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </a>
             );
@@ -198,7 +198,7 @@ export default function CommunitySection() {
         <div className="mt-20 pt-16 border-t border-white/10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
-              <span className="text-xs font-mono text-[#c1b3ff] uppercase tracking-widest block mb-1">
+              <span className="text-xs font-mono text-[#60a5fa] uppercase tracking-widest block mb-1">
                 Student Toolkit
               </span>
               <h3 className="font-rector text-2xl sm:text-3xl font-normal text-white uppercase">
@@ -217,15 +217,15 @@ export default function CommunitySection() {
                 href={res.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cut-corner-sm p-5 bg-white/[0.02] border border-white/10 hover:border-[#c1b3ff]/40 transition-colors group"
+                className="cut-corner-sm p-5 bg-white/[0.02] border border-white/10 hover:border-[#60a5fa]/40 transition-colors group"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-[10px] font-mono uppercase text-zinc-400">
                     {res.tag}
                   </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#c1b3ff]" />
+                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#60a5fa]" />
                 </div>
-                <h4 className="text-sm font-bold text-white uppercase group-hover:text-[#c1b3ff] transition-colors mb-1">
+                <h4 className="text-sm font-bold text-white uppercase group-hover:text-[#60a5fa] transition-colors mb-1">
                   {res.title}
                 </h4>
                 <p className="text-xs text-zinc-400 line-clamp-2">

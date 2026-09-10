@@ -6,7 +6,7 @@
     --brand-dark: #070913;
     --brand-card: #0d1021;
     --brand-accent: #3b82f6;
-    --brand-lavender: #c1b3ff;
+    --brand-blue: #60a5fa;
     --brand-emerald: #10b981;
     --brand-cream: #f4f2ee;
     --background: #070913;
@@ -79,7 +79,7 @@ body {
     0px 14px
   );
   --ticket-border: rgba(255, 255, 255, 0.3);
-  --ticket-border-hover: rgba(193, 179, 255, 0.7);
+  --ticket-border-hover: rgba(96, 165, 250, 0.8);
 }
 
 .cut-corner::after {
@@ -147,7 +147,7 @@ body {
     0px 8px
   );
   --ticket-border-sm: rgba(255, 255, 255, 0.3);
-  --ticket-border-hover: rgba(193, 179, 255, 0.7);
+  --ticket-border-hover: rgba(96, 165, 250, 0.8);
 }
 
 .cut-corner-sm::after {
@@ -189,17 +189,18 @@ body {
   background-color: var(--ticket-border-hover);
 }
 
-[class*="border-[#c1b3ff]"] {
-  --ticket-border: rgba(193, 179, 255, 0.5);
-  --ticket-border-sm: rgba(193, 179, 255, 0.5);
+[class*="border-[#60a5fa]"],
+[class*="border-[#3b82f6]"] {
+  --ticket-border: rgba(96, 165, 250, 0.6);
+  --ticket-border-sm: rgba(96, 165, 250, 0.6);
 }
 
 /* Bespoke Button Styles */
 .btn-primary,
 .nacos-btn-primary,
 [class*="btn-primary"] {
-  background-color: #c1b3ff;
-  color: #070913;
+  background-color: #3b82f6;
+  color: #ffffff;
   font-weight: 700;
   display: inline-flex !important;
   flex-direction: row !important;
@@ -216,10 +217,10 @@ body {
 .btn-primary:hover,
 .nacos-btn-primary:hover,
 [class*="btn-primary"]:hover {
-  background-color: #ffffff;
+  background-color: #60a5fa;
   color: #070913;
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -6px rgba(193, 179, 255, 0.4);
+  box-shadow: 0 14px 30px -6px rgba(59, 130, 246, 0.5);
 }
 
 /* Guarantee all icons inside interactive buttons stay strictly inline and never wrap or shrink */
@@ -240,7 +241,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background: #c1b3ff;
+  background: #3b82f6;
   transform: translateY(-2px);
 }
 
@@ -257,7 +258,7 @@ body {
 }
 
 .btn-secondary:hover .btn-secondary-inner {
-  background: #111528;
+  background: #0d1733;
   color: #ffffff;
 }
 
@@ -273,7 +274,7 @@ body {
   border-radius: 4px;
 }
 .terminal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #c1b3ff;
+  background: #3b82f6;
 }
 
 /* Page Scrollbar */
@@ -288,5 +289,5 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c1b3ff;
+  background: #3b82f6;
 }
