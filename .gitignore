@@ -40,6 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# lighthouse
+.lighthouseci/
+
 # local development & assistant notes
 AGENTS.md
 CLAUDE.md

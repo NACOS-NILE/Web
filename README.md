@@ -14,8 +14,8 @@ Your goal is to build an inspiring, modern, and fully responsive landing page th
 
 Put your skills to the test and get your NACOS Nile dues waived!
 
-- 🥇 **Solo Submission Winner**: **100% Full Academic Session Dues Waived** (both semesters cleared).
-- 👥 **Team of 2 Winners**: **One Semester Dues Waived for Each Member** (50% annual clearance each).
+- 🥇 **Solo Submission Winner**: **₦50,000 CASH PRIZE**.
+- 👥 **Team of 2 Winners**: **₦25,000 CASH PRIZE EACH**.
 
 ---
 
