@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+/* ============================================================
+   NACOS Nile — Design Tokens (Awwwards Premium)
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Brand Palette ── */
+  --color-spatial: #000000;       /* OLED Black background   */
+  --color-primary: #274193;       /* NACOS Nile Royal Blue     */
+  --color-highlight: #3b82f6;     /* Bright accent / links     */
+  --color-glow: #60a5fa;          /* Glow / hover accent       */
+  --color-surface: #0a0a0a;       /* Card / surface layer      */
+
+  /* ── Neutral Palette ── */
+  --color-foreground: #ffffff;    /* Pure white text   */
+  --color-muted: #888888;         /* Premium muted grey    */
+  --color-border: rgba(255, 255, 255, 0.08); /* Subtle borders  */
 }
 
+/* ── Register tokens with Tailwind v4 ── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-spatial: var(--color-spatial);
+  --color-primary: var(--color-primary);
+  --color-highlight: var(--color-highlight);
+  --color-glow: var(--color-glow);
+  --color-surface: var(--color-surface);
+  --color-foreground: var(--color-foreground);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+
+  --font-sans: var(--font-inter-tight), "Inter", sans-serif;
+  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --font-serif: var(--font-newsreader), serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   Global Base Styles
+   ============================================================ */
+
+/* Remove scroll-behavior: smooth — Lenis handles all smooth scrolling natively */
+html {
+  /* DO NOT set scroll-behavior here — conflicts with Lenis */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-spatial);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none; /* Global custom cursor system */
+}
+
+/* ── Selection highlight ── */
+::selection {
+  background-color: var(--color-highlight);
+  color: white;
+}
+
+/* ── Custom scrollbar (Webkit) ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-spatial);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-highlight);
+}
+
+/* ============================================================
+   Utility: Noise Overlay
+   ============================================================ */
+.bg-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.08; /* Bumped up because it's no longer overlay */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   Utility: Glassmorphism
+   ============================================================
+   Usage:  <div class="glass"> ... </div>
+   Provides a frosted-glass card effect with subtle border.
+   ============================================================ */
+
+.glass {
+  background: rgba(19, 31, 66, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.12);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
 }
