@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useMemo } from "react";
-import Image from "next/image";
+import React, { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -87,12 +86,17 @@ const CHANNELS: ChannelItem[] = [
 export function Community() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const hubRef = useRef<HTMLDivElement>(null);
+  const hubRef = useRef<HTMLButtonElement>(null);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const pathRefs = useRef<(SVGPathElement | null)[]>([]);
   const shouldReduceMotion = useReducedMotion();
 
+  // Expansion state tracked with ref and state to avoid race conditions
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isExpandedRef = useRef(false);
+
   // Dynamic radius based on viewport
-  const [radius, setRadius] = useState(215);
+  const [radius, setRadius] = useState(210);
 
   useEffect(() => {
     const updateRadius = () => {
@@ -100,11 +104,11 @@ export function Community() {
       if (w < 480) {
         setRadius(120);
       } else if (w < 640) {
-        setRadius(140);
+        setRadius(145);
       } else if (w < 1024) {
         setRadius(175);
       } else {
-        setRadius(215);
+        setRadius(210);
       }
     };
 
@@ -124,81 +128,198 @@ export function Community() {
     });
   }, [radius]);
 
-  // GSAP shoot-out animation when scrolled into section
+  // Generate Git version-control branch curves from center (0,0) to each outer node (x, y)
+  const branchPaths = useMemo(() => {
+    return coords.map((coord, idx) => {
+      const { x, y } = coord;
+      const angle = CHANNELS[idx].angle;
+
+      if (angle === 270) {
+        // Top: Git branch S-curve upward
+        return `M 0 0 C 35 ${y * 0.35}, -25 ${y * 0.7}, ${x} ${y}`;
+      } else if (angle === 90) {
+        // Bottom: Git branch S-curve downward
+        return `M 0 0 C -35 ${y * 0.35}, 25 ${y * 0.7}, ${x} ${y}`;
+      } else if (angle === 330) {
+        // Top-right: branch upward then curve right
+        return `M 0 0 C 0 ${y * 0.85}, ${x * 0.3} ${y}, ${x} ${y}`;
+      } else if (angle === 210) {
+        // Top-left: branch upward then curve left
+        return `M 0 0 C 0 ${y * 0.85}, ${x * 0.3} ${y}, ${x} ${y}`;
+      } else if (angle === 30) {
+        // Bottom-right: branch right then curve down
+        return `M 0 0 C ${x * 0.65} 0, ${x * 0.45} ${y}, ${x} ${y}`;
+      } else {
+        // Bottom-left (angle === 150): branch left then curve down
+        return `M 0 0 C ${x * 0.65} 0, ${x * 0.45} ${y}, ${x} ${y}`;
+      }
+    });
+  }, [coords]);
+
+  // Execute animation whenever expanded state or coords changes
+  const animateState = useCallback(
+    (expanded: boolean) => {
+      isExpandedRef.current = expanded;
+      setIsExpanded(expanded);
+
+      const validIcons = iconRefs.current.filter(Boolean) as HTMLElement[];
+      const validPaths = pathRefs.current.filter(Boolean) as SVGPathElement[];
+
+      if (shouldReduceMotion) {
+        gsap.set(validIcons, {
+          opacity: expanded ? 1 : 0,
+          scale: expanded ? 1 : 0,
+          x: (i: number) => (expanded ? coords[i]?.x ?? 0 : 0),
+          y: (i: number) => (expanded ? coords[i]?.y ?? 0 : 0),
+        });
+        validPaths.forEach((path) => {
+          gsap.set(path, {
+            strokeDashoffset: expanded ? 0 : 100,
+            opacity: expanded ? 0.75 : 0,
+          });
+        });
+        return;
+      }
+
+      if (expanded) {
+        // Shoot out icons smoothly from center
+        gsap.to(validIcons, {
+          x: (i: number) => coords[i]?.x ?? 0,
+          y: (i: number) => coords[i]?.y ?? 0,
+          scale: 1,
+          opacity: 1,
+          duration: 0.95,
+          stagger: 0.04,
+          ease: "back.out(1.6)",
+          overwrite: "auto",
+        });
+
+        // Draw Git branch lines out from center
+        validPaths.forEach((path, i) => {
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            opacity: 0.75,
+            duration: 0.85,
+            delay: i * 0.035,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        });
+      } else {
+        // Retract icons smoothly back behind center circle
+        gsap.to(validIcons, {
+          x: 0,
+          y: 0,
+          scale: 0,
+          opacity: 0,
+          duration: 0.55,
+          stagger: 0.025,
+          ease: "power3.inOut",
+          overwrite: "auto",
+        });
+
+        // Retract Git branch lines back into center
+        validPaths.forEach((path, i) => {
+          gsap.to(path, {
+            strokeDashoffset: 100,
+            opacity: 0,
+            duration: 0.45,
+            delay: i * 0.02,
+            ease: "power3.inOut",
+            overwrite: "auto",
+          });
+        });
+      }
+    },
+    [coords, shouldReduceMotion]
+  );
+
+  // Set initial hidden state behind the center circle on mount
   useEffect(() => {
-    if (!sectionRef.current || !containerRef.current) return;
+    const validIcons = iconRefs.current.filter(Boolean) as HTMLElement[];
+    const validPaths = pathRefs.current.filter(Boolean) as SVGPathElement[];
+
+    gsap.set(validIcons, { x: 0, y: 0, scale: 0, opacity: 0 });
+    validPaths.forEach((path) => {
+      gsap.set(path, { strokeDashoffset: 100, opacity: 0 });
+    });
+  }, []);
+
+  // Update position on resize if currently expanded
+  useEffect(() => {
+    if (isExpandedRef.current) {
+      animateState(true);
+    }
+  }, [coords, animateState]);
+
+  // ScrollTrigger: fires each time the user scrolls to this section
+  useEffect(() => {
+    if (!sectionRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const validIcons = iconRefs.current.filter(Boolean) as HTMLElement[];
+    const trigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top 65%",
+      end: "bottom 25%",
+      onEnter: () => animateState(true),
+      onLeave: () => animateState(false),
+      onEnterBack: () => animateState(true),
+      onLeaveBack: () => animateState(false),
+    });
 
-    if (shouldReduceMotion) {
-      // Instant reveal for reduced-motion users
-      gsap.set(validIcons, {
-        opacity: 1,
-        scale: 1,
-        x: (i) => coords[i]?.x ?? 0,
-        y: (i) => coords[i]?.y ?? 0,
-      });
-      return;
+    // If page loads already inside the community section, trigger immediately
+    const rect = sectionRef.current.getBoundingClientRect();
+    const inViewNow = rect.top <= window.innerHeight * 0.75 && rect.bottom >= window.innerHeight * 0.25;
+    if (inViewNow) {
+      animateState(true);
     }
 
-    const ctx = gsap.context(() => {
-      // Set initial state: tucked hidden directly behind the center circle
-      gsap.set(validIcons, {
-        x: 0,
-        y: 0,
-        scale: 0.1,
-        opacity: 0,
-      });
+    return () => trigger.kill();
+  }, [animateState]);
 
-      // Smooth burst shooting out to all sides
-      gsap.to(validIcons, {
-        x: (i) => coords[i]?.x ?? 0,
-        y: (i) => coords[i]?.y ?? 0,
-        scale: 1,
-        opacity: 1,
-        duration: 1.1,
-        stagger: 0.05,
-        ease: "back.out(1.6)",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 72%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // Ambient pulse on the center hub
-      if (hubRef.current) {
-        gsap.fromTo(
-          hubRef.current,
-          { scale: 0.9, opacity: 0.7 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.9,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [coords, shouldReduceMotion]);
+  // Click center hub to toggle expand / retract at will
+  const handleToggle = () => {
+    animateState(!isExpandedRef.current);
+  };
 
   return (
     <section
       id="community"
       ref={sectionRef}
-      className="relative w-full py-20 sm:py-28 md:py-36 bg-[#111111] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
+      className="relative w-full pt-20 sm:pt-28 md:pt-36 pb-32 sm:pb-44 md:pb-56 bg-[#111111] text-[#F7F7F5] border-t border-white/10 overflow-hidden"
     >
+      {/* Subtle Grey Grid Background — Exclusive to Community Section */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none opacity-40 select-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: "36px 36px",
+          maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, #000 50%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, #000 50%, transparent 100%)",
+        }}
+      />
+
+      {/* Global CSS for Organic Floating Micro-Drift */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes communityDrift0 { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(6px, -6px); } }
+            @keyframes communityDrift1 { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(-5px, 6px); } }
+            @keyframes communityDrift2 { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(6px, 5px); } }
+            @keyframes communityDrift3 { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(-6px, -5px); } }
+            @keyframes communityDrift4 { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(5px, 3px); } }
+            @keyframes communityDrift5 { 0%, 100% { transform: translate(0px, 0px); } 50% { transform: translate(-5px, -6px); } }
+          `,
+        }}
+      />
+
       {/* Editorial Headline */}
-      <Container size="default" className="text-center pb-8 sm:pb-12">
+      <Container size="default" className="relative z-10 text-center pb-8 sm:pb-12">
         <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] text-white py-1">
           JOIN THE
           <br />
@@ -211,28 +332,35 @@ export function Community() {
       </Container>
 
       {/* Interactive Radial Shoot-Out Canvas */}
-      <Container size="default">
+      <Container size="default" className="relative z-10">
         <div
           ref={containerRef}
-          className="relative w-full max-w-2xl mx-auto h-[380px] sm:h-[460px] md:h-[540px] flex items-center justify-center select-none"
+          className="relative w-full max-w-2xl mx-auto h-[440px] sm:h-[520px] md:h-[600px] flex items-center justify-center select-none"
         >
-          {/* Subtle Concentric Orbit Guides */}
-          <div
+          {/* Dynamic Git Version-Control Curved Branch Lines (Solid Grey, Zero Glow) */}
+          <svg
             aria-hidden="true"
-            className="absolute rounded-full border border-dashed border-white/10 pointer-events-none"
-            style={{
-              width: `${radius * 2}px`,
-              height: `${radius * 2}px`,
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute rounded-full border border-white/5 pointer-events-none"
-            style={{
-              width: `${radius * 1.3}px`,
-              height: `${radius * 1.3}px`,
-            }}
-          />
+            className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible"
+            viewBox="-300 -300 600 600"
+          >
+            {branchPaths.map((d, idx) => (
+              <path
+                key={idx}
+                ref={(el) => {
+                  pathRefs.current[idx] = el;
+                }}
+                d={d}
+                fill="none"
+                stroke="#6b7280"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                pathLength={100}
+                strokeDasharray="100"
+                strokeDashoffset={100}
+                opacity={0}
+              />
+            ))}
+          </svg>
 
           {/* Social Icons Shooting Out from Behind Center Circle */}
           {CHANNELS.map((channel, idx) => (
@@ -241,64 +369,83 @@ export function Community() {
               ref={(el) => {
                 iconRefs.current[idx] = el;
               }}
-              className="absolute z-10 will-change-transform"
+              className="absolute z-30 will-change-transform"
             >
-              <a
-                href={channel.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="OPEN"
-                aria-label={`Join NACOS on ${channel.name}`}
-                className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-[#181818]/95 text-neutral-300 border border-white/15 shadow-2xl transition-all duration-300 hover:scale-120 hover:text-white hover:border-[#3b82f6] hover:bg-[#202020] hover:shadow-[0_0_28px_rgba(59,130,246,0.45)]"
+              {/* Inner Wrapper with Organic Micro-Movement / Floating Drift */}
+              <div
+                style={{
+                  animation: isExpanded
+                    ? `communityDrift${idx % 6} ${3.2 + (idx % 3) * 0.7}s ease-in-out infinite alternate`
+                    : "none",
+                }}
               >
-                {/* Platform Icon */}
-                <span className="transition-transform duration-300 group-hover:scale-110">
-                  {channel.icon}
-                </span>
-
-                {/* Clean Floating Tooltip on Hover */}
-                <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[2px] bg-[#141414] border border-white/20 px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.16em] text-white opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-1 shadow-lg">
-                  {channel.name}
-                </span>
-              </a>
+                <a
+                  href={channel.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="OPEN"
+                  aria-label={channel.name}
+                  className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-white/[0.05] backdrop-blur-md text-neutral-200 border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-125 hover:text-white hover:border-white/50 hover:bg-white/[0.12] active:scale-95"
+                >
+                  {/* Platform Icon Smooth Size Increase on Hover (Zero Glow, Zero Tooltips) */}
+                  <span className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-115">
+                    {channel.icon}
+                  </span>
+                </a>
+              </div>
             </div>
           ))}
 
-          {/* Center Community Hub (Icons emerge from behind this circle) */}
-          <div
+          {/* Center Community Hub (Transparent Frosted Glass, Clickable to Retract/Expand, Zero Glow, All-White Icon, No Text) */}
+          <button
             ref={hubRef}
-            className="relative z-20 flex flex-col items-center justify-center rounded-full w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 bg-[#141414] border border-white/20 shadow-[0_0_50px_rgba(39,65,147,0.35)] select-none"
+            type="button"
+            onClick={handleToggle}
+            data-cursor="CLICK"
+            aria-label={isExpanded ? "Retract community channels" : "Expand community channels"}
+            aria-expanded={isExpanded}
+            className="group relative z-20 flex items-center justify-center rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-white/[0.05] backdrop-blur-md border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] select-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-108 hover:border-white/50 hover:bg-white/[0.1] focus-visible:outline-none"
           >
-            {/* Ambient Pulse Wave */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 rounded-full border border-[#3b82f6]/40 animate-ping opacity-20 pointer-events-none"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute -inset-2.5 rounded-full border border-white/5 pointer-events-none"
-            />
-
-            <div className="flex flex-col items-center justify-center gap-1 sm:gap-1.5 text-center px-2">
-              <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center">
-                <Image
-                  src="/logo.svg"
-                  alt="NACOS Nile Logo"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+            {/* Community People Icon — 100% Fully White (No blue head) */}
+            <div className="relative flex items-center justify-center text-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-white"
+                aria-hidden="true"
+              >
+                {/* Left person */}
+                <circle cx="5.5" cy="10" r="2" strokeWidth="1.75" />
+                <path
+                  d="M2 18c0-2.2 1.6-3.8 3.8-3.8 1.2 0 2.2.5 2.9 1.4"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
                 />
-              </div>
 
-              <span className="font-heading text-xs sm:text-sm md:text-base uppercase tracking-wider text-white">
-                COMMUNITY
-              </span>
+                {/* Right person */}
+                <circle cx="18.5" cy="10" r="2" strokeWidth="1.75" />
+                <path
+                  d="M22 18c0-2.2-1.6-3.8-3.8-3.8-1.2 0-2.2.5-2.9 1.4"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                />
 
-              <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#60a5fa]">
-                CHANNELS
-              </span>
+                {/* Center / Leader person — Pure White */}
+                <circle
+                  cx="12"
+                  cy="7.5"
+                  r="2.5"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M7 18.5c0-2.8 2.2-4.8 5-4.8s5 2 5 4.8"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
-          </div>
+          </button>
         </div>
       </Container>
     </section>
