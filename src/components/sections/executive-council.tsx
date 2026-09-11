@@ -56,8 +56,8 @@ export function ExecutiveCouncil() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div
-                  className={`relative overflow-hidden bg-surface-2 ${
-                    i === 0 ? "aspect-[3/2] max-[560px]:aspect-[3/2]" : "aspect-[4/5]"
+                  className={`relative overflow-hidden bg-surface-2 aspect-[4/5] ${
+                    i === 0 ? "max-[560px]:aspect-[3/2]" : ""
                   } after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_52%,rgba(8,13,26,.5)_82%,rgba(8,13,26,.92)_100%)]`}
                 >
                   <Image
@@ -65,7 +65,7 @@ export function ExecutiveCouncil() {
                     alt=""
                     fill
                     sizes="(max-width: 560px) 45vw, (max-width: 1000px) 30vw, 20vw"
-                    className={`object-cover ${i === 0 ? "object-[center_22%]" : ""}`}
+                    className={`object-cover ${i === 0 ? "max-[560px]:object-[center_22%]" : ""}`}
                   />
                   <Image
                     src={e.image}
@@ -73,7 +73,7 @@ export function ExecutiveCouncil() {
                     fill
                     sizes="(max-width: 560px) 45vw, (max-width: 1000px) 30vw, 20vw"
                     className={`object-cover opacity-100 transition-opacity duration-[400ms] [transition-timing-function:var(--ease)] group-hover:opacity-0 ${
-                      i === 0 ? "object-[center_22%]" : ""
+                      i === 0 ? "max-[560px]:object-[center_22%]" : ""
                     }`}
                     style={{ filter: "url(#duotone)" }}
                   />
