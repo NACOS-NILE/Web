@@ -1,26 +1,293 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --brand-primary: #274193;
+    --brand-dark: #070913;
+    --brand-card: #0d1021;
+    --brand-accent: #3b82f6;
+    --brand-blue: #60a5fa;
+    --brand-emerald: #10b981;
+    --brand-cream: #f4f2ee;
+    --background: #070913;
+    --foreground: #f4f2ee;
   }
 }
 
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #070913;
+  color: #f4f2ee;
+  font-family: var(--font-public-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "Rector";
+  src: url("/fonts/Rector-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rector";
+  src: url("/fonts/Rector-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rector";
+  src: url("/fonts/Rector-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+.font-rector {
+  font-family: var(--font-rector), "Rector", Georgia, "Times New Roman", serif;
+}
+
+/* Precision Cut Corners - Complete 8-Sided Closed Silhouettes with continuous 1.5px stroke */
+.cut-corner,
+.cut-corner-sm,
+[class*="cut-corner"] {
+  border: 0 !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  outline: none !important;
+}
+
+.cut-corner {
+  position: relative;
+  clip-path: polygon(
+    14px 0px,
+    calc(100% - 14px) 0px,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0px calc(100% - 14px),
+    0px 14px
+  );
+  --ticket-border: rgba(255, 255, 255, 0.3);
+  --ticket-border-hover: rgba(96, 165, 250, 0.8);
+}
+
+.cut-corner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--ticket-border);
+  clip-path: polygon(
+    evenodd,
+    /* Outer 8 points */
+    14px 0px,
+    calc(100% - 14px) 0px,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0px calc(100% - 14px),
+    0px 14px,
+    14px 0px,
+    /* Inner 8 points: exact 1.5px perpendicular offset (K = 14 + 1.5*(sqrt(2)-1) = 14.62px) */
+    14.62px 1.5px,
+    1.5px 14.62px,
+    1.5px calc(100% - 14.62px),
+    14.62px calc(100% - 1.5px),
+    calc(100% - 14.62px) calc(100% - 1.5px),
+    calc(100% - 1.5px) calc(100% - 14.62px),
+    calc(100% - 1.5px) 14.62px,
+    calc(100% - 14.62px) 1.5px,
+    14.62px 1.5px
+  );
+  z-index: 20;
+  transition: background-color 0.3s ease;
+}
+
+.cut-corner:hover::after,
+.group:hover .cut-corner::after,
+.cut-corner.group:hover::after {
+  background-color: var(--ticket-border-hover);
+}
+
+.cut-corner-inner {
+  clip-path: polygon(
+    13px 0px,
+    calc(100% - 13px) 0px,
+    100% 13px,
+    100% calc(100% - 13px),
+    calc(100% - 13px) 100%,
+    13px 100%,
+    0px calc(100% - 13px),
+    0px 13px
+  );
+}
+
+.cut-corner-sm {
+  position: relative;
+  clip-path: polygon(
+    8px 0px,
+    calc(100% - 8px) 0px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0px calc(100% - 8px),
+    0px 8px
+  );
+  --ticket-border-sm: rgba(255, 255, 255, 0.3);
+  --ticket-border-hover: rgba(96, 165, 250, 0.8);
+}
+
+.cut-corner-sm::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--ticket-border-sm);
+  clip-path: polygon(
+    evenodd,
+    /* Outer 8 points */
+    8px 0px,
+    calc(100% - 8px) 0px,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0px calc(100% - 8px),
+    0px 8px,
+    8px 0px,
+    /* Inner 8 points: exact 1.5px perpendicular offset (K = 8 + 1.5*(sqrt(2)-1) = 8.62px) */
+    8.62px 1.5px,
+    1.5px 8.62px,
+    1.5px calc(100% - 8.62px),
+    8.62px calc(100% - 1.5px),
+    calc(100% - 8.62px) calc(100% - 1.5px),
+    calc(100% - 1.5px) calc(100% - 8.62px),
+    calc(100% - 1.5px) 8.62px,
+    calc(100% - 8.62px) 1.5px,
+    8.62px 1.5px
+  );
+  z-index: 20;
+  transition: background-color 0.3s ease;
+}
+
+.cut-corner-sm:hover::after,
+.group:hover .cut-corner-sm::after,
+.cut-corner-sm.group:hover::after {
+  background-color: var(--ticket-border-hover);
+}
+
+[class*="border-[#60a5fa]"],
+[class*="border-[#3b82f6]"] {
+  --ticket-border: rgba(96, 165, 250, 0.6);
+  --ticket-border-sm: rgba(96, 165, 250, 0.6);
+}
+
+/* Bespoke Button Styles */
+.btn-primary,
+.nacos-btn-primary,
+[class*="btn-primary"] {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 700;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  gap: 0.625rem !important;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover,
+.nacos-btn-primary:hover,
+[class*="btn-primary"]:hover {
+  background-color: #60a5fa;
+  color: #070913;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -6px rgba(59, 130, 246, 0.5);
+}
+
+/* Guarantee all icons inside interactive buttons stay strictly inline and never wrap or shrink */
+.btn-primary svg,
+.nacos-btn-primary svg,
+[class*="btn-primary"] svg,
+.cut-corner svg,
+.cut-corner-sm svg {
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 1px;
+  display: inline-flex;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.btn-secondary-inner {
+  background: #070913;
+  color: #f4f2ee;
+  font-weight: 700;
+  padding: 0.8125rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-secondary:hover .btn-secondary-inner {
+  background: #0d1733;
+  color: #ffffff;
+}
+
+/* Terminal Custom Scrollbar */
+.terminal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.terminal-scroll::-webkit-scrollbar-track {
+  background: #05070e;
+}
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: #1e243a;
+  border-radius: 4px;
+}
+.terminal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Page Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070913;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e243a;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
 }

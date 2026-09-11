@@ -42,3 +42,13 @@ next-env.d.ts
 
 # lighthouse
 .lighthouseci/
+
+# local development & assistant notes
+AGENTS.md
+CLAUDE.md
+MEMORY.TXT
+download_gallery.js
+scratch/
+.system_generated/
+*.log
+
