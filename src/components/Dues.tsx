@@ -115,9 +115,8 @@ export function Dues() {
                   </div>
                   <h3 className="plan-card-title">Full Session Payment</h3>
                   <p className="plan-card-desc">
-                    Pay once for the full academic session. One single transfer covers your
-                    two-semester departmental dues (₦20,000) and your official NACOS
-                    department shirt (₦20,000) in full. There is no need to send money twice.
+                    One single transfer covers both semesters of departmental dues (₦20,000)
+                    and your official NACOS department shirt (₦20,000) in full.
                   </p>
                   <dl className="dues-prices">
                     <div>
@@ -154,9 +153,8 @@ export function Dues() {
                   </div>
                   <h3 className="plan-card-title">Approved Installment Plan</h3>
                   <p className="plan-card-desc">
-                    Pay using the approved installment structure across the session.
-                    The first payment clears your initial semester dues and shirt deposit;
-                    the second payment completes your session clearance.
+                    Pay across two approved installments: the first clears initial semester dues and shirt deposit;
+                    the second completes your session clearance.
                   </p>
                   <dl className="dues-prices dues-instalments">
                     <div>
@@ -191,37 +189,40 @@ export function Dues() {
             <div className="dues-clarification-panel">
               <div className="clarification-header">
                 <ShieldCheckIcon className="clarification-icon" aria-hidden="true" />
-                <h4>Important Payment Clarification</h4>
+                <h4>Payment Clarification</h4>
               </div>
               <p>
                 Please pay either <strong>₦40,000 once</strong> for the full session, or use the approved <strong>₦25,000 + ₦15,000</strong> installment structure.
               </p>
               <div className="clarification-warning">
                 <strong>Do NOT pay:</strong>
-                <span>₦30,000 + ₦10,000 or ₦20,000 + ₦20,000.</span>
+                <span>₦30k + ₦10k or ₦20k + ₦20k splits.</span>
               </div>
               <p className="clarification-subtext">
-                There is no need to send money twice if paying for the full session. If you already paid using an older split, your payment will still be accounted for, but those splits should not be used for future payments.
+                Prior splits will still be accounted for, but should not be used for future payments.
               </p>
             </div>
 
             {/* Previous-session exception */}
-            <div className="dues-prior">
-              <div className="prior-header">
+            <details className="dues-prior">
+              <summary className="prior-header">
                 <AcademicCapIcon className="prior-icon" aria-hidden="true" />
-                <h3>Outstanding balance from a previous session?</h3>
+                <span>Outstanding balance from a previous session?</span>
+                <span className="prior-chevron" aria-hidden="true">↓</span>
+              </summary>
+              <div className="prior-content">
+                <p>
+                  You may pay the outstanding amount separately. Clearly state that it is a <strong>previous-session balance</strong> in your transaction description so it can be identified correctly.
+                </p>
+                <p className="prior-contact">
+                  Confirm your recorded balance with the Financial Secretary before initiating another transfer:{" "}
+                  <a href={`mailto:${chapterEmail}`}>
+                    <MailIcon aria-hidden="true" style={{ verticalAlign: "-2px", marginRight: 4 }} />
+                    Contact Financial Secretary
+                  </a>
+                </p>
               </div>
-              <p>
-                You may pay the outstanding amount separately. Clearly state that it is a <strong>previous-session balance</strong> in your transaction description so it can be identified correctly.
-              </p>
-              <p className="prior-contact">
-                Confirm your recorded balance with the Financial Secretary before initiating another transfer:{" "}
-                <a href={`mailto:${chapterEmail}`}>
-                  <MailIcon aria-hidden="true" style={{ verticalAlign: "-2px", marginRight: 4 }} />
-                  Contact Financial Secretary
-                </a>
-              </p>
-            </div>
+            </details>
           </div>
 
           <div className="dues-bank">

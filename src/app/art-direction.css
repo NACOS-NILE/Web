@@ -83,16 +83,14 @@ h2 { font-weight:720; font-size:clamp(38px,4.5vw,70px); letter-spacing:-.055em; 
 .discipline-list button { padding:14px 12px; min-height:58px; border:1px solid #ccdcef; border-radius:7px; gap:10px; background:#ffffffa0; }
 .discipline-list button svg { flex:none; width:21px; }
 .discipline-list button > span:first-child,.discipline-list button > span:nth-child(2) { font-size:12px; letter-spacing:0; line-height:1.4; }
-.discipline-list button[aria-pressed="true"] { background:#1556ea; color:white; border-color:#2378ff; box-shadow:0 5px 15px #2471ef22; }
-.discipline-detail { display:grid; grid-template-columns:1fr 1fr; gap:35px; align-items:center; padding:28px 40px; border:1px solid #ccdcf0; border-radius:12px; margin-top:14px; min-height:390px; background:#ffffff75; }
-.discipline-diagram { grid-column:2; grid-row:1; }
-.discipline-diagram svg { max-width:360px; max-height:360px; width:100%; height:auto; }
-.discipline-text { grid-column:1; grid-row:1; }
-.discipline-text h3 { font-size:clamp(27px,3vw,44px); font-weight:700; }
-.discipline-text > p:not(.eyebrow) { font-size:16px; color:#4a5f7d; }
-.discipline-text .eyebrow { font-size:10px; }
-.detail-icon { width:36px; height:36px; color:#225cd0; margin-bottom:18px; }
-.discipline-text .discipline-focus { font-size:11px!important; }
+.discipline-detail { display:block; padding:32px 38px; border:1px solid #ccdcf0; border-radius:12px; margin-top:14px; background:#ffffff90; box-shadow:0 4px 20px #1556ea08; }
+.discipline-text { max-width:820px; }
+.discipline-text-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.discipline-text-top .eyebrow { margin:0; }
+.detail-icon { width:28px; height:28px; color:#225cd0; margin:0; flex-shrink:0; }
+.discipline-text h3 { font-size:clamp(27px,3vw,40px); font-weight:700; margin:0 0 12px; }
+.discipline-desc { font-size:16px; line-height:1.75; color:#4a5f7d; margin:0 0 16px; }
+.discipline-text .discipline-focus { font-size:11px!important; display:inline-block; padding:5px 12px; border-radius:5px; background:#1556ea0f; border:1px solid #1556ea22; color:#1756ed; }
 .programs > .wrap { display:grid; grid-template-columns:.85fr 1.15fr; gap:30px 60px; align-items:start; }
 .programs .section-heading { align-self:start; position:static; }
 .programs h2 { font-size:clamp(42px,4.8vw,73px); max-width:540px; }
@@ -236,9 +234,12 @@ h2 { font-weight:720; font-size:clamp(38px,4.5vw,70px); letter-spacing:-.055em; 
  .community-routes h3 { font-size:23px; } .community-intro { font-size:16px; }
  .footer-main { grid-template-columns:1fr 1fr 1fr; } .footer-main > div:first-child { grid-column:1/-1; }
  .footer-main > div:last-child { grid-column:auto; } .footer-main > div + div { border:0;padding:0; }
- .dues-fee-summary { flex-direction:column; align-items:flex-start; gap:16px; padding:20px 24px; }
+ .dues-fee-summary { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:16px 20px; }
+ .dues-fee-summary .fee-summary-item:last-child { grid-column:1/-1; border-top:1px solid #204368; padding-top:10px; }
  .fee-summary-divider { display:none; }
- .dues-info-grid { grid-template-columns:1fr; gap:18px; margin-top:30px; }
+ .fee-summary-amount { font-size:26px; }
+ .fee-summary-note { font-size:12px; }
+ .dues-info-grid { grid-template-columns:1fr; gap:16px; margin-top:24px; }
 }
 @media(max-width:600px) {
  .wrap { width:calc(100% - 40px); } .section-space { padding-block:36px; }
@@ -262,11 +263,10 @@ h2 { font-weight:720; font-size:clamp(38px,4.5vw,70px); letter-spacing:-.055em; 
  .discipline-list button[aria-pressed="true"] { background:#1556ea;color:white;border-color:#2378ff; }
  .discipline-list button[aria-pressed="true"] svg { color:white; }
  .discipline-list button > span:nth-child(2) { font-size:12px; }
- .discipline-detail { display:flex;flex-direction:column-reverse;min-height:0;padding:18px;background:#ffffffb8;border:1px solid #ccdcf0;gap:0; }
- .discipline-text h3 { font-size:24px; color:#031020; } .discipline-text > p:not(.eyebrow) { color:#4a5f7d; }
+ .discipline-detail { display:block;min-height:0;padding:18px;background:#ffffffcc;border:1px solid #ccdcf0; }
+ .discipline-text h3 { font-size:22px; color:#031020; } .discipline-desc { font-size:14px; line-height:1.65; color:#4a5f7d; margin-bottom:14px; }
  .discipline-text .eyebrow { color:#2057d6; }
- .discipline-diagram { width:100%; } .discipline-diagram svg { max-height:220px; }
- .detail-icon { display:none; }
+ .detail-icon { display:inline-block; width:24px; height:24px; }
  .programs h2 { font-size:38px; } .program-row summary { padding:15px;grid-template-columns:28px 1fr 28px;gap:10px; }
  .program-row h3 { font-size:21px; }.program-title { font-size:12px; }.program-content { padding:0 15px 18px; }
  .events-note { padding:20px 22px; margin-top:14px; }
@@ -282,9 +282,25 @@ h2 { font-weight:720; font-size:clamp(38px,4.5vw,70px); letter-spacing:-.055em; 
  .executive-info h3 { font-size:15px;line-height:1.25;letter-spacing:-.3px;color:#051426; }
  .executive-role { font-size:11px;color:#2454b9;font-weight:600; } .executive-quote { font-size:11px;line-height:1.45;color:#536581; }
  .executive-link { font-size:11px;gap:6px;border-color:#e0e7f0;min-height:40px;color:#2057d6; } .executive-link .arrow { width:12px; }
- .dues-grid { grid-template-columns:1fr;gap:20px; }.dues-plan-tab { padding:14px; }.dues-plan-tab strong { font-size:14px; }
- .dues-plan-card,.dues-bank { padding:18px; }.plan-card-title { font-size:20px; }.dues-prices dt { font-size:13px; }
- .dues-prices dd { font-size:20px; }.dues-prices dt span { font-size:11px; }.dues-prices > div { gap:10px; }
+ .dues-fee-summary { padding:14px 16px; gap:10px; margin-bottom:20px; }
+ .fee-summary-amount { font-size:22px; }
+ .fee-summary-label { font-size:11px; }
+ .fee-summary-note { font-size:11px; }
+ .dues-grid { grid-template-columns:1fr;gap:16px; }.dues-plan-tab { padding:12px; }.dues-plan-tab strong { font-size:14px; }
+ .dues-plan-card,.dues-bank { padding:16px; }.plan-card-title { font-size:18px; }.dues-prices dt { font-size:13px; }
+ .dues-prices dd { font-size:18px; }.dues-prices dt span { font-size:11px; }.dues-prices > div { gap:8px; padding:10px 0; }
+ .dues-clarification-panel { padding:12px 14px; margin-top:16px; }
+ .dues-clarification-panel p { font-size:12px; margin-bottom:6px; }
+ .clarification-warning { padding:4px 8px; font-size:11px; margin-bottom:6px; }
+ .clarification-subtext { font-size:11px !important; }
+ .dues-prior { margin-top:16px; padding:10px 14px; }
+ .prior-header { font-size:13px; }
+ .dues-info-card { padding:18px 16px; }
+ .dues-info-card h3 { font-size:16px; }
+ .dues-info-card p { font-size:13px; }
+ .dues-steps { padding:12px 14px; margin:16px 0 12px; }
+ .steps-list { font-size:12px; line-height:1.5; }
+ .dues-submit-link { padding:14px 16px; font-size:13px; margin:14px 0 10px; }
  .community { padding:36px 0 28px; }.community-heading { padding:18px 0 14px; }.community-heading h2 { font-size:clamp(34px,9vw,44px); }.community-arrow { display:none; }
  .community-routes { grid-template-columns:1fr;gap:12px; }.community-routes h3 { font-size:20px; }
  .community-routes .button { width:100%; }.route-icon { width:38px;height:38px;font-size:21px;margin-bottom:14px; }

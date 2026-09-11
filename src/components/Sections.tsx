@@ -7,7 +7,6 @@ import {
 } from "@/data/content";
 import { Arrow } from "./Arrow";
 import { DisciplineIcon } from "./DisciplineIcon";
-import { EarthHorizon } from "./EarthHorizon";
 import {
   LinkedInIcon,
   InstagramIcon,
@@ -146,7 +145,7 @@ export function Programs() {
             <p>Event dates will be shared here when they’re confirmed.</p>
           </div>
           <a className="text-link" href="#community">
-            Find your community <Arrow diagonal />
+            Get event updates <Arrow diagonal />
           </a>
         </div>
       </div>
@@ -161,7 +160,6 @@ export function Community() {
       className="community"
       aria-labelledby="community-title"
     >
-      <EarthHorizon variant="community" />
       <div className="wrap">
         <div className="community-top">
           <p className="eyebrow">JOIN THE COMMUNITY</p>
@@ -258,14 +256,13 @@ export function Footer() {
         <div className="footer-main">
           <div>
             <a className="brand" href="#home">
-              <span className="logo-box">
-                <Image
-                  src="/logo.svg"
-                  width={80}
-                  height={38}
-                  alt="NACOS Nile logo"
-                />
-              </span>
+              <Image
+                src="/logo.svg"
+                width={80}
+                height={38}
+                alt="NACOS Nile logo"
+                className="footer-brand-logo"
+              />
               <span>
                 NACOS <b>Nile</b>
                 <small>LEARN • BUILD • GROW</small>

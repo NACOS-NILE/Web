@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { disciplines } from "@/data/content";
 import { DisciplineIcon } from "./DisciplineIcon";
-import { NetworkGraphic } from "./NetworkGraphic";
 export function DisciplineExperience() {
   const [selected, setSelected] = useState(0);
   const discipline = disciplines[selected];
@@ -53,16 +52,15 @@ export function DisciplineExperience() {
             aria-live="polite"
             aria-atomic="true"
           >
-            <div className="discipline-diagram" aria-hidden="true">
-              <NetworkGraphic selected={selected} />
-            </div>
             <div className="discipline-text" key={discipline.short}>
-              <p className="eyebrow">
-                {discipline.short} / YOUR WAY INTO COMPUTING
-              </p>
-              <DisciplineIcon kind={discipline.short} className="detail-icon" />
+              <div className="discipline-text-top">
+                <DisciplineIcon kind={discipline.short} className="detail-icon" />
+                <p className="eyebrow">
+                  {discipline.short} / YOUR WAY INTO COMPUTING
+                </p>
+              </div>
               <h3>{discipline.name}</h3>
-              <p>{discipline.description}</p>
+              <p className="discipline-desc">{discipline.description}</p>
               <p className="discipline-focus mono">{discipline.focus}</p>
             </div>
           </div>

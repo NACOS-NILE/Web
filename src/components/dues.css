@@ -203,7 +203,20 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #dbe7f6;
+  list-style: none;
+}
+.prior-header::-webkit-details-marker {
+  display: none;
+}
+.prior-header:focus-visible {
+  outline: 2px solid #5da0ff;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 .prior-icon {
   width: 20px;
@@ -211,33 +224,50 @@
   color: #79b5ff;
   flex-shrink: 0;
 }
-.prior-contact {
-  margin-top: 10px !important;
-  font-size: 13px;
+.prior-chevron {
+  margin-left: auto;
+  font-size: 14px;
+  color: #79b5ff;
+  transition: transform 0.2s ease;
+}
+.dues-prior[open] .prior-chevron {
+  transform: rotate(180deg);
+}
+.prior-content {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #1c3d62;
 }
 .dues-prior {
-  margin-top: 24px;
-  border-left: 2px solid var(--blue);
-  padding-left: 20px;
+  margin-top: 20px;
+  background: rgba(8, 27, 50, 0.7);
+  border: 1px solid #1f4268;
+  border-left: 3px solid #38bdf8;
+  border-radius: 6px;
+  padding: 12px 16px;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
-.dues-prior h3 {
-  font-size: 16px;
-  margin: 0;
-  color: #f1f6ff;
+.dues-prior[open] {
+  background: rgba(8, 27, 50, 0.92);
+  border-color: #2b5785;
 }
 .dues-prior p {
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--muted);
-  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #b0c3de;
+  margin-top: 6px;
+}
+.prior-contact {
+  margin-top: 8px !important;
+  font-size: 12px;
 }
 .dues-prior a {
-  color: var(--blue);
+  color: #79b5ff;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-underline-offset: 3px;
 }
 .dues-bank {
   padding: 36px;
