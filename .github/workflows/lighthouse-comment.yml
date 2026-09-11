@@ -1,0 +1,127 @@
+name: Post Lighthouse Comment
+
+on:
+  workflow_run:
+    workflows: ["Lighthouse Audit"]
+    types:
+      - completed
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.event == 'pull_request' ||
+      github.event.workflow_run.event == 'workflow_dispatch'
+    steps:
+      - name: Download Lighthouse Metadata Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: lighthouse-metadata
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+          path: ./report-metadata
+
+      - name: Post PR Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const prNumberPath = path.join('./report-metadata', 'pr_number');
+            const prShaPath = path.join('./report-metadata', 'pr_sha');
+            const manifestPath = path.join('./report-metadata', 'lighthouseci', 'manifest.json');
+            const linksPath = path.join('./report-metadata', 'lighthouseci', 'links.json');
+
+            if (!fs.existsSync(prNumberPath)) {
+              console.log('No PR number artifact found.');
+              return;
+            }
+
+            const prNumber = fs.readFileSync(prNumberPath, 'utf8').trim();
+            const prSha = fs.existsSync(prShaPath) ? fs.readFileSync(prShaPath, 'utf8').trim().substring(0, 7) : 'latest';
+
+            if (!prNumber) {
+              console.log('PR number is empty.');
+              return;
+            }
+
+            // If the audit failed or build failed before producing manifest.json
+            if (!fs.existsSync(manifestPath)) {
+              console.log('Manifest not found — build or audit step likely failed.');
+              const failureBody = `### 🏛️ NACOS Nile — Lighthouse Audit Report\n\n` +
+                `⚠️ **Lighthouse audit could not be completed for commit \`${prSha}\`.**\n\n` +
+                `This usually means the build had a TypeScript or lint error. Please ensure \`npm run build\` and \`npm run lint\` pass cleanly without errors on your local branch, then push your update.\n`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: Number(prNumber),
+                body: failureBody,
+              });
+              return;
+            }
+
+            let manifest = [];
+            let links = {};
+
+            try {
+              manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            } catch (e) {
+              console.error('Error parsing manifest:', e);
+            }
+
+            if (fs.existsSync(linksPath)) {
+              try {
+                links = JSON.parse(fs.readFileSync(linksPath, 'utf8'));
+              } catch (e) {
+                console.error('Error parsing links:', e);
+              }
+            }
+
+            if (!manifest || manifest.length === 0) {
+              console.log('Manifest is empty.');
+              return;
+            }
+
+            const representative = manifest.find(m => m.isRepresentativeRun) || manifest[0];
+            const summary = representative.summary || {};
+
+            const formatScore = (val) => {
+              if (val === undefined || val === null) return 'N/A';
+              const score = Math.round(val * 100);
+              const badge = score >= 90 ? '🟢' : score >= 50 ? '🟠' : '🔴';
+              return `${badge} **${score}** / 100`;
+            };
+
+            const reportUrl = links[representative.url] || Object.values(links)[0] || '';
+
+            let commentBody = `### 🏛️ NACOS Nile — Lighthouse Audit Report\n\n`;
+            commentBody += `Automated audit results for commit \`${prSha}\`:\n\n`;
+            commentBody += `| Category | Score |\n`;
+            commentBody += `| :--- | :---: |\n`;
+            commentBody += `| ⚡ **Performance** | ${formatScore(summary.performance)} |\n`;
+            commentBody += `| ♿ **Accessibility** | ${formatScore(summary.accessibility)} |\n`;
+            commentBody += `| 💡 **Best Practices** | ${formatScore(summary['best-practices'])} |\n`;
+            commentBody += `| 🔍 **SEO** | ${formatScore(summary.seo)} |\n\n`;
+
+            if (reportUrl) {
+              commentBody += `🔗 **[View Full Interactive Lighthouse Report](${reportUrl})**\n\n`;
+            }
+
+            commentBody += `*(Scores are based on the median of 3 Lighthouse runs against the Next.js production build)*\n`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(prNumber),
+              body: commentBody,
+            });
+
+            console.log(`Successfully posted new Lighthouse audit comment on PR #${prNumber}`);

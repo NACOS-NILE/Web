@@ -1,0 +1,69 @@
+name: Lighthouse Audit
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to audit (e.g. 4)'
+        required: true
+        type: string
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # Always resolve to the PR's actual HEAD commit, never GitHub's synthetic
+          # refs/pull/N/merge commit — that merge SHA doesn't exist in the PR's own
+          # commit history, which is why the audit comment could reference a commit
+          # that "doesn't exist in the PR".
+          ref: ${{ github.event.inputs.pr_number != '' && format('refs/pull/{0}/head', github.event.inputs.pr_number) || github.event.pull_request.head.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Next.js Static Export
+        run: npm run build
+
+      - name: Ensure Lighthouse Config Exists
+        run: |
+          if [ ! -f lighthouserc.json ]; then
+            echo '{"ci":{"collect":{"staticDistDir":"./out","url":["http://localhost/"],"numberOfRuns":3},"upload":{"target":"temporary-public-storage"}}}' > lighthouserc.json
+          fi
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: './lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Save PR Details and Audit Artifacts
+        if: always()
+        run: |
+          mkdir -p ./report-metadata
+          PR_NUM="${{ github.event.pull_request.number || github.event.inputs.pr_number }}"
+          echo "$PR_NUM" > ./report-metadata/pr_number
+          git rev-parse HEAD > ./report-metadata/pr_sha
+          if [ -d .lighthouseci ]; then
+            cp -r .lighthouseci ./report-metadata/lighthouseci
+          fi
+
+      - name: Upload Report Metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-metadata
+          path: ./report-metadata/
+          retention-days: 1
