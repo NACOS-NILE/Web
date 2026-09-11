@@ -2250,7 +2250,7 @@ html:has(.lightbox[open]) {
 .footer-top {
   display: flex;
 
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 
   padding: 50px 0;
@@ -2282,9 +2282,56 @@ html:has(.lightbox[open]) {
   line-height: 1.6;
 }
 
-.footer-links {
+.footer-groups {
   display: flex;
-  gap: 26px;
+  gap: 64px;
+}
+
+.footer-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-heading {
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 32px;
+}
+
+.footer-resources {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-resources a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.footer-resources .arrow-icon {
+  width: 12px;
+  height: 12px;
+
+  color: var(--highlight);
 }
 
 .footer-links a {
@@ -2410,7 +2457,8 @@ html:has(.lightbox[open]) {
     padding-left: 7px;
   }
 
-  .footer-links a:hover {
+  .footer-links a:hover,
+  .footer-resources a:hover {
     color: #ffffff;
   }
 
@@ -2794,6 +2842,16 @@ html:has(.lightbox[open]) {
 
   .community-inner {
     gap: 45px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Leave room so the back-to-top button never covers the credit line */
+  .footer-bottom {
+    padding-bottom: 80px;
   }
 }
 
@@ -3258,9 +3316,22 @@ html:has(.lightbox[open]) {
     font-size: 12px;
   }
 
+  .footer-groups {
+    flex-direction: column;
+    gap: 28px;
+  }
+
   .footer-links {
-    flex-wrap: wrap;
-    gap: 4px 20px;
+    gap: 4px 32px;
+  }
+
+  .footer-resources {
+    gap: 4px;
+  }
+
+  .footer-resources a {
+    padding: 8px 0;
+    font-size: 13px;
   }
 
   .footer-links a {

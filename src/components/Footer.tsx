@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { CREDITS, NAV_ITEMS } from "@/data/content";
+import { ArrowUpRightIcon } from "@/components/icons";
+import { CREDITS, NAV_ITEMS, STUDENT_RESOURCES } from "@/data/content";
 
 export default function Footer() {
   return (
@@ -24,13 +25,34 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav className="footer-links" aria-label="Footer">
-          {NAV_ITEMS.map((item) => (
-            <a key={item.id} href={`#${item.id}`}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="footer-groups">
+          <nav className="footer-group" aria-label="Footer">
+            <h2 className="footer-heading">Explore</h2>
+
+            <div className="footer-links">
+              {NAV_ITEMS.map((item) => (
+                <a key={item.id} href={`#${item.id}`}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          <div className="footer-group">
+            <h2 className="footer-heading">Student resources</h2>
+
+            <ul className="footer-resources">
+              {STUDENT_RESOURCES.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                    <ArrowUpRightIcon />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div className="container footer-bottom">

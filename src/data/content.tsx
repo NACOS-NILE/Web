@@ -391,6 +391,16 @@ export const SOCIAL_LINKS = [
 export const SLIDE_DURATION = 4500;
 
 /*
+  STUDENT RESOURCES
+  Official links shown in the footer. They open in a new tab. Add the
+  student portal or e-learning links here once you have the correct URLs.
+*/
+export const STUDENT_RESOURCES = [
+  { label: "Nile University website", href: "https://nileuniversity.edu.ng" },
+  { label: "Nile University library", href: "https://nileuniversity.edu.ng/nile-library" },
+];
+
+/*
   CREDITS
   Shown in the footer. Change the name and link to whatever you want judges
   and visitors to see.
