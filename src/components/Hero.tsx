@@ -39,7 +39,7 @@ export default function Hero() {
 
         <div className="hero-bottom">
           <AnimatedStat value="06" label="Computing Disciplines" />
-          <AnimatedStat value="01" label="Student Community" />
+          <AnimatedStat value="2500+" label="Students" />
           <AnimatedStat value="∞" label="Possibilities" />
         </div>
       </div>

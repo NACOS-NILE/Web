@@ -147,6 +147,7 @@ export default function AboutSlideshow() {
                 alt=""
                 fill
                 sizes="(max-width: 900px) 100vw, 600px"
+                style={{ objectPosition: slide.position }}
               />
             )}
 

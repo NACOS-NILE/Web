@@ -103,30 +103,35 @@ export const aboutSlides = [
     description:
       "NACOS Nile is the student community for computing, technology and innovation at Nile University of Nigeria.",
     image: "/images/about/chapter.jpg",
+    position: "50% 50%",
   },
   {
     title: "A place to learn together",
     description:
       "Students across every computing discipline share knowledge, support one another and grow with their peers.",
     image: "/images/about/learning.jpg",
+    position: "50% 45%",
   },
   {
     title: "Beyond the classroom",
     description:
       "Through workshops, study groups and practical sessions, NACOS turns classroom ideas into useful skills.",
     image: "/images/about/workshop.jpg",
+    position: "50% 40%",
   },
   {
     title: "A community that connects",
     description:
       "Meet collaborators, mentors and friends who make the journey through computing less solitary.",
     image: "/images/about/community.jpg",
+    position: "50% 50%",
   },
   {
     title: "Room to become more",
     description:
       "NACOS creates opportunities to lead, experiment, build confidence and shape the future of technology.",
     image: "/images/about/future.jpg",
+    position: "50% 50%",
   },
 ];
 
