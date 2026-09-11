@@ -101,7 +101,7 @@ export default function FAQSection() {
               <MessageCircleQuestion className="w-5 h-5 text-[#60a5fa]" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white uppercase">Have a specific question?</h4>
+              <h3 className="text-sm font-bold text-white uppercase">Have a specific question?</h3>
               <p className="text-xs text-zinc-400">Reach out directly to the Secretariat team on Discord.</p>
             </div>
           </div>

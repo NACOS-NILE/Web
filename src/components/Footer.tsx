@@ -127,7 +127,7 @@ export default function Footer() {
         </div>
 
         {/* Statutory Chapter Notices & Nile University Address */}
-        <div className="pt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-[12px] font-mono text-white/40 leading-relaxed">
+        <div className="pt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-[12px] font-mono text-slate-300 leading-relaxed">
           <div className="space-y-1">
             <p>• Official Student Chapter of Nigeria Computer Society (NCS) &amp; NACOS National.</p>
             <p>• Department of Computer Science &amp; Information Technology, Nile University of Nigeria.</p>
@@ -135,10 +135,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col md:items-end gap-1">
-            <div className="text-white/60">
+            <div className="text-slate-200">
               © {new Date().getFullYear()} NACOS Nile Chapter. All rights reserved.
             </div>
-            <div className="text-[11px] text-[#60a5fa]/80">
+            <div className="text-[11px] text-[#60a5fa] font-semibold">
               Built for Creative Engineering &amp; Student Excellence.
             </div>
           </div>
