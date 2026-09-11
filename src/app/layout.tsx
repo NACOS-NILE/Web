@@ -1,21 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "NACOS Nile — Nigeria Association of Computing Students",
   description: "Official web portal of NACOS Nile University of Nigeria Chapter.",
 };
+
+import SplashScreen from "@/components/SplashScreen";
 
 export default function RootLayout({
   children,
@@ -25,9 +16,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+      className="h-full antialiased scroll-smooth"
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="font-sans min-h-full flex flex-col relative">
+        <SplashScreen />
+        <div className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03] mix-blend-difference dark:mix-blend-overlay">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <filter id="noiseFilter">
+              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+          </svg>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
