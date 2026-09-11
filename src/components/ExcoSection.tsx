@@ -5,83 +5,77 @@ const excos = [
     name: "Zikora Fortune Nwafor",
     role: "President",
     image: "/excos-pics/president.jpg",
-    bio: "Passionate about building active student communities.",
-    badge: "Executive Head",
+    bio: "Leading community initiatives, industry partnerships, and student advocacy across the faculty.",
+    objectPosition: "object-top",
   },
   {
     name: "Abdullah Ali Ahmad",
     role: "Vice President",
     image: "/excos-pics/vp.jpg",
-    bio: "Advocating for student welfare and academic excellence.",
-    badge: "Executive Vice",
+    bio: "Overseeing student academic welfare, departmental coordination, and project execution.",
+    objectPosition: "object-top",
   },
   {
     name: "Sheila Jato",
     role: "Secretary General",
     image: "/excos-pics/sg.jpg",
-    bio: "Keeping the engines running smoothly.",
-    badge: "Administration",
+    bio: "Managing chapter documentation, meeting administration, and inter-level student communications.",
+    objectPosition: "object-top",
   },
   {
     name: "Amira Ibrahim",
     role: "Financial Secretary",
     image: "/excos-pics/fc.jpg",
-    bio: "Making the important financial decisions.",
-    badge: "Finance & Treasury",
+    bio: "Directing treasury, budgeting, sponsorships, and transparent departmental accounting.",
+    objectPosition: "object-top",
   },
   {
     name: "Elvis Francis",
     role: "Public Relations Officer",
     image: "/excos-pics/pro.jpg",
-    bio: "Applying creativity to communication.",
-    badge: "Communications",
+    bio: "Handling external relations, announcements, event broadcasts, and media outreach.",
+    objectPosition: "object-top",
   },
   {
     name: "Ivoke Kamsi",
-    role: "Director of Training & Development (DTD)",
+    role: "Director of Training & Development",
     image: "/excos-pics/dtd.jpg",
-    bio: "Driving technical growth and leading coding workshops for Nile computing students.",
-    badge: "Technical Director",
+    bio: "Curating hands-on workshops, peer tutorial circles, and hackathon technical prep.",
+    objectPosition: "object-top",
   },
   {
     name: "Zubaida Abdulazeez",
     role: "Provost",
     image: "/excos-pics/provost.jpg",
-    bio: "Managing the day-to-day operations of NACOS Nile.",
-    badge: "Operations",
+    bio: "Ensuring discipline, adherence to constitution, and smooth logistics during faculty events.",
+    objectPosition: "object-[center_20%]",
   },
   {
     name: "Saidat Ahmed",
     role: "Director of Socials",
     image: "/excos-pics/socials.jpg",
-    bio: "Prioritizing social activities and events.",
-    badge: "Student Life",
+    bio: "Organizing social mixers, tech dinners, gaming competitions, and community gatherings.",
+    objectPosition: "object-[center_25%]",
   },
   {
     name: "Danielle Ekunwe",
     role: "Director of Welfare",
     image: "/excos-pics/welfare.jpg",
-    bio: "Your well-being is my priority.",
-    badge: "Student Support",
+    bio: "Dedicated to student health, wellbeing, academic aid, and inclusive student support.",
+    objectPosition: "object-top",
   },
 ];
 
 export default function ExcoSection() {
   return (
-    <section id="leadership" className="py-24 relative">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-700/10 rounded-full blur-[160px] pointer-events-none -z-10" />
-
+    <section id="excos" className="py-28 relative scroll-mt-16 bg-[#070e24]/60 border-y border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 border border-blue-500/20 text-blue-300 text-xs font-semibold mb-4">
-            <span>EXECUTIVE COUNCIL</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6">
-            Meet the Leaders Guiding NACOS Nile
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Meet the Executive Team
           </h2>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            Dedicated student leaders committed to serving, representing, and elevating every computing student at Nile University of Nigeria.
+            Your elected student representatives working to support computing students at Nile University of Nigeria.
           </p>
         </div>
 
@@ -90,41 +84,35 @@ export default function ExcoSection() {
           {excos.map((exco) => (
             <div
               key={exco.name}
-              className="glass-card rounded-2xl overflow-hidden glass-card-hover border border-blue-900/30 group flex flex-col justify-between"
+              className="glass-card rounded-2xl overflow-hidden glass-card-hover border border-slate-800 hover:border-blue-500/50 group flex flex-col justify-between"
             >
-              {/* Photo Area */}
-              <div className="relative w-full aspect-[4/4] bg-[#0c142b] overflow-hidden">
+              {/* Photo Area with consistent aspect ratio and custom focal points */}
+              <div className="relative w-full aspect-[4/3.8] bg-[#0c142b] overflow-hidden">
                 <Image
                   src={exco.image}
                   alt={`${exco.name} - ${exco.role}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  className={`object-cover ${exco.objectPosition} transition-transform duration-500 group-hover:scale-105`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060b18] via-transparent to-transparent opacity-80" />
-                
-                <div className="absolute top-3 right-3">
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#060b18]/80 text-blue-300 border border-blue-500/30 backdrop-blur-md">
-                    {exco.badge}
-                  </span>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#091024] via-transparent to-transparent opacity-90" />
               </div>
 
               {/* Bio & Details */}
-              <div className="p-6 flex flex-col flex-1 justify-between bg-[#070e24]/70">
+              <div className="p-6 flex flex-col flex-1 justify-between">
                 <div>
                   <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">
                     {exco.name}
                   </h3>
                   <p className="text-sm font-semibold text-blue-400 mb-3">{exco.role}</p>
-                  <blockquote className="text-xs sm:text-sm text-slate-300 italic border-l-2 border-blue-500/40 pl-3">
-                    &ldquo;{exco.bio}&rdquo;
-                  </blockquote>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    {exco.bio}
+                  </p>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-                  <span>Nile University Chapter</span>
-                  <span className="text-blue-400/80 font-mono text-[11px]">NACOS EXCO</span>
+                <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                  <span>Nile University of Nigeria</span>
+                  <span className="text-blue-400 font-mono text-[11px]">NACOS Nile</span>
                 </div>
               </div>
             </div>

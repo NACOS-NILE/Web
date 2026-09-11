@@ -7,20 +7,37 @@ import Link from "next/link";
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Disciplines", href: "#disciplines" },
-  { name: "Initiatives", href: "#initiatives" },
-  { name: "Leadership", href: "#leadership" },
+  { name: "Events", href: "#events" },
+  { name: "Excos", href: "#excos" },
   { name: "Community", href: "#community" },
-  { name: "FAQ", href: "#faq" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      const sections = ["about", "disciplines", "events", "excos", "community", "faq", "contact"];
+      const scrollPosition = window.scrollY + 200;
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -64,15 +81,22 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="px-3.5 py-1.5 text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 rounded-lg hover:bg-blue-900/20"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`px-3.5 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                    isActive
+                      ? "text-white bg-blue-900/40 border border-blue-500/30"
+                      : "text-slate-300 hover:text-white hover:bg-blue-900/20"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Desktop Right CTA */}

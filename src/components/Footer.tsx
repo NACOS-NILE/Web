@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#040813] border-t border-blue-900/30 text-slate-400 pt-16 pb-12">
+    <footer id="contact" className="bg-[#040813] border-t border-blue-900/30 text-slate-400 pt-16 pb-12 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
           {/* Col 1 & 2: Chapter Info */}

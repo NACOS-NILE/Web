@@ -26,22 +26,19 @@ body {
   overflow-x: hidden;
 }
 
-/* Glassmorphism card utility */
+/* Clean institutional card styling */
 .glass-card {
-  background: rgba(13, 23, 51, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(59, 130, 246, 0.18);
+  background: #091024;
+  border: 1px solid #1a2744;
 }
 
 .glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .glass-card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(96, 165, 250, 0.45);
-  box-shadow: 0 20px 35px -10px rgba(39, 65, 147, 0.4);
+  border-color: #2b457e;
+  transform: translateY(-2px);
 }
 
 /* Custom scrollbar */
@@ -61,4 +58,5 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #274193;
 }
+
 
