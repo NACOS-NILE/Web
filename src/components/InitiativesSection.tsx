@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Code2, Terminal, Users, Cpu, ShieldAlert } from "lucide-react";
 import { Label } from "./ui/Label";

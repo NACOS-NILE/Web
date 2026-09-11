@@ -79,7 +79,7 @@ function getPointOnPath(pts: {x: number, y: number}[], progress: number, totalLe
 }
 
 function buildNetwork(width: number, height: number) {
-  const cellSize = 90;
+  const cellSize = 140; // Reduced density for much better rendering performance
   const cols = Math.ceil(width / cellSize) + 2;
   const rows = Math.ceil(height / cellSize) + 2;
   

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect, useLayoutEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, useVelocity } from "framer-motion";
+import { useRef, useLayoutEffect } from "react";
+import { motion, useScroll, useTransform, useSpring, useVelocity, Variants } from "framer-motion";
 
 import { Label } from "./ui/Label";
 import { SectionHeader } from "./ui/SectionHeader";
@@ -100,7 +100,7 @@ const DISCIPLINES = [
   },
 ];
 
-const staggerVariants: any = {
+const staggerVariants: Variants = {
   hidden: { opacity: 0, y: 40, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -110,7 +110,7 @@ const staggerVariants: any = {
   }
 };
 
-const cardContainerVariants: any = {
+const cardContainerVariants: Variants = {
   hidden: { opacity: 0, x: 150, scale: 0.8, rotateY: 20 },
   visible: {
     opacity: 1,
@@ -186,8 +186,8 @@ export default function DisciplinesSection() {
   const setCursorVariant = useCursorStore(state => state.setVariant);
 
   return (
-    // P4 fix: 400vh sufficient for card count — 1500vh causes massive paint area
-    <section ref={containerRef} className="relative w-full h-[400vh] bg-[#0a0a0f] z-10">
+    // P4 fix: 200vh sufficient for card count
+    <section ref={containerRef} className="relative w-full h-[200vh] bg-[#0a0a0f] z-10">
       {/* A4 fix: perspective on parent so rotateY reads as real 3D */}
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
         

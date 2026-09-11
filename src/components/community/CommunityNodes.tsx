@@ -76,14 +76,12 @@ export function SatelliteNode({
   x,
   y,
   nodeProgress,
-  index,
   onHoverChange
 }: {
   platform: (typeof PLATFORMS)[number];
   x: number;
   y: number;
   nodeProgress: number;
-  index: number;
   onHoverChange?: (hovered: boolean) => void;
 }) {
   const [hovered, setHovered] = useState(false);

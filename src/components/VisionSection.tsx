@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import StaticNetwork from "@/components/StaticNetwork";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { IsoChip, IsoServer, IsoTerminal, IsoNode } from "@/components/IsoShapes";
 import { Label } from "./ui/Label";
 import { SectionHeader } from "./ui/SectionHeader";
@@ -42,7 +41,7 @@ export default function VisionSection() {
   const objRotate4 = useTransform(scrollYProgress, [0, 1], [0, 3]);
 
   // The content blocks entry animation (triggered natively as they scroll into view)
-  const blockVariants: any = {
+  const blockVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { 
       opacity: 1, 
@@ -55,8 +54,8 @@ export default function VisionSection() {
   return (
     <section 
       ref={containerRef}
-      // P5 fix: 500vh is plenty for this content — 900vh traps users too long
-      className="relative w-full h-[500vh] bg-[#0a0a0f] z-10"
+      // P5 fix: 250vh is plenty for this content — 900vh traps users too long
+      className="relative w-full h-[250vh] bg-[#0a0a0f] z-10"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
         

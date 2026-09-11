@@ -1,14 +1,22 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { ArrowUpRight } from "lucide-react";
 import { sCurvePath } from "./SplinePath";
 import { CARD_WIDTH, HEIGHT, TOTAL_CARDS } from "./data";
-import { RippleCardMaterial } from "./RippleCardMaterial";
 import { useCursorStore } from "@/store/cursorStore";
+
+import { ThreeEvent } from "@react-three/fiber";
+
+interface EventType {
+  id: string | number;
+  title: string;
+  category: string;
+  image: string;
+}
 
 // HTML Wrapper that tracks the 3D position exactly (including the bend offset)
 function TrackedHtml({ position, uBendDir, children }: { position: [number, number, number], uBendDir: number, children: React.ReactNode }) {
@@ -21,12 +29,17 @@ function TrackedHtml({ position, uBendDir, children }: { position: [number, numb
   );
 }
 
-export function EventCard({ event, index, alphaMap }: { event: any, index: number, alphaMap: THREE.Texture }) {
-  const texture = useTexture(event.image) as THREE.Texture;
-  texture.colorSpace = THREE.SRGBColorSpace;
+export function EventCard({ event, index, alphaMap }: { event: EventType, index: number, alphaMap: THREE.Texture }) {
+  const rawTexture = useTexture(event.image) as THREE.Texture;
+  const texture = useMemo(() => {
+    const t = rawTexture.clone();
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }, [rawTexture]);
   
   const [hovered, setHovered] = useState(false);
-  const materialRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const materialRef = useRef<any>(null); // We keep any here for custom shader material as it lacks tight typing
   const groupRef = useRef<THREE.Group>(null);
   
   // Calculate this card's fixed position and orientation along the Spline
@@ -52,14 +65,14 @@ export function EventCard({ event, index, alphaMap }: { event: any, index: numbe
   const catPos: [number, number, number] = [CARD_WIDTH / 2 - 0.4, HEIGHT / 2 - 0.5, 0.1];
   const btnPos: [number, number, number] = [CARD_WIDTH / 2 - 0.5, -HEIGHT / 2 + 0.6, 0.1];
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (materialRef.current) {
       materialRef.current.uHover = THREE.MathUtils.lerp(materialRef.current.uHover, hovered ? 1 : 0, 0.1);
       materialRef.current.uTime = state.clock.elapsedTime;
     }
   });
 
-  const handlePointerOver = (e: any) => {
+  const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation(); 
     // B9 fix: Remove document.body.style.cursor — cursorStore handles all cursor state
     setHovered(true);
@@ -76,7 +89,7 @@ export function EventCard({ event, index, alphaMap }: { event: any, index: numbe
       <mesh 
         onPointerOver={handlePointerOver} 
         onPointerOut={() => { setHovered(false); }}
-        onPointerMove={(e) => {
+        onPointerMove={(e: ThreeEvent<PointerEvent>) => {
           if (materialRef.current && hovered && e.uv) {
             materialRef.current.uRippleOrigin.set(e.uv.x, e.uv.y);
             const now = performance.now() / 1000;
@@ -87,7 +100,7 @@ export function EventCard({ event, index, alphaMap }: { event: any, index: numbe
         }}
       >
         <planeGeometry args={[CARD_WIDTH, HEIGHT, 40, 40]} />
-        {/* @ts-ignore */}
+        {/* @ts-expect-error custom material */}
         <rippleCardMaterial 
           ref={materialRef} 
           uTexture={texture} 

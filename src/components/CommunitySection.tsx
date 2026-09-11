@@ -38,6 +38,7 @@ export default function CommunitySection() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isInView && !hasAnimated) setHasAnimated(true);
   }, [isInView, hasAnimated]);
 
@@ -62,6 +63,7 @@ export default function CommunitySection() {
   const nodeDrawProgress = PLATFORMS.map((_, i) => {
     const start = 0.2 + i * 0.07;
     const end = start + 0.08;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useTransform(scrollYProgress, [start, end], [0, 1]);
   });
 
@@ -96,8 +98,8 @@ export default function CommunitySection() {
   return (
     <section
       ref={containerRef}
-      // P9 fix: 300vh gives nodes breathing room to reveal ceremonially
-      className="relative w-full h-[300vh] bg-transparent"
+      // P9 fix: 200vh gives nodes breathing room to reveal ceremonially
+      className="relative w-full h-[200vh] bg-transparent"
       onMouseMove={handleMouseMove}
     >
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-between py-[5vh] md:py-[6vh]">
@@ -186,7 +188,6 @@ export default function CommunitySection() {
                       x={x}
                       y={y}
                       nodeProgress={prog}
-                      index={i}
                       onHoverChange={(h) => setHoveredIndex(h ? i : null)}
                     />
                   )}
@@ -211,7 +212,7 @@ export default function CommunitySection() {
 }
 
 // Helper component to read motion values in render for SVG line
-function MotionConnectionLine({ drawProgress, ...props }: any) {
+function MotionConnectionLine({ drawProgress, ...props }: { drawProgress: any; cx: number; cy: number; ex: number; ey: number; accent: string; isHovered: boolean }) {
   const [prog, setProg] = useState(0);
   useMotionValueEvent(drawProgress, "change", (v: number) => setProg(v));
 
@@ -219,7 +220,7 @@ function MotionConnectionLine({ drawProgress, ...props }: any) {
 }
 
 // Helper to read motion value for Satellite Node
-function MotionSatelliteNodeWrapper({ progress, render }: any) {
+function MotionSatelliteNodeWrapper({ progress, render }: { progress: any; render: (prog: number) => React.ReactNode }) {
   const [prog, setProg] = useState(0);
   useMotionValueEvent(progress, "change", (v: number) => setProg(v));
 

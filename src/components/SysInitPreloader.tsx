@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const BOOT_LINES = [
   "NACOS_NILE.OS v2.0.26 — BOOT SEQUENCE INITIATED",
   "SYS: Authenticating member credentials...",
   "NET: Establishing peer-to-peer mesh...",
-  "HUB: Loading community nodes [██████████] 100%",
+  "HUB: Loading community nodes [##########] 100%",
   "SYS: ALL SYSTEMS NOMINAL — WELCOME TO THE NETWORK",
 ];
 
@@ -16,6 +16,14 @@ export default function SysInitPreloader({ onComplete }: { onComplete: () => voi
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Check if already visited
+    const hasVisited = sessionStorage.getItem("nacos_visited");
+    if (hasVisited) {
+      onComplete();
+      return;
+    }
+    sessionStorage.setItem("nacos_visited", "true");
+
     // Animate progress bar
     const progressInterval = setInterval(() => {
       setProgress(p => {
@@ -43,6 +51,11 @@ export default function SysInitPreloader({ onComplete }: { onComplete: () => voi
       clearTimeout(completeTimer);
     };
   }, [onComplete]);
+
+  // If already visited, render nothing while it quickly fires onComplete
+  if (typeof window !== "undefined" && sessionStorage.getItem("nacos_visited") === "true") {
+    return null;
+  }
 
   return (
     <motion.div

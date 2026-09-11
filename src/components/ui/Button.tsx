@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import MagneticButton from "../MagneticButton";
 import { ReactNode } from "react";

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useRef, useState, useEffect } from 'react';
+import { Suspense, useMemo, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
@@ -87,7 +87,7 @@ export default function EventsSection() {
     if (!el) return;
 
     const onNativeWheel = (e: WheelEvent) => {
-      const progressDelta = (e.deltaY / window.innerHeight) * 0.15;
+      const progressDelta = (e.deltaY / window.innerHeight) * 0.35;
       const isAtEdges = (targetScroll.current === 0 && e.deltaY <= 0) || 
                         (targetScroll.current === 1 && e.deltaY >= 0);
 
@@ -142,7 +142,7 @@ export default function EventsSection() {
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
-        onPointerLeave={(e) => {
+        onPointerLeave={() => {
           handlePointerUp();
           setCursorVariant('default');
         }}
