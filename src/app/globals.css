@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-nacos-900: #0d1733;
+  --color-nacos-800: #162050;
+  --color-nacos-700: #1e2d6e;
+  --color-nacos-600: #274193;
+  --color-nacos-500: #3b82f6;
+  --color-nacos-400: #60a5fa;
+  --color-nacos-300: #93c5fd;
+  --color-nacos-200: #bfdbfe;
+  --color-nacos-100: #dbeafe;
+  --color-nacos-50: #eff6ff;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-white text-gray-900 font-sans;
+  }
+
+  ::selection {
+    @apply bg-nacos-600 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-nacos-600 rounded-full;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-nacos {
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-nacos-600 text-white px-6 py-3 text-sm font-semibold tracking-wide uppercase rounded-sm transition-all duration-300 hover:bg-nacos-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-nacos-500 focus-visible:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-nacos-600 text-nacos-600 px-6 py-3 text-sm font-semibold tracking-wide uppercase rounded-sm transition-all duration-300 hover:bg-nacos-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-nacos-500 focus-visible:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 text-white/80 border border-white/20 px-6 py-3 text-sm font-semibold tracking-wide uppercase rounded-sm transition-all duration-300 hover:bg-white/10 hover:text-white hover:border-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-nacos-900;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold tracking-[0.2em] uppercase text-nacos-500;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-nacos-900;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-28 lg:py-36;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
