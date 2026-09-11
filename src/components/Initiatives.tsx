@@ -1,16 +1,34 @@
 'use client';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { useRef, useState, useEffect } from 'react';
+
+const images = [
+  "/initiatives-group.jpg",
+  "/events/1.jpg",
+  "/events/2.png",
+  "/events/3.png",
+  "/events/4.jpg",
+  "/events/5.jpg"
+];
 
 export default function Initiatives() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section id="initiatives" className="py-16 sm:py-32 bg-[#F9F8F6] dark:bg-black">
@@ -52,15 +70,39 @@ export default function Initiatives() {
         </div>
 
         <div ref={containerRef} className="relative w-full aspect-[16/9] lg:aspect-[2.5/1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-gray-200 group">
-          <motion.div style={{ y }} className="absolute inset-[-20%] w-[140%] h-[140%]">
-            <Image 
-              src="/initiatives-group.jpg" 
-              alt="NACOS Nile University computing students at a tech event"
-              fill
-              className="object-cover transition-transform duration-1000 group-hover:scale-105"
-            />
+          <motion.div style={{ y }} className="absolute inset-[-20%] w-[140%] h-[140%] bg-black">
+            <AnimatePresence>
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute inset-0 w-full h-full"
+              >
+                <Image 
+                  src={images[currentIndex]} 
+                  alt="NACOS Nile University computing students at a tech event"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-black/10 pointer-events-none transition-colors duration-500 group-hover:bg-black/0" />
           </motion.div>
-          
+
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {images.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
 
         </div>
 
