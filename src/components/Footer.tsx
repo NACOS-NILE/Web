@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container footer-top">
         <div className="footer-brand">
           <Image
-            src="/logo.svg"
+            src="/logo-web.svg"
             alt="NACOS Nile logo"
             width={52}
             height={52}
@@ -17,7 +17,7 @@ export default function Footer() {
             <strong>NACOS Nile</strong>
 
             <p>
-              Nigerian Association of Computing Students
+              Nigeria Association of Computing Students
               <br />
               Nile University of Nigeria, Abuja, FCT
             </p>

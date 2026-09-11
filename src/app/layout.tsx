@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
-import { preload } from "react-dom";
 import "./globals.css";
 
 /*
@@ -29,9 +28,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // The gate photo is the first thing visitors see, so fetch it right away
-  preload("/nile-blue-gate.jpg", { as: "image", fetchPriority: "high" });
-
   return (
     <html lang="en" className={manrope.variable}>
       <body>{children}</body>

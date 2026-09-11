@@ -111,7 +111,7 @@ export default function Navbar() {
         <div className="nav-container">
           <a href="#" className="brand" onClick={() => setMenuOpen(false)}>
             <Image
-              src="/logo.svg"
+              src="/logo-web.svg"
               alt="NACOS Nile logo"
               width={48}
               height={48}

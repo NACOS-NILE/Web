@@ -461,7 +461,7 @@ img {
   width: min(34vw, 440px);
   aspect-ratio: 1 / 1;
 
-  background: url("/logo.svg") center / contain no-repeat;
+  background: url("/logo-web.svg") center / contain no-repeat;
 
   transform: translateY(-50%);
 
@@ -549,7 +549,6 @@ img {
 }
 
 .hero-copy > .eyebrow,
-.hero-copy > h1,
 .hero-copy > p,
 .hero-copy > .hero-actions,
 .hero-bottom {
@@ -558,12 +557,21 @@ img {
     cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/*
+  The headline slides up but never starts invisible. Browsers ignore
+  invisible elements when measuring how fast the page loads, so a fading
+  headline made the page look several seconds slower in Lighthouse.
+*/
+.hero-copy > h1 {
+  animation: hero-title-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .hero-copy > .eyebrow {
   animation-delay: 0.15s;
 }
 
 .hero-copy > h1 {
-  animation-delay: 0.3s;
+  animation-delay: 0.1s;
 }
 
 .hero-copy > p {
@@ -576,6 +584,16 @@ img {
 
 .hero-bottom {
   animation-delay: 0.8s;
+}
+
+@keyframes hero-title-rise {
+  from {
+    transform: translateY(22px);
+  }
+
+  to {
+    transform: none;
+  }
 }
 
 @keyframes hero-rise {

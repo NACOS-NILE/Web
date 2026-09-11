@@ -135,7 +135,7 @@ export default function AboutSlideshow() {
           <div className="about-slide-image">
             {activeSlide === 0 ? (
               <Image
-                src="/logo.svg"
+                src="/logo-web.svg"
                 alt="NACOS Nile logo"
                 width={170}
                 height={80}
