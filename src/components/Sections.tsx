@@ -16,7 +16,10 @@ import {
   IdCardIcon,
   UserIcon,
   MapPinIcon,
+  TargetIcon,
+  EyeIcon,
 } from "./Icons";
+
 export function About() {
   return (
     <section
@@ -25,64 +28,93 @@ export function About() {
       className="about section-space"
       aria-labelledby="about-title"
     >
-      <div className="wrap about-composition">
+      <div className="wrap">
         <div className="section-heading" data-reveal>
-          <p className="eyebrow">THIS IS NACOS NILE</p>
+          <p className="eyebrow">
+            <span className="eyebrow-dot" aria-hidden="true" />
+            ABOUT THE CHAPTER
+          </p>
           <div>
             <h2 id="about-title">
-              University is better
+              A student body
               <br />
-              when you <span className="blue-text">find your people.</span>
+              for everyone who <span className="blue-text">builds with a computer.</span>
             </h2>
+            <p className="lead about-lead">
+              NACOS Nile is the Nile University of Nigeria chapter of the Nigeria Association of
+              Computing Students. We represent and serve students across Computer Science,
+              Software Engineering, Cyber Security, Information Technology, Information
+              Systems, and Data Science.
+            </p>
           </div>
         </div>
-        <div className="about-bottom" data-reveal>
-          <div className="about-identity">
-            <Image src="/logo.svg" alt="NACOS Nile" width={160} height={76} />
+
+        <div className="about-cards-grid" data-reveal-stagger>
+          <div className="about-card" data-reveal>
+            <div className="about-card-icon" aria-hidden="true">
+              <TargetIcon />
+            </div>
+            <h3>Our mission</h3>
             <p>
-              Your computing
-              <br />
-              community at Nile.
+              To empower computing students through learning, collaboration, and real-world opportunities.
             </p>
           </div>
-          <div>
-            <p className="lead">
-              We’re the Nile University chapter of the Nigeria Association of
-              Computing Students.
-            </p>
+
+          <div className="about-card" data-reveal>
+            <div className="about-card-icon" aria-hidden="true">
+              <EyeIcon />
+            </div>
+            <h3>Our vision</h3>
             <p>
-              We bring computing students together to learn new skills, build
-              projects and support each other. From your first workshop to your
-              next big idea, there’s a place for you here.
+              To be a thriving community that shapes innovative, ethical, and globally competitive tech leaders from Nile.
             </p>
-            <a className="text-link dark-link" href="#team">
-              Meet the Team <Arrow diagonal />
-            </a>
           </div>
         </div>
-        <figure className="about-photo" data-reveal>
-          <picture>
-            <source
-              media="(max-width: 600px)"
-              srcSet="/community/about-group-mobile.webp"
-              type="image/webp"
-            />
-            <img
-              src="/community/about-group.webp"
-              alt="NACOS Nile computing students gathered together at a community event"
-              width={900}
-              height={600}
-              loading="lazy"
-              decoding="async"
-              style={{ width: "100%", height: "auto" }}
-            />
-          </picture>
-          <figcaption><strong>Built by students. For students.</strong><span>NACOS Nile Community</span></figcaption>
+
+        <figure className="about-feature-photo" data-reveal>
+          <div className="about-photo-wrapper">
+            <picture>
+              <source
+                media="(max-width: 600px)"
+                srcSet="/community/about-group-mobile.webp"
+                type="image/webp"
+              />
+              <img
+                src="/community/about-group.webp"
+                alt="NACOS Nile computing students gathered together at a community event"
+                width={1200}
+                height={600}
+                loading="lazy"
+                decoding="async"
+                className="about-feature-img"
+              />
+            </picture>
+            <div className="about-photo-tagline" aria-hidden="true">
+              <span>STUDENTS</span>
+              <span>IDEAS</span>
+              <span>COMMUNITY</span>
+              <span>IMPACT</span>
+            </div>
+            <div className="about-photo-content">
+              <div className="about-photo-bar" aria-hidden="true" />
+              <h3>More than a chapter. A community that builds.</h3>
+              <a href="#community" className="about-photo-arrow" aria-label="Join our community">
+                <Arrow diagonal />
+              </a>
+            </div>
+          </div>
         </figure>
+
+        <div className="section-divider-banner" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-label">SAME STUDENTS. A BRIGHTER TOMORROW.</span>
+          <span className="divider-line" />
+        </div>
       </div>
     </section>
   );
 }
+
 export function Programs() {
   return (
     <section
@@ -93,7 +125,10 @@ export function Programs() {
     >
       <div className="wrap">
         <div className="section-heading" data-reveal>
-          <p className="eyebrow">MORE THAN THE CLASSROOM</p>
+          <p className="eyebrow">
+            <span className="eyebrow-dot" aria-hidden="true" />
+            MORE THAN THE CLASSROOM
+          </p>
           <div>
             <h2 id="program-title">
               <span className="program-study">Don’t just study it.</span>
@@ -101,107 +136,122 @@ export function Programs() {
             </h2>
             <p>
               Small starts, shared ideas, hands-on experience.
-              <br />
+              <br className="desktop-break" />{" "}
               Here’s what we come together to do.
             </p>
           </div>
         </div>
-        <div className="program-rows" data-reveal-stagger>
-          {programs.map((program, index) => (
-            <details
-              className="program-row"
-              key={program.word}
-              name="programs"
-              open={index === 0}
-              data-reveal
-            >
-              <summary>
-                <DisciplineIcon kind={["IT", "CS", "IS", "DS"][index]} className="program-icon" />
-                <h3>
-                  {program.word}
-                  <span>.</span>
-                </h3>
-                <span className="program-title">{program.title}</span>
-                <span className="expand-icon" aria-hidden="true" />
-              </summary>
-              <div className="program-content">
-                <p>{program.description}</p>
-                <div>
+
+        <div className="programs-layout">
+          <div className="program-rows" data-reveal-stagger>
+            {programs.map((program, index) => (
+              <details
+                className="program-row"
+                key={program.word}
+                name="programs"
+                open={index === 0}
+                data-reveal
+              >
+                <summary>
+                  <DisciplineIcon kind={["IT", "CS", "IS", "DS"][index]} className="program-icon" />
+                  <h3>
+                    {program.word}
+                    <span>.</span>
+                  </h3>
+                  <span className="program-title">{program.title}</span>
+                  <span className="program-toggle-icon" aria-hidden="true" />
+                </summary>
+                <div className="program-content">
+                  <p className="program-desc">{program.description}</p>
                   <div className="program-tags">
                     {program.tags.map((tag) => (
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
+                  <div className="program-detail-divider" aria-hidden="true" />
                   <p className="program-detail">{program.detail}</p>
                 </div>
-              </div>
-            </details>
-          ))}
-        </div>
-        <div id="events" tabIndex={-1} className="events-note">
-          <div>
-            <p className="eyebrow">THE NEXT CHAPTER</p>
-            <h3>Keep a little room in your calendar.</h3>
-            <p>Event dates will be shared here when they’re confirmed.</p>
+              </details>
+            ))}
           </div>
-          <a className="text-link" href="#community">
-            Get event updates <Arrow diagonal />
-          </a>
+
+          <div id="events" tabIndex={-1} className="events-note" data-reveal>
+            <div className="events-note-body">
+              <p className="eyebrow">THE NEXT CHAPTER</p>
+              <h3>Keep a little room in your calendar.</h3>
+              <p>Event dates will be shared here when they’re confirmed.</p>
+              <a className="text-link" href="#community">
+                Get event updates <Arrow diagonal />
+              </a>
+            </div>
+            <div className="dot-matrix-pattern" aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 export function Community() {
   return (
     <section
       id="community"
       tabIndex={-1}
-      className="community"
+      className="community section-space"
       aria-labelledby="community-title"
     >
       <div className="wrap">
-        <div className="community-top">
-          <p className="eyebrow">JOIN THE COMMUNITY</p>
-          <span className="mono">LEARN • BUILD • GROW</span>
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">
+            <span className="eyebrow-dot" aria-hidden="true" />
+            JOIN THE COMMUNITY
+          </p>
+          <div>
+            <h2 id="community-title">
+              Come curious.
+              <br />
+              Leave <span className="blue-text">connected.</span>
+            </h2>
+            <p className="community-intro desktop-only">
+              Join our WhatsApp community. We verify members to keep it a safe space for NACOS students.
+            </p>
+            <p className="community-intro mobile-only">
+              Join our WhatsApp community or request access by email. Meet fellow NACOS students, get updates, ask questions, and be part of a supportive tech community.
+            </p>
+          </div>
         </div>
-        <div className="community-heading" data-reveal>
-          <h2 id="community-title">
-            Come curious.
-            <br />
-            Leave <span>connected.</span>
-          </h2>
-          <a href="#community-routes" className="community-arrow" aria-label="Explore community access routes">
-            ↗
-          </a>
-        </div>
-        <p className="community-intro">
-          Join our WhatsApp community. We verify members to keep it a safe space
-          for NACOS students.
-        </p>
+
         <div className="community-routes" id="community-routes" data-reveal-stagger>
-          <article>
-            <span className="route-icon" aria-hidden="true">
-              <WhatsAppIcon width="24" height="24" />
-            </span>
+          <article className="community-route-card" data-reveal>
+            <div className="route-header">
+              <span className="route-icon" aria-hidden="true">
+                <WhatsAppIcon width="24" height="24" />
+              </span>
+
+            </div>
             <p className="eyebrow">THROUGH YOUR COURSE REP</p>
-            <h3>Start with someone you know.</h3>
+            <h3 className="desktop-only">Start with someone you know.</h3>
+            <h3 className="mobile-only">Start with the WhatsApp community.</h3>
             <p>Ask your course representative for the community invite link.</p>
             <p className="community-note">
               Please don’t share the invitation with non-NACOS members.
             </p>
           </article>
-          <article>
-            <span className="route-icon" aria-hidden="true">
-              <MailIcon width="24" height="24" />
-            </span>
+
+          <article className="community-route-card" data-reveal>
+            <div className="route-header">
+              <span className="route-icon" aria-hidden="true">
+                <MailIcon width="24" height="24" />
+              </span>
+
+            </div>
             <p className="eyebrow">THROUGH YOUR STUDENT EMAIL</p>
             <h3>Request access by email.</h3>
             <p>
               Send from your Outlook student email to{" "}
               <a href={`mailto:${chapterEmail}`}>{chapterEmail}</a>. Include:
             </p>
-            <ul className="community-checklist">
+            <ul className="community-checklist desktop-only">
               <li>
                 <UserIcon className="checklist-icon" aria-hidden="true" />
                 <span>Full Name</span>
@@ -215,14 +265,20 @@ export function Community() {
                 <span>WhatsApp Phone Number</span>
               </li>
             </ul>
-            <a className="button button-white" href={communityEmailHref}>
+            <p className="community-checklist-summary mobile-only">
+              Include your full name, student ID and WhatsApp phone number.
+            </p>
+            <a className="button button-blue community-cta-btn" href={communityEmailHref}>
               <MailIcon aria-hidden="true" />
               <span>Request Access by Email</span>
             </a>
           </article>
         </div>
-        <div className="community-public">
-          <p>Follow along, wherever you are.</p>
+
+        <div className="community-public" data-reveal>
+          <p className="community-public-title">Follow along, wherever you are.</p>
+
+          {/* Desktop social row */}
           <div className="community-socials" data-reveal-stagger>
             {socialLinks.map((link) => {
               const Icon = link.label.includes("LinkedIn")
@@ -237,6 +293,7 @@ export function Community() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`NACOS Nile on ${link.label}`}
+                  className="social-pill-link"
                 >
                   <Icon aria-hidden="true" />
                   <span>{link.label}</span>
@@ -244,81 +301,106 @@ export function Community() {
               );
             })}
           </div>
+
         </div>
       </div>
     </section>
   );
 }
+
 export function Footer() {
   return (
-    <footer id="contact" className="footer">
+    <footer id="contact" className="footer" aria-labelledby="footer-brand-heading">
       <div className="wrap">
-        <div className="footer-main">
-          <div>
-            <a className="brand" href="#home">
+        <div className="footer-top-brand" data-reveal>
+          <div className="footer-brand-group">
+            <a className="footer-brand-logos" href="#home">
               <Image
                 src="/logo.svg"
-                width={80}
-                height={38}
-                alt="NACOS Nile logo"
-                className="footer-brand-logo"
+                width={90}
+                height={42}
+                alt=""
+                className="footer-brand-svg"
               />
-              <span>
-                NACOS <b>Nile</b>
-                <small>LEARN • BUILD • GROW</small>
+              <span className="footer-brand-text">
+                <span className="footer-brand-nacos">NACOS <b className="footer-brand-nile">Nile</b></span>
+                <small className="footer-brand-tagline">LEARN • BUILD • GROW</small>
               </span>
             </a>
-            <p>
-              The digital home for
-              <br />
-              Nile’s computing community.
-            </p>
           </div>
-          <div>
-            <p className="eyebrow">EXPLORE</p>
-            <a href="#about">About NACOS Nile</a>
-            <a href="#disciplines">Computing disciplines</a>
-            <a href="#programs">Programs & activities</a>
-            <a href="#team">Executive council</a>
-          </div>
-          <div>
-            <p className="eyebrow">STUDENT RESOURCES</p>
-            <a href="#dues">Pay Dues</a>
-            <a href="#life">Community photos</a>
-            <a href="#events">Event updates</a>
-            <a href="#programs">Workshops & study groups</a>
-            <a href="#community">Community information</a>
-          </div>
-          <div>
+          <p className="footer-summary" id="footer-brand-heading">
+            The official computing community chapter at Nile University of Nigeria. Empowering students through technology, community and real-world learning.
+          </p>
+        </div>
+
+        <div className="footer-columns-grid" data-reveal>
+          <nav className="footer-nav-col" aria-label="Footer navigation">
+            <p className="eyebrow">EXPLORE NACOS</p>
+            <ul className="footer-link-list">
+              {[["About", "about"], ["Disciplines", "disciplines"], ["Programs", "programs"], ["Life at NACOS", "life"], ["Executive Council", "team"], ["Dues", "dues"], ["Community", "community"]].map(([label, id]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}
+            </ul>
+          </nav>
+
+          <div className="footer-nav-col footer-find-us">
             <p className="eyebrow">FIND US</p>
-            <address>
-              <MapPinIcon aria-hidden="true" style={{ verticalAlign: "-2px", marginRight: 6, color: "#6cb6ff" }} />
-              Nile University of Nigeria
-              <br />
-              Abuja, FCT, Nigeria
+            <address className="footer-address">
+              <MapPinIcon aria-hidden="true" className="footer-address-icon" />
+              <div>
+                <span>Nile University of Nigeria</span>
+                <span>Abuja, FCT, Nigeria</span>
+              </div>
             </address>
-            <a href={`mailto:${chapterEmail}`}>
-              <MailIcon aria-hidden="true" style={{ verticalAlign: "-2px", marginRight: 6, color: "#6cb6ff" }} />
-              {chapterEmail}
+            <a href={`mailto:${chapterEmail}`} className="footer-email-link">
+              <MailIcon aria-hidden="true" className="footer-email-icon" />
+              <span>{chapterEmail}</span>
             </a>
-            <a className="back-top" href="#home">
-              Back to top ↑
-            </a>
+            <div className="footer-social-buttons" aria-label="Official social profiles">
+              <a
+                href="https://www.linkedin.com/company/nacos-nile-university-of-nigeria-chapter/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-btn"
+                aria-label="NACOS Nile on LinkedIn"
+              >
+                <LinkedInIcon width="16" height="16" aria-hidden="true" />
+              </a>
+              <a
+                href="https://x.com/NacosNileUni"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-btn"
+                aria-label="NACOS Nile on X / Twitter"
+              >
+                <XTwitterIcon width="16" height="16" aria-hidden="true" />
+              </a>
+              <a
+                href="https://www.instagram.com/nacosnileuni/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-btn"
+                aria-label="NACOS Nile on Instagram"
+              >
+                <InstagramIcon width="16" height="16" aria-hidden="true" />
+              </a>
+            </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} NACOS Nile. All rights reserved.</p>
+
+        <div className="footer-legal-bar">
+          <p>© 2026 NACOS Nile. All rights reserved.</p>
           <p>
             Designed & built by{" "}
             <a
               href="https://github.com/JesseDev454"
               target="_blank"
               rel="noopener noreferrer"
+              className="footer-credit-link"
             >
               JesseDev454 <Arrow diagonal />
             </a>
           </p>
         </div>
+
       </div>
     </footer>
   );

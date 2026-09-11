@@ -4,6 +4,7 @@ import "./globals.css";
 import "./refinements.css";
 import "@/components/dues.css";
 import "./art-direction.css";
+import "./final-polish.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

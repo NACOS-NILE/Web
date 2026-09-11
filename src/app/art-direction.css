@@ -23,15 +23,15 @@ h2 { font-weight:720; font-size:clamp(38px,4.5vw,70px); letter-spacing:-.055em; 
 .dues-submit-link:focus-visible { outline:2px solid #85b8ff; outline-offset:3px; }
 .hero,.programs,.dues,.community,.footer { position:relative; isolation:isolate; background-color:#031020; color:#f6f9ff; }
 .hero,.programs,.community { background-image:radial-gradient(ellipse at 75% 40%,#09478040,transparent 52%),radial-gradient(1px 1px at 18% 24%,#69b8ff90 80%,transparent),radial-gradient(1px 1px at 80% 68%,#78c5ff80 80%,transparent),linear-gradient(#3494ea06 1px,transparent 1px),linear-gradient(90deg,#3494ea06 1px,transparent 1px); background-size:auto,163px 137px,251px 207px,86px 86px,86px 86px; }
-.hero { overflow:hidden; padding-top:112px; min-height:0; }
+.hero { overflow:hidden; padding-top:112px; min-height:0; contain:paint; }
 .hero-inner { position:relative; z-index:2; }
 
 /* Unified Earth Horizon styling */
 .earth-horizon { position:absolute; pointer-events:none; overflow:hidden; user-select:none; }
-.earth-horizon-media { position:absolute; inset:0; background-repeat:no-repeat; background-size:cover; }
+.earth-horizon-media { position:absolute; inset:0; }
 
 /* Hero variant: atmospheric Earth limb behind text & orbital network */
-.earth-horizon-hero { inset:0; z-index:1; }
+.earth-horizon-hero { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
 .earth-horizon-hero .earth-horizon-media { opacity:.60; }
 
 /* Community variant: subtle curved horizon arc entering gently from the bottom */

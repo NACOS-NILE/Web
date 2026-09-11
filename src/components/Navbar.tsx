@@ -5,7 +5,7 @@ const links = [
   ["About", "about"],
   ["Disciplines", "disciplines"],
   ["Programs", "programs"],
-  ["The team", "team"],
+  ["Executive Council", "team"],
   ["Pay Dues", "dues"],
 ];
 export function Navbar() {
@@ -13,7 +13,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const toggle = useRef<HTMLButtonElement>(null);
-  const menu = useRef<HTMLElement>(null);
+  const menu = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     let scrolledVal = false;
     const onScroll = () => {
@@ -28,7 +28,7 @@ export function Navbar() {
 
     let observer: IntersectionObserver | undefined;
     const initObserver = () => {
-      if (observer) return;
+      if (observer || !("IntersectionObserver" in window)) return;
       observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries)
@@ -53,6 +53,9 @@ export function Navbar() {
   }, []);
   useEffect(() => {
     if (!open) return;
+    const dialog = menu.current;
+    const trigger = toggle.current;
+    dialog?.showModal();
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
@@ -62,9 +65,8 @@ export function Navbar() {
       }
       if (event.key === "Tab") {
         const items = [
-          toggle.current,
           ...Array.from(
-            menu.current?.querySelectorAll<HTMLAnchorElement>("a") ?? [],
+            menu.current?.querySelectorAll<HTMLElement>("a, button") ?? [],
           ),
         ].filter(Boolean) as HTMLElement[];
         const first = items[0],
@@ -85,7 +87,9 @@ export function Navbar() {
     wide.addEventListener("change", onWide);
     document.addEventListener("keydown", onKey);
     return () => {
+      dialog?.close();
       document.body.style.overflow = previous;
+      trigger?.focus({ preventScroll: true });
       document.removeEventListener("keydown", onKey);
       wide.removeEventListener("change", onWide);
     };
@@ -135,15 +139,26 @@ export function Navbar() {
           <span />
         </button>
       </div>
-      <nav
+      <dialog
         ref={menu}
         id="mobile-menu"
         className="mobile-menu"
         aria-label="Mobile navigation"
-        hidden={!open}
+        onCancel={() => setOpen(false)}
+        onClose={() => setOpen(false)}
       >
+        <div className="mobile-menu-heading">
+          <a className="brand" href="#home" onClick={() => setOpen(false)}>
+            <span className="logo-box">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.svg" alt="" width={80} height={38} />
+            </span>
+            <span>NACOS <b>Nile</b><small>LEARN • BUILD • GROW</small></span>
+          </a>
+          <button className="mobile-menu-close" onClick={() => setOpen(false)} aria-label="Close menu" autoFocus>×</button>
+        </div>
         <p className="eyebrow">YOUR COMMUNITY, ONE TAP AWAY</p>
-        {[...links, ["Photos", "life"], ["Join Community", "community"]].map(
+        {[...links, ["Life at NACOS", "life"], ["Join Community", "community"]].map(
           ([label, id]) => (
             <a
               key={id}
@@ -162,7 +177,7 @@ export function Navbar() {
           ),
         )}
         <p>Nile University of Nigeria · Abuja</p>
-      </nav>
+      </dialog>
     </header>
   );
 }

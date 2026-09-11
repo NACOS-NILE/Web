@@ -119,7 +119,7 @@ export const executives: Executive[] = [
 export const programs = [
   {
     word: "Learn",
-    title: "A little practice. A lot of progress.",
+    title: "Workshops & Study Groups",
     description:
       "Get hands-on in coding workshops and tech bootcamps. Work through the tricky parts with other students in tutorials and study groups.",
     tags: ["Coding workshops", "Tech bootcamps", "Study groups"],
@@ -128,7 +128,7 @@ export const programs = [
   },
   {
     word: "Build",
-    title: "Give your ideas a first version.",
+    title: "Hackathons & Project Sprints",
     description:
       "Put what you learn to work. Team up, try something new and take on a challenge at a hackathon or Tech Week.",
     tags: ["Hackathons", "Tech Week", "Student projects"],
@@ -137,7 +137,7 @@ export const programs = [
   },
   {
     word: "Connect",
-    title: "Good things start with a conversation.",
+    title: "Career Talks & Community",
     description:
       "Meet other computing students and learn from people working in tech through industry mentorship and career talks.",
     tags: ["Industry mentorship", "Career talks", "Community"],
@@ -146,7 +146,7 @@ export const programs = [
   },
   {
     word: "Grow",
-    title: "Make your time at Nile count.",
+    title: "Mentorship & Opportunities",
     description:
       "Get involved in your student community. Share what you know, support your classmates and find ways to lead.",
     tags: ["Student leadership", "Peer support", "Volunteering"],

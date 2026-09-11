@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { galleryPhotos } from "@/data/content";
-import { PhotoViewer } from "./PhotoViewer";
+import { Arrow } from "./Arrow";
+import { AcademicCapIcon, CodeIcon, UserGroupIcon } from "./Icons";
 
 export function LifeAtNacos() {
   return (
@@ -11,61 +11,143 @@ export function LifeAtNacos() {
       aria-labelledby="life-title"
     >
       <div className="wrap">
-        <div className="section-heading" data-reveal>
-          <p className="eyebrow">LIFE AT NACOS NILE</p>
+        <div className="section-heading life-heading" data-reveal>
+          <div className="life-heading-top">
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              THE MOMENTS IN BETWEEN
+            </p>
+            <div className="life-header-kicker desktop-only" aria-hidden="true">
+              <span>STUDENTS</span> × <span>TECHNOLOGY</span> × <span>COMMUNITY</span>
+              <br />
+              <small>A BRIGHTER TOMORROW</small>
+            </div>
+          </div>
           <div>
             <h2 id="life-title">
-              The people.
-              <br />
-              <span className="muted-heading">The moments in between.</span>
+              Life at <span className="blue-text">NACOS.</span>
             </h2>
             <p>
-              From learning something new to a night out together.
-              <br />A few moments from our community.
+              More than code. A community of curious minds, lasting friendships, and real impact.
             </p>
           </div>
         </div>
 
-        <div className="life-photos" role="region" aria-label="NACOS community photographs" tabIndex={0} data-reveal>
-          {galleryPhotos.map((photo, index) => (
-            <figure
-              className={`${index === 0 ? "life-featured" : ""} ${index >= 3 ? "life-photo-extra" : ""}`}
-              key={photo.src}
-            >
-              <div className="life-image">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  width={photo.width}
-                  height={photo.height}
-                  sizes={
-                    index === 0
-                      ? "(max-width: 600px) 86vw, (max-width: 900px) 90vw, 60vw"
-                      : "(max-width: 600px) 86vw, (max-width: 900px) 44vw, 30vw"
-                  }
-                />
+        {/* 3 Signature Pillar Cards */}
+        <div className="life-pillars-grid" data-reveal-stagger>
+          {/* Card 1: Where we learn */}
+          <article className="life-pillar-card" data-reveal>
+            <div className="life-pillar-media">
+              <Image
+                src="/community/workshop-attendees.jpg"
+                alt="Students attending a NACOS Nile workshop"
+                width={1200}
+                height={500}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="life-pillar-img"
+              />
+              <div className="life-card-top-badges" aria-hidden="true">
+                <span className="badge-left">Ideas · Students · Impact</span>
+                <span className="badge-right">Better Builders Brighter Nigeria •</span>
               </div>
-              <figcaption>{photo.caption}</figcaption>
-            </figure>
-          ))}
+              <div className="life-card-overlay">
+                <div className="life-card-info">
+                  <div className="life-card-icon-wrap" aria-hidden="true">
+                    <AcademicCapIcon />
+                  </div>
+                  <div>
+                    <h3>Where we <span className="blue-text">learn.</span></h3>
+                    <p>Workshops. Mentorship. New perspectives.</p>
+                  </div>
+                </div>
+                <a href="#programs" className="life-card-arrow" aria-label="Explore learning programs">
+                  <Arrow diagonal={false} />
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* Card 2: Where we build */}
+          <article className="life-pillar-card" data-reveal>
+            <div className="life-pillar-media">
+              <Image
+                src="/community/workshop-presenter.webp"
+                alt="A NACOS Nile workshop presenter demonstrating a technical tool on a projected screen"
+                width={1200}
+                height={500}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="life-pillar-img"
+              />
+              <div className="life-card-top-badges" aria-hidden="true">
+                <span className="badge-left">Good Software A Brighter Nigeria •</span>
+                <span className="badge-right">&lt;/&gt; STUDENTS BUILD TOMORROW</span>
+              </div>
+              <div className="life-card-overlay">
+                <div className="life-card-info">
+                  <div className="life-card-icon-wrap" aria-hidden="true">
+                    <CodeIcon />
+                  </div>
+                  <div>
+                    <h3>Where we <span className="blue-text">build.</span></h3>
+                    <p>Hackathons. Projects. Real-world impact.</p>
+                  </div>
+                </div>
+                <a href="#programs" className="life-card-arrow" aria-label="Explore build initiatives">
+                  <Arrow diagonal={false} />
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* Card 3: Where we connect */}
+          <article className="life-pillar-card" data-reveal>
+            <div className="life-pillar-media">
+              <Image
+                src="/community/friendship.jpg"
+                alt="NACOS Nile computing students smiling and connecting together outdoors"
+                width={1200}
+                height={500}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="life-pillar-img"
+              />
+              <div className="life-card-top-badges" aria-hidden="true">
+                <span className="badge-left">SAME PASSION BRIGHTER TOMORROW</span>
+                <span className="badge-right">People · Code · Progress •</span>
+              </div>
+              <div className="life-card-overlay">
+                <div className="life-card-info">
+                  <div className="life-card-icon-wrap" aria-hidden="true">
+                    <UserGroupIcon />
+                  </div>
+                  <div>
+                    <h3>Where we <span className="blue-text">connect.</span></h3>
+                    <p>Friends. Ideas. A stronger tomorrow.</p>
+                  </div>
+                </div>
+                <a href="#community" className="life-card-arrow" aria-label="Join our community">
+                  <Arrow diagonal={false} />
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
 
-        <div className="life-mobile-cue mono" aria-hidden="true">
-          <span>← SWIPE FOR MORE MOMENTS →</span>
+        {/* Action Button */}
+        <div className="life-cta-row" data-reveal>
+          <a href="#community" className="button button-blue life-cta-btn">
+            <span>Be Part of It</span>
+            <Arrow diagonal={false} />
+          </a>
         </div>
 
-        <div className="life-bottom">
-          <p>Real moments. Your community.</p>
-          <PhotoViewer photos={galleryPhotos} />
+        {/* Section Divider */}
+        <div className="section-divider-banner" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-label">SAME PEOPLE. A BRIGHTER TOMORROW.</span>
+          <span className="divider-line" />
         </div>
 
-        <noscript>
-          <p className="gallery-fallback">
-            <a href={galleryPhotos[3].src}>
-              View more photographs from the community ↗
-            </a>
-          </p>
-        </noscript>
+
       </div>
     </section>
   );

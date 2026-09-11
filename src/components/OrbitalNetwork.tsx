@@ -8,7 +8,7 @@ export function OrbitalNetwork() {
         <span>THE NACOS NETWORK</span>
         <span>CONNECTED AT NILE</span>
       </div>
-      <NetworkGraphic moving />
+      <NetworkGraphic />
       <div className="art-caption">
         <p>
           Different disciplines.

@@ -10,7 +10,7 @@ export function Hero() {
       <div className="wrap hero-inner">
         <div className="hero-topline">
           <span className="eyebrow">
-            <i className="status-dot" /> NILE UNIVERSITY OF NIGERIA
+            <i className="status-dot" /> Built at Nile. Connected to the world.
           </span>
           <span className="mono hero-coordinate">
             ABUJA, NG / COMPUTING COMMUNITY

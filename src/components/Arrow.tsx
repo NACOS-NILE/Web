@@ -1,7 +1,7 @@
-export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+export function Arrow({ diagonal = false, className = "" }: { diagonal?: boolean; className?: string }) {
   return (
     <svg
-      className={`arrow${diagonal ? " diagonal" : ""}`}
+      className={`arrow${diagonal ? " diagonal" : ""}${className ? ` ${className}` : ""}`}
       width="22"
       height="22"
       viewBox="0 0 24 24"

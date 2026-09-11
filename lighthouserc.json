@@ -5,7 +5,10 @@
       "url": [
         "http://localhost/"
       ],
-      "numberOfRuns": 3
+      "numberOfRuns": 3,
+      "settings": {
+        "preset": "desktop"
+      }
     },
     "upload": {
       "target": "temporary-public-storage"

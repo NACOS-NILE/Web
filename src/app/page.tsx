@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About, Programs, Community, Footer } from "@/components/Sections";
@@ -8,10 +7,6 @@ import {
   DeferredExecutives,
   DeferredDues,
 } from "@/components/DeferredSections";
-
-const MotionEnhancer = dynamic(() =>
-  import("@/components/MotionEnhancer").then((m) => m.MotionEnhancer)
-);
 
 export default function Home() {
   return (
@@ -27,11 +22,10 @@ export default function Home() {
         <Programs />
         <DeferredLife />
         <DeferredExecutives />
-        <DeferredDues />
-        <Community />
-      </main>
-      <Footer />
-      <MotionEnhancer />
+      <DeferredDues />
+      <Community />
+    </main>
+    <Footer />
     </>
   );
 }
