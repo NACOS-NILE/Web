@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0d1733;
+
+  --color-nacos-blue: #274193;
+  --color-nacos-dark: #0d1733;
+  --color-nacos-accent: #3b82f6;
+  --color-nacos-accent-light: #60a5fa;
+}
+
+.dark {
+  --background: #0d1733;
+  --foreground: #f3f6fb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-nacos-blue: var(--color-nacos-blue);
+  --color-nacos-dark: var(--color-nacos-dark);
+  --color-nacos-accent: var(--color-nacos-accent);
+  --color-nacos-accent-light: var(--color-nacos-accent-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-padding-top: 6rem;
+}
+
+/* Subtle technical grid pattern, used sparingly on dark sections */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(96, 165, 250, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(96, 165, 250, 0.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (max-width: 639px) {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--color-nacos-accent);
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
