@@ -819,3 +819,31 @@
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
 }
+
+/* Dark Navbar Logo Treatment Refinement */
+.header .logo-box {
+  position: relative;
+  background-color: rgba(4, 23, 42, 0.85);
+  border: 1px solid rgba(84, 130, 181, 0.25);
+  border-radius: 6px;
+  background-image:
+    linear-gradient(#f8fafc, #f8fafc),
+    radial-gradient(circle, #ffffff 68%, transparent 70%);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 24px 28px, 28px 28px;
+  background-position: 4px center, 38px center;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+.header .brand:hover .logo-box {
+  border-color: rgba(96, 165, 250, 0.45);
+  background-color: rgba(6, 30, 56, 0.9);
+}
+
+@media (max-width: 600px) {
+  .header .logo-box {
+    background-size: 20px 23px, 23.5px 23.5px;
+    background-position: 3.5px center, 31.5px center;
+  }
+}
+
