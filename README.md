@@ -47,6 +47,9 @@ All static assets are located in the [`public/`](public/) directory:
   - Accent / Highlights: `#3b82f6` / `#60a5fa`
   - Clean whites, grays, and dark background tokens for dark mode compatibility.
 
+### 3. DINNER Night Photos
+ - **Link:** https://dhmedia270.pixieset.com/acolorsshownacosnilechapter/
+ - **Download Pin:** 2501
 ---
 
 ## 📋 Required Sections & Features
