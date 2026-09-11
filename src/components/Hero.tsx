@@ -23,11 +23,11 @@ export default function Hero() {
               src="/faculty.png" 
               alt="Faculty of Computing"
               fill
-              className="object-cover opacity-50 mix-blend-overlay group-hover:scale-105 transition-transform duration-[2s] ease-out"
+              className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-[2s] ease-out"
               priority
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-black/40" />
           
           <div className="relative z-10 max-w-3xl mt-10 pointer-events-none">
             <motion.h1 
