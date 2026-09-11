@@ -260,7 +260,7 @@ export function Disciplines() {
                         </div>
 
                         {/* Mobile Inline Artwork */}
-                        <div className="relative aspect-[4/3] w-full max-w-sm overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 mt-3">
+                        <div className="relative aspect-[4/3] w-full max-w-[260px] sm:max-w-xs mx-auto overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 mt-3">
                           <Image
                             src={item.image}
                             alt={item.name}

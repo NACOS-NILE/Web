@@ -164,10 +164,10 @@ export function Events() {
             </div>
 
             {/* Right: Featured Artwork */}
-            <div className="lg:col-span-5 flex justify-end">
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <div
                 data-cursor="VIEW"
-                className="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10"
+                className="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5] w-full max-w-[260px] sm:max-w-md mx-auto lg:mx-0 overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10"
               >
                 <Image
                   src={FEATURED_EVENT.image}
@@ -258,7 +258,7 @@ export function Events() {
                           {event.description}
                         </p>
 
-                        <div className="relative aspect-[16/10] w-full max-w-sm overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10">
+                        <div className="relative aspect-[16/10] w-full max-w-[260px] sm:max-w-xs mx-auto overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10">
                           <Image
                             src={event.image}
                             alt={event.title}

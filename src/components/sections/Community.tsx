@@ -259,18 +259,18 @@ export function Community() {
     gsap.registerPlugin(ScrollTrigger);
 
     const trigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top 65%",
-      end: "bottom 25%",
+      trigger: containerRef.current,
+      start: "top 70%",
+      end: "bottom 10%",
       onEnter: () => animateState(true),
       onLeave: () => animateState(false),
       onEnterBack: () => animateState(true),
       onLeaveBack: () => animateState(false),
     });
 
-    // If page loads already inside the community section, trigger immediately
-    const rect = sectionRef.current.getBoundingClientRect();
-    const inViewNow = rect.top <= window.innerHeight * 0.75 && rect.bottom >= window.innerHeight * 0.25;
+    // If page loads already inside the community canvas, trigger immediately
+    const rect = containerRef.current!.getBoundingClientRect();
+    const inViewNow = rect.top <= window.innerHeight * 0.7 && rect.bottom >= window.innerHeight * 0.1;
     if (inViewNow) {
       animateState(true);
     }

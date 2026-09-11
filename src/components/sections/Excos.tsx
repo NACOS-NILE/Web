@@ -167,7 +167,7 @@ export function Excos() {
               <div
                 data-cursor="VIEW"
                 tabIndex={0}
-                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
+                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full max-w-[260px] sm:max-w-md lg:max-w-none mx-auto lg:mx-0 overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
               >
                 <Image
                   src={president.image}
@@ -182,14 +182,14 @@ export function Excos() {
               </div>
 
               {/* President Information */}
-              <div className="space-y-2 pt-2">
+              <div className="space-y-2 pt-2 text-center lg:text-left">
                 <div className="font-mono text-xs uppercase tracking-widest text-[#274193] font-semibold">
                   {president.role}
                 </div>
-                <h3 className="font-heading text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[0.9] text-neutral-950">
+                <h3 className="font-heading text-xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[0.95] text-neutral-950">
                   {president.name}
                 </h3>
-                <p className="text-sm leading-relaxed text-neutral-600 font-sans italic max-w-md">
+                <p className="text-sm leading-relaxed text-neutral-600 font-sans italic max-w-md mx-auto lg:mx-0">
                   &ldquo;{president.tagline}&rdquo;
                 </p>
               </div>
@@ -200,7 +200,7 @@ export function Excos() {
               <div
                 data-cursor="VIEW"
                 tabIndex={0}
-                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full max-w-md ml-auto overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
+                className="group relative aspect-[3/4] sm:aspect-[4/5] w-full max-w-[260px] sm:max-w-md mx-auto lg:ml-auto lg:mr-0 overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
               >
                 <Image
                   src={vp.image}
@@ -214,11 +214,11 @@ export function Excos() {
               </div>
 
               {/* VP Information */}
-              <div className="space-y-2 pt-2 max-w-md ml-auto">
+              <div className="space-y-2 pt-2 max-w-md mx-auto lg:ml-auto text-center lg:text-left">
                 <div className="font-mono text-xs uppercase tracking-widest text-[#274193] font-semibold">
                   {vp.role}
                 </div>
-                <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[0.9] text-neutral-950">
+                <h3 className="font-heading text-[clamp(1.4rem,5.5vw,3.5rem)] sm:text-4xl md:text-5xl uppercase tracking-tight leading-[0.95] text-neutral-950 break-words">
                   {vp.name}
                 </h3>
                 <p className="text-sm leading-relaxed text-neutral-600 font-sans italic">
@@ -242,7 +242,7 @@ export function Excos() {
                   <div
                     data-cursor="VIEW"
                     tabIndex={0}
-                    className="group relative aspect-[3/4] w-full overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
+                    className="group relative aspect-[3/4] w-full max-w-[260px] sm:max-w-none mx-auto sm:mx-0 overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
                   >
                     <Image
                       src={member.image}
@@ -255,14 +255,14 @@ export function Excos() {
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
                   </div>
 
-                  <div className="space-y-1.5 pt-1">
+                  <div className="space-y-1.5 pt-1 text-center sm:text-left">
                     <div className="font-mono text-[11px] uppercase tracking-widest text-[#274193] font-semibold">
                       {member.role}
                     </div>
-                    <h4 className="font-heading text-2xl sm:text-3xl lg:text-3xl uppercase tracking-tight leading-[0.9] text-neutral-950">
+                    <h4 className="font-heading text-[clamp(1.25rem,5vw,2.25rem)] sm:text-3xl lg:text-3xl uppercase tracking-tight leading-[0.9] text-neutral-950">
                       {member.name}
                     </h4>
-                    <p className="text-xs leading-relaxed text-neutral-600 font-sans italic line-clamp-2">
+                    <p className="text-xs leading-relaxed text-neutral-600 font-sans italic line-clamp-2 max-w-xs mx-auto sm:mx-0">
                       &ldquo;{member.tagline}&rdquo;
                     </p>
                   </div>
@@ -285,7 +285,7 @@ export function Excos() {
                   <div
                     data-cursor="VIEW"
                     tabIndex={0}
-                    className="group relative aspect-[3/4] w-full overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
+                    className="group relative aspect-[3/4] w-full max-w-[260px] sm:max-w-none mx-auto sm:mx-0 overflow-hidden bg-neutral-200/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900"
                   >
                     <Image
                       src={member.image}
@@ -298,14 +298,14 @@ export function Excos() {
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
                   </div>
 
-                  <div className="space-y-1 pt-1">
+                  <div className="space-y-1 pt-1 text-center sm:text-left">
                     <div className="font-mono text-[10px] uppercase tracking-widest text-[#274193] font-semibold">
                       {member.role}
                     </div>
                     <h4 className="font-heading text-xl sm:text-2xl uppercase tracking-tight leading-[0.9] text-neutral-950">
                       {member.name}
                     </h4>
-                    <p className="text-xs leading-relaxed text-neutral-600 font-sans italic line-clamp-2">
+                    <p className="text-xs leading-relaxed text-neutral-600 font-sans italic line-clamp-2 max-w-xs mx-auto sm:mx-0">
                       &ldquo;{member.tagline}&rdquo;
                     </p>
                   </div>

@@ -90,12 +90,12 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-between border-b border-white/10 pb-5 text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-400"
         >
-          <div className="flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6]" />
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3b82f6] shrink-0" />
             <span className="font-semibold text-white tracking-widest">NACOS Nile Chapter</span>
           </div>
 
-          <div className="font-mono text-[10px] sm:text-[11px] text-neutral-400">
+          <div className="hidden sm:block font-mono text-[10px] sm:text-[11px] text-neutral-400 shrink-0 ml-4">
             <span>Nile University of Nigeria</span>
           </div>
         </motion.div>
@@ -162,7 +162,7 @@ export function Hero() {
 
           {/* Right Column: Authentic Editorial Tech Workspace Image */}
           <div className="lg:col-span-4 min-w-0 lg:pl-4 xl:pl-8 flex flex-col justify-end">
-            <div ref={imageContainerRef} className="relative w-full max-w-md mx-auto lg:max-w-none">
+            <div ref={imageContainerRef} className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-none mx-auto">
               <motion.div
                 data-cursor="VIEW"
                 initial={
@@ -180,7 +180,7 @@ export function Hero() {
                   delay: 0.35,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative aspect-[3/4] sm:aspect-[4/5] max-h-[500px] 2xl:max-h-[560px] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10"
+                className="group relative aspect-[3/4] sm:aspect-[4/5] max-h-[380px] sm:max-h-[500px] 2xl:max-h-[560px] w-full overflow-hidden rounded-[2px] bg-neutral-900 border border-white/10 mx-auto"
               >
                 <Image
                   src={EDITORIAL_IMAGES.hero}

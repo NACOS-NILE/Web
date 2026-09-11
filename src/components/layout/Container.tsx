@@ -25,7 +25,7 @@ export function Container({
   return (
     <Component
       id={id}
-      className={`mx-auto w-full px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 ${sizeClasses[size]} ${className}`}
+      className={`mx-auto w-full px-8 sm:px-10 md:px-12 lg:px-16 xl:px-20 ${sizeClasses[size]} ${className}`}
     >
       {children}
     </Component>

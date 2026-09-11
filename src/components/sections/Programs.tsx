@@ -292,7 +292,7 @@ export function Programs() {
                 <p className="text-sm leading-relaxed text-neutral-600 font-sans">
                   {item.description}
                 </p>
-                <div className="relative aspect-[4/3] w-full max-w-sm overflow-hidden rounded-[2px] bg-neutral-200 border border-neutral-900/10 mt-3">
+                <div className="relative aspect-[4/3] w-full max-w-[260px] sm:max-w-xs mx-auto overflow-hidden rounded-[2px] bg-neutral-200 border border-neutral-900/10 mt-3">
                   <Image
                     src={item.image}
                     alt={item.title}
