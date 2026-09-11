@@ -1,33 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
-  title: "NACOS Nile — Nigeria Association of Computing Students",
-  description: "Official web portal of NACOS Nile University of Nigeria Chapter.",
+  title: "NACOS Nile — Chapter",
+  description: "Official portal for the Nigeria Association of Computing Students, Nile University Chapter.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={inter.className}>
+      <body className="bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+        {children}
+      </body>
     </html>
   );
 }
