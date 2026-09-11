@@ -14,6 +14,7 @@ const images = [
 export default function Initiatives() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadedIndices, setLoadedIndices] = useState<number[]>([0]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -28,6 +29,21 @@ export default function Initiatives() {
     }, 4000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    if (!loadedIndices.includes(nextIndex)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLoadedIndices((prev) => [...prev, nextIndex]);
+    }
+  }, [currentIndex, loadedIndices]);
+
+  const handleDotClick = (idx: number) => {
+    if (!loadedIndices.includes(idx)) {
+      setLoadedIndices((prev) => [...prev, idx]);
+    }
+    setCurrentIndex(idx);
+  };
 
   return (
     <section id="initiatives" className="py-16 sm:py-32 bg-[#F9F8F6] dark:bg-black">
@@ -71,33 +87,38 @@ export default function Initiatives() {
         <div ref={containerRef} className="relative w-full aspect-[16/9] lg:aspect-[2.5/1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-gray-200 group">
           <motion.div style={{ y }} className="absolute inset-[-20%] w-[140%] h-[140%] bg-black">
             {images.map((src, idx) => (
-              <div
-                key={src}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                  idx === currentIndex ? 'opacity-100' : 'opacity-0'
-                }`}
-              >
-                <Image 
-                  src={src} 
-                  alt="NACOS Nile University computing students at a tech event"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              loadedIndices.includes(idx) && (
+                <div
+                  key={src}
+                  className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                    idx === currentIndex ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <Image 
+                    src={src} 
+                    alt="NACOS Nile University computing students at a tech event"
+                    fill
+                    className="object-cover"
+                    priority={idx === 0}
+                  />
+                </div>
+              )
             ))}
             <div className="absolute inset-0 bg-black/10 pointer-events-none transition-colors duration-500 group-hover:bg-black/0" />
           </motion.div>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-10">
             {images.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'
-                }`}
+                onClick={() => handleDotClick(idx)}
+                className="p-3 focus:outline-none flex items-center justify-center group/btn"
                 aria-label={`Go to slide ${idx + 1}`}
-              />
+              >
+                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 group-hover/btn:bg-white/80'
+                }`} />
+              </button>
             ))}
           </div>
 
