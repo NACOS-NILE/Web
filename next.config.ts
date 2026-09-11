@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "nacos.org.ng" },
+      { protocol: "https", hostname: "nunhr.nileuniversity.edu.ng" },
+      { protocol: "https", hostname: "www.ncs.org.ng" },
+      { protocol: "https", hostname: "upload.wikimedia.org" },
+    ],
   },
 };
 
