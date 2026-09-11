@@ -1,9 +1,9 @@
 ### 🎓 Contributor Information
 - **Contributor 1**: [Full Name]
-  - **Student ID**: [e.g. 211206123]
+  - **Student ID**: [Your Student ID]
   - **Department**: [e.g. Software Engineering]
 - **Contributor 2 (if pair submission)**: [Full Name]
-  - **Student ID**: [e.g. 211206456]
+  - **Student ID**: [Student ID 2]
   - **Department**: [e.g. Computer Science]
 
 ---
