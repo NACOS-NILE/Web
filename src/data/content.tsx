@@ -194,9 +194,104 @@ export const NAV_ITEMS = [
   { id: "about", label: "About" },
   { id: "disciplines", label: "Disciplines" },
   { id: "programs", label: "Programs" },
+  { id: "gallery", label: "Gallery" },
   { id: "excos", label: "Excos" },
   { id: "membership", label: "Membership" },
   { id: "community", label: "Community" },
+];
+
+/*
+  GALLERY
+  Photos from the chapter dinner. Each photo has a small version for the
+  grid (src) and a larger one that opens when tapped (full). "position"
+  controls which part of the photo stays visible when the grid crops it.
+*/
+export const GALLERY = {
+  event: "A Colours Show",
+  photographer: "DH Media",
+};
+
+export const galleryPhotos = [
+  {
+    id: "hall",
+    src: "/images/gallery/hall.webp",
+    full: "/images/gallery/hall-full.webp",
+    width: 1800,
+    height: 1200,
+    position: "50% 55%",
+    caption: "The hall on the night",
+    alt: "Guests seated at decorated round tables facing the stage, with draped fabric overhead",
+  },
+  {
+    id: "red-carpet",
+    src: "/images/gallery/red-carpet.webp",
+    full: "/images/gallery/red-carpet-full.webp",
+    width: 1200,
+    height: 1800,
+    position: "50% 30%",
+    caption: "Red carpet arrivals",
+    alt: "A guest in a red lace gown posing on the red carpet in front of the event backdrop",
+  },
+  {
+    id: "couple",
+    src: "/images/gallery/couple.webp",
+    full: "/images/gallery/couple-full.webp",
+    width: 1200,
+    height: 1800,
+    position: "50% 30%",
+    caption: "Dressed for the occasion",
+    alt: "Two guests in black formal wear posing in front of the NACOS Nile backdrop",
+  },
+  {
+    id: "stage",
+    src: "/images/gallery/stage.webp",
+    full: "/images/gallery/stage-full.webp",
+    width: 1800,
+    height: 1200,
+    position: "50% 60%",
+    caption: "On stage",
+    alt: "A row of guests seated on stage while a host speaks into a microphone",
+  },
+  {
+    id: "smiles",
+    src: "/images/gallery/smiles.webp",
+    full: "/images/gallery/smiles-full.webp",
+    width: 1200,
+    height: 1800,
+    position: "50% 40%",
+    caption: "All smiles",
+    alt: "A guest in a black jacket smiling and dancing at his table",
+  },
+  {
+    id: "dance",
+    src: "/images/gallery/dance.webp",
+    full: "/images/gallery/dance-full.webp",
+    width: 1200,
+    height: 1800,
+    position: "50% 45%",
+    caption: "Dancing the night away",
+    alt: "A guest in a green sequinned dress dancing under green lights",
+  },
+  {
+    id: "awards",
+    src: "/images/gallery/awards.webp",
+    full: "/images/gallery/awards-full.webp",
+    width: 1800,
+    height: 1200,
+    position: "50% 35%",
+    caption: "Awards presentation",
+    alt: "An award plaque being presented on stage",
+  },
+  {
+    id: "friends",
+    src: "/images/gallery/friends.webp",
+    full: "/images/gallery/friends-full.webp",
+    width: 1800,
+    height: 1200,
+    position: "50% 35%",
+    caption: "Capturing the moment",
+    alt: "Three friends in red outfits taking a selfie at the dinner",
+  },
 ];
 
 /*

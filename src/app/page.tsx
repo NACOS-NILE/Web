@@ -4,6 +4,7 @@ import Community from "@/components/Community";
 import Disciplines from "@/components/Disciplines";
 import Excos from "@/components/Excos";
 import Footer from "@/components/Footer";
+import Gallery from "@/components/Gallery";
 import Hero from "@/components/Hero";
 import Membership from "@/components/Membership";
 import Navbar from "@/components/Navbar";
@@ -23,6 +24,7 @@ export default function Home() {
         <About />
         <Disciplines />
         <Programs />
+        <Gallery />
         <Excos />
         <Membership />
         <Community />

@@ -1470,6 +1470,239 @@ img {
 }
 
 /* =========================
+   GALLERY
+========================= */
+
+.gallery {
+  background: var(--blue-dark);
+  color: #ffffff;
+}
+
+.gallery .section-top h2 em {
+  color: #9ec4ff;
+}
+
+.gallery .section-top > p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/*
+  Bento-style grid. Row height follows the column width, so photos keep
+  sensible proportions at every screen size. Each photo is placed by its
+  id (set inline as grid-area).
+*/
+.gallery-grid {
+  --gallery-gap: 12px;
+  --gallery-cell: calc((min(1180px, 100vw - 48px) - 3 * var(--gallery-gap)) / 4);
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: calc(var(--gallery-cell) * 0.72);
+  gap: var(--gallery-gap);
+
+  grid-template-areas:
+    "hall hall red-carpet couple"
+    "hall hall red-carpet couple"
+    "stage stage smiles dance"
+    "awards friends smiles dance";
+}
+
+.gallery-item {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: #16224a;
+
+  cursor: zoom-in;
+}
+
+.gallery-item img {
+  object-fit: cover;
+
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-caption {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 44px 16px 14px;
+
+  background: linear-gradient(transparent, rgba(5, 10, 26, 0.88));
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: left;
+
+  opacity: 0;
+  transform: translateY(8px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.gallery-item:focus-visible .gallery-caption {
+  opacity: 1;
+  transform: none;
+}
+
+.gallery-credit {
+  margin-top: 18px;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 12px;
+}
+
+/* Full-screen photo viewer */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+
+  margin: 0;
+  padding: 24px 84px;
+
+  border: 0;
+
+  background: rgba(5, 10, 26, 0.97);
+  color: #ffffff;
+}
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox::backdrop {
+  background: transparent;
+}
+
+/* Stop the page behind from scrolling while the viewer is open */
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+.lightbox-figure {
+  margin: 0;
+
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.lightbox-figure img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 130px);
+  max-height: calc(100svh - 130px);
+
+  border-radius: 10px;
+
+  animation: lightbox-in 0.35s ease both;
+}
+
+.lightbox-figure figcaption {
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.lightbox-count {
+  margin-right: 10px;
+
+  color: var(--highlight);
+
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox-button {
+  position: absolute;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+
+  background: rgba(13, 23, 51, 0.7);
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.lightbox-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox-close {
+  top: 18px;
+  right: 18px;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  margin-top: -24px;
+}
+
+.lightbox-prev {
+  left: 18px;
+}
+
+.lightbox-next {
+  right: 18px;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================
    MEMBERSHIP
 ========================= */
 
@@ -2092,6 +2325,20 @@ img {
 ========================= */
 
 @media (hover: hover) and (pointer: fine) {
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: none;
+  }
+
+  .lightbox-button:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
   .faq-item summary:hover {
     color: var(--blue);
   }
@@ -2180,6 +2427,16 @@ img {
 ========================= */
 
 @media (hover: none), (pointer: coarse) {
+  .gallery-caption {
+    opacity: 1;
+    transform: none;
+  }
+
+  .gallery-item:active img {
+    transform: scale(1.03);
+    transition-duration: 0.3s;
+  }
+
   .faq-item summary:active {
     color: var(--blue);
   }
@@ -2262,6 +2519,10 @@ img {
 
   .faq-item::details-content {
     transition: none;
+  }
+
+  .lightbox-figure img {
+    animation: none;
   }
 
   .scroll-reveal,
@@ -2426,6 +2687,10 @@ img {
     transition-delay: 0.31s;
   }
 
+  .nav-links.open a:nth-child(7) {
+    transition-delay: 0.36s;
+  }
+
   .nav-links a.active {
     color: var(--highlight);
   }
@@ -2456,6 +2721,24 @@ img {
   .membership-grid,
   .membership-faq {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    --gallery-gap: 10px;
+    --gallery-cell: calc((100vw - 48px - var(--gallery-gap)) / 2);
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: calc(var(--gallery-cell) * 0.78);
+
+    grid-template-areas:
+      "hall hall"
+      "hall hall"
+      "red-carpet couple"
+      "red-carpet couple"
+      "stage stage"
+      "smiles dance"
+      "smiles dance"
+      "awards friends";
   }
 
   .membership-faq {
@@ -2835,6 +3118,50 @@ img {
 
   .exco-info p {
     font-size: 12px;
+  }
+
+  /* GALLERY */
+  .gallery-grid {
+    --gallery-gap: 8px;
+    --gallery-cell: calc((100vw - 32px - var(--gallery-gap)) / 2);
+  }
+
+  .gallery-item {
+    border-radius: 10px;
+  }
+
+  .gallery-caption {
+    padding: 30px 10px 9px;
+    font-size: 11px;
+  }
+
+  .lightbox {
+    padding: 64px 12px 84px;
+  }
+
+  .lightbox-figure img {
+    max-height: calc(100vh - 190px);
+    max-height: calc(100svh - 190px);
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    top: auto;
+    bottom: 18px;
+    margin-top: 0;
+  }
+
+  .lightbox-prev {
+    left: calc(50% - 60px);
+  }
+
+  .lightbox-next {
+    right: calc(50% - 60px);
   }
 
   /* MEMBERSHIP */
