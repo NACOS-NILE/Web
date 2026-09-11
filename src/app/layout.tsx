@@ -56,7 +56,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-[#060b18] text-slate-100 selection:bg-[#274193] selection:text-white">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#060b18] text-slate-100 selection:bg-[#274193] selection:text-white"
+      >
         {children}
       </body>
     </html>
