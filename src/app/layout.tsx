@@ -1,33 +1,31 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "NACOS Nile — Nigeria Association of Computing Students",
-  description: "Official web portal of NACOS Nile University of Nigeria Chapter.",
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0d1733",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const metadata: Metadata = {
+  title: "NACOS Nile | Nile University of Nigeria",
+  description: "The student computing community at Nile University of Nigeria. Learn, build and grow across six computing disciplines.",
+  authors: [
+    { name: "Lloyd Akhigbe" },
+    { name: "Ephraim Ofoli" },
+  ],
+  openGraph: {
+    title: "NACOS Nile University Chapter",
+    description: "Six disciplines. One computing community.",
+    type: "website",
+  },
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

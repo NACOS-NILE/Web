@@ -1,0 +1,6 @@
+Brand icon SVGs in this folder are copied from Font Awesome Free 6.7.2 by Fonticons, Inc.
+Source repository: https://github.com/FortAwesome/Font-Awesome
+Brand icons license: CC BY 4.0
+Font Awesome license information: https://fontawesome.com/license/free
+
+Included: Instagram, TikTok, LinkedIn, X, WhatsApp and envelope.
