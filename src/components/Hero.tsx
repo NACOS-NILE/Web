@@ -20,7 +20,7 @@ export default function Hero() {
         >
           <Image 
             src="/faculty.png" 
-            alt="Faculty of Computing"
+            alt="Faculty of Computing building at Nile University of Nigeria"
             fill
             className="object-cover opacity-60"
             priority
@@ -38,7 +38,7 @@ export default function Hero() {
             className="text-5xl sm:text-7xl lg:text-8xl font-serif font-bold tracking-tight text-white leading-[1.05]"
           >
             Welcome to <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 italic font-light">NACOS Nile</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 italic font-light">NACOS Nile University</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 sm:mt-8 text-lg sm:text-2xl text-gray-200 font-medium max-w-2xl"
           >
-            The digital front door for the Nigeria Association of Computing Students at Nile University of Nigeria. Explore our community, events, and opportunities in tech.
+            Join the premier community for computing students in Nigeria. Discover exclusive tech events, build your network, and accelerate your tech career.
           </motion.p>
         </div>
       </div>

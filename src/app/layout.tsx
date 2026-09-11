@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NACOS Nile — Nigeria Association of Computing Students",
-  description: "Official web portal of NACOS Nile University of Nigeria Chapter.",
+  title: "NACOS Nile University | Computing Student Tech Community",
+  description: "Join the official NACOS Nile University tech community. Discover upcoming tech events, connect with computing students, and launch your career in Nigeria.",
+  keywords: ["NACOS Nile University", "Computing Students in Nigeria", "Tech Community Abuja", "Nile University Tech Events", "Computer Science"],
 };
 
 

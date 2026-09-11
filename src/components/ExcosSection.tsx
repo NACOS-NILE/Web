@@ -71,7 +71,7 @@ export default function ExcosSection() {
           className="mb-16 sm:mb-32 flex flex-col items-center text-center"
         >
           <h2 className="text-4xl sm:text-7xl lg:text-[7rem] font-serif font-bold text-black dark:text-white leading-[1.1] sm:leading-[1] tracking-tight max-w-5xl">
-            Meet the <span className="italic font-light text-gray-400">Executives</span>
+            Meet the NACOS Nile <span className="italic font-light text-gray-400">Executives</span>
           </h2>
           <p className="mt-6 sm:mt-10 text-lg sm:text-2xl text-gray-600 dark:text-gray-400 font-light max-w-2xl">
             The dedicated team working behind the scenes to make NACOS Nile great.
@@ -91,7 +91,7 @@ export default function ExcosSection() {
               <div className="relative w-full aspect-[3/4] rounded-t-[10rem] rounded-b-3xl overflow-hidden bg-gray-200 mb-8 border border-black/5 dark:border-white/5 shadow-sm transition-shadow duration-500 group-hover:shadow-2xl">
                 <Image
                   src={exco.image}
-                  alt={exco.name}
+                  alt={`${exco.name} - ${exco.role} of NACOS Nile University`}
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

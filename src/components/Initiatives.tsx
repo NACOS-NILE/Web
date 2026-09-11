@@ -28,7 +28,7 @@ export default function Initiatives() {
               <span className="text-xs font-bold tracking-wider text-black dark:text-white uppercase">Initiatives</span>
             </div>
             <h2 className="text-4xl sm:text-6xl lg:text-[5rem] font-serif font-bold text-black dark:text-white leading-[1.1] sm:leading-[1] tracking-tight">
-              Key Initiatives & Events
+              Upcoming Tech Events at Nile University
             </h2>
           </motion.div>
           
@@ -40,7 +40,7 @@ export default function Initiatives() {
             className="pb-0 sm:pb-4"
           >
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 font-light max-w-md mb-8 sm:mb-10 leading-relaxed">
-              Discover the programs we run to supercharge your tech journey. Connect, build, and innovate.
+              Discover the exclusive programs and tech events we run to supercharge your tech journey. Connect with industry professionals, build your portfolio, and innovate.
             </p>
             <button className="group relative overflow-hidden rounded-full border border-black dark:border-white px-8 py-3 text-sm font-semibold text-black dark:text-white transition-all hover:border-transparent">
               <span className="absolute inset-0 bg-black dark:bg-white translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0"></span>
@@ -55,7 +55,7 @@ export default function Initiatives() {
           <motion.div style={{ y }} className="absolute inset-[-20%] w-[140%] h-[140%]">
             <Image 
               src="/initiatives-group.jpg" 
-              alt="NACOS Experiences"
+              alt="NACOS Nile University computing students at a tech event"
               fill
               className="object-cover transition-transform duration-1000 group-hover:scale-105"
             />
