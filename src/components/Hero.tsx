@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import Image from 'next/image';
 
 export default function Hero() {
   return (
@@ -10,9 +11,23 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full aspect-[4/5] sm:aspect-[2/1] lg:aspect-[2.5/1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-black flex flex-col justify-center px-8 sm:px-16 lg:px-24"
+          className="relative w-full aspect-[4/5] sm:aspect-[2/1] lg:aspect-[2.5/1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-black flex flex-col justify-center px-8 sm:px-16 lg:px-24 group"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-gray-900" />
+          <motion.div
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <Image 
+              src="/faculty.png" 
+              alt="Faculty of Computing"
+              fill
+              className="object-cover opacity-50 mix-blend-overlay group-hover:scale-105 transition-transform duration-[2s] ease-out"
+              priority
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent" />
           
           <div className="relative z-10 max-w-3xl mt-10 pointer-events-none">
             <motion.h1 
