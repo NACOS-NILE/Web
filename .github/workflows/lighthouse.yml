@@ -18,7 +18,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.pr_number != '' && format('refs/pull/{0}/head', github.event.inputs.pr_number) || '' }}
+          # Always resolve to the PR's actual HEAD commit, never GitHub's synthetic
+          # refs/pull/N/merge commit — that merge SHA doesn't exist in the PR's own
+          # commit history, which is why the audit comment could reference a commit
+          # that "doesn't exist in the PR".
+          ref: ${{ github.event.inputs.pr_number != '' && format('refs/pull/{0}/head', github.event.inputs.pr_number) || github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
