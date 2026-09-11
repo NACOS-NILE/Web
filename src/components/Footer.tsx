@@ -27,7 +27,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-[var(--color--dark)] text-white">
+    <footer className="border-t border-white/10 bg-[var(--color-primary-dark)] text-white">
       <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 sm:py-16 lg:px-12 lg:py-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr] md:gap-10 lg:gap-20">
           <div>
@@ -94,7 +94,7 @@ export default function Footer() {
                 );
               })}
               <a
-                href="mailto:hello@nacosnile.org"
+                href="mailto:nacosnile@gmail.com"
                 aria-label="Email NACOS Nile"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-transform hover:-translate-y-1 hover:bg-white/20"
               >

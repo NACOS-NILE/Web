@@ -193,7 +193,7 @@ export default function Hero() {
       >
         Your computing journey
         <br />
-        starts <span className="text-[var(--color-primary)]">here.</span>
+        starts <span className="text-[var(--color-primary)] dark:text-[var(--color-accent)]">here.</span>
       </h1>
 
       <p
@@ -209,7 +209,7 @@ export default function Hero() {
           href="#community"
           onPointerMove={handleCtaMove}
           onPointerLeave={handleCtaLeave}
-          className="w-52 rounded-[7px] bg-[var(--color-primary)] px-6 py-4 font-body text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-dark)] sm:px-8 sm:py-4 sm:text-base"
+          className="w-52 rounded-[7px] bg-[var(--color-primary)] dark:bg-[var(--color-accent)] dark:hover:bg-[var(--color-primary)] px-6 py-4 font-body text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-dark)] sm:px-8 sm:py-4 sm:text-base"
         >
           Join Community
         </Link>

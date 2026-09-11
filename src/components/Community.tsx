@@ -87,8 +87,8 @@ export default function Community() {
             Join the Conversation
           </h2>
           <p ref={copyRef} className="max-w-lg text-center font-body text-[clamp(15px,1.8vw,18px)] leading-relaxed text-[var(--color-ink-muted)]">
-            Get involved, ask questions, or share your innovative ideas to move
-            NACOS Nile forward in the right direction.
+            Connect with fellow computing students, discover opportunities, and
+            stay close to the people shaping NACOS Nile.
           </p>
         </div>
 

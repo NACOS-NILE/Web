@@ -11,37 +11,31 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
 
-  // Track active section via IntersectionObserver
+  // Track the section that has crossed the sticky header.
   useEffect(() => {
-    const sectionIds = ["top", ...navLinks.map((l) => l.href.replace("#", ""))];
-    const observers: IntersectionObserver[] = [];
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting) return;
-          if (window.scrollY <= 120) {
-            setActiveSection("");
-            return;
-          }
-          setActiveSection(id === "top" ? "" : id);
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
+    const sectionIds = navLinks.map((link) => link.href.slice(1));
     function handleScroll() {
-      if (window.scrollY <= 120) setActiveSection("");
+      const headerOffset = 120;
+
+      if (window.scrollY <= headerOffset) {
+        setActiveSection("");
+        return;
+      }
+
+      let currentSection = "";
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= window.scrollY + headerOffset) {
+          currentSection = id;
+        }
+      });
+
+      setActiveSection(currentSection);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      observers.forEach((o) => o.disconnect());
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -119,7 +113,7 @@ export default function Navbar() {
             <Link
               href="#community"
               onClick={closeMenu}
-              className="hidden rounded-[7px] bg-[var(--color-primary)] px-4 py-2.5 font-body text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-dark)] lg:inline-flex"
+              className="hidden rounded-[7px] bg-[var(--color-primary)] dark:bg-[var(--color-accent)] dark:hover:bg-[var(--color-primary)] px-4 py-2.5 font-body text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-dark)] lg:inline-flex"
             >
               Join Community
             </Link>
@@ -146,7 +140,7 @@ export default function Navbar() {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed inset-0 z-40 flex flex-col bg-[var(--color-surface)] transition-all duration-300 ease-in-out lg:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-[65px] z-40 flex flex-col bg-[var(--color-surface)] transition-all duration-300 ease-in-out lg:hidden ${
           menuOpen
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "-translate-y-4 opacity-0 pointer-events-none"
@@ -155,13 +149,12 @@ export default function Navbar() {
       >
         <nav className="flex flex-1 flex-col px-6 pt-8">
           <ul className="flex flex-col gap-1">
-            {navLinks.map((link, i) => {
+            {navLinks.map((link) => {
               const id = link.href.replace("#", "");
               const isActive = activeSection === id;
               return (
                 <li
                   key={link.href}
-                  style={{ transitionDelay: menuOpen ? `${i * 40}ms` : "0ms" }}
                   className={`transition-all duration-300 ${
                     menuOpen
                       ? "translate-y-0 opacity-100"
@@ -192,7 +185,7 @@ export default function Navbar() {
           <Link
             href="#community"
             onClick={closeMenu}
-            className="mt-8 inline-flex items-center justify-center rounded-[7px] bg-[var(--color-primary)] px-5 py-4 font-body text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-dark)]"
+            className="mt-8 inline-flex items-center dark:bg-[var(--color-accent)] dark:hover:bg-[var(--color-primary)] justify-center rounded-[7px] bg-[var(--color-primary)] px-5 py-4 font-body text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-dark)]"
           >
             Join Community
           </Link>

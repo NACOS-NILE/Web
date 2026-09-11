@@ -115,7 +115,7 @@ export default function About() {
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="mb-12 mt-4 ssm:items-end sm:mb-14">
+        <div className="mb-12 mt-4 sm:mb-14">
           <h2
             ref={headingRef}
             className="font-display text-center text-[clamp(26px,4vw,42px)] font-bold leading-tight text-[var(--color-ink)]"
@@ -156,7 +156,7 @@ export default function About() {
               grown steadily with the goal of improving the student body in the
               Faculty of computing at Nile University. We focus on bridging the
               gap between academic theory and industry reality through social
-              and practical engagement.s.
+              and practical engagement.
             </p>
           </div>
         </div>
@@ -164,17 +164,21 @@ export default function About() {
         {/* Stat cards */}
         <div
           ref={statsRef}
-          className="grid gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-4"
+          className="grid place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
           {stats.map(({ start, suffix, displayValue, label }, index) => (
             <div
               key={label}
-              className="rounded-2xl  px-6 py-8 flex-col items-center justify-center gap-2 text-center"
+              className="flex flex-col items-center justify-center gap-2 rounded-2xl px-6 py-8 text-center"
             >
               <p className="mb-1 font-display text-[clamp(28px,3vw,40px)] font-bold text-[var(--color-primary)] dark:text-[var(--color-ink)]">
                 {displayValue ?? (
                   <>
-                    <span ref={(element) => { counterRefs.current[index] = element; }}>
+                    <span
+                      ref={(element) => {
+                        counterRefs.current[index] = element;
+                      }}
+                    >
                       {start}
                     </span>
                     {suffix}

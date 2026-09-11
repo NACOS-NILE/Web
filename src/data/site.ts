@@ -2,11 +2,12 @@ import whySocial from "../../public/event-pics/why-social-events.jpg"
 import whyTechnicalWorkshop from "../../public/event-pics/why-technical-workshops.jpg"
 import whyHackathons from "../../public/event-pics/why-hackathons.jpeg"
 import whyLeadership from "../../public/event-pics/why-leadership.jpg"
+import whyTalks from "../../public/event-pics/why_talks.jpeg"
+import whyAcademics from "../../public/event-pics/why-academics.jpg"
 
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Disciplines", href: "#disciplines" },
-  { label: "Events", href: "#events" },
   { label: "Excos", href: "#excos" },
   { label: "Community", href: "#community" },
   { label: "Contact", href: "#contact" },
@@ -68,6 +69,20 @@ export const whyNacosite = [
     title: "Hackathons",
     description: "Get updated on upcoming hackathons and innovation challenges.",
     image: whyHackathons,
+  },
+  {
+    number: "05",
+    title: "Industry Mentorship & Career Talks",
+    description:
+      "Connect with professionals and discover the paths from computing student to industry-ready graduate.",
+    image: whyTalks,
+  },
+  {
+    number: "06",
+    title: "Academic Tutorials & Study Groups",
+    description:
+      "Peer-led sessions that turn coursework into practical understanding beyond the classroom.",
+    image: whyAcademics,
   },
 ];
 

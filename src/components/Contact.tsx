@@ -8,7 +8,7 @@ import { chapterAddress } from "@/data/site";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-const CONTACT_EMAIL = "hello@nacosnile.org"; // placeholder — swap for the real chapter inbox
+const CONTACT_EMAIL = "nacosnile@gmail.com";
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);

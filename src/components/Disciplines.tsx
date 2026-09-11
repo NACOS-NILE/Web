@@ -186,26 +186,13 @@ export default function Disciplines() {
       <div className="mx-auto mb-10 max-w-7xl px-4 text-left sm:px-6 lg:px-8">
         <h2
           ref={headingRef}
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontSize: "clamp(26px , 4vw, 42px)",
-            color: "var(--color-ink)",
-            textAlign: "center",
-            margin: "0 0 10px",
-          }}
+          className="mb-2 text-center font-display text-[clamp(26px,4vw,42px)] font-bold leading-tight text-[var(--color-ink)]"
         >
           Six disciplines, one community
         </h2>
         <p
           ref={copyRef}
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "clamp(15px, 2vw, 18px)",
-            color: "var(--color-ink-muted)",
-            textAlign: "center",
-            margin: "0",
-          }}
+          className="text-center font-body text-[clamp(15px,2vw,18px)] leading-relaxed text-[var(--color-ink-muted)]"
         >
           Scroll down to see them land.
         </p>

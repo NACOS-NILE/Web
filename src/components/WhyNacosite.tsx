@@ -71,36 +71,21 @@ export default function WhyNacosite() {
         "-=0.3",
       );
 
-      const mm = gsap.matchMedia();
-      mm.add(
+      const isMobile = window.matchMedia("(max-width: 639px)").matches;
+      gsap.fromTo(
+        carousel,
+        { scale: isMobile ? 0.9 : 0.95, transformOrigin: "center center" },
         {
-          isMobile: "(max-width: 639px)",
-          isDesktop: "(min-width: 640px)",
-        },
-        (context) => {
-          const { isMobile } = context.conditions as { isMobile: boolean };
-
-          gsap.fromTo(
-            carousel,
-            { scale: isMobile ? 0.9 : 0.95, transformOrigin: "center center" },
-            {
-              scale: isMobile ? 1 : 1.06,
-              ease: "none",
-              scrollTrigger: {
-                trigger: carousel,
-                start: "top bottom",
-                end: "top center",
-                scrub: true,
-              },
-            },
-          );
+          scale: isMobile ? 1 : 1.06,
+          ease: "none",
+          scrollTrigger: {
+            trigger: carousel,
+            start: "top bottom",
+            end: "top center",
+            scrub: true,
+          },
         },
       );
-
-      // Recalculate trigger positions once everything above is registered —
-      // guards against next/image's fill layout shifting things after the
-      // initial measurement.
-      ScrollTrigger.refresh();
     }, sectionRef);
 
     return () => ctx.revert();
