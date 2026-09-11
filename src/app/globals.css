@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Design notes:
+  - Palette is locked to the brief's official brand colors — no room to invent
+    a new one, so the visual distinctiveness comes from type + layout instead.
+  - Type pairing: Space Grotesk (display) is geometric and slightly technical,
+    fitting a computing society without leaning on generic Inter-only defaults.
+    IBM Plex Sans (body) was built for tech/engineering contexts and pairs
+    cleanly with it. A monospace accent (Plex Mono) is used sparingly for
+    small data-like labels (event dates, discipline codes) — a nod to "code"
+    that's actually justified by the subject matter, not decoration.
+  - Import both in src/app/layout.tsx via next/font/google and expose as
+    CSS variables (--font-display / --font-body / --font-mono) referenced below.
+*/
+
+@theme {
+  /* Brand colors from the official spec */
+  --color-primary: #274193;      /* NACOS Nile Royal Blue */
+  --color-primary-dark: #0d1733; /* Dark accent / dark-mode base */
+  --color-accent: #3b82f6;
+  --color-accent-light: #60a5fa;
+
+  /* Supporting neutrals — cool-toned to sit next to royal blue,
+     deliberately not a warm cream (avoids the generic AI-page look) */
+  --color-surface: #f5f7fb;
+  --color-surface-dark: #0d1733;
+  --color-ink: #10162e;
+  --color-ink-muted: #4b5568;
+
+  /* Type */
+  --font-display: var(--font-sora), "Sora", sans-serif;
+  --font-body: var(--font-instrument-sans), "Instrument Sans", sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", monospace;
+
+  /* Radii + shadow tokens kept restrained — one radius scale, no per-card
+     drop shadows everywhere */
+  --radius-card: 0.75rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-surface: #f5f7fb;
+  --color-surface-dark: #0d1733;
+  --color-ink: #10162e;
+  --color-ink-muted: #4b5568;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --color-surface: #0B172B;
+  --color-surface-dark: #070a18;
+  --color-ink: #f1f5f9;
+  --color-ink-muted: #94a3b8;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
