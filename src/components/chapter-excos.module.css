@@ -1,0 +1,246 @@
+.section {
+  position: relative;
+  height: 360svh;
+  background: var(--background);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  min-height: 660px;
+  overflow: clip;
+  padding: 32px 20px;
+}
+
+.header {
+  z-index: 2;
+  text-align: center;
+}
+.header h2 {
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+.header p {
+  margin-top: 10px;
+  color: var(--muted-foreground);
+  font-size: 17px;
+}
+
+.stage {
+  --orbit-radius: min(36vw, 480px);
+  --strip-height: clamp(86px, 11vw, 148px);
+  --slice-width: calc(var(--orbit-radius) * 0.019166667);
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  height: clamp(270px, 43svh, 430px);
+  margin: 28px 0 22px;
+  flex-shrink: 0;
+}
+.stage::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 0;
+  height: 120px;
+  background: linear-gradient(transparent, var(--background));
+  pointer-events: none;
+}
+
+.mainPortrait {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate3d(-50%, 0, 0);
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  max-width: 52vw;
+  overflow: hidden;
+  border-radius: 12px;
+  corner-shape: squircle;
+  background: var(--muted);
+}
+.mainPortrait img {
+  object-fit: cover;
+  object-position: center 25%;
+  transition: opacity 350ms ease;
+}
+.visible {
+  opacity: 1;
+}
+.hidden {
+  opacity: 0;
+}
+
+.perspective {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+.ring {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 59%;
+  transform-style: preserve-3d;
+}
+.paperSlice {
+  position: absolute;
+  left: calc(50% - var(--slice-width) / 2);
+  top: calc(59% - var(--strip-height) / 2);
+  /* Subpixel overlap closes seams between adjacent tangent planes. */
+  width: calc(var(--slice-width) + 0.65px);
+  height: var(--strip-height);
+  overflow: hidden;
+  corner-shape: squircle;
+  background-color: var(--muted);
+  backface-visibility: visible;
+}
+.paperTexture {
+  position: absolute;
+  top: 0;
+  width: calc(var(--orbit-radius) * 0.46);
+  height: 100%;
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+}
+
+.details {
+  position: relative;
+  z-index: 3;
+  width: fit-content;
+  max-width: 460px;
+  padding: 0;
+  text-align: center;
+}
+.textSwap {
+  --text-swap-dur: 150ms;
+  --text-swap-translate-y: 4px;
+  --text-swap-blur: 2px;
+  --text-swap-ease: ease-in-out;
+  display: inline-block;
+  transform: translateY(0);
+  filter: blur(0);
+  opacity: 1;
+  transition:
+    transform var(--text-swap-dur) var(--text-swap-ease),
+    filter var(--text-swap-dur) var(--text-swap-ease),
+    opacity var(--text-swap-dur) var(--text-swap-ease);
+  will-change: transform, filter, opacity;
+}
+.textSwap.isExit {
+  transform: translateY(calc(var(--text-swap-translate-y) * -1));
+  filter: blur(var(--text-swap-blur));
+  opacity: 0;
+}
+.textSwap.isEnterStart {
+  transform: translateY(var(--text-swap-translate-y));
+  filter: blur(var(--text-swap-blur));
+  opacity: 0;
+  transition: none;
+}
+
+.role {
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: 500;
+}
+.details h3 {
+  margin-top: 3px;
+  font-size: clamp(25px, 2.5vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+.tagline {
+  margin: 8px auto 0;
+  max-width: 390px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+  text-wrap: balance;
+}
+@media (min-width: 601px) {
+  .stage {
+    overflow: visible;
+  }
+  .stage::after {
+    bottom: -72px;
+  }
+  .details {
+    transform: translateY(72px);
+  }
+}
+
+@media (max-width: 600px) {
+  .sticky {
+    padding: 26px 16px;
+    min-height: 600px;
+  }
+  .header h2 {
+    font-size: 34px;
+  }
+  .header p {
+    font-size: 15px;
+  }
+  .stage {
+    height: min(34svh, 320px);
+    min-height: 245px;
+    margin-top: 32px;
+    --orbit-radius: 40vw;
+  }
+  .mainPortrait {
+    width: 52vw;
+    aspect-ratio: auto;
+  }
+  .tagline {
+    max-width: 310px;
+    font-size: 15px;
+  }
+}
+
+@media (max-height: 660px) {
+  .sticky {
+    min-height: 0;
+    padding-block: 14px;
+  }
+  .header h2 {
+    font-size: 28px;
+  }
+  .header p {
+    display: none;
+  }
+  .stage {
+    height: 38svh;
+    min-height: 0;
+    margin-block: 18px 12px;
+  }
+  .details h3 {
+    font-size: 24px;
+  }
+  .tagline {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mainPortrait img {
+    transition: none;
+  }
+  .textSwap {
+    transition: none !important;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}
