@@ -13,21 +13,21 @@ export default function Initiatives() {
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section id="initiatives" className="py-32 bg-[#F9F8F6] dark:bg-black">
+    <section id="initiatives" className="py-16 sm:py-32 bg-[#F9F8F6] dark:bg-black">
       <div className="container mx-auto max-w-[1400px] px-4 sm:px-6">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-end mb-20 px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-32 items-end mb-12 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-4 sm:mb-6">
               <span className="w-10 h-[1px] bg-black dark:bg-white"></span>
               <span className="text-xs font-bold tracking-wider text-black dark:text-white uppercase">Initiatives</span>
             </div>
-            <h2 className="text-5xl sm:text-6xl lg:text-[5rem] font-serif font-bold text-black dark:text-white leading-[1] tracking-tight">
+            <h2 className="text-4xl sm:text-6xl lg:text-[5rem] font-serif font-bold text-black dark:text-white leading-[1.1] sm:leading-[1] tracking-tight">
               Key Initiatives & Events
             </h2>
           </motion.div>
@@ -37,9 +37,9 @@ export default function Initiatives() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="pb-4"
+            className="pb-0 sm:pb-4"
           >
-            <p className="text-xl text-gray-600 dark:text-gray-400 font-light max-w-md mb-10 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 font-light max-w-md mb-8 sm:mb-10 leading-relaxed">
               Discover the programs we run to supercharge your tech journey. Connect, build, and innovate.
             </p>
             <button className="group relative overflow-hidden rounded-full border border-black dark:border-white px-8 py-3 text-sm font-semibold text-black dark:text-white transition-all hover:border-transparent">

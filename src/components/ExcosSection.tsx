@@ -61,19 +61,19 @@ const excos = [
 
 export default function ExcosSection() {
   return (
-    <section id="excos" className="py-32 bg-[#F9F8F6] dark:bg-black">
+    <section id="excos" className="py-16 sm:py-32 bg-[#F9F8F6] dark:bg-black">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-32 flex flex-col items-center text-center"
+          className="mb-16 sm:mb-32 flex flex-col items-center text-center"
         >
-          <h2 className="text-5xl sm:text-7xl lg:text-[7rem] font-serif font-bold text-black dark:text-white leading-[1] tracking-tight max-w-5xl">
+          <h2 className="text-4xl sm:text-7xl lg:text-[7rem] font-serif font-bold text-black dark:text-white leading-[1.1] sm:leading-[1] tracking-tight max-w-5xl">
             Meet the <span className="italic font-light text-gray-400">Executives</span>
           </h2>
-          <p className="mt-10 text-xl sm:text-2xl text-gray-600 dark:text-gray-400 font-light max-w-2xl">
+          <p className="mt-6 sm:mt-10 text-lg sm:text-2xl text-gray-600 dark:text-gray-400 font-light max-w-2xl">
             The dedicated team working behind the scenes to make NACOS Nile great.
           </p>
         </motion.div>

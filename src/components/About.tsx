@@ -37,7 +37,7 @@ const disciplines = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 bg-[#F9F8F6] dark:bg-black overflow-hidden relative">
+    <section id="about" className="py-16 sm:py-32 bg-[#F9F8F6] dark:bg-black overflow-hidden relative">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
         
         <motion.div 
@@ -45,16 +45,16 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl mb-32"
+          className="max-w-4xl mb-20 sm:mb-32"
         >
-          <div className="flex items-center gap-2 mb-6">
+          <div className="flex items-center gap-2 mb-4 sm:mb-6">
             <span className="w-10 h-[1px] bg-black dark:bg-white"></span>
             <span className="text-xs font-bold tracking-widest text-black dark:text-white uppercase">About</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl lg:text-[7rem] font-serif font-bold text-black dark:text-white leading-[1] tracking-tight">
+          <h2 className="text-4xl sm:text-7xl lg:text-[7rem] font-serif font-bold text-black dark:text-white leading-[1.1] sm:leading-[1] tracking-tight">
             About NACOS <span className="italic font-light text-gray-400">Nile</span>
           </h2>
-          <p className="mt-12 text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl font-light leading-relaxed">
+          <p className="mt-8 sm:mt-12 text-lg sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl font-light leading-relaxed">
             We are a vibrant community of computing students dedicated to innovation, learning, and collaboration. Our mission is to foster a dynamic environment that empowers students to excel in various tech fields.
           </p>
         </motion.div>
@@ -63,9 +63,9 @@ export default function About() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mb-16 flex items-center justify-between"
+          className="mb-12 sm:mb-16 flex items-center justify-between"
         >
-          <h3 className="text-3xl font-serif italic text-black dark:text-white">Core Computing Disciplines</h3>
+          <h3 className="text-2xl sm:text-3xl font-serif italic text-black dark:text-white">Core Computing Disciplines</h3>
           <span className="hidden sm:block text-sm font-semibold tracking-wider text-gray-500 uppercase">01 / 04</span>
         </motion.div>
 
