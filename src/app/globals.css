@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+/*
+  The Manrope font is loaded in layout.tsx with next/font, which bundles it
+  with the site instead of fetching it from Google on every visit.
+*/
 
 /* =========================
    VARIABLES
@@ -16,6 +19,8 @@
   --text: #101828;
   --muted: #667085;
   --border: #e6e8ee;
+
+  --nav-height: 82px;
 }
 
 /* =========================
@@ -30,13 +35,22 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--text);
   background: var(--white);
   line-height: 1.6;
+}
+
+/* Stops sideways wobble on phones without breaking sticky elements */
+main {
+  overflow-x: clip;
 }
 
 ::selection {
@@ -47,6 +61,12 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 button {
@@ -66,17 +86,19 @@ img {
   padding: 110px 0;
 }
 
+/*
+  Sections are only hidden after the page script has run and added
+  .reveal-ready to <html>. Without JavaScript everything stays visible.
+*/
 .scroll-reveal {
-  opacity: 0;
-  transform: translateY(24px);
   transition:
     opacity 0.7s ease,
     transform 0.7s ease;
 }
 
-.scroll-reveal.is-visible {
-  opacity: 1;
-  transform: none;
+.reveal-ready .scroll-reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(24px);
 }
 
 :focus-visible {
@@ -101,6 +123,7 @@ img {
   transform-origin: left;
   transform: scaleX(0);
 
+  pointer-events: none;
   will-change: transform;
 }
 
@@ -121,6 +144,7 @@ img {
 .navbar.scrolled {
   position: fixed;
   background: rgba(13, 23, 51, 0.94);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: 0 8px 24px rgba(7, 19, 49, 0.18);
 }
@@ -130,7 +154,7 @@ img {
   z-index: 2;
 
   width: min(1240px, calc(100% - 48px));
-  height: 82px;
+  height: var(--nav-height);
   margin: auto;
 
   display: flex;
@@ -203,10 +227,6 @@ img {
   transition: transform 0.25s ease;
 }
 
-.nav-links a:hover {
-  opacity: 1;
-}
-
 .nav-links a.active {
   opacity: 1;
 }
@@ -227,11 +247,6 @@ img {
   transition: 0.25s ease;
 }
 
-.nav-cta:hover {
-  background: #ffffff;
-  color: var(--blue);
-}
-
 /* =========================
    HAMBURGER / MOBILE MENU
 ========================= */
@@ -239,8 +254,8 @@ img {
 .menu-button {
   display: none;
 
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
 
   border: 0;
   background: transparent;
@@ -266,7 +281,7 @@ img {
 }
 
 .menu-button.open span:nth-child(1) {
-  transform: translateY(5px) rotate(45deg);
+  transform: translateY(8px) rotate(45deg);
 }
 
 .menu-button.open span:nth-child(2) {
@@ -275,25 +290,32 @@ img {
 }
 
 .menu-button.open span:nth-child(3) {
-  transform: translateY(-5px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Sibling of the header, so it covers the whole screen */
 .nav-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 49;
 
   background: rgba(5, 10, 26, 0.55);
 
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 
-  transition: opacity 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0s linear 0.3s;
 }
 
 .nav-backdrop.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+
+  transition-delay: 0s;
 }
 
 /* =========================
@@ -340,10 +362,6 @@ img {
   pointer-events: auto;
 }
 
-.back-to-top:hover {
-  background: var(--blue-dark);
-}
-
 .back-to-top-icon {
   width: 18px;
   height: 18px;
@@ -381,16 +399,118 @@ img {
     ),
     url("/nile-blue-gate.jpg") center / cover no-repeat;
 
+  /*
+    The drift moves the layer with transform, which the phone's graphics
+    chip handles, instead of repainting the whole image every frame.
+  */
+  will-change: transform;
   animation: hero-drift 25s ease-in-out infinite alternate;
 }
 
 @keyframes hero-drift {
   from {
-    background-position: center;
+    transform: scale(1.04) translate3d(0, 0, 0);
   }
 
   to {
-    background-position: 54% 46%;
+    transform: scale(1.08) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+/*
+  SECOND HERO IMAGE
+  The gate shows first, then this layer fades in with the logo, then it
+  fades back out to the gate, and repeats.
+
+  To use a different logo, change the url() below. Save your image in the
+  public folder, for example public/hero-logo.png, and write
+  url("/hero-logo.png"). Use a PNG with a transparent background or an
+  SVG, otherwise a white box will show around the logo.
+
+  To change the speed, change --hero-cycle (one full gate, logo, gate loop).
+*/
+.hero {
+  --hero-cycle: 16s;
+}
+
+.hero-logo-bg {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 74% 50%,
+      rgba(59, 130, 246, 0.28),
+      transparent 45%
+    ),
+    linear-gradient(105deg, #071230 0%, #0d1733 55%, #1b3278 100%);
+
+  opacity: 0;
+  pointer-events: none;
+
+  animation: hero-logo-fade var(--hero-cycle) ease-in-out infinite;
+}
+
+.hero-logo-bg::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  right: 7%;
+
+  width: min(34vw, 440px);
+  aspect-ratio: 1 / 1;
+
+  background: url("/logo.svg") center / contain no-repeat;
+
+  transform: translateY(-50%);
+
+  animation: hero-logo-zoom var(--hero-cycle) ease-in-out infinite;
+}
+
+@keyframes hero-logo-fade {
+  0%,
+  40% {
+    opacity: 0;
+  }
+
+  50%,
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-logo-zoom {
+  0%,
+  40% {
+    transform: translateY(-50%) scale(0.94);
+  }
+
+  90%,
+  100% {
+    transform: translateY(-50%) scale(1.02);
+  }
+}
+
+/* On medium screens the logo sits closer to the text, so it is softer */
+@media (max-width: 1100px) {
+  .hero-logo-bg::after {
+    opacity: 0.45;
+  }
+}
+
+/* Six nav links: tighten spacing on smaller laptops */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .nav-container {
+    gap: 20px;
+  }
+
+  .nav-links {
+    gap: 22px;
   }
 }
 
@@ -556,17 +676,9 @@ img {
   color: var(--blue-dark);
 }
 
-.button-light:hover {
-  transform: translateY(-2px);
-}
-
 .button-outline {
   border: 1px solid rgba(255, 255, 255, 0.38);
   color: #ffffff;
-}
-
-.button-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .hero-bottom {
@@ -655,14 +767,17 @@ img {
   transition: transform 0.2s ease;
 }
 
-.text-link:hover span {
-  transform: translateX(5px);
-}
-
 .about-slideshow {
   width: 100%;
+  min-width: 0;
   max-width: 650px;
   margin-left: auto;
+}
+
+/* Clips the slide-in motion and lets vertical page scrolling pass through */
+.about-slide-viewport {
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
 .about-slide {
@@ -701,6 +816,10 @@ img {
   animation: kenburns 4.5s ease-out forwards;
 }
 
+.about-slideshow.is-paused .about-slide-image img {
+  animation-play-state: paused;
+}
+
 @keyframes kenburns {
   from {
     transform: scale(1);
@@ -714,7 +833,7 @@ img {
 .about-slide-image .about-logo {
   object-fit: contain;
   width: 170px;
-  height: auto;
+  height: 80px;
 
   /* logo slide shouldn't zoom like a photo */
   animation: none;
@@ -770,24 +889,80 @@ img {
 
 .about-slide-controls {
   display: flex;
-  gap: 6px;
-  margin-top: 14px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.about-slide-controls button {
-  width: 30px;
-  height: 3px;
+.about-slide-toggle {
+  flex: 0 0 auto;
+
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: var(--blue-dark);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.about-slide-toggle svg {
+  width: 11px;
+  height: 11px;
+}
+
+.about-slide-dots {
+  display: flex;
+  gap: 2px;
+}
+
+/* Visible bar stays thin, but the tap area is 34 by 32px */
+.about-slide-dots button {
+  position: relative;
+
+  width: 34px;
+  height: 32px;
 
   padding: 0;
 
   border: 0;
 
-  background: var(--border);
+  background: transparent;
 
   cursor: pointer;
 }
 
-.about-slide-controls button.active {
+.about-slide-dots button::before {
+  content: "";
+
+  position: absolute;
+
+  left: 2px;
+  right: 2px;
+  top: 50%;
+
+  height: 3px;
+  margin-top: -1.5px;
+
+  background: var(--border);
+
+  transition: background 0.25s ease;
+}
+
+.about-slide-dots button.active::before {
   background: var(--blue);
 }
 
@@ -843,6 +1018,7 @@ img {
 }
 
 .discipline-menu {
+  position: relative;
   border-right: 1px solid #dfe3ec;
 }
 
@@ -915,13 +1091,11 @@ img {
   transition: 0.25s ease;
 }
 
-.discipline-menu button:hover,
 .discipline-menu button.active {
   color: var(--blue-dark);
   background: #ffffff;
 }
 
-.discipline-menu button:hover .arrow-icon,
 .discipline-menu button.active .arrow-icon {
   opacity: 1;
   transform: none;
@@ -935,6 +1109,8 @@ img {
 .discipline-feature {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  min-width: 0;
 
   background: #ffffff;
 
@@ -955,10 +1131,6 @@ img {
   object-fit: cover;
 
   transition: transform 0.7s ease;
-}
-
-.discipline-feature:hover .discipline-feature-image img {
-  transform: scale(1.035);
 }
 
 /* Discipline-specific gradient tint, set inline via style prop */
@@ -1006,6 +1178,7 @@ img {
 
   background: rgba(13, 23, 51, 0.45);
 
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
@@ -1064,6 +1237,7 @@ img {
 }
 
 .discipline-feature-note .icon {
+  flex: 0 0 auto;
   width: 18px;
   color: var(--blue);
 }
@@ -1127,11 +1301,6 @@ img {
   transition: 0.3s ease;
 }
 
-.program-row:hover {
-  padding-left: 20px;
-  background: var(--off-white);
-}
-
 .program-number {
   font-size: 10px;
   font-weight: 800;
@@ -1162,10 +1331,6 @@ img {
   color: var(--blue);
 
   transition: 0.25s ease;
-}
-
-.program-row:hover .program-arrow {
-  transform: translate(3px, -3px);
 }
 
 .arrow-icon {
@@ -1205,6 +1370,7 @@ img {
 }
 
 .exco-card {
+  min-width: 0;
   text-align: left;
 }
 
@@ -1225,10 +1391,6 @@ img {
   object-fit: cover;
 
   transition: transform 0.6s ease;
-}
-
-.exco-card:hover .exco-image img {
-  transform: scale(1.035);
 }
 
 .exco-info {
@@ -1285,6 +1447,406 @@ img {
 }
 
 /* =========================
+   MEMBERSHIP
+========================= */
+
+.membership {
+  background: #ffffff;
+}
+
+.membership-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+
+  gap: 24px;
+
+  align-items: stretch;
+}
+
+.membership-plan {
+  padding: 36px;
+
+  border: 1px solid var(--border);
+
+  background: var(--off-white);
+}
+
+.membership-plan-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 22px;
+}
+
+.membership-plan-head h3,
+.membership-support h3,
+.membership-shirt h3 {
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.membership-session {
+  padding: 6px 11px;
+
+  border: 1px solid rgba(39, 65, 147, 0.25);
+  border-radius: 100px;
+
+  color: var(--blue);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.membership-stages {
+  list-style: none;
+}
+
+.membership-stage {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: start;
+  gap: 14px;
+
+  padding: 20px 0;
+
+  border-top: 1px solid var(--border);
+}
+
+/* Line joining the numbered steps */
+.membership-stage::before {
+  content: "";
+
+  position: absolute;
+
+  left: 12.5px;
+  top: 46px;
+  bottom: -20px;
+
+  width: 1px;
+
+  background: rgba(39, 65, 147, 0.25);
+}
+
+.membership-stage:last-child::before {
+  display: none;
+}
+
+.membership-stage-marker {
+  position: relative;
+  z-index: 1;
+
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--blue);
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.membership-stage:last-child .membership-stage-marker {
+  background: #ffffff;
+  color: var(--blue);
+
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+
+.membership-stage h4 {
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.membership-stage p {
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.membership-stage strong {
+  color: var(--blue-dark);
+
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.membership-plan-note {
+  padding-top: 18px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.membership-side {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 24px;
+}
+
+.membership-support {
+  padding: 32px;
+
+  background: var(--blue-dark);
+  color: #ffffff;
+}
+
+.membership-support ul {
+  list-style: none;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 14px;
+
+  margin-top: 20px;
+}
+
+.membership-support li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.membership-support .icon {
+  flex: 0 0 auto;
+
+  width: 18px;
+  height: 18px;
+
+  color: var(--highlight);
+}
+
+.membership-shirt {
+  padding: 32px;
+
+  border: 1px solid var(--border);
+}
+
+.membership-shirt-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.membership-shirt-price strong {
+  color: var(--blue);
+
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.membership-shirt-price span {
+  color: var(--muted);
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.membership-shirt p {
+  margin-top: 14px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* FAQ */
+
+.membership-faq {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 60px;
+
+  align-items: start;
+
+  margin-top: 80px;
+}
+
+.membership-faq-intro h3 {
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.membership-faq-intro p {
+  max-width: 340px;
+
+  margin-top: 14px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.faq-list {
+  border-top: 1px solid var(--border);
+
+  interpolate-size: allow-keywords;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item summary {
+  list-style: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 20px 4px;
+
+  color: var(--blue-dark);
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition: color 0.2s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Plus sign that turns into a minus when open */
+.faq-toggle {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.faq-toggle::before,
+.faq-toggle::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 10px;
+  height: 1.5px;
+
+  background: var(--blue);
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.faq-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-item[open] summary {
+  color: var(--blue);
+}
+
+.faq-item[open] .faq-toggle {
+  border-color: var(--blue);
+  background: var(--blue);
+}
+
+.faq-item[open] .faq-toggle::before,
+.faq-item[open] .faq-toggle::after {
+  background: #ffffff;
+}
+
+.faq-item[open] .faq-toggle::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq-answer {
+  padding: 0 48px 22px 4px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.faq-answer a {
+  color: var(--blue);
+  font-weight: 700;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Smooth opening in browsers that support it; others simply open instantly */
+.faq-item::details-content {
+  height: 0;
+  overflow: hidden;
+
+  transition:
+    height 0.35s ease,
+    content-visibility 0.35s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  height: auto;
+}
+
+/* =========================
    COMMUNITY
 ========================= */
 
@@ -1314,6 +1876,8 @@ img {
   border: 1px solid rgba(96, 165, 250, 0.12);
 
   border-radius: 50%;
+
+  pointer-events: none;
 }
 
 .community-inner {
@@ -1371,9 +1935,34 @@ img {
   transition: 0.2s ease;
 }
 
-.community-links a:hover {
-  color: #ffffff;
-  padding-left: 7px;
+/* Platforms without a link yet: quieter, with a "Coming soon" label */
+.community-links a[aria-disabled="true"],
+.community-links a[aria-disabled="true"]:hover,
+.community-links a[aria-disabled="true"]:active {
+  padding-left: 0;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  cursor: default;
+}
+
+.community-links a[aria-disabled="true"] .social-icon {
+  opacity: 0.6;
+}
+
+.community-link-soon {
+  margin-left: auto;
+  padding: 3px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 100px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
 }
 
 .community-links .arrow-icon {
@@ -1449,14 +2038,11 @@ img {
   font-weight: 600;
 }
 
-.footer-links a:hover {
-  color: #ffffff;
-}
-
 .footer-bottom {
   display: flex;
 
   justify-content: space-between;
+  gap: 8px;
 
   padding: 17px 0;
 
@@ -1468,11 +2054,182 @@ img {
 }
 
 /* =========================
+   HOVER EFFECTS
+   Only on devices with a real mouse. On phones, :hover "sticks" after a
+   tap, which made rows shift and cards stay zoomed.
+========================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-item summary:hover {
+    color: var(--blue);
+  }
+
+  .faq-item summary:hover .faq-toggle {
+    border-color: var(--blue);
+  }
+
+  .nav-links a:hover {
+    opacity: 1;
+  }
+
+  .nav-cta:hover {
+    background: #ffffff;
+    color: var(--blue);
+  }
+
+  .back-to-top:hover {
+    background: var(--blue-dark);
+  }
+
+  .button-light:hover {
+    transform: translateY(-2px);
+  }
+
+  .button-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .text-link:hover span {
+    transform: translateX(5px);
+  }
+
+  .about-slide-toggle:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .discipline-menu button:hover {
+    color: var(--blue-dark);
+    background: #ffffff;
+  }
+
+  .discipline-menu button:hover .arrow-icon {
+    opacity: 1;
+    transform: none;
+    color: var(--blue);
+  }
+
+  .discipline-feature:hover .discipline-feature-image img {
+    transform: scale(1.035);
+  }
+
+  .program-row:hover {
+    padding-left: 20px;
+    background: var(--off-white);
+  }
+
+  .program-row:hover .program-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .exco-card:hover .exco-image img {
+    transform: scale(1.035);
+  }
+
+  .community-links a:hover {
+    color: #ffffff;
+    padding-left: 7px;
+  }
+
+  .footer-links a:hover {
+    color: #ffffff;
+  }
+}
+
+/* =========================
+   TAP EFFECTS (PHONES AND TABLETS)
+   Touch screens cannot hover, so the same effects show when tapped.
+   Program rows stay highlighted after a tap; everything else reacts
+   while your finger is on it.
+========================= */
+
+@media (hover: none), (pointer: coarse) {
+  .faq-item summary:active {
+    color: var(--blue);
+  }
+
+  .program-row.active {
+    padding-left: 14px;
+    background: var(--off-white);
+  }
+
+  .program-row.active .program-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .program-row.active h3 {
+    color: var(--blue);
+  }
+
+  .program-row:active {
+    background: var(--off-white);
+  }
+
+  .exco-card:active .exco-image img {
+    transform: scale(1.035);
+    transition-duration: 0.3s;
+  }
+
+  .discipline-feature-image:active img {
+    transform: scale(1.035);
+    transition-duration: 0.3s;
+  }
+
+  .community-links a:active {
+    color: #ffffff;
+    padding-left: 7px;
+  }
+
+  .button-light:active {
+    transform: scale(0.97);
+  }
+
+  .button-outline:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .text-link:active span {
+    transform: translateX(5px);
+  }
+
+  .about-slide-toggle:active {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .nav-links a:active {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+  }
+
+  .footer-links a:active {
+    color: #ffffff;
+  }
+
+  .back-to-top:active {
+    background: var(--blue-dark);
+  }
+}
+
+.program-row h3 {
+  transition: color 0.25s ease;
+}
+
+/* =========================
    REDUCED MOTION
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .faq-item::details-content {
+    transition: none;
+  }
+
+  .scroll-reveal,
+  .reveal-ready .scroll-reveal:not(.is-visible) {
     opacity: 1;
     transform: none;
     transition: none;
@@ -1488,6 +2245,12 @@ img {
   }
 
   .hero-background {
+    animation: none;
+  }
+
+  /* No fading for people who ask for less motion: the gate stays */
+  .hero-logo-bg,
+  .hero-logo-bg::after {
     animation: none;
   }
 
@@ -1511,12 +2274,33 @@ img {
 ========================= */
 
 @media (max-width: 900px) {
+  /*
+    No blur behind the navbar on phones and tablets. The bar is almost
+    solid anyway, and the blur is recalculated on every scroll frame.
+  */
+  .navbar.scrolled {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(13, 23, 51, 0.97);
+  }
+
+  /* Logo centred and faint behind the text so the headline stays readable */
+  .hero-logo-bg::after {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    width: min(62vw, 420px);
+
+    opacity: 0.3;
+  }
+
   .nav-links {
     position: absolute;
 
-    top: 72px;
-    left: 24px;
-    right: 24px;
+    top: calc(var(--nav-height) - 10px);
+    left: 0;
+    right: 0;
     z-index: 2;
 
     display: flex;
@@ -1529,15 +2313,14 @@ img {
 
     border-radius: 12px;
 
-    background: rgba(13, 23, 51, 0.97);
-
-    backdrop-filter: blur(12px);
+    background: rgba(13, 23, 51, 0.98);
 
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
 
     max-height: 0;
     opacity: 0;
     overflow: hidden;
+    visibility: hidden;
     pointer-events: none;
     transform: translateY(-8px);
 
@@ -1545,20 +2328,26 @@ img {
       max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
       opacity 0.25s ease,
       transform 0.3s ease,
-      padding 0.4s ease;
+      padding 0.4s ease,
+      visibility 0s linear 0.4s;
   }
 
   .nav-links.open {
     max-height: 400px;
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     transform: none;
 
     padding: 9px;
+
+    transition-delay: 0s;
   }
 
   .nav-links a {
-    padding: 13px;
+    padding: 14px 13px;
+
+    font-size: 15px;
 
     opacity: 0;
     transform: translateY(-6px);
@@ -1597,6 +2386,10 @@ img {
     transition-delay: 0.26s;
   }
 
+  .nav-links.open a:nth-child(6) {
+    transition-delay: 0.31s;
+  }
+
   .nav-links a.active {
     color: var(--highlight);
   }
@@ -1608,6 +2401,7 @@ img {
   .menu-button {
     display: flex;
     margin-left: auto;
+    margin-right: -10px;
   }
 
   .about-grid,
@@ -1621,6 +2415,16 @@ img {
   .about-slideshow {
     max-width: none;
     margin: 0;
+  }
+
+  .membership-grid,
+  .membership-faq {
+    grid-template-columns: 1fr;
+  }
+
+  .membership-faq {
+    gap: 24px;
+    margin-top: 60px;
   }
 
   .discipline-explorer {
@@ -1662,7 +2466,7 @@ img {
   }
 
   .exco-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .president-panel {
@@ -1679,7 +2483,12 @@ img {
 ========================= */
 
 @media (max-width: 650px) {
-  .container {
+  :root {
+    --nav-height: 72px;
+  }
+
+  .container,
+  .nav-container {
     width: min(100% - 32px, 1180px);
   }
 
@@ -1687,53 +2496,101 @@ img {
     padding: 78px 0;
   }
 
+  /* Keeps section headings clear of the fixed navbar after tapping a link */
+  section[id] {
+    scroll-margin-top: 24px;
+  }
+
+  /* HERO: grows with its content so the stats never overlap the buttons */
   .hero {
-    min-height: 680px;
-    height: 90vh;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    max-height: none;
+
+    align-items: stretch;
   }
 
   .hero-background {
     background-position: 58% center;
   }
 
+  .hero-logo-bg::after {
+    top: 44%;
+    width: 80vw;
+  }
+
+  .hero-content {
+    height: auto;
+
+    padding-top: calc(var(--nav-height) + 36px);
+    padding-bottom: 28px;
+  }
+
+  .hero-copy {
+    margin: auto 0;
+  }
+
   .hero h1 {
-    font-size: clamp(43px, 13vw, 65px);
+    font-size: clamp(40px, 12vw, 60px);
   }
 
   .hero-copy > p {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
 
-    max-width: 300px;
+    max-width: 320px;
   }
 
   .button {
     width: 100%;
+    font-size: 13px;
   }
 
+  /* Compact stats row on phones */
   .hero-bottom {
-    left: 16px;
-    right: 16px;
+    position: static;
 
-    gap: 17px;
+    margin-top: 30px;
+    padding-top: 12px;
+
+    gap: 20px;
   }
 
   .hero-bottom div {
+    flex: 0 1 auto;
+
     flex-direction: column;
     align-items: flex-start;
-    gap: 1px;
+    gap: 0;
   }
 
   .hero-bottom strong {
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 1.3;
   }
 
   .hero-bottom span {
-    font-size: 7px;
+    font-size: 9px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+
+  /* ABOUT */
+  .about-intro,
+  .section-top > p,
+  .programs-heading > p,
+  .community-copy > p {
+    font-size: 14px;
+  }
+
+  .text-link {
+    font-size: 13px;
+    padding: 6px 0;
   }
 
   .about-slide {
@@ -1742,19 +2599,37 @@ img {
   }
 
   .about-slide-image {
-    min-height: 260px;
+    min-height: 240px;
   }
 
   .about-slide-content {
-    padding: 25px;
+    padding: 24px;
+  }
+
+  .about-slide-content > span {
+    font-size: 10px;
   }
 
   .about-slide-content h3 {
     font-size: 21px;
   }
 
+  .about-slide-content p {
+    font-size: 13px;
+  }
+
   .about-slide-count {
     bottom: 15px;
+  }
+
+  .about-slide-dots button {
+    width: 30px;
+    height: 40px;
+  }
+
+  .about-slide-toggle {
+    width: 36px;
+    height: 36px;
   }
 
   .section-heading h2,
@@ -1764,22 +2639,75 @@ img {
     font-size: clamp(34px, 10vw, 48px);
   }
 
+  /*
+    DISCIPLINES: the six options become a sideways-scrolling row of pills,
+    so the details panel sits right under whatever you tap.
+  */
+  .discipline-explorer {
+    min-height: 0;
+  }
+
   .discipline-menu {
-    display: block;
+    display: flex;
+    gap: 8px;
+
+    padding: 14px 0;
+
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .discipline-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .discipline-menu button,
+  .discipline-menu button:nth-child(odd),
+  .discipline-menu button:nth-child(5),
+  .discipline-menu button:nth-child(6),
+  .discipline-menu button:last-child {
+    border: 1px solid #dfe3ec;
   }
 
   .discipline-menu button {
-    grid-template-columns: 35px 1fr 18px;
+    flex: 0 0 auto;
 
-    padding: 17px 14px;
+    width: auto;
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border-radius: 100px;
+
+    background: #ffffff;
+
+    scroll-snap-align: center;
   }
 
-  .discipline-menu button:nth-child(odd) {
-    border-right: 0;
+  .discipline-menu button::before,
+  .discipline-menu button .arrow-icon {
+    display: none;
   }
 
-  .discipline-menu button:nth-child(5) {
-    border-bottom: 1px solid #dfe3ec;
+  .discipline-menu button strong {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .discipline-menu button.active {
+    color: #ffffff;
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .discipline-menu button.active span {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .discipline-feature {
@@ -1787,17 +2715,31 @@ img {
   }
 
   .discipline-feature-image {
-    min-height: 270px;
+    min-height: 240px;
   }
 
   .discipline-feature-copy {
-    padding: 28px 24px;
+    padding: 26px 22px 30px;
+  }
+
+  .discipline-feature-copy > span {
+    font-size: 10px;
   }
 
   .discipline-feature-copy h3 {
     font-size: 26px;
   }
 
+  .discipline-feature-copy > p {
+    font-size: 14px;
+  }
+
+  .discipline-feature-note {
+    margin-top: 22px;
+    font-size: 12px;
+  }
+
+  /* PROGRAMS */
   .program-row {
     grid-template-columns: 36px 1fr 18px;
 
@@ -1806,16 +2748,12 @@ img {
     padding: 21px 3px;
   }
 
-  .program-row:hover {
-    padding-left: 9px;
-  }
-
   .program-row h3 {
     font-size: 16px;
   }
 
   .program-row p {
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .program-arrow {
@@ -1823,34 +2761,112 @@ img {
     grid-row: 1;
   }
 
+  /* EXCOS */
   .leadership-editorial {
     grid-template-columns: 1fr;
     gap: 45px;
   }
 
   .president-panel {
+    width: 100%;
     max-width: 310px;
     margin: 0 auto;
   }
 
   .exco-grid {
-    grid-template-columns: repeat(2, 1fr);
-
     gap: 32px 15px;
+  }
+
+  .exco-image {
+    border-radius: 14px;
   }
 
   .exco-large .exco-info h3 {
     font-size: 22px;
   }
 
-  .exco-info h3 {
+  .exco-large .exco-info p {
     font-size: 13px;
   }
 
-  .exco-info p {
+  .exco-info > span {
     font-size: 9px;
   }
 
+  .exco-info h3 {
+    font-size: 14px;
+  }
+
+  .exco-info p {
+    font-size: 12px;
+  }
+
+  /* MEMBERSHIP */
+  .membership-plan,
+  .membership-support,
+  .membership-shirt {
+    padding: 24px 20px;
+  }
+
+  .membership-plan-head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .membership-stage {
+    grid-template-columns: 30px 1fr auto;
+    gap: 10px;
+  }
+
+  .membership-stage h4 {
+    font-size: 14px;
+  }
+
+  .membership-stage p {
+    font-size: 12px;
+  }
+
+  .membership-stage strong {
+    font-size: 17px;
+  }
+
+  .membership-plan-note,
+  .membership-shirt p {
+    font-size: 13px;
+  }
+
+  .membership-support ul {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .membership-support li {
+    font-size: 13px;
+  }
+
+  .membership-shirt-price strong {
+    font-size: 28px;
+  }
+
+  .membership-faq-intro h3 {
+    font-size: 26px;
+  }
+
+  .membership-faq-intro p {
+    font-size: 14px;
+  }
+
+  .faq-item summary {
+    padding: 18px 2px;
+    font-size: 15px;
+  }
+
+  .faq-answer {
+    padding: 0 8px 20px 2px;
+    font-size: 14px;
+  }
+
+  /* COMMUNITY */
   .community {
     padding: 82px 0;
   }
@@ -1859,22 +2875,45 @@ img {
     font-size: clamp(38px, 12vw, 58px);
   }
 
+  .community-links a {
+    min-height: 52px;
+    font-size: 14px;
+  }
+
+  /* FOOTER */
   .footer-top,
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
   }
 
+  .footer-top {
+    gap: 28px;
+  }
+
+  .footer-brand p {
+    font-size: 12px;
+  }
+
   .footer-links {
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 4px 20px;
+  }
+
+  .footer-links a {
+    padding: 8px 0;
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    font-size: 11px;
   }
 
   .back-to-top {
     right: 16px;
     bottom: 16px;
 
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 }
