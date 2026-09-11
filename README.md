@@ -28,15 +28,15 @@ All static assets are located in the [`public/`](public/) directory:
 
 | Photo File | Name | Office / Role | Bio / Tagline |
 | :--- | :--- | :--- | :--- |
-| [`president.jpg`](public/excos-pics/president.jpg) | **Zikora Fortune Nwafor** | President | *"Passionate about building active student communities."* |
-| [`vp.jpg`](public/excos-pics/vp.jpg) | **Abdullah Ali Ahmad** | Vice President | *"Advocating for student welfare and academic excellence."* |
-| [`sg.jpg`](public/excos-pics/sg.jpg) | **Sheila Jato** | Secretary General | *"Keeping the engines running smoothly."* |
-| [`fc.jpg`](public/excos-pics/fc.jpg) | **Amira Ibrahim** | Financial Secretary | *"Making the important financial decisions."* |
-| [`pro.jpg`](public/excos-pics/pro.jpg) | **Elvis Francis** | Public Relations Officer | *"Applying creativity to communication."* |
-| [`dtd.jpg`](public/excos-pics/dtd.jpg) | **Ivoke Kamsi** | Director of Training & Development (DTD) | *"Driving technical growth and leading coding workshops for Nile computing students."* |
-| [`provost.jpg`](public/excos-pics/provost.jpg) | **Zubaida Abdulazeez** | Provost | *"Managing the day-to-day operations of NACOS Nile."* |
-| [`socials.jpg`](public/excos-pics/socials.jpg) | **Saidat Ahmed** | Director of Socials | *"Prioritizing social activities and events."* |
-| [`welfare.jpg`](public/excos-pics/welfare.jpg) | **Danielle Ekunwe** | Director of Welfare | *"Your well-being is my priority."* |
+| [`president.webp`](public/excos-pics/president.webp) | **Zikora Fortune Nwafor** | President | *"Passionate about building active student communities."* |
+| [`vp.webp`](public/excos-pics/vp.webp) | **Abdullah Ali Ahmad** | Vice President | *"Advocating for student welfare and academic excellence."* |
+| [`sg.webp`](public/excos-pics/sg.webp) | **Sheila Jato** | Secretary General | *"Keeping the engines running smoothly."* |
+| [`fc.webp`](public/excos-pics/fc.webp) | **Amira Ibrahim** | Financial Secretary | *"Making the important financial decisions."* |
+| [`pro.webp`](public/excos-pics/pro.webp) | **Elvis Francis** | Public Relations Officer | *"Applying creativity to communication."* |
+| [`dtd.webp`](public/excos-pics/dtd.webp) | **Ivoke Kamsi** | Director of Training & Development (DTD) | *"Driving technical growth and leading coding workshops for Nile computing students."* |
+| [`provost.webp`](public/excos-pics/provost.webp) | **Zubaida Abdulazeez** | Provost | *"Managing the day-to-day operations of NACOS Nile."* |
+| [`socials.webp`](public/excos-pics/socials.webp) | **Saidat Ahmed** | Director of Socials | *"Prioritizing social activities and events."* |
+| [`welfare.webp`](public/excos-pics/welfare.webp) | **Danielle Ekunwe** | Director of Welfare | *"Your well-being is my priority."* |
 
 
 ### 2. Official Branding & Logo
@@ -47,9 +47,6 @@ All static assets are located in the [`public/`](public/) directory:
   - Accent / Highlights: `#3b82f6` / `#60a5fa`
   - Clean whites, grays, and dark background tokens for dark mode compatibility.
 
-### 3. DINNER Night Photos
- - **Link:** https://dhmedia270.pixieset.com/acolorsshownacosnilechapter/
- - **Download Pin:** 2501
 ---
 
 ## 📋 Required Sections & Features
