@@ -4,17 +4,17 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { FaXTwitter, FaInstagram, FaLinkedin, FaFacebook, FaGithub, FaTiktok, FaWhatsapp } from 'react-icons/fa6';
+import type { IconType } from 'react-icons'; // <-- ADD THIS IMPORT
 
-// Define our type to prevent TypeScript errors
 type Social = {
   name: string;
   handle: string;
   description: string;
-  icon: any;
+  icon: IconType; // <-- CHANGE 'any' TO 'IconType'
   href?: string;
   active: boolean;
   tag?: string;
-  isPopup?: boolean; // New property to trigger the modal
+  isPopup?: boolean;
 };
 
 const socials: Social[] = [

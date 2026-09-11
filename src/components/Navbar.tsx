@@ -21,12 +21,11 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch for the theme toggle
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
-  // Detect scroll for frosted glass effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -35,7 +34,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll handler
   const scrollToSection = (targetId: string) => {
     setIsMobileMenuOpen(false); 
     
@@ -67,7 +65,6 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4 max-w-7xl flex items-center justify-between">
           
-          {/* Logo */}
           <div 
             onClick={() => scrollToSection('home')}
             className="flex items-center gap-2 cursor-pointer group"
@@ -84,7 +81,6 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* Desktop Links */}
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
@@ -96,7 +92,6 @@ export default function Navbar() {
               </button>
             ))}
             
-            {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
@@ -106,7 +101,6 @@ export default function Navbar() {
               {!mounted && <div className="w-[18px] h-[18px]" />}
             </button>
             
-            {/* CTA Button */}
             <button 
               onClick={() => scrollToSection('community')}
               className="px-5 py-2 text-sm font-bold rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-sm"
@@ -115,7 +109,6 @@ export default function Navbar() {
             </button>
           </nav>
 
-          {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -135,7 +128,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

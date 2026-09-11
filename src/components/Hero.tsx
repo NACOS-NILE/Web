@@ -1,15 +1,11 @@
 "use client";
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import DataRibbon from './DataRibbon';
 
 export default function Hero() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
-      {/* REMOVED: bg-slate-50 dark:bg-black. Now it's fully transparent so CursorGlow shows! */}
       <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden transition-colors duration-300">
         
         <DataRibbon />
@@ -45,7 +41,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <button 
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-blue-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-lg font-medium transition-colors duration-500 flex items-center justify-center gap-2 shadow-lg"
             >
               Join the Community <span>&rarr;</span>

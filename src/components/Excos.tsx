@@ -91,7 +91,6 @@ export default function Excos() {
           </p>
         </div>
 
-        {/* Carousel Container */}
         <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center">
           
           <div className="absolute inset-0 flex items-center justify-between z-20 px-4 md:px-10 pointer-events-none">
@@ -107,13 +106,12 @@ export default function Excos() {
             <AnimatePresence mode="popLayout">
               {executives.map((exco, index) => {
                 
-                // Calculate position relative to active index
                 let offset = index - activeIndex;
                 if (offset < -Math.floor(executives.length / 2)) offset += executives.length;
                 if (offset > Math.floor(executives.length / 2)) offset -= executives.length;
 
                 const isActive = offset === 0;
-                const isVisible = Math.abs(offset) <= 2; // Only show 5 cards at a time
+                const isVisible = Math.abs(offset) <= 2; 
 
                 if (!isVisible) return null;
 
@@ -126,7 +124,7 @@ export default function Excos() {
                       x: `${offset * 60}%`,
                       scale: isActive ? 1 : 0.8 - Math.abs(offset) * 0.1,
                       zIndex: 10 - Math.abs(offset),
-                      rotateY: offset * -15, // Creates the 3D cover flow tilt
+                      rotateY: offset * -15, 
                       opacity: isActive ? 1 : 0.4 - Math.abs(offset) * 0.1,
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -140,15 +138,13 @@ export default function Excos() {
                       className="object-cover object-center"
                     />
                     
-                    {/* Gradient Overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent transition-opacity duration-300 ${isActive ? 'opacity-90' : 'opacity-40'}`}></div>
 
-                    {/* Bio Text - Only fully visible on active card */}
                     <div className={`absolute bottom-0 left-0 w-full p-6 transition-all duration-300 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                       <h3 className="text-2xl font-black text-white mb-1 drop-shadow-md">{exco.name}</h3>
                       <p className="text-nacos-accent-light font-bold text-sm mb-3 drop-shadow-md uppercase tracking-wider">{exco.role}</p>
                       <p className="text-gray-200 text-sm leading-relaxed border-t border-white/20 pt-3 mt-2 font-medium">
-                        "{exco.bio}"
+                        &quot;{exco.bio}&quot;
                       </p>
                     </div>
                   </motion.div>
