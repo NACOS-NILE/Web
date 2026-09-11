@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
+@theme {
+  --color-nacos-blue: #274193;
+  --color-nacos-blue-deep: #0d1733;
+  --color-nacos-blue-glow: #3b82f6;
+  --color-nacos-green: #75b947;
+  --color-nacos-emerald: #10b981;
+  --color-nacos-mint: #34d399;
+  --color-nacos-dark: #060b19;
+  --color-nacos-darker: #03060e;
+  --color-nacos-card: #0b1429;
+  --color-nacos-card-hover: #101c38;
+  --color-nacos-border: rgba(255, 255, 255, 0.08);
+  --color-nacos-border-green: rgba(117, 185, 71, 0.35);
+  --color-nacos-border-blue: rgba(59, 130, 246, 0.35);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #060b19;
+  --foreground: #f1f5f9;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  selection-background-color: #75b947;
+  selection-color: #060b19;
+}
+
+::selection {
+  background-color: #75b947;
+  color: #060b19;
+}
+
+/* Background Grids & Technical Accents */
+.tech-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.tech-dots-pattern {
+  background-image: radial-gradient(rgba(117, 185, 71, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.subtle-blue-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(39, 65, 147, 0.28) 0%, rgba(6, 11, 25, 0) 70%);
+}
+
+.subtle-green-glow {
+  background: radial-gradient(circle at 80% 20%, rgba(117, 185, 71, 0.18) 0%, rgba(6, 11, 25, 0) 60%);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(11, 20, 41, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(117, 185, 71, 0.4);
+  background: rgba(16, 28, 56, 0.82);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.45);
+}
+
+/* Custom Thin Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060b19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #75b947;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessible High-Contrast Focus Visible Rings */
+*:focus-visible {
+  outline: 2px solid #75b947 !important;
+  outline-offset: 3px !important;
+}
+
+/* Smooth Interactive Touch Action */
+a, button {
+  touch-action: manipulation;
 }
