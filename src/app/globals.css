@@ -2,25 +2,152 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --color-primary: #274193;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #1a2f6c;
+  --color-accent: #60a5fa;
+  --color-dark-accent: #0d1733;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #274193;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #1a2f6c;
+  --color-accent: #60a5fa;
+  --color-dark-accent: #0d1733;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --font-display: var(--font-deacon), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-deacon: var(--font-deacon), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-terminal: "SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Code", "Courier New", Menlo, Monaco, Consolas, ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Fallback for any same-page hash navigation the SmoothScroll click
+   handler doesn't catch (e.g. browser back/forward). The handler itself
+   already checks prefers-reduced-motion, so this only needs to as well. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+/* Hide scrollbars across browsers */
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: #274193;
+  color: #ffffff;
+}
+
+@keyframes graphDashFlow {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+.animate-graph-dash {
+  animation: graphDashFlow 3s linear infinite;
+}
+
+.animate-graph-dash-active {
+  animation: graphDashFlow 1s linear infinite;
+}
+
+/* MarqueeBand: the row is rendered twice back-to-back (w-max, not w-full)
+   and this shifts it left by exactly one copy's width, so the moment it
+   snaps back to 0% the two copies line up pixel-for-pixel — no visible
+   seam. GPU-only (transform), so it costs nothing per scroll frame; the
+   motion-reduce:animate-none utility on the element itself (Tailwind's
+   built-in prefers-reduced-motion variant) turns it off for anyone who's
+   asked for less motion. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* Below-the-fold content visibility optimization to skip offscreen style and layout calculations */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 850px;
+}
+
+@keyframes fillProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fillOverlay {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes floatSubtle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(3deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(-3deg);
+  }
+}
+
+.animate-float-1 {
+  animation: floatSubtle 3.2s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatReverse 3.6s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: floatSubtle 4s ease-in-out infinite 0.4s;
+}
+
+.animate-float-4 {
+  animation: floatReverse 3.8s ease-in-out infinite 0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-char {
+    animation: none;
+    transition: none;
+  }
 }

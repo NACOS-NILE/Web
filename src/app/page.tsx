@@ -1,69 +1,110 @@
-import Image from "next/image";
+import dynamic from "next/dynamic";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ArchitecturalGrid from "@/components/ArchitecturalGrid";
+import ExcoArch from "@/components/ExcoArch";
+import AboutBento from "@/components/AboutBento";
+
+// Code-split below-the-fold sections to decrease initial bundle size and defer unused JS
+const CoursesGraph = dynamic(() => import("@/components/CoursesGraph"));
+const GallerySection = dynamic(() => import("@/components/GallerySection"));
+const EventsSection = dynamic(() => import("@/components/EventsSection"));
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
+const MarqueeBand = dynamic(() => import("@/components/MarqueeBand"));
+const JoinCTA = dynamic(() => import("@/components/JoinCTA"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black min-h-screen">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="min-h-screen bg-white text-gray-900 flex flex-col items-center justify-start overflow-x-clip selection:bg-[#274193] selection:text-white relative">
+      {/* EARLY LCP DISCOVERY: Preload initial hero image with high fetchPriority and responsive imageSrcSet */}
+      <link
+        rel="preload"
+        as="image"
+        href="https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-1200,q-75,f-auto"
+        imageSrcSet="https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-360,q-75,f-auto 360w, https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-480,q-75,f-auto 480w, https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-640,q-75,f-auto 640w, https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-750,q-75,f-auto 750w, https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-828,q-75,f-auto 828w, https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-1080,q-75,f-auto 1080w, https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img107.webp?tr=w-1200,q-75,f-auto 1200w"
+        imageSizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
+        fetchPriority="high"
+      />
+
+      {/* AMBIENT BRAND WASH — soft primary-color gradient behind the Navbar/Hero,
+          fading to white by the time you reach the executive arch. Same low-opacity
+          blurred-blob technique ExcoArch already uses for its own background glow. */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 inset-x-0 h-[480px] sm:h-[620px] bg-gradient-to-b from-[#274193]/[0.09] via-[#274193]/[0.03] to-transparent pointer-events-none z-0"
+      />
+
+      {/* ARCHITECTURAL BACKGROUND MARGIN GRID LINES */}
+      <ArchitecturalGrid />
+
+      {/* FLOATING FROSTED NAVBAR */}
+      <Navbar />
+
+      {/* EDITORIAL HERO SECTION */}
+      <Hero />
+
+      {/* 3D EXECUTIVE COUNCIL ARCH */}
+      <section id="leadership" className="w-full relative z-30 -mt-12 xs:-mt-16 sm:-mt-48 md:-mt-64 lg:-mt-72 xl:-mt-80 pb-6 sm:pb-10 px-2 sm:px-4">
+        <ExcoArch />
+      </section>
+
+      {/* ABOUT & MILESTONES
+          Also (like JoinCTA below) NOT content-visibility-auto. These four
+          sections' headers all now carry a scroll-scrubbed TechIconField —
+          under content-visibility:auto, ScrollTrigger's first measurement
+          of a still-skipped subtree can be wrong, and the *correction* once
+          it un-skips is itself a visible jump: a one-time flash exactly
+          where a header crosses the edge of the viewport, gone on every
+          later pass because the size is cached correctly after that first
+          real render. Removing content-visibility here trades a bit of
+          off-screen render deferral for not having that one-time glitch —
+          the components are still JS-code-split via dynamic() above either
+          way. */}
+      <div className="w-full">
+        <AboutBento />
+      </div>
+
+      {/* COURSES & ACADEMIC ECOSYSTEM (CENTER NACOS LOGO WITH ORGANIC DOTTED CONNECTIONS) */}
+      <div className="w-full">
+        <CoursesGraph />
+      </div>
+
+      {/* CAMPUS & BUILDER GALLERY */}
+      <div className="w-full">
+        <GallerySection />
+      </div>
+
+      {/* UPCOMING EVENTS AGENDA */}
+      <div className="w-full">
+        <EventsSection />
+      </div>
+
+      {/* COMMUNITY VOICES & TESTIMONIALS */}
+      <div className="w-full">
+        <TestimonialsSection />
+      </div>
+
+      {/* JOIN THE GUILD COMMUNITY CTA (EDITORIAL BLACK BOOKEND) */}
+      <div className="w-full">
+        <JoinCTA />
+      </div>
+
+      {/* TILTED RIBBON SEAM — stands in for a straight line into the
+          footer; negative-margined into both neighbors, so it needs to sit
+          between them in DOM order, not wrapped with either. */}
+      <MarqueeBand />
+
+      {/* MODERN MINIMALIST CHAPTER FOOTER — NOT content-visibility-auto
+          (unlike before): the wordmark now carries its own scroll-scrubbed
+          ScrollTrigger, and content-visibility skipping this subtree while
+          off-screen is exactly what caused that trigger's first measurement
+          to land on a collapsed footer height — the stale-measurement
+          "flash"/pause documented on the other sections above, the same
+          reason they all dropped content-visibility too. */}
+      <div className="w-full">
+        <Footer />
+      </div>
+    </main>
   );
 }
