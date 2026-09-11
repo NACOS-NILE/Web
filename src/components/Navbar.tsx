@@ -29,11 +29,11 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/logo.svg"
-              alt="NACOS Nile Logo"
-              width={32}
-              height={32}
-              className="h-8 w-auto"
+              src="/nacos-logo.png"
+              alt="NACOS Official Logo"
+              width={36}
+              height={36}
+              className="h-9 w-auto"
             />
             <span className="font-serif font-bold tracking-tight text-nacos-primary dark:text-nacos-accent-light ml-2 hidden sm:block">
               NACOS Nile
