@@ -37,8 +37,10 @@ export const testimonials: Testimonial[] = [
     aspect: "square",
   },
   {
-    id: "gabriel",
-    name: "Gabriel Eneojo Momoh",
+    id: "zikora",
+    // Photo is the real President's headshot (see excos.ts) — name has to
+    // match the actual person, not a placeholder.
+    name: "Zikora Fortune Nwafor",
     role: "President",
     dept: "Software Engineering",
     year: "Alumni",
@@ -59,10 +61,11 @@ export const testimonials: Testimonial[] = [
     aspect: "square",
   },
   {
-    id: "chisom",
-    name: "Chisom A.",
-    role: "Public Relations",
-    dept: "Cyber Security",
+    id: "elvis",
+    // Photo is the real PRO's headshot — name/dept corrected to match.
+    name: "Elvis Francis",
+    role: "PRO",
+    dept: "Software Engineering",
     year: "400 Level",
     image: "/excos-pics/pro.webp",
     quote: "From intense CTF competitions to threat modeling workshops, NACOS prepares you for the security realities of industry.",
@@ -70,8 +73,9 @@ export const testimonials: Testimonial[] = [
     aspect: "tall",
   },
   {
-    id: "amara",
-    name: "Amara O.",
+    id: "zubaida",
+    // Photo is the real Provost's headshot — name corrected to match.
+    name: "Zubaida Abdulazeez",
     role: "Provost",
     dept: "Computer Science",
     year: "300 Level",
@@ -93,10 +97,12 @@ export const testimonials: Testimonial[] = [
     aspect: "square",
   },
   {
-    id: "tariq",
-    name: "Tariq B.",
-    role: "Social Director",
-    dept: "Software Engineering",
+    id: "saidat",
+    // Photo is the real Director of Socials' headshot — name/role/dept
+    // corrected to match.
+    name: "Saidat Ahmed",
+    role: "Director of Socials",
+    dept: "Computer Science",
     year: "300 Level",
     image: "/excos-pics/socials.webp",
     quote: "The lifelong friendships and late-night hackathon memories formed within NACOS make studying computing at Nile unforgettable.",
@@ -104,10 +110,12 @@ export const testimonials: Testimonial[] = [
     aspect: "tall",
   },
   {
-    id: "emmanuel",
-    name: "Emmanuel O.",
-    role: "Financial Controller",
-    dept: "Information Systems",
+    id: "amira",
+    // Photo is the real Financial Secretary's headshot — name/role/dept
+    // corrected to match.
+    name: "Amira Ibrahim",
+    role: "Financial Secretary",
+    dept: "Software Engineering",
     year: "Final Year",
     image: "/excos-pics/fc.webp",
     quote: "Managing guild budgets, technical initiatives, and operations taught me executive execution and organizational discipline.",

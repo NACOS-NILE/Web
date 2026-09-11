@@ -535,7 +535,7 @@ function TrustedBuildersHeading() {
 }
 
 export default function TestimonialsSection() {
-  const [selectedId, setSelectedId] = useState<string>("gabriel");
+  const [selectedId, setSelectedId] = useState<string>("zikora");
   const avatarRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const mobileCarouselRef = useRef<HTMLDivElement | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -674,11 +674,11 @@ export default function TestimonialsSection() {
   // Row 1 items (one per column 1-7)
   const row1Items: { col: number; item: Testimonial }[] = [
     { col: 1, item: testimonials.find((t) => t.id === "halima")! },
-    { col: 2, item: testimonials.find((t) => t.id === "gabriel")! },
-    { col: 3, item: testimonials.find((t) => t.id === "chisom")! },
-    { col: 4, item: testimonials.find((t) => t.id === "amara")! },
-    { col: 5, item: testimonials.find((t) => t.id === "tariq")! },
-    { col: 6, item: testimonials.find((t) => t.id === "emmanuel")! },
+    { col: 2, item: testimonials.find((t) => t.id === "zikora")! },
+    { col: 3, item: testimonials.find((t) => t.id === "elvis")! },
+    { col: 4, item: testimonials.find((t) => t.id === "zubaida")! },
+    { col: 5, item: testimonials.find((t) => t.id === "saidat")! },
+    { col: 6, item: testimonials.find((t) => t.id === "amira")! },
     { col: 7, item: testimonials.find((t) => t.id === "omodot")! },
   ];
 
