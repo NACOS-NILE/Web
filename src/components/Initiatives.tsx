@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 
 const images = [
@@ -71,23 +71,21 @@ export default function Initiatives() {
 
         <div ref={containerRef} className="relative w-full aspect-[16/9] lg:aspect-[2.5/1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-gray-200 group">
           <motion.div style={{ y }} className="absolute inset-[-20%] w-[140%] h-[140%] bg-black">
-            <AnimatePresence>
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                className="absolute inset-0 w-full h-full"
+            {images.map((src, idx) => (
+              <div
+                key={src}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                  idx === currentIndex ? 'opacity-100' : 'opacity-0'
+                }`}
               >
                 <Image 
-                  src={images[currentIndex]} 
+                  src={src} 
                   alt="NACOS Nile University computing students at a tech event"
                   fill
                   className="object-cover"
                 />
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            ))}
             <div className="absolute inset-0 bg-black/10 pointer-events-none transition-colors duration-500 group-hover:bg-black/0" />
           </motion.div>
 
