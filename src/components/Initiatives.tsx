@@ -54,7 +54,7 @@ export default function Initiatives() {
         <div ref={containerRef} className="relative w-full aspect-[16/9] lg:aspect-[2.5/1] rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-gray-200 group">
           <motion.div style={{ y }} className="absolute inset-[-20%] w-[140%] h-[140%]">
             <Image 
-              src="/excos-pics/socials.jpg" 
+              src="/initiatives-group.jpg" 
               alt="NACOS Experiences"
               fill
               className="object-cover transition-transform duration-1000 group-hover:scale-105"
