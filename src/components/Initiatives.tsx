@@ -61,17 +61,7 @@ export default function Initiatives() {
             />
           </motion.div>
           
-          <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center transition-colors duration-500 group-hover:bg-black/40">
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center cursor-pointer hover:scale-110 hover:bg-white/20 transition-all duration-300 border border-white/20 shadow-2xl group/play"
-            >
-              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-2 transform group-hover/play:scale-110 transition-transform"></div>
-            </motion.div>
-          </div>
+
         </div>
 
       </div>
