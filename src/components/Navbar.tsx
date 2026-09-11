@@ -10,12 +10,13 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { name: "About", href: "#about" },
-  { name: "Disciplines", href: "#disciplines" },
-  { name: "Events", href: "#events" },
-  { name: "Excos", href: "#excos" },
-  { name: "Community", href: "#community" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Disciplines", href: "/#disciplines" },
+  { name: "Events", href: "/#events" },
+  { name: "Excos", href: "/#excos" },
+  { name: "Community", href: "/#community" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -65,7 +66,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             <a
               href="#community"
-              className="bg-nacos-accent hover:bg-nacos-accent-light text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-nacos-accent/25 transition-all duration-200 active:scale-95"
+              className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-nacos-accent/25 transition-all duration-200 active:scale-95"
             >
               Join Community
             </a>

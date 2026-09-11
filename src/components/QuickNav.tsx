@@ -11,7 +11,7 @@ const QUICK_NAV_ITEMS: QuickNavItem[] = [
   {
     id: "about",
     name: "About",
-    href: "#about",
+    href: "/#about",
     icon: (
       <svg
         className="w-6 h-6"
@@ -32,7 +32,7 @@ const QUICK_NAV_ITEMS: QuickNavItem[] = [
   {
     id: "disciplines",
     name: "Disciplines",
-    href: "#about",
+    href: "/#disciplines",
     icon: (
       <svg
         className="w-6 h-6"
@@ -51,7 +51,7 @@ const QUICK_NAV_ITEMS: QuickNavItem[] = [
   {
     id: "excos",
     name: "Excos",
-    href: "#excos",
+    href: "/#excos",
     icon: (
       <svg
         className="w-6 h-6"
@@ -69,7 +69,7 @@ const QUICK_NAV_ITEMS: QuickNavItem[] = [
   {
     id: "community",
     name: "Community",
-    href: "#community",
+    href: "/#community",
     icon: (
       <svg
         className="w-6 h-6"
@@ -87,7 +87,7 @@ const QUICK_NAV_ITEMS: QuickNavItem[] = [
   {
     id: "contact",
     name: "Contact",
-    href: "#contact",
+    href: "/#contact",
     icon: (
       <svg
         className="w-6 h-6"

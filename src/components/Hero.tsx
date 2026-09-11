@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import ScrollReveal from "./ScrollReveal";
 
@@ -19,7 +21,52 @@ export default function Hero() {
         <ScrollReveal>
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-normal text-white max-w-4xl leading-tight mb-6 font-display">
             The Official Computing Student Chapter at{" "}
-            <span className="text-nacos-accent-light inline-block whitespace-nowrap">
+            <span className="relative inline-block text-nacos-accent-light whitespace-nowrap px-1">
+              {/* Playful Cartoony Circling Doodle & Orbiting Star Particle */}
+              <span
+                aria-hidden="true"
+                className="absolute -inset-x-4 -inset-y-3 pointer-events-none z-20 flex items-center justify-center overflow-visible"
+                style={{
+                  animation: "nileDoodleWrapper 3.6s cubic-bezier(0.25, 1, 0.5, 1) 900ms forwards",
+                  opacity: 0,
+                }}
+              >
+                <svg
+                  className="w-[calc(100%+2rem)] h-[calc(100%+1.5rem)] overflow-visible"
+                  viewBox="0 0 140 60"
+                  fill="none"
+                >
+                  {/* Organic hand-drawn cartoony oval loop */}
+                  <path
+                    d="M 15 30 C 10 12, 50 5, 115 10 C 135 14, 130 45, 85 52 C 35 58, 8 42, 18 25 C 26 15, 60 8, 120 12"
+                    stroke="#38BDF8"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    strokeDasharray="450"
+                    strokeDashoffset="450"
+                    style={{
+                      filter: "drop-shadow(0 0 8px rgba(56, 189, 248, 0.85))",
+                      animation: "nileDoodleStroke 2s cubic-bezier(0.4, 0, 0.2, 1) 950ms forwards",
+                    }}
+                  />
+                  {/* Cartoony Star Particle that circles around Nile */}
+                  <g
+                    style={{
+                      animation: "nileStarOrbit 2.4s ease-in-out 950ms forwards",
+                      opacity: 0,
+                    }}
+                  >
+                    <path
+                      d="M0 -7 L2.2 -2.2 L7 0 L2.2 2.2 L0 7 L-2.2 2.2 L-7 0 L-2.2 -2.2 Z"
+                      fill="#00C2FF"
+                      style={{
+                        filter: "drop-shadow(0 0 6px #00C2FF)",
+                      }}
+                    />
+                  </g>
+                </svg>
+              </span>
+
               {["N", "i", "l", "e"].map((char, index) => (
                 <span
                   key={`${char}-${index}`}
@@ -48,7 +95,7 @@ export default function Hero() {
           </h1>
         </ScrollReveal>
 
-        {/* Embedded Style for Nile Split-Text Wave Animations */}
+        {/* Embedded Style for Nile Split-Text Wave & Cartoony Circle Animations */}
         <style>{`
           @keyframes nileLetterEntry {
             0% {
@@ -77,6 +124,77 @@ export default function Hero() {
               transform: translateY(-3.5px);
             }
           }
+
+          @keyframes nileDoodleStroke {
+            0% {
+              stroke-dashoffset: 450;
+            }
+            100% {
+              stroke-dashoffset: 0;
+            }
+          }
+
+          @keyframes nileDoodleWrapper {
+            0% {
+              opacity: 0;
+              transform: scale(0.85) rotate(-5deg);
+            }
+            12% {
+              opacity: 1;
+              transform: scale(1.06) rotate(3deg);
+            }
+            25% {
+              transform: scale(0.98) rotate(-1deg);
+            }
+            75% {
+              opacity: 1;
+              transform: scale(1) rotate(0deg);
+            }
+            88% {
+              opacity: 0.9;
+              transform: scale(1.12) rotate(4deg);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(0.3) rotate(-15deg);
+            }
+          }
+
+          @keyframes nileStarOrbit {
+            0% {
+              opacity: 0;
+              transform: translate(15px, 30px) scale(0.4) rotate(0deg);
+            }
+            20% {
+              opacity: 1;
+              transform: translate(115px, 10px) scale(1.4) rotate(90deg);
+            }
+            50% {
+              opacity: 1;
+              transform: translate(85px, 52px) scale(1.1) rotate(180deg);
+            }
+            80% {
+              opacity: 1;
+              transform: translate(18px, 25px) scale(1.3) rotate(270deg);
+            }
+            100% {
+              opacity: 0;
+              transform: translate(120px, 12px) scale(0) rotate(360deg);
+            }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            span[style*="nileLetterEntry"],
+            span[style*="nileLetterIdle"],
+            span[style*="nileDoodleWrapper"],
+            path[style*="nileDoodleStroke"],
+            g[style*="nileStarOrbit"] {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+              stroke-dashoffset: 0 !important;
+            }
+          }
         `}</style>
 
         {/* Subheadline */}
@@ -90,8 +208,8 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
           {/* Primary CTA */}
           <a
-            href="#community"
-            className="w-full sm:w-auto inline-flex items-center justify-center bg-nacos-accent hover:bg-nacos-accent-light text-white font-semibold text-base px-8 py-3.5 rounded-xl shadow-md transition-all duration-200 active:scale-95"
+            href="/#community"
+            className="w-full sm:w-auto inline-flex items-center justify-center bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-semibold text-base px-8 py-3.5 rounded-xl shadow-md transition-all duration-200 active:scale-95"
           >
             Join Student Community
             <svg
@@ -112,7 +230,7 @@ export default function Hero() {
 
           {/* Secondary CTA */}
           <a
-            href="#about"
+            href="/#about"
             className="w-full sm:w-auto inline-flex items-center justify-center border border-white/20 hover:border-nacos-accent-light text-gray-200 hover:text-white bg-white/5 hover:bg-white/10 font-semibold text-base px-8 py-3.5 rounded-xl transition-all duration-200 active:scale-95"
           >
             Explore Department

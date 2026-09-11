@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NACOS Nile Chapter - About Us Component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0d1733;
+      --bg-card: rgba(255, 255, 255, 0.02);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --nacos-accent: #3b82f6;
+      --nacos-accent-light: #60a5fa;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #cbd5e1;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius-lg: 16px;
+      --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .about-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.25rem;
+      max-width: 850px;
+      width: 100%;
+      position: relative;
+    }
+
+    .about-title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .about-summary {
+      font-size: 0.975rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    .outbound-link {
+      color: var(--nacos-accent-light);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(96, 165, 250, 0.4);
+      padding-bottom: 1px;
+      transition: var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .outbound-link:hover {
+      color: #ffffff;
+      border-bottom-color: var(--nacos-accent);
+    }
+
+    .outbound-link svg { width: 14px; height: 14px; }
+
+    /* Ultra Fast & Smooth Grid Height Transition */
+    .expandable-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .expandable-wrapper.expanded {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+      margin-top: 1.25rem;
+    }
+
+    .expandable-content { overflow: hidden; }
+
+    .details-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-bottom: 1.25rem;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .detail-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 1.25rem 1.25rem;
+    }
+
+    .detail-icon-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .icon-box {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(39, 65, 147, 0.25);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--nacos-accent-light);
+      flex-shrink: 0;
+    }
+
+    .detail-card-heading {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .detail-card-text {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .degree-tags {
+      display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem;
+    }
+
+    .degree-tag {
+      font-size: 0.75rem; font-weight: 500; padding: 0.15rem 0.5rem;
+      border-radius: 4px; background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim); border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .toggle-btn {
+      margin-top: 1.25rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05); color: var(--text-main);
+      font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1.1rem;
+      border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer; transition: var(--transition-fast);
+    }
+
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Accessibility: Reduced Motion Safety Guard */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .expandable-wrapper {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-card { padding: 1.5rem 1.25rem; }
+      .about-title { font-size: 1.4rem; }
+      .details-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="about-container">
+    <section class="about-card" aria-labelledby="about-heading">
+      
+      <h2 id="about-heading" class="about-title">About NACOS Nile Chapter</h2>
+
+      <p class="about-summary">
+        The <strong>NACOS Nile Chapter</strong> serves as the premier student-led tech community at Nile University of Nigeria, operating under the national umbrella body 
+        <a href="https://nacos.org.ng" target="_blank" rel="noopener noreferrer" class="outbound-link">
+          NACOS National
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a> 
+        and integrated with 
+        <a href="https://nileuniversity.edu.ng" target="_blank" rel="noopener noreferrer" class="outbound-link">
+          Nile University
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a> 
+        to empower computing students through digital innovation and academic excellence.
+      </p>
+
+      <div id="about-expandable" class="expandable-wrapper" role="region" aria-live="polite">
+        <div class="expandable-content">
+          <div class="details-divider"></div>
+          <div class="details-grid">
+            
+            <div class="detail-card">
+              <div class="detail-icon-title">
+                <div class="icon-box">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                </div>
+                <h3 class="detail-card-heading">NACOS National</h3>
+              </div>
+              <p class="detail-card-text">
+                The Nigeria Association of Computing Students (NACOS) is the umbrella body for computing and technology students across Nigeria, actively fostering digital literacy, technical capability, innovation, and national tech advancement.
+              </p>
+            </div>
+
+            <div class="detail-card">
+              <div class="detail-icon-title">
+                <div class="icon-box">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                </div>
+                <h3 class="detail-card-heading">Nile Chapter Legacy</h3>
+              </div>
+              <p class="detail-card-text">
+                Established in <strong>2023</strong> under the Department of Computer Science (Faculty of Natural & Applied Sciences), the chapter bridges academic theory and industry reality across six computing disciplines:
+              </p>
+              <div class="degree-tags">
+                <span class="degree-tag">Computer Science</span>
+                <span class="degree-tag">Software Engineering</span>
+                <span class="degree-tag">Cybersecurity</span>
+                <span class="degree-tag">IT</span>
+                <span class="degree-tag">Information Systems</span>
+                <span class="degree-tag">Data Science</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <button 
+        id="about-toggle-btn" 
+        class="toggle-btn" 
+        aria-expanded="false" 
+        aria-controls="about-expandable"
+        onclick="toggleAboutOverview()"
+      >
+        <span id="toggle-text">Read Full Overview ↓</span>
+      </button>
+
+    </section>
+  </div>
+
+  <script>
+    function toggleAboutOverview() {
+      const expandable = document.getElementById('about-expandable');
+      const toggleBtn = document.getElementById('about-toggle-btn');
+      const toggleText = document.getElementById('toggle-text');
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        expandable.classList.remove('expanded');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleText.textContent = 'Read Full Overview ↓';
+      } else {
+        expandable.classList.add('expanded');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        toggleText.textContent = 'Show Less ↑';
+      }
+    }
+  </script>
+
+</body>
+</html>

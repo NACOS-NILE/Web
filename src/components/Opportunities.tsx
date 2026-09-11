@@ -80,63 +80,63 @@ const PATHWAY_STEPS: PathwayStep[] = [
 
 export default function Opportunities() {
   return (
-    <section id="opportunities" className="relative py-20 sm:py-28 bg-nacos-dark px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden scroll-mt-20">
+    <section id="opportunities" className="relative py-12 sm:py-16 bg-nacos-dark px-4 sm:px-6 lg:px-8 border-t border-white/5 overflow-hidden scroll-mt-20">
       {/* Background Texture */}
       <div className="absolute inset-0 pointer-events-none aria-hidden:true">
         <div className="absolute inset-0 bg-dot-pattern opacity-40" />
         <div className="absolute inset-0 bg-noise pointer-events-none" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative max-w-6xl mx-auto">
         {/* Section Header */}
-        <ScrollReveal className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-nacos-accent/10 border border-nacos-accent/30 text-nacos-accent-light text-xs font-semibold uppercase tracking-wider mb-4">
+        <ScrollReveal className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nacos-accent/10 border border-nacos-accent/30 text-nacos-accent-light text-[11px] font-semibold uppercase tracking-wider mb-2.5">
             Student Journey &amp; Growth Pathway
           </span>
-          <h2 className="text-2xl sm:text-4xl font-semibold tracking-tight text-white mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-normal text-white mb-2 font-display">
             Opportunities &amp; Pathways
           </h2>
-          <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
             A step-by-step roadmap from freshman orientation to industry career placement.
           </p>
         </ScrollReveal>
 
         {/* Pathway Timeline Steps Grid */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {PATHWAY_STEPS.map((step, idx) => (
             <ScrollReveal key={step.id} delay={idx * 100}>
-              <div className="group relative p-6 sm:p-7 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/10 hover:border-nacos-accent/40 transition-all duration-300 flex flex-col justify-between h-full shadow-lg">
+              <div className="group relative p-4 sm:p-5 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/10 hover:border-nacos-accent/40 transition-all duration-300 flex flex-col justify-between h-full shadow-lg">
                 <div>
                   {/* Top Bar: Step Number + Stage Badge */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-10 h-10 rounded-xl bg-nacos-blue/30 border border-nacos-accent/30 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-nacos-blue/30 border border-nacos-accent/30 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
                       {step.icon}
                     </div>
-                    <span className="text-2xl font-bold font-mono text-nacos-accent/40 group-hover:text-nacos-accent-light transition-colors">
+                    <span className="text-xl font-bold font-mono text-nacos-accent/40 group-hover:text-nacos-accent-light transition-colors">
                       {step.step}
                     </span>
                   </div>
 
                   {/* Stage Label */}
-                  <p className="text-xs font-semibold uppercase tracking-wider text-nacos-accent-light/80 mb-1">
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-nacos-accent-light/80 mb-1">
                     {step.stage}
                   </p>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-white mb-2.5 group-hover:text-nacos-accent-light transition-colors leading-snug">
+                  <h3 className="text-base font-semibold text-white mb-1.5 group-hover:text-nacos-accent-light transition-colors leading-snug">
                     {step.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-300 leading-relaxed font-normal">
+                  <p className="text-xs text-gray-300/90 leading-relaxed font-normal">
                     {step.description}
                   </p>
                 </div>
 
                 {/* Progress Step Arrow indicator */}
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 group-hover:text-nacos-accent-light transition-colors">
+                <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 group-hover:text-nacos-accent-light transition-colors">
                   <span>Step {step.step} of 04</span>
-                  <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </div>

@@ -20,6 +20,13 @@ export default function TypewriterBadge({
   const hasTriggeredRef = useRef(false);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setDisplayedText(text);
+      setIsComplete(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasTriggeredRef.current) {

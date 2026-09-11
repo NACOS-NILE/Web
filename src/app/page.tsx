@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Pillars from "@/components/Pillars";
 import QuoteBanner from "@/components/QuoteBanner";
-import Opportunities from "@/components/Opportunities";
 import Initiatives from "@/components/Initiatives";
 import ExcoGrid from "@/components/ExcoGrid";
 import MembershipCTA from "@/components/MembershipCTA";
@@ -19,7 +18,6 @@ export default function Home() {
         <About />
         <Pillars />
         <QuoteBanner />
-        <Opportunities />
         <Initiatives />
         <ExcoGrid />
         <MembershipCTA />
