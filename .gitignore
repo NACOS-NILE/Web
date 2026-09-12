@@ -40,5 +40,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# local visual QA artifacts
+/output/
+/.playwright-cli/
+
 # lighthouse
 .lighthouseci/
+
+# reference archives and local visual artifacts
+*.zip
+screenshots*/
+design_refs/
+community_images/
