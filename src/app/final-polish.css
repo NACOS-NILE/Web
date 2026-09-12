@@ -323,19 +323,20 @@
     line-height: 1.3 !important;
     min-height: 2.6em;
     margin-bottom: 4px;
-    color: #6fb5ff;
+    color: #1d4ed8 !important;
   }
   .executive-card h3 {
     font-size: 15px !important;
     line-height: 1.25 !important;
     margin-bottom: 6px;
+    color: #0f172a !important;
     word-break: normal;
     overflow-wrap: break-word;
   }
   .executive-quote {
     font-size: 12px !important;
     line-height: 1.35 !important;
-    color: #94a3b8;
+    color: #475569 !important;
     margin-bottom: 8px;
     display: -webkit-box;
     -webkit-line-clamp: 2;

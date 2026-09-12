@@ -21,7 +21,7 @@ export function EarthHorizon({ variant = "hero", className = "" }: EarthHorizonP
             alt=""
             fetchPriority={variant === "hero" ? "high" : "auto"}
             loading={variant === "hero" ? "eager" : "lazy"}
-            decoding={variant === "hero" ? "sync" : "async"}
+            decoding="async"
             width={768}
             height={432}
             style={{
