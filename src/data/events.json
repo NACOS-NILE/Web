@@ -1,0 +1,182 @@
+[
+  {
+    "id": "freshers-orientation",
+    "title": "Freshers' Tech Orientation",
+    "dateISO": "2026-10-04",
+    "time": "10:00 AM – 1:00 PM",
+    "location": "Nile University, Main Auditorium",
+    "tag": "Orientation",
+    "description": "A welcome session for new computing students — chapter structure, mentorship pairing, and a first look at what NACOS Nile runs all year.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img6.webp"
+  },
+  {
+    "id": "codesprint-hackathon",
+    "title": "CodeSprint 48-Hour Hackathon",
+    "dateISO": "2026-10-18",
+    "time": "Fri 6:00 PM – Sun 6:00 PM",
+    "location": "Computing Lab, Block C",
+    "tag": "Hackathon",
+    "description": "Teams of 3–5 build a working prototype from scratch in 48 hours, judged by faculty and industry mentors. Free food, prizes for top three teams.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img33.webp"
+  },
+  {
+    "id": "systems-masterclass",
+    "title": "Systems Architecture Masterclass",
+    "dateISO": "2026-11-08",
+    "time": "2:00 PM – 4:30 PM",
+    "location": "Virtual — link shared in the WhatsApp community",
+    "tag": "Workshop",
+    "description": "A hands-on walkthrough of designing systems that scale, led by a NACOS Nile alum now working in backend infrastructure.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img61.webp"
+  },
+  {
+    "id": "guild-dinner-night",
+    "title": "Guild Dinner Night",
+    "dateISO": "2026-11-29",
+    "time": "5:00 PM – 9:00 PM",
+    "location": "Nile University, Event Hall",
+    "tag": "Social",
+    "description": "The chapter's end-of-semester dinner — awards, executive handovers, and a chance to unwind with the whole community before exams.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img90.webp"
+  },
+  {
+    "id": "cyberdef-briefing",
+    "title": "CyberDef Defense Briefing",
+    "dateISO": "2026-12-13",
+    "time": "1:00 PM – 3:00 PM",
+    "location": "Computing Lab, Block C",
+    "tag": "CyberSec",
+    "description": "A guided walkthrough of common attack patterns and how to defend against them, run by the chapter's security interest group ahead of exam season.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img98.webp"
+  },
+  {
+    "id": "new-semester-kickoff",
+    "title": "New Semester Kickoff",
+    "dateISO": "2027-01-19",
+    "time": "11:00 AM – 1:00 PM",
+    "location": "Nile University, Main Auditorium",
+    "tag": "Orientation",
+    "description": "Back from break — a look at the new semester's project tracks, mentorship batches, and what's on the calendar next.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img14.webp"
+  },
+  {
+    "id": "career-mentorship-day",
+    "title": "Career & Mentorship Day",
+    "dateISO": "2027-02-07",
+    "time": "10:00 AM – 4:00 PM",
+    "location": "Nile University, Event Hall",
+    "tag": "Mentorship",
+    "description": "Alumni now working across the industry return to run résumé clinics, mock interviews, and 1:1 mentorship speed-rounds.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img42.webp"
+  },
+  {
+    "id": "founders-day-demo",
+    "title": "Founders' Day Demo Showcase",
+    "dateISO": "2027-03-21",
+    "time": "12:00 PM – 5:00 PM",
+    "location": "Nile University, Main Auditorium",
+    "tag": "Showcase",
+    "description": "Teams demo what they've shipped over the semester to faculty, alumni, and industry guests, with awards for the standout builds.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img70.webp"
+  },
+  {
+    "id": "spring-hack-jam",
+    "title": "Spring Hack Jam",
+    "dateISO": "2027-04-11",
+    "time": "Sat 9:00 AM – 9:00 PM",
+    "location": "Computing Lab, Block C",
+    "tag": "Hackathon",
+    "description": "A one-day build sprint — pick a track, form a team on the spot, and ship something demoable by evening.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img3.webp"
+  },
+  {
+    "id": "women-in-tech-panel",
+    "title": "Women in Tech Panel",
+    "dateISO": "2027-04-29",
+    "time": "3:00 PM – 5:00 PM",
+    "location": "Nile University, Main Auditorium",
+    "tag": "Community",
+    "description": "Women engineers from the chapter and industry talk career paths, mentorship, and building in rooms where you're the only one like you.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img20.webp"
+  },
+  {
+    "id": "cloud-devops-bootcamp",
+    "title": "Cloud & DevOps Bootcamp",
+    "dateISO": "2027-05-16",
+    "time": "10:00 AM – 3:00 PM",
+    "location": "Virtual — link shared in the WhatsApp community",
+    "tag": "Workshop",
+    "description": "Containers, CI/CD, and shipping to the cloud — a practical half-day bootcamp for students who've never deployed anything past localhost.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img48.webp"
+  },
+  {
+    "id": "alumni-homecoming-mixer",
+    "title": "Alumni Homecoming Mixer",
+    "dateISO": "2027-06-06",
+    "time": "4:00 PM – 8:00 PM",
+    "location": "Nile University, Event Hall",
+    "tag": "Social",
+    "description": "Alumni back on campus to reconnect, swap stories, and meet the current executive council over food and music.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img55.webp"
+  },
+  {
+    "id": "open-source-sprint",
+    "title": "Open Source Sprint",
+    "dateISO": "2027-06-20",
+    "time": "11:00 AM – 4:00 PM",
+    "location": "Computing Lab, Block C",
+    "tag": "Hackathon",
+    "description": "A guided first-contribution day — pick a real open-source issue, pair up, and land your first merged pull request.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img77.webp"
+  },
+  {
+    "id": "ai-ml-study-jam",
+    "title": "AI & ML Study Jam",
+    "dateISO": "2027-07-11",
+    "time": "1:00 PM – 4:00 PM",
+    "location": "Nile University, Main Auditorium",
+    "tag": "Academic",
+    "description": "A student-led study group working through the fundamentals together, from linear regression up to a first neural net.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img85.webp"
+  },
+  {
+    "id": "executive-strategic-retreat",
+    "title": "Executive Strategic Retreat",
+    "dateISO": "2027-07-25",
+    "time": "9:00 AM – 5:00 PM",
+    "location": "Off-campus — details shared with incoming excos",
+    "tag": "Leadership",
+    "description": "The incoming executive council plans the next academic year's calendar, budget, and priorities before handover.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img110.webp"
+  },
+  {
+    "id": "capstone-project-clinic",
+    "title": "Capstone Project Clinic",
+    "dateISO": "2027-08-08",
+    "time": "10:00 AM – 2:00 PM",
+    "location": "Computing Lab, Block C",
+    "tag": "Mentorship",
+    "description": "Drop-in office hours with senior students and faculty for final-year students stuck on their capstone projects.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img125.webp"
+  },
+  {
+    "id": "ctf-qualifiers",
+    "title": "CTF Qualifiers",
+    "dateISO": "2027-08-22",
+    "time": "10:00 AM – 6:00 PM",
+    "location": "Virtual — link shared in the WhatsApp community",
+    "tag": "CyberSec",
+    "description": "An online capture-the-flag qualifier — top scorers represent NACOS Nile at the inter-chapter finals later in the year.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img140.webp"
+  },
+  {
+    "id": "welcome-back-social",
+    "title": "Welcome Back Social",
+    "dateISO": "2027-09-05",
+    "time": "5:00 PM – 8:00 PM",
+    "location": "Nile University, Event Hall",
+    "tag": "Social",
+    "description": "A low-key evening to kick off the new academic year — new members, old faces, free food.",
+    "image": "https://ik.imagekit.io/nacosnile/gallery/DinnerNight/2026/img155.webp"
+  }
+]

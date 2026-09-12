@@ -1,0 +1,15 @@
+# Immutable hashed Next.js scripts, styles, and font media
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static media and images
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/excos-pics/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML documents (always revalidate to ensure instantaneous deployment rollouts)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

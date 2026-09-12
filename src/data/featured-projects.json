@@ -1,0 +1,33 @@
+[
+  {
+    "id": "scrollcade",
+    "title": "Scrollcade",
+    "tagline": "Instant Gaming Reinvented — Swipe up to discover endless games",
+    "builder": "Gabriel Eneojo Momoh",
+    "level": "Alumni",
+    "department": "Software Engineering",
+    "category": "Mobile",
+    "tech": ["Next.js", "TypeScript", "iOS App Store", "HTML5 Games", "TailwindCSS"],
+    "description": "The ultimate platform for discovering and playing mobile games instantly. Endless games with zero downloads, no waiting, and no installs—just scroll, discover, and play directly across mobile, iOS, and the web.",
+    "image": "/scrollcade-icon.webp",
+    "githubUrl": "https://github.com/Scrollcade",
+    "liveUrl": "https://scrollcade.com",
+    "appStoreUrl": "https://apps.apple.com/us/app/scrollcade/id6749141579",
+    "featured": true
+  },
+  {
+    "id": "refreeg",
+    "title": "RefreeG",
+    "tagline": "Powering Social Impact Through Blockchain — Give and see exactly where it lands",
+    "builder": "Julius Angulu",
+    "level": "Student Founder",
+    "department": "Faculty of Computing",
+    "category": "Web & Cloud",
+    "tech": ["Next.js", "TypeScript", "Solidity", "Blockchain", "Smart Contracts", "TailwindCSS"],
+    "description": "RefreeG puts every naira on-chain with verifiable receipts, milestone-released escrow smart contracts, and transparent social impact crowdfunding. Donors track their giving in real time with zero trust tax.",
+    "image": "/refreeg-logo.svg",
+    "githubUrl": "https://github.com/refreeg",
+    "liveUrl": "https://refreeg.com",
+    "featured": true
+  }
+]
