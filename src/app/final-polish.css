@@ -53,13 +53,16 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .discipline-detail-content { animation: detail-refine 280ms var(--ease); }
-  .mobile-menu[open] { animation: drawer-refine 280ms var(--ease); }
+  .mobile-menu[open] { animation: drawer-slide 340ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .mobile-menu[open] > a { animation: menu-item-in 260ms cubic-bezier(0.22, 1, 0.36, 1) backwards; animation-delay: calc(var(--item-index, 0) * 35ms); }
 }
 @keyframes detail-refine { from { opacity: .3; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes drawer-refine { from { opacity: .5; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+@keyframes drawer-slide { from { transform: translateX(100%); opacity: 0.9; } to { transform: translateX(0); opacity: 1; } }
+@keyframes menu-item-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
 @media (max-width: 900px) {
   .header .nav-inner { height: 76px; min-height: 76px; }
-  .discipline-detail-panel { grid-template-columns: minmax(0, 1fr); padding: 22px; }
+  .discipline-detail-panel { grid-template-columns: minmax(0, 1fr); padding: 20px 18px; }
+  .discipline-detail-content { padding-bottom: 0; }
   .discipline-laptop-mockup { max-width: 100%; }
   .mockup-stack-left, .mockup-stack-right { display: none; }
   .laptop-chassis { width: min(280px, 100%); }
@@ -189,7 +192,7 @@
 .chart-bars { display: flex; align-items: end; justify-content: space-around; height: 68%; margin: 1em 1em .5em; border-bottom: 1px solid #37536f; }.chart-bars i { width: 7%; min-height: 8%; border-radius: 2px 2px 0 0; background: linear-gradient(#72cfff, #2767d5); }
 
 @media (max-width: 900px) {
-  .discipline-laptop-stage { --laptop-width: min(100%, 340px); min-height: clamp(250px, 72vw, 340px); margin-top: 14px; }
+  .discipline-laptop-stage { --laptop-width: min(90%, 280px); min-height: clamp(180px, 52vw, 240px); margin-top: 1rem; margin-inline: auto; }
   .discipline-laptop { transform: rotateX(-5deg) rotateY(calc(var(--laptop-yaw) + var(--laptop-look-y))); }
   .discipline-detail-panel { grid-template-columns: minmax(0, 1fr); }
 }
@@ -197,5 +200,215 @@
   /* Reserve the document flow while deferring offscreen layout work. */
   main > section:not(#home), .footer { content-visibility: auto; contain-intrinsic-size: 760px; }
 }
-@media (max-width: 420px) { .discipline-laptop-stage { --laptop-width: min(100%, 310px); min-height: 240px; } }
+@media (max-width: 420px) { .discipline-laptop-stage { --laptop-width: min(90%, 260px); min-height: 200px; } }
 @media (prefers-reduced-motion: reduce) { .discipline-laptop-stage *, .discipline-laptop { transition: none !important; } }
+
+/* ==========================================================================
+   FINAL POLISH PASS REFINEMENTS
+   ========================================================================== */
+
+/* 1. Hero Mobile Contrast Protection */
+@media (max-width: 900px) {
+  .hero-copy {
+    position: relative;
+    z-index: 5;
+    background: linear-gradient(
+      135deg,
+      rgba(2, 15, 30, 0.90) 0%,
+      rgba(2, 15, 30, 0.65) 50%,
+      rgba(2, 15, 30, 0.15) 85%,
+      transparent 100%
+    );
+    border-radius: 12px;
+    padding: 14px 16px 18px;
+    margin-inline: -12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .hero-description {
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+    color: #e2edfb !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  }
+  .hero-actions .button-blue {
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.6);
+  }
+  .hero-actions .text-link {
+    background: rgba(11, 28, 50, 0.75);
+    color: #f0f6ff;
+  }
+  .hero-community-note {
+    color: #c9daf2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* 3. About Section Desktop Content Sizing */
+.about-cards-grid {
+  align-items: stretch;
+}
+.about-card {
+  padding: 20px 22px;
+  height: auto;
+  min-height: 0;
+}
+.about-card p {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* 6. Programs Section Desktop 2-Column Composition */
+@media (min-width: 901px) {
+  .programs .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.22fr);
+    grid-template-areas:
+      "heading rows"
+      "events rows";
+    column-gap: 56px;
+    row-gap: 28px;
+    align-items: start;
+  }
+  .programs .section-heading {
+    grid-area: heading;
+    margin-bottom: 0;
+  }
+  .programs-layout {
+    display: contents;
+  }
+  .program-rows {
+    grid-area: rows;
+  }
+  .events-note {
+    grid-area: events;
+    margin-top: 0;
+  }
+}
+
+/* 7. Life at NACOS High-Contrast Bottom Overlay */
+.life-card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(2, 15, 30, 0.88) 0%,
+    rgba(2, 15, 30, 0.45) 40%,
+    transparent 72%
+  ) !important;
+}
+.life-card-info h3 {
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+.life-card-info p {
+  color: #cddbf0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* 8. Executive Council Mobile Typography */
+@media (max-width: 768px) {
+  .executive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .executive-card {
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .executive-info {
+    padding-top: 10px;
+  }
+  .executive-role {
+    font-size: 11.5px !important;
+    line-height: 1.3 !important;
+    min-height: 2.6em;
+    margin-bottom: 4px;
+    color: #6fb5ff;
+  }
+  .executive-card h3 {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 6px;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  .executive-quote {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .executive-link {
+    font-size: 12px !important;
+    padding-block: 4px;
+  }
+}
+
+/* 9. Dues Currency Symbol Styling */
+.currency-symbol {
+  font-family: Arial, Inter, system-ui, -apple-system, sans-serif !important;
+  font-weight: 700;
+  margin-right: 0.04em;
+  letter-spacing: normal;
+  display: inline-block;
+  text-decoration: none !important;
+}
+.amount-number {
+  letter-spacing: -0.01em;
+  text-decoration: none !important;
+}
+
+/* 11 & 12. Community Section Desktop Sizing & Checklist */
+.community-routes article {
+  min-height: 0;
+  padding: 28px 28px 26px;
+}
+.community-route-card {
+  display: flex;
+  flex-direction: column;
+}
+.community-route-card .community-cta-btn {
+  margin-top: 20px;
+}
+.community-include-label {
+  font-size: 13.5px;
+  color: #94a3b8;
+  margin: 12px 0 6px;
+  font-weight: 500;
+}
+.community-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.community-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #e2edfb;
+}
+
+/* 13. Footer Spacing */
+.footer {
+  margin-top: 0;
+  padding-top: 48px;
+}
+.community {
+  padding-bottom: 48px;
+}
+
+/* 18. Mobile Typography Audit */
+@media (max-width: 600px) {
+  p:not(.eyebrow):not(.mono):not(.caption):not(.fee-card-desc):not(.executive-role):not(.executive-quote):not(.dues-footnote):not(.community-include-label):not(.community-note) {
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+}

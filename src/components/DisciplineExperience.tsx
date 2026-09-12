@@ -123,14 +123,6 @@ export function DisciplineExperience() {
                 </span>
               ))}
             </div>
-
-            <a
-              href="#programs"
-              className="button button-blue discipline-explore-btn"
-            >
-              <span>Explore {discipline.name}</span>
-              <Arrow diagonal={false} />
-            </a>
           </div>
 
           <DisciplineLaptop activeIndex={selected} />

@@ -71,8 +71,8 @@ export function LifeAtNacos() {
           <article className="life-pillar-card" data-reveal>
             <div className="life-pillar-media">
               <Image
-                src="/community/workshop-presenter.webp"
-                alt="A NACOS Nile workshop presenter demonstrating a technical tool on a projected screen"
+                src="/community/11_stemcon_collaboration.jpg"
+                alt="NACOS Nile computing students collaborating together at the STEMCON initiative"
                 width={1200}
                 height={500}
                 sizes="(max-width: 768px) 100vw, 1200px"

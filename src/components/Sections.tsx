@@ -212,11 +212,8 @@ export function Community() {
               <br />
               Leave <span className="blue-text">connected.</span>
             </h2>
-            <p className="community-intro desktop-only">
+            <p className="community-intro">
               Join our WhatsApp community. We verify members to keep it a safe space for NACOS students.
-            </p>
-            <p className="community-intro mobile-only">
-              Join our WhatsApp community or request access by email. Meet fellow NACOS students, get updates, ask questions, and be part of a supportive tech community.
             </p>
           </div>
         </div>
@@ -249,9 +246,10 @@ export function Community() {
             <h3>Request access by email.</h3>
             <p>
               Send from your Outlook student email to{" "}
-              <a href={`mailto:${chapterEmail}`}>{chapterEmail}</a>. Include:
+              <a href={`mailto:${chapterEmail}`}>{chapterEmail}</a>.
             </p>
-            <ul className="community-checklist desktop-only">
+            <p className="community-include-label">Include:</p>
+            <ul className="community-checklist">
               <li>
                 <UserIcon className="checklist-icon" aria-hidden="true" />
                 <span>Full Name</span>
@@ -265,9 +263,6 @@ export function Community() {
                 <span>WhatsApp Phone Number</span>
               </li>
             </ul>
-            <p className="community-checklist-summary mobile-only">
-              Include your full name, student ID and WhatsApp phone number.
-            </p>
             <a className="button button-blue community-cta-btn" href={communityEmailHref}>
               <MailIcon aria-hidden="true" />
               <span>Request Access by Email</span>

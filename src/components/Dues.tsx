@@ -64,7 +64,10 @@ export function Dues() {
               <AcademicCapIcon />
             </div>
             <span className="fee-card-label">FIRST PAYMENT</span>
-            <strong className="fee-card-amount">₦25,000</strong>
+            <strong className="fee-card-amount">
+              <span className="currency-symbol">₦</span>
+              <span className="amount-number">25,000</span>
+            </strong>
             <p className="fee-card-desc">Approved amount for the first payment.</p>
           </div>
 
@@ -73,7 +76,10 @@ export function Dues() {
               <FileTextIcon />
             </div>
             <span className="fee-card-label">SECOND PAYMENT</span>
-            <strong className="fee-card-amount">₦15,000</strong>
+            <strong className="fee-card-amount">
+              <span className="currency-symbol">₦</span>
+              <span className="amount-number">15,000</span>
+            </strong>
             <p className="fee-card-desc">Approved amount for the second payment.</p>
           </div>
 
@@ -82,8 +88,11 @@ export function Dues() {
               <BarChartIcon />
             </div>
             <span className="fee-card-label">FULL SESSION TOTAL</span>
-            <strong className="fee-card-amount">₦40,000</strong>
-            <p className="fee-card-desc">Complete session dues (₦25,000 + ₦15,000).</p>
+            <strong className="fee-card-amount">
+              <span className="currency-symbol">₦</span>
+              <span className="amount-number">40,000</span>
+            </strong>
+            <p className="fee-card-desc">Complete session dues (<span className="currency-symbol">₦</span>25,000 + <span className="currency-symbol">₦</span>15,000).</p>
           </div>
         </div>
 
@@ -94,18 +103,18 @@ export function Dues() {
             <div>
               <h3 className="dues-alert-title">Important Payment Clarification</h3>
               <p className="dues-alert-lead">
-                The correct payment structure is <strong>₦25,000 + ₦15,000</strong> or <strong>₦40,000</strong> at once.
+                The correct payment structure is <strong><span className="currency-symbol">₦</span>25,000 + <span className="currency-symbol">₦</span>15,000</strong> or <strong><span className="currency-symbol">₦</span>40,000</strong> at once.
               </p>
             </div>
           </div>
 
           <div className="dues-warning-box">
             <XCircleIcon className="dues-warning-icon" aria-hidden="true" />
-            <p>Do NOT pay ₦30,000 + ₦10,000 or ₦20,000 + ₦20,000.</p>
+            <p>Do NOT pay <span className="currency-symbol">₦</span>30,000 + <span className="currency-symbol">₦</span>10,000 or <span className="currency-symbol">₦</span>20,000 + <span className="currency-symbol">₦</span>20,000.</p>
           </div>
 
           <p className="dues-alert-footnote">
-            Pay ₦40,000 once, or use only the approved installments above.
+            Pay <span className="currency-symbol">₦</span>40,000 once, or use only the approved installments above.
           </p>
         </div>
 

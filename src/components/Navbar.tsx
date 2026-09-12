@@ -5,6 +5,7 @@ const links = [
   ["About", "about"],
   ["Disciplines", "disciplines"],
   ["Programs", "programs"],
+  ["Life at NACOS", "life"],
   ["Executive Council", "team"],
   ["Pay Dues", "dues"],
 ];
@@ -158,11 +159,12 @@ export function Navbar() {
           <button className="mobile-menu-close" onClick={() => setOpen(false)} aria-label="Close menu" autoFocus>×</button>
         </div>
         <p className="eyebrow">YOUR COMMUNITY, ONE TAP AWAY</p>
-        {[...links, ["Life at NACOS", "life"], ["Join Community", "community"]].map(
-          ([label, id]) => (
+        {[...links, ["Join Community", "community"]].map(
+          ([label, id], index) => (
             <a
               key={id}
               href={`#${id}`}
+              style={{ "--item-index": index } as React.CSSProperties}
               aria-current={active === id ? "location" : undefined}
               onClick={() => {
                 setOpen(false);

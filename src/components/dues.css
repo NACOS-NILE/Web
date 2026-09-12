@@ -75,7 +75,7 @@
 .fee-card-amount {
   font-size: clamp(28px, 3vw, 36px);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   color: #38bdf8;
   margin-bottom: 8px;
 }
