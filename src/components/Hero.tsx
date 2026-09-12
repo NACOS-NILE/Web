@@ -17,10 +17,10 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-[80px] md:text-[160px] font-extrabold tracking-tight text-slate-900 dark:text-white leading-none absolute top-1/2 md:top-[40%] z-0 transition-colors duration-300">
+            <h1 className="text-[80px] md:text-[160px] font-extrabold tracking-tight text-slate-900 dark:text-white leading-none absolute top-1/2 -translate-y-1/2 z-0 transition-colors duration-300">
               NILE
             </h1>
-            <h1 className="text-[100px] md:text-[200px] font-extrabold tracking-tight text-transparent [-webkit-text-stroke:2px_#2563eb] dark:[-webkit-text-stroke:2px_#3b82f6] leading-none absolute top-0 z-10 pointer-events-none">
+            <h1 className="text-[100px] md:text-[200px] font-extrabold tracking-tight text-transparent [-webkit-text-stroke:2px_#2563eb] dark:[-webkit-text-stroke:2px_#3b82f6] leading-none absolute top-1/2 -translate-y-1/2 z-10 pointer-events-none">
               NACOS
             </h1>
           </motion.div>
