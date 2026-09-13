@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "src/app/globals.css"
+        ],
+        "createdAt": "2026-09-10T11:56:23.533Z",
+        "reason": "single position:fixed header bar, triggers once per scroll-threshold crossing (not per-frame/list); fixed positioning means it reflows only its own subtree, not the page"
+      }
+    ]
+  }
+}
