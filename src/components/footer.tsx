@@ -1,61 +1,109 @@
-import React from 'react';
-import { MapPin, } from 'lucide-react';
+import React from "react";
+import Image from "next/image";
+import { MapPin, ArrowUpRight } from "lucide-react";
 
 export default function FooterSection() {
   return (
-    <footer className="border-t border-slate-800 bg-slate-950/80 pt-16 pb-12 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-        
-        {/* Col 1 & 2: Chapter Address & Info */}
+    <footer className="border-t border-white/10 bg-[#0d1733] px-6 pb-12 pt-16 md:px-12">
+      <div className="mx-auto mb-12 grid w-full max-w-7xl grid-cols-1 gap-10 md:grid-cols-4">
+        {/* Chapter information */}
         <div className="md:col-span-2">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400 text-sm">
-              N
+          <div className="mb-4 flex items-center gap-3">
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src="/logo.svg"
+                alt="NACOS Nile Chapter"
+                width={160}
+                height={48}
+                className="h-10 w-auto object-contain"
+              />
             </div>
+
             <div>
-              <p className="font-bold text-white leading-none">NACOS</p>
-              <p className="text-xs text-slate-400">Nile University Chapter</p>
+              <p className="font-bold leading-none text-white">NACOS</p>
+              <p className="mt-1 text-xs text-white/50">Nile University Chapter</p>
             </div>
           </div>
-          <p className="text-slate-400 text-sm max-w-sm mb-6 leading-relaxed">
-            Nigeria Association of Computing Students (NACOS) — Nile University Chapter. Empowering computing minds, sparking innovation, and fostering technical excellence.
+
+          <p className="mb-6 max-w-sm text-sm leading-relaxed text-white/60">
+            Nigeria Association of Computing Students (NACOS) — Nile University
+            Chapter. Empowering computing minds, sparking innovation, and
+            fostering technical excellence.
           </p>
-          <div className="flex items-start gap-2 text-slate-400 text-sm">
-            <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-1" />
+
+          <div className="flex items-start gap-2 text-sm text-white/60">
+            <MapPin className="mt-1 h-4 w-4 shrink-0 text-[#60a5fa]" />
             <span>
-              Nile University of Nigeria, Plot 681, Cadastral Zone C-OO, Research &amp; Institution Area, Jabi, Abuja, FCT.
+              Nile University of Nigeria, Plot 681, Cadastral Zone C-OO,
+              Research &amp; Institution Area, Jabi, Abuja, FCT.
             </span>
           </div>
         </div>
 
-        {/* Col 3: Quick Links */}
+        {/* Quick links */}
         <div>
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h4>
-          <ul className="space-y-2.5 text-sm text-slate-400">
-            <li><a href="#about" className="hover:text-emerald-400 transition-colors">About Us</a></li>
-            <li><a href="#disciplines" className="hover:text-emerald-400 transition-colors">Disciplines</a></li>
-            <li><a href="#events" className="hover:text-emerald-400 transition-colors">Events &amp; Programs</a></li>
-            <li><a href="#excos" className="hover:text-emerald-400 transition-colors">Executive Council</a></li>
-            <li><a href="#community" className="hover:text-emerald-400 transition-colors">Community Channels</a></li>
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+            Quick Links
+          </h4>
+
+          <ul className="space-y-2.5 text-sm text-white/55">
+            <li>
+              <a href="#about" className="transition-colors hover:text-[#60a5fa]">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#disciplines" className="transition-colors hover:text-[#60a5fa]">
+                Disciplines
+              </a>
+            </li>
+            <li>
+              <a href="#events" className="transition-colors hover:text-[#60a5fa]">
+                Events &amp; Programs
+              </a>
+            </li>
+            <li>
+              <a href="#excos" className="transition-colors hover:text-[#60a5fa]">
+                Executive Council
+              </a>
+            </li>
+            <li>
+              <a href="#community" className="transition-colors hover:text-[#60a5fa]">
+                Community Channels
+              </a>
+            </li>
           </ul>
         </div>
 
-        {/* Col 4: Creator Credits & Repo */}
+        {/* Community */}
         <div>
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Community</h4>
-          <p className="text-xs text-slate-500 leading-relaxed mb-4">
-            An official chapter under the Department of Computer Science &amp; Information Technology, Nile University of Nigeria.
-          </p>
-        </div>
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+            Community
+          </h4>
 
+          <p className="mb-4 text-xs leading-relaxed text-white/45">
+            An official chapter under the Department of Computer Science &amp;
+            Information Technology, Nile University of Nigeria.
+          </p>
+
+          <a
+            href="#community"
+            className="inline-flex items-center gap-1 text-xs font-medium text-[#60a5fa] transition-colors hover:text-white"
+          >
+            Join the community
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
 
-      {/* Bottom Legal Disclaimer */}
-      <div className="max-w-7xl mx-auto pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 sm:flex-row">
         <p>© {new Date().getFullYear()} NACOS Nile University Chapter. All rights reserved.</p>
-        <p className="flex items-center gap-1">
-          Designed &amp; Built with <span className="text-emerald-400">⚡</span> by NACOS Nile Dev Team
-        </p>
+
+        {/* <p className="flex items-center gap-1">
+          Designed &amp; Built with
+          <span className="text-[#60a5fa]">⚡</span>
+          by NACOS Nile Dev Team
+        </p> */}
       </div>
     </footer>
   );
