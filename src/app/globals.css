@@ -2,7 +2,11 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0d1733;
+  --nacos-blue: #274193;
+  --nacos-dark: #0d1733;
+  --nacos-accent: #3b82f6;
+  --nacos-highlight: #60a5fa;
 }
 
 @theme inline {
@@ -12,15 +16,114 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: #dbe7ff;
+  color: #0d1733;
+}
+
+.hero-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.hero-fade-up-delay-1 {
+  animation: fade-up 0.7s 0.08s ease-out both;
+}
+
+.hero-fade-up-delay-2 {
+  animation: fade-up 0.7s 0.16s ease-out both;
+}
+
+.hero-fade-up-delay-3 {
+  animation: fade-up 0.7s 0.24s ease-out both;
+}
+
+.hero-fade-up-delay-4 {
+  animation: fade-up 0.7s 0.32s ease-out both;
+}
+
+.hero-logo-pulse {
+  animation: logo-pulse 4.5s ease-in-out infinite;
+}
+
+.hero-orbit {
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-orbit-slow {
+  animation: float 6.5s 0.8s ease-in-out infinite;
+}
+
+.hero-slide-content {
+  animation: card-content 0.28s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logo-pulse {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 24px 60px rgba(39, 65, 147, 0.18);
+  }
+  50% {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 72px rgba(39, 65, 147, 0.21);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes card-content {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-fade-up,
+  .hero-fade-up-delay-1,
+  .hero-fade-up-delay-2,
+  .hero-fade-up-delay-3,
+  .hero-fade-up-delay-4,
+  .hero-logo-pulse,
+  .hero-orbit,
+  .hero-orbit-slow,
+  .hero-slide-content {
+    animation: none;
+  }
 }

@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NACOS Nile — Nigeria Association of Computing Students",
-  description: "Official web portal of NACOS Nile University of Nigeria Chapter.",
+  title: "NACOS Nile | Computing Students Community",
+  description:
+    "NACOS Nile is a student-led computing community at Nile University of Nigeria focused on learning, innovation, collaboration, and growth.",
 };
 
 export default function RootLayout({
@@ -25,9 +26,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }
