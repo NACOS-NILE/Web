@@ -1,0 +1,6 @@
+{
+  // globals.css uses Tailwind v4 at-rules (@theme, @custom-variant). VS Code's
+  // built-in CSS validator only knows standard CSS, so it reports them as
+  // "Unknown at rule" warnings. They are valid — Tailwind compiles them away.
+  "css.lint.unknownAtRules": "ignore"
+}

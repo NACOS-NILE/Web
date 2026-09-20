@@ -1,26 +1,1359 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Class-based dark mode so the theme toggle can override the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Registered so it can be animated. A plain custom property is just a string
+ * to the engine and jumps between keyframes; declaring the syntax lets it
+ * interpolate, which is what makes the heading sweep glide instead of snap.
+ */
+@property --spot-x {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 50%;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/*
+ * Tailwind v4 wraps `hover:` and `group-hover:` in `@media (hover: hover)`.
+ * That guard is meant to stop hover styles sticking after a tap, but it keys
+ * off the *primary* pointer: a touchscreen laptop reports `hover: none` even
+ * with a mouse plugged in, and every hover style on the site silently dies.
+ *
+ * These redefinitions drop the media guard. The cost is that a tap on a
+ * touch-only device can leave a hover state showing until the next tap; here
+ * that is a colour shift or an underline, which is a far smaller problem than
+ * no hover feedback at all on a whole class of machine.
+ */
+@custom-variant hover (&:hover);
+@custom-variant group-hover (&:is(:where(.group):hover *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* NACOS Nile royal blue */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #dce4fb;
+  --color-brand-200: #bccbf6;
+  --color-brand-300: #90a7ec;
+  --color-brand-400: #6180de;
+  --color-brand-500: #3f5dc7;
+  --color-brand-600: #274193;
+  --color-brand-700: #21376f;
+  --color-brand-800: #16244a;
+  --color-brand-900: #0d1733;
+  --color-brand-950: #070d1d;
+
+  /* Highlight / accent */
+  --color-accent: #3b82f6;
+  --color-accent-soft: #60a5fa;
+  /* Sourced from the leaf mark in logo.svg */
+  --color-leaf: #75b947;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0d1733;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: #070d1d;
+    --foreground: #e8ecf7;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the fixed navbar. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Visible keyboard focus everywhere, without a ring on mouse clicks. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-brand-600);
+    color: #ffffff;
+  }
+
+  /*
+   * Scroll lock for the mobile navigation sheet. Scoping it to the same
+   * breakpoint that shows the sheet (Tailwind's `lg`) means widening the
+   * window releases the lock on its own — the page can never be left
+   * unscrollable behind a sheet that is no longer on screen.
+   */
+  @media (width < 64rem) {
+    html.nav-open,
+    html.nav-open body {
+      overflow: hidden;
+    }
+  }
+}
+
+@layer components {
+  /*
+   * Resting state for scroll-reveal. Only the "before" is declared here —
+   * Reveal.tsx hands the element to GSAP, which owns the easing and writes
+   * inline styles that take over from this. Declaring a CSS transition too
+   * would have both engines animating the same properties at once.
+   */
+  /*
+   * Scroll-reveal hides content, so it is gated on `anim-armed` — a class the
+   * boot script only adds when JavaScript is actually running, and removes
+   * again if the bundle never reaches us. Hiding text unconditionally means a
+   * dropped chunk on a weak connection leaves the page permanently blank.
+   */
+  html.anim-armed .reveal {
+    opacity: 0;
+  }
+
+  /*
+   * The programme cards' collapsible description on phones (ProgramMatrix).
+   * A grid row going 0fr → 1fr is the one way to animate to `height: auto` in
+   * CSS alone, so a card opens to the height of whatever it holds without
+   * anything measuring it first.
+   *
+   * Collapsed only under `anim-armed`, like `.reveal`: without JavaScript
+   * nothing could ever open a card again, so the copy stays visible instead.
+   * From `md` up the matrix shows every description, so there is no collapse.
+   */
+  .mx-desc {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition:
+      grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
+  }
+
+  .mx-desc > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  @media (width >= 48rem) {
+    .mx-desc > * {
+      overflow: visible;
+    }
+  }
+
+  @media (width < 48rem) {
+    html.anim-armed .mx-desc[data-open="false"] {
+      grid-template-rows: 0fr;
+      opacity: 0;
+    }
+  }
+
+  /* ------------------------------------------------- heading spotlight --- */
+
+  .heading-spot {
+    /* Centre until something moves it, so a stray paint is never off-page. */
+    --spot-x: 50%;
+    --spot-y: 50%;
+  }
+
+  /*
+   * Guarded: without background-clip the transparent fill below would leave
+   * the heading invisible rather than merely unhighlighted. The gradient ends
+   * at `currentColor`, so beyond the spotlight the text keeps whatever colour
+   * it already had — light, dark, or the white used on the gradient panel.
+   */
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .heading-spot.is-lit,
+    .heading-spot.is-sweeping {
+      background-image: radial-gradient(
+        16rem circle at var(--spot-x) var(--spot-y),
+        var(--spot-glow, var(--color-accent-soft)),
+        currentColor 55%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  /*
+   * The unprompted pass, played once when the heading scrolls into view. It
+   * animates the registered `--spot-x` above rather than a wrapper element, so
+   * the light travels through the letters exactly as it does under the pointer.
+   */
+  .heading-spot.is-sweeping {
+    animation: heading-sweep 1.7s cubic-bezier(0.4, 0, 0.2, 1) 0.25s both;
+  }
+
+  @keyframes heading-sweep {
+    from {
+      --spot-x: -15%;
+    }
+    to {
+      --spot-x: 115%;
+    }
+  }
+
+  /* ---------------------------------------------------------------- loader */
+
+  #app-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    gap: 1.25rem;
+    background: var(--background);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.35s ease,
+      visibility 0s linear 0.35s;
+  }
+
+  /*
+   * The fade-in is delayed, so a fast connection finishes before the loader
+   * ever becomes visible and nobody sees a flash of it on a good network.
+   */
+  html.is-loading #app-loader {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 0.35s ease 0.45s,
+      visibility 0s;
+  }
+
+  .loader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+  }
+
+  /* Text, not an image: it paints immediately even while assets are stalled. */
+  .loader-word {
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brand-700);
+  }
+
+  .dark .loader-word {
+    color: var(--color-brand-100);
+  }
+
+  .loader-track {
+    position: relative;
+    overflow: hidden;
+    width: 8.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-brand-600) 18%, transparent);
+  }
+
+  .loader-track::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    width: 40%;
+    border-radius: inherit;
+    background: var(--color-brand-600);
+    animation: loader-sweep 1.15s ease-in-out infinite;
+  }
+
+  .dark .loader-track::after {
+    background: var(--color-brand-300);
+  }
+
+  @keyframes loader-sweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
+  }
+}
+
+/* Respect users who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================================================
+ * The programme laptop
+ * -------------------------------------------------------------------------
+ * A MacBook assembled from four flat planes in CSS 3D — see MacBook.tsx for
+ * the markup and DisciplineShowcase.tsx for the timeline that drives it.
+ *
+ * Geometry, so the angles below are readable:
+ *   The hinge is the origin. `.mb-lid` sits above it and rotates about its
+ *   bottom edge; `.mb-deck` sits below it and is folded forward 90deg so it
+ *   lies flat, running towards the reader; `.mb-front` is parked at the far
+ *   end of that fold to give the deck a thickness. Positive `--mb-open` leans
+ *   the lid back (open), -90deg lays it face down on the keys (shut).
+ *
+ * Every length is derived from `--mb-w`. Change that one value and the whole
+ * machine — bezels, keys, type on the screen — scales with it.
+ * ========================================================================= */
+
+/*
+ * Registered as angles so they interpolate. GSAP writes these directly, and a
+ * plain custom property would step between whole strings rather than sweep.
+ * `inherits: true` matters: the timeline sets them on the wrapper, and the lid
+ * and deck read them several levels down.
+ */
+@property --mb-open {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 19deg;
+}
+@property --mb-yaw {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: -19deg;
+}
+@property --mb-pitch {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: -13deg;
+}
+@property --mb-yaw-p {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+@property --mb-pitch-p {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+@property --mb-z {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+/* Backlight level, 0 to 1. Driven on wake so the panel comes up rather than
+   snapping on with the new contents already lit. */
+@property --mb-wake {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+@layer components {
+  /*
+   * `--mb-w` is the machine's own width, but perspective makes the deck flare
+   * towards the reader: the shape that actually has to fit is about 1.25x that
+   * wide and 1.1x tall. Every value here is the space available divided by
+   * that, which is why they look smaller than the column they sit in.
+   */
+  .mb-stage-wrap {
+    --mb-w: clamp(11rem, 68vw, 17rem);
+  }
+
+  @media (width >= 40rem) {
+    .mb-stage-wrap {
+      --mb-w: min(24rem, 56vw);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .mb-stage-wrap {
+      --mb-w: min(28rem, 33vw);
+    }
+  }
+
+  .mb-stage-wrap {
+    /* Derived once here so the planes below never repeat the arithmetic. */
+    --mb-h: calc(var(--mb-w) * 0.665);
+    --mb-depth: calc(var(--mb-w) * 0.63);
+    --mb-thick: calc(var(--mb-w) * 0.028);
+    --mb-radius: calc(var(--mb-w) * 0.022);
+
+    /* Brushed aluminium: bands rather than a smooth ramp, because a single
+       gradient reads as plastic. The light band near the middle is the
+       specular line that makes it look like metal. */
+    --mb-alu: linear-gradient(
+      147deg,
+      #f7f9fb 0%,
+      #dde3e9 14%,
+      #c3cbd3 30%,
+      #f2f5f8 46%,
+      #d2d9e0 58%,
+      #b6bec7 78%,
+      #dee4ea 100%
+    );
+    --mb-alu-edge: #9aa4ae;
+    --mb-key: linear-gradient(180deg, #3b4149, #23272d);
+    --mb-key-edge: #4d545c;
+    --mb-deck-face: linear-gradient(180deg, #e9edf1 0%, #d7dde3 42%, #c5ccd4 100%);
+  }
+
+  /* Space grey for the dark theme: the light machine glares against a near
+     black section, and the screen is the only thing that should. */
+  .dark .mb-stage-wrap {
+    --mb-alu: linear-gradient(
+      147deg,
+      #6a7078 0%,
+      #4c5158 15%,
+      #383c42 32%,
+      #737a83 46%,
+      #454a51 58%,
+      #2c3036 78%,
+      #4e545b 100%
+    );
+    --mb-alu-edge: #23272c;
+    --mb-key: linear-gradient(180deg, #2a2e34, #16191d);
+    --mb-key-edge: #3a3f46;
+    --mb-deck-face: linear-gradient(180deg, #555b63 0%, #444a51 42%, #33373d 100%);
+  }
+
+  .mb-stage {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    /* Tall enough to hold the projection, not just the machine's layout box:
+       an open machine draws about 0.95 of its own width in height once the
+       deck is folded out towards the reader. */
+    min-height: calc(var(--mb-w) * 1.02);
+    /* Tied to the machine's own width so the amount of convergence is the same
+       at every size: a fixed perspective makes a small machine look flat and a
+       large one look like a fisheye. 5.2 is as close as the camera can come
+       before the deck starts to splay out past the lid. */
+    perspective: calc(var(--mb-w) * 5.2);
+    /* Pinned to the machine, not to a percentage of this box. A percentage
+       would move the vanishing point every time the column changed shape, and
+       the deck's flare — and so the optical centring below — would come out
+       different at every breakpoint. */
+    perspective-origin: 50% calc(var(--mb-w) * 0.45);
+  }
+
+  .mb-machine {
+    position: relative;
+    width: var(--mb-w);
+    height: var(--mb-h);
+    transform-style: preserve-3d;
+    /* Pivot on the hinge: the base stays planted and the lid does the moving,
+       which is how the object behaves in the hand. */
+    transform-origin: 50% 100%;
+    /* The leading translate is optical centring: the deck's near edge is
+       magnified and throws the visible mass to the left of the element's own
+       box, so the box is offset right by half of that spread. */
+    transform: translateX(calc(var(--mb-w) * 0.08)) translateZ(var(--mb-z))
+      rotateX(calc(var(--mb-pitch) + var(--mb-pitch-p)))
+      rotateY(calc(var(--mb-yaw) + var(--mb-yaw-p)));
+  }
+
+  /* --------------------------------------------------------------- lid --- */
+
+  .mb-lid {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform-origin: 50% 100%;
+    transform: rotateX(var(--mb-open));
+    padding: calc(var(--mb-w) * 0.0115);
+    border-radius: var(--mb-radius) var(--mb-radius) calc(var(--mb-w) * 0.004)
+      calc(var(--mb-w) * 0.004);
+    background: var(--mb-alu);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--mb-alu-edge) 70%, transparent),
+      0 calc(var(--mb-w) * 0.03) calc(var(--mb-w) * 0.07) rgb(9 15 32 / 0.28);
+  }
+
+  .mb-glass {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: calc(var(--mb-radius) * 0.75);
+    background: #05070d;
+    /* The one place a fixed unit is right: this is the lid's own thickness,
+       not a feature that should grow with the machine. */
+    transform: translateZ(0.6px);
+    backface-visibility: hidden;
+    /* `size` so the mock interfaces can key off the display's own box, and a
+       font-size derived from the machine so every `em` inside a screen is a
+       constant fraction of it. */
+    container-type: size;
+    font-size: calc(var(--mb-w) * 0.0205);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  }
+
+  .mb-lid-back {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: inherit;
+    background: var(--mb-alu);
+    /* Facing away, and hidden until the machine actually turns its back. */
+    transform: translateZ(-0.6px) rotateY(180deg);
+    backface-visibility: hidden;
+  }
+
+  .mb-brand {
+    font-size: calc(var(--mb-w) * 0.055);
+    font-weight: 800;
+    letter-spacing: 0.32em;
+    text-indent: 0.32em;
+    color: rgb(255 255 255 / 0.5);
+    mix-blend-mode: overlay;
+  }
+
+  /* Camera housing. */
+  .mb-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: calc(var(--mb-w) * 0.15);
+    height: calc(var(--mb-w) * 0.018);
+    background: #05070d;
+    border-radius: 0 0 calc(var(--mb-w) * 0.008) calc(var(--mb-w) * 0.008);
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .mb-camera {
+    width: calc(var(--mb-w) * 0.007);
+    height: calc(var(--mb-w) * 0.007);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #2b3a4d, #090c12 70%);
+  }
+
+  /* Fixed room reflection: brighter at the top left, where the ceiling is. */
+  .mb-sheen {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      146deg,
+      rgb(255 255 255 / 0.11) 0%,
+      rgb(255 255 255 / 0.03) 26%,
+      transparent 47%
+    );
+  }
+
+  /* The swept highlight, parked off screen until the timeline throws it across
+     as the lid comes up. */
+  .mb-flare {
+    position: absolute;
+    top: -30%;
+    left: 0;
+    z-index: 2;
+    width: 42%;
+    height: 160%;
+    opacity: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      104deg,
+      transparent,
+      rgb(255 255 255 / 0.16) 45%,
+      rgb(255 255 255 / 0.03) 70%,
+      transparent
+    );
+    transform: translateX(-140%);
+  }
+
+  /* --------------------------------------------------------- the screen -- */
+
+  .mb-pane {
+    position: absolute;
+    inset: 0;
+    padding: calc(var(--mb-w) * 0.012);
+    opacity: 0;
+    /* Backlight, tinted by the running programme. */
+    background:
+      radial-gradient(
+        120% 80% at 50% -10%,
+        color-mix(in srgb, var(--mb-accent) 22%, transparent),
+        transparent 62%
+      ),
+      linear-gradient(170deg, #0b1020, #05070d 60%);
+    transition: opacity 0.28s ease;
+  }
+
+  .mb-pane[data-active="true"] {
+    opacity: 1;
+    /* `--mb-wake` rests at 1, so this is a no-op except during the swap. */
+    filter: brightness(calc(0.35 + 0.65 * var(--mb-wake)))
+      saturate(calc(0.4 + 0.6 * var(--mb-wake)));
+  }
+
+  /* ------------------------------------------------------- the mock app -- */
+
+  .mb-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: calc(var(--mb-w) * 0.008);
+    background: rgb(11 16 27 / 0.86);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.07),
+      0 1.5em 3em rgb(0 0 0 / 0.4);
+    color: #d7deeb;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    line-height: 1.55;
+  }
+
+  .mb-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+
+  .mb-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    padding: 0.55em 0.85em;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.03));
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    font-size: 0.82em;
+  }
+
+  .mb-lights {
+    display: flex;
+    gap: 0.42em;
+  }
+
+  .mb-lights i {
+    width: 0.62em;
+    height: 0.62em;
+    border-radius: 50%;
+    background: #ff5f57;
+  }
+
+  .mb-lights i:nth-child(2) {
+    background: #febc2e;
+  }
+
+  .mb-lights i:nth-child(3) {
+    background: #28c840;
+  }
+
+  .mb-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(215 222 235 / 0.75);
+  }
+
+  .mb-title-meta {
+    color: var(--mb-accent);
+    letter-spacing: 0.12em;
+  }
+
+  .mb-appbody {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+  }
+
+  .mb-appbody > * {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mb-code {
+    margin: 0;
+    font-size: 0.92em;
+    white-space: pre;
+    overflow: hidden;
+  }
+
+  .mb-t-k {
+    color: #c792ea;
+  }
+  .mb-t-f {
+    color: var(--mb-accent);
+  }
+  .mb-t-s {
+    color: #a5d6a7;
+  }
+  .mb-t-c,
+  .mb-t-dim {
+    color: rgb(215 222 235 / 0.38);
+  }
+  .mb-t-n {
+    color: #ffab70;
+  }
+  .mb-t-p {
+    color: rgb(215 222 235 / 0.7);
+  }
+  .mb-t-ok {
+    color: #4ade80;
+  }
+  .mb-t-warn {
+    color: #fbbf24;
+  }
+
+  .mb-statusbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: auto;
+    padding: 0.5em 0.95em;
+    border-top: 1px solid rgb(255 255 255 / 0.07);
+    background: rgb(255 255 255 / 0.03);
+    font-size: 0.74em;
+    color: rgb(215 222 235 / 0.5);
+  }
+
+  .mb-statusbar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    white-space: nowrap;
+  }
+
+  .mb-dim {
+    color: rgb(215 222 235 / 0.42);
+  }
+
+  .mb-dot {
+    width: 0.5em;
+    height: 0.5em;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgb(215 222 235 / 0.3);
+  }
+
+  .mb-dot-live {
+    background: var(--mb-accent);
+    box-shadow: 0 0 0.6em var(--mb-accent);
+  }
+
+  .mb-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    vertical-align: text-bottom;
+    background: var(--mb-accent);
+    animation: caret-blink 1.1s steps(1) infinite;
+  }
+
+  /*
+   * The resting cursor in the hero terminal: proof that the line can be typed
+   * into, for anyone who would otherwise read the whole panel as a picture. It
+   * stands in for the browser's own caret while the field is empty and
+   * unfocused, and hands over the moment it is focused.
+   */
+  .hero-caret {
+    animation: caret-blink 1.06s steps(1) infinite;
+  }
+
+  /*
+   * Ends on a visible frame, deliberately. The global reduced-motion rule
+   * collapses every animation to one 0.01ms run, so whatever sits at 100% is
+   * what stays on screen — and a cursor that settles on `opacity: 0` is a
+   * cursor that has been deleted for the people most likely to need it.
+   */
+  @keyframes caret-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    99% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* editor ---------------------------------------------------------------- */
+
+  .mb-editor {
+    display: grid !important;
+    grid-template-columns: auto 1fr;
+    gap: 0 0.9em;
+    padding: 0.75em 0.95em 0;
+    align-content: start;
+  }
+
+  .mb-gutter {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.92em;
+    line-height: 1.55;
+    text-align: right;
+    color: rgb(215 222 235 / 0.25);
+  }
+
+  .mb-editor .mb-statusbar {
+    grid-column: 1 / -1;
+    margin: auto -0.95em 0;
+  }
+
+  /* pipeline -------------------------------------------------------------- */
+
+  .mb-pipeline {
+    padding: 0.85em 0.95em 0;
+    gap: 0.85em;
+  }
+
+  .mb-pipe-head {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    font-size: 0.8em;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .mb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.2em 0.65em;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--mb-accent) 18%, transparent);
+    color: var(--mb-accent);
+  }
+
+  .mb-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.72em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.82em;
+  }
+
+  .mb-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) 5.5em auto;
+    align-items: center;
+    gap: 0.75em;
+  }
+
+  .mb-step-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mb-step-mark {
+    width: 0.9em;
+    height: 0.9em;
+    border-radius: 50%;
+    border: 1px solid rgb(215 222 235 / 0.3);
+  }
+
+  .mb-step[data-state="done"] .mb-step-mark {
+    border-color: #4ade80;
+    background: #4ade80;
+  }
+
+  .mb-step[data-state="run"] .mb-step-mark {
+    border-color: var(--mb-accent);
+    border-right-color: transparent;
+    animation: mb-spin 0.9s linear infinite;
+  }
+
+  .mb-step[data-state="done"] .mb-step-label {
+    color: rgb(215 222 235 / 0.55);
+  }
+
+  @keyframes mb-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .mb-bar {
+    display: block;
+    height: 0.42em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.08);
+    overflow: hidden;
+  }
+
+  .mb-bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  .mb-bar-accent {
+    background: var(--mb-accent);
+    box-shadow: 0 0 0.8em color-mix(in srgb, var(--mb-accent) 70%, transparent);
+  }
+
+  .mb-bar-mute {
+    background: rgb(74 222 128 / 0.55);
+  }
+
+  /* terminal -------------------------------------------------------------- */
+
+  .mb-terminal {
+    padding: 0.8em 0.95em 0;
+  }
+
+  /* console --------------------------------------------------------------- */
+
+  .mb-console {
+    gap: 0.85em;
+    padding: 0.85em 0.95em;
+  }
+
+  .mb-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6em;
+    font-size: 0.8em;
+  }
+
+  .mb-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+    padding: 0.6em 0.75em;
+    border-radius: 0.5em;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  }
+
+  .mb-tile strong {
+    font-size: 1.35em;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* Grows into whatever height is left so the dashboard fills the display
+     rather than stacking against the top edge. */
+  .mb-rack {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    gap: 0.35em;
+    min-height: 4.2em;
+    padding: 0.5em 0.6em;
+    border-radius: 0.5em;
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .mb-rack-slot {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    height: 100%;
+    border-radius: 0.2em;
+    background: rgb(255 255 255 / 0.05);
+  }
+
+  .mb-rack-fill {
+    width: 100%;
+    border-radius: 0.2em;
+    background: linear-gradient(
+      180deg,
+      var(--mb-accent),
+      color-mix(in srgb, var(--mb-accent) 35%, transparent)
+    );
+  }
+
+  .mb-log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.78em;
+    color: rgb(215 222 235 / 0.55);
+  }
+
+  .mb-log li {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+
+  /* schema ---------------------------------------------------------------- */
+
+  .mb-schema {
+    padding: 0.9em 0.95em 0;
+  }
+
+  .mb-erd {
+    position: relative;
+    flex: 1;
+    display: grid;
+    grid-template-areas:
+      "a . b"
+      "a . c";
+    grid-template-columns: 1fr 2.2em 1fr;
+    align-items: start;
+    gap: 0.7em;
+    font-size: 0.76em;
+  }
+
+  /* `a` spans both rows, so without this the left entity would stretch to the
+     height of the two on the right and read as an empty panel. */
+  .mb-entity {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    gap: 0.18em;
+    align-content: start;
+    padding: 0.55em 0.7em;
+    border-radius: 0.45em;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+    color: rgb(215 222 235 / 0.6);
+  }
+
+  .mb-entity-head {
+    margin-bottom: 0.2em;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid rgb(255 255 255 / 0.09);
+    color: var(--mb-accent);
+  }
+
+  .mb-link {
+    position: absolute;
+    height: 1px;
+    background: color-mix(in srgb, var(--mb-accent) 55%, transparent);
+  }
+
+  .mb-link-1 {
+    top: 27%;
+    left: calc(50% - 1.35em);
+    width: 2.7em;
+  }
+
+  .mb-link-2 {
+    top: 74%;
+    left: calc(50% - 1.35em);
+    width: 2.7em;
+  }
+
+  .mb-rel-1 {
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    transform: translate(-50%, -1.55em);
+    font-size: 0.72em;
+    color: rgb(215 222 235 / 0.45);
+  }
+
+  /* notebook -------------------------------------------------------------- */
+
+  .mb-notebook {
+    gap: 0.8em;
+    padding: 0.85em 0.95em 0;
+  }
+
+  .mb-cell {
+    display: flex;
+    gap: 0.8em;
+    padding: 0.55em 0.7em;
+    border-radius: 0.4em;
+    background: rgb(255 255 255 / 0.05);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  }
+
+  .mb-cell-tag {
+    flex-shrink: 0;
+    font-size: 0.76em;
+    color: var(--mb-accent);
+  }
+
+  .mb-chart {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5em;
+    min-height: 3.5em;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  }
+
+  .mb-col {
+    flex: 1;
+    border-radius: 0.2em 0.2em 0 0;
+    background: linear-gradient(
+      180deg,
+      var(--mb-accent),
+      color-mix(in srgb, var(--mb-accent) 22%, transparent)
+    );
+  }
+
+  /* The fitted line over the bars: one rotated rule, no chart library. */
+  .mb-trend {
+    position: absolute;
+    right: 4%;
+    bottom: 62%;
+    left: 4%;
+    height: 1px;
+    background: rgb(255 255 255 / 0.55);
+    transform: rotate(-11deg);
+  }
+
+  /* ---------------------------------------------------- deck & chassis --- */
+
+  .mb-deck {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: var(--mb-depth);
+    transform-style: preserve-3d;
+    transform-origin: 50% 0;
+    /* Folded forward so it lies flat and runs towards the reader. */
+    transform: rotateX(90deg);
+    padding: calc(var(--mb-w) * 0.035) calc(var(--mb-w) * 0.055);
+    border-radius: 0 0 var(--mb-radius) var(--mb-radius);
+    background: var(--mb-deck-face);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mb-alu-edge) 55%, transparent);
+  }
+
+  /* The dark strip the lid folds into. */
+  .mb-hinge {
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: calc(var(--mb-w) * 0.012);
+    border-radius: 0 0 calc(var(--mb-w) * 0.006) calc(var(--mb-w) * 0.006);
+    background: linear-gradient(180deg, #2c3138, #6d757e);
+    opacity: 0.55;
+  }
+
+  .mb-keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--mb-w) * 0.0055);
+    padding: calc(var(--mb-w) * 0.008);
+    border-radius: calc(var(--mb-w) * 0.008);
+    background: rgb(20 24 30 / 0.55);
+  }
+
+  .mb-key-row {
+    display: flex;
+    gap: calc(var(--mb-w) * 0.0055);
+    height: calc(var(--mb-w) * 0.026);
+  }
+
+  .mb-key {
+    flex-basis: 0;
+    border-radius: calc(var(--mb-w) * 0.0035);
+    background: var(--mb-key);
+    box-shadow:
+      inset 0 0 0 0.5px var(--mb-key-edge),
+      0 0.5px 0 rgb(255 255 255 / 0.06);
+  }
+
+  .mb-trackpad {
+    display: block;
+    width: 38%;
+    height: calc(var(--mb-depth) * 0.31);
+    margin: calc(var(--mb-w) * 0.022) auto 0;
+    border-radius: calc(var(--mb-w) * 0.006);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(0 0 0 / 0.06));
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  }
+
+  /* The front edge. Without it the deck reads as a decal on the floor. */
+  .mb-front {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: var(--mb-thick);
+    border-radius: 0 0 calc(var(--mb-w) * 0.008) calc(var(--mb-w) * 0.008);
+    background: linear-gradient(180deg, #f0f3f6, #b9c1c9 60%, #99a2ac);
+    transform: translateZ(var(--mb-depth));
+  }
+
+  .dark .mb-front {
+    background: linear-gradient(180deg, #5a6068, #3a3f46 60%, #24282d);
+  }
+
+  /* The scoop you lift the lid by. */
+  .mb-notch-grip {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 14%;
+    height: 55%;
+    border-radius: 0 0 999px 999px;
+    background: rgb(0 0 0 / 0.28);
+    transform: translateX(-50%);
+  }
+
+  /* Contact shadow, lying flat in the same plane as the deck. */
+  .mb-shadow {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: calc(var(--mb-depth) * 1.05);
+    transform-origin: 50% 0;
+    transform: rotateX(90deg) translate3d(0, calc(var(--mb-w) * -0.01), -1px);
+    background: radial-gradient(52% 50% at 50% 45%, rgb(6 10 22 / 0.45), transparent 70%);
+    filter: blur(calc(var(--mb-w) * 0.012));
+  }
+
+  /* --------------------------------------------------------- the selector */
+
+  .mb-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mb-tab {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.85rem 0.25rem;
+    text-align: left;
+    cursor: pointer;
+    /* The rule belongs to the button below it, so the last row has no line
+       under it and the group reads as a list rather than a table. */
+    border-top: 1px solid color-mix(in srgb, var(--color-brand-900) 12%, transparent);
+  }
+
+  .dark .mb-tab {
+    border-top-color: rgb(255 255 255 / 0.1);
+  }
+
+  .mb-tab:first-child {
+    border-top: 0;
+  }
+
+  .mb-tab-code {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    color: color-mix(in srgb, var(--color-brand-900) 45%, transparent);
+    transition: color 0.3s ease;
+  }
+
+  .dark .mb-tab-code {
+    color: rgb(232 236 247 / 0.4);
+  }
+
+  .mb-tab-name {
+    font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: color-mix(in srgb, var(--color-brand-900) 55%, transparent);
+    transition:
+      color 0.3s ease,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dark .mb-tab-name {
+    color: rgb(232 236 247 / 0.55);
+  }
+
+  /* The accent rule that grows out of the selected row. */
+  .mb-tab-rule {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--mb-accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mb-tab:hover .mb-tab-name,
+  .mb-tab:focus-visible .mb-tab-name,
+  .mb-tab[aria-selected="true"] .mb-tab-name {
+    color: var(--color-brand-900);
+    transform: translateX(0.35rem);
+  }
+
+  .dark .mb-tab:hover .mb-tab-name,
+  .dark .mb-tab:focus-visible .mb-tab-name,
+  .dark .mb-tab[aria-selected="true"] .mb-tab-name {
+    color: #fff;
+  }
+
+  .mb-tab[aria-selected="true"] .mb-tab-code {
+    color: var(--mb-accent);
+  }
+
+  .mb-tab[aria-selected="true"] .mb-tab-rule {
+    transform: scaleX(1);
+  }
+
+  /*
+   * With reduced motion the hinge never moves, so the lid must not be left
+   * wherever a killed timeline happened to drop it, and the sweeping highlight
+   * has nothing to sweep for.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .mb-machine {
+      --mb-open: 19deg;
+    }
+
+    .mb-flare,
+    .mb-caret,
+    .mb-step[data-state="run"] .mb-step-mark {
+      animation: none;
+      opacity: 0;
+    }
+  }
 }
